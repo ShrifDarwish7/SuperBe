@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-shadow" translatesAutoresizingMaskIntoConstraints="NO" id="Sg1-2J-5hY">
+                                <rect key="frame" x="-36.5" y="224" width="387" height="448"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="em3-8D-EZP">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1U2-rv-whP"/>
+                                    <constraint firstAttribute="width" constant="200" id="haa-z9-hxe"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="Main"/>
+                        <constraints>
+                            <constraint firstItem="Sg1-2J-5hY" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="AHb-Ye-vz6"/>
+                            <constraint firstItem="Sg1-2J-5hY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-50" id="HcV-rB-or3"/>
+                            <constraint firstItem="Sg1-2J-5hY" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.5" id="Lvw-0L-5hE"/>
+                            <constraint firstItem="em3-8D-EZP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SAS-ZV-XYa"/>
+                            <constraint firstItem="em3-8D-EZP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SJX-1Q-KXY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="206" y="-48"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="118" height="118"/>
+        <image name="logo-shadow" width="387" height="387"/>
+        <namedColor name="Main">
+            <color red="0.95300000905990601" green="0.28999999165534973" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

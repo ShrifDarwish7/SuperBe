@@ -1,0 +1,6 @@
+framework module Pods_New_Super_Bekala_iOS_New_Super_Bekala_iOSUITests {
+  umbrella header "Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

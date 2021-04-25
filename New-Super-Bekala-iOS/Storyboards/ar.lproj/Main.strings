@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "+20"; ObjectID = "2Fo-3G-h1X"; */
+"2Fo-3G-h1X.text" = "+20";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "2O3-px-dnJ"; */
+"2O3-px-dnJ.normalTitle" = "Skip";
+
+/* Class = "UILabel"; text = "Deliver from"; ObjectID = "5tI-Po-Lbs"; */
+"5tI-Po-Lbs.text" = "Deliver from";
+
+/* Class = "UILabel"; text = "Login with us by"; ObjectID = "E67-jI-jyN"; */
+"E67-jI-jyN.text" = "Login with us by";
+
+/* Class = "UILabel"; text = "Google"; ObjectID = "G8I-q0-MCP"; */
+"G8I-q0-MCP.text" = "Google";
+
+/* Class = "UILabel"; text = "Telephone"; ObjectID = "NaX-3t-sSN"; */
+"NaX-3t-sSN.text" = "Telephone";
+
+/* Class = "UILabel"; text = "Butchers"; ObjectID = "NwD-mp-VP4"; */
+"NwD-mp-VP4.text" = "Butchers";
+
+/* Class = "UILabel"; text = "And much\nmore ..."; ObjectID = "OAm-4B-huP"; */
+"OAm-4B-huP.text" = "And much\nmore ...";
+
+/* Class = "UILabel"; text = "Send code"; ObjectID = "SHf-4M-z6X"; */
+"SHf-4M-z6X.text" = "Send code";
+
+/* Class = "UIButton"; normalTitle = "Resend code"; ObjectID = "WN1-xN-5R9"; */
+"WN1-xN-5R9.normalTitle" = "Resend code";
+
+/* Class = "UITextField"; text = "1234567890"; ObjectID = "YIu-xm-THd"; */
+"YIu-xm-THd.text" = "1234567890";
+
+/* Class = "UILabel"; text = "Lorem Ipsum is simply dummy text of the \nprinting and typesetting industry. Lorem Ipsum \nhas been the industry's standard dummy text \never since the 1500s"; ObjectID = "bzX-Nb-dAf"; */
+"bzX-Nb-dAf.text" = "Lorem Ipsum is simply dummy text of the \nprinting and typesetting industry. Lorem Ipsum \nhas been the industry's standard dummy text \never since the 1500s";
+
+/* Class = "UILabel"; text = "Facebook"; ObjectID = "ieQ-YZ-weD"; */
+"ieQ-YZ-weD.text" = "Facebook";
+
+/* Class = "UILabel"; text = "Welcome"; ObjectID = "xQw-Dq-1Kx"; */
+"xQw-Dq-1Kx.text" = "Welcome";
+
+/* Class = "UILabel"; text = "Please enter your number\n to login"; ObjectID = "ycO-Dp-lYC"; */
+"ycO-Dp-lYC.text" = "Please enter your number\n to login";

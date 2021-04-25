@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  New-Super-Bekala-iOS
+
+  Created by Sherif Darwish on 23/01/2021.
+  Copyright © 2021 Super Bekala. All rights reserved.
+*/
+
+"lang" = "en";
+"Address title already exists." = "Address title already exists.";
+"(Choose 1)" = "(Choose 1)";
+"(Optional)" = "(Optional)";
