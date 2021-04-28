@@ -55,9 +55,12 @@ class CartVC: UIViewController {
             if let items = items{
                 self.items = items
                 for item in items{
-                    let variations = item.variations?.getDecodedObject(from: [Variation].self)
-                    print("here vars", variations)
-                    print("here vars count", variations?.count)
+                   // let variations = item.variations?.getDecodedObject(from: [Variation].self)
+                    if let _ = item.photos{
+                        let photosData = try! JSONDecoder.init().decode([Data].self, from: item.photos!)
+                        let photos = photosData.map({ UIImage(data: $0) })
+                    }
+                    
                 }
                 self.loadProductsTableView()
             }

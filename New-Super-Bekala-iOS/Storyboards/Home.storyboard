@@ -351,7 +351,7 @@
                                         <rect key="frame" x="10" y="10" width="220" height="65"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please zoom in more to find your exact delivery location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27H-fy-tRI">
-                                                <rect key="frame" x="10" y="18.5" width="200" height="28"/>
+                                                <rect key="frame" x="10" y="10" width="200" height="45"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1420,6 +1420,9 @@
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsl-mY-4dZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="131.5" height="50"/>
+                                                                <connections>
+                                                                    <action selector="toImageOrder:" destination="oBb-wB-WfQ" eventType="touchUpInside" id="Xvr-l9-Rju"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" name="Gold"/>
@@ -1473,6 +1476,9 @@
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUp-bX-Meh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="131" height="50"/>
+                                                                <connections>
+                                                                    <action selector="toVoiceOrder:" destination="oBb-wB-WfQ" eventType="touchUpInside" id="RtM-Vi-eU6"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" name="Gold"/>
@@ -2678,7 +2684,7 @@ has been the industry's</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="SQ5-ef-EpL">
-                                <rect key="frame" x="20" y="64" width="125" height="45"/>
+                                <rect key="frame" x="20" y="64" width="122.5" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVy-kh-DxP" customClass="LocalizedBtn" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="45"/>
@@ -2693,7 +2699,7 @@ has been the industry's</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0n-Ie-Vtb">
-                                        <rect key="frame" x="61" y="3.5" width="64" height="38.5"/>
+                                        <rect key="frame" x="61" y="4" width="61.5" height="37.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2749,19 +2755,19 @@ has been the industry's</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dez-Kg-MhP">
-                                        <rect key="frame" x="15" y="54.5" width="89" height="51.5"/>
+                                        <rect key="frame" x="15" y="55" width="90.5" height="50.5"/>
                                         <subviews>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wuy-bW-0Li">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="51.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="50.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTz-8n-4cQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dE9-EB-VtH">
-                                                        <rect key="frame" x="0.0" y="27.5" width="0.0" height="24"/>
+                                                        <rect key="frame" x="0.0" y="27" width="0.0" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -2769,16 +2775,16 @@ has been the industry's</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1je-ed-zTP">
-                                                <rect key="frame" x="0.0" y="0.0" width="89" height="51.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="90.5" height="50.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-t5-Yre">
-                                                        <rect key="frame" x="27" y="0.0" width="35" height="19.5"/>
+                                                        <rect key="frame" x="28.5" y="0.0" width="34" height="19"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsp-o6-SOb">
-                                                        <rect key="frame" x="0.0" y="27.5" width="89" height="24"/>
+                                                        <rect key="frame" x="0.0" y="27" width="90.5" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -2878,16 +2884,16 @@ has been the industry's</string>
                                 <rect key="frame" x="0.0" y="596" width="414" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2IV-R6-Djv">
-                                        <rect key="frame" x="50" y="30" width="314" height="65.5"/>
+                                        <rect key="frame" x="50" y="30" width="314" height="96"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-pV-DxG">
-                                                <rect key="frame" x="75" y="0.0" width="164.5" height="22.5"/>
+                                                <rect key="frame" x="79.5" y="0.0" width="155" height="36"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If we have your location, we can do a better job to find what you want and deliver it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMd-sl-DPC">
-                                                <rect key="frame" x="9.5" y="37.5" width="295" height="28"/>
+                                                <rect key="frame" x="5" y="51" width="304.5" height="45"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="12"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3093,31 +3099,31 @@ has been the industry's</string>
     </scenes>
     <designables>
         <designable name="68C-SE-jas">
-            <size key="intrinsicContentSize" width="32" height="30"/>
+            <size key="intrinsicContentSize" width="34" height="30"/>
         </designable>
         <designable name="8b0-Ez-0aw">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="Ce0-vg-BkO">
-            <size key="intrinsicContentSize" width="80" height="30"/>
+            <size key="intrinsicContentSize" width="79" height="30"/>
         </designable>
         <designable name="G5q-35-6fV">
-            <size key="intrinsicContentSize" width="181" height="30"/>
+            <size key="intrinsicContentSize" width="170" height="41"/>
         </designable>
         <designable name="H8G-FD-GWA">
             <size key="intrinsicContentSize" width="96" height="20"/>
         </designable>
         <designable name="Nh4-rX-V9W">
-            <size key="intrinsicContentSize" width="44" height="30"/>
+            <size key="intrinsicContentSize" width="43" height="30"/>
         </designable>
         <designable name="O9n-GA-jbT">
-            <size key="intrinsicContentSize" width="52" height="27"/>
+            <size key="intrinsicContentSize" width="52" height="26"/>
         </designable>
         <designable name="TuI-i1-fh1">
             <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
         <designable name="aSg-tN-k3T">
-            <size key="intrinsicContentSize" width="55" height="27"/>
+            <size key="intrinsicContentSize" width="55" height="26"/>
         </designable>
         <designable name="bqn-Sl-VpR">
             <size key="intrinsicContentSize" width="96" height="20"/>

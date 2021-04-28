@@ -95,6 +95,14 @@ class BranchVC: UIViewController {
         fees.text = "\(branch?.deliveryFees ?? 0 ) EGP"
     }
     
+    @IBAction func toImageOrder(_ sender: Any) {
+        Router.toImagesOrder(self,self.branch!)
+    }
+    
+    @IBAction func toVoiceOrder(_ sender: Any) {
+        Router.toVoiceOrder(self, branch!)
+    }
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

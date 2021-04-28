@@ -15,14 +15,17 @@
         <attribute name="name_ar" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="name_en" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="photos" optional="YES" attributeType="Binary"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="product_id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="variations" optional="YES" attributeType="Binary"/>
+        <attribute name="voice" optional="YES" attributeType="Binary"/>
         <relationship name="branch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CartBranch" inverseName="items" inverseEntity="CartBranch"/>
     </entity>
     <elements>
         <element name="CartBranch" positionX="-54" positionY="-9" width="128" height="119"/>
-        <element name="CartItem" positionX="-355.9595336914062" positionY="-1.705276489257812" width="128" height="194"/>
+        <element name="CartItem" positionX="-355.9595336914062" positionY="-1.705276489257812" width="128" height="239"/>
     </elements>
 </model>

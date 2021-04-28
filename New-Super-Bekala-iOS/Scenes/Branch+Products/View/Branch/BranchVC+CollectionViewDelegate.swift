@@ -77,7 +77,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                 cell.productImage.layer.cornerRadius = 25
                 cell.loadFrom(data: self.products![indexPath.row])
                 
-                let inCartItems = self.cartItems?.filter({ return $0.cart_id == self.products![indexPath.row].id })
+                let inCartItems = self.cartItems?.filter({ return $0.cart_id == self.products![indexPath.row].id! })
                 if inCartItems!.isEmpty{
                     cell.inCartView.isHidden = true
                     cell.addToCartBtn.isHidden = false

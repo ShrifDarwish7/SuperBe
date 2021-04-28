@@ -100,4 +100,16 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
+    static func toImagesOrder(_ sender: UIViewController,_ branch: Branch){
+        let vc = self.instantiate(appStoryboard: .orders, identifier: "ImagesOrderVC") as! ImagesOrderVC
+        vc.branch = branch
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    static func toVoiceOrder(_ sender: UIViewController,_ branch: Branch){
+        let vc = self.instantiate(appStoryboard: .orders, identifier: "VoiceOrderVC") as! VoiceOrderVC
+        vc.branch = branch
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

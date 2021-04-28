@@ -29,7 +29,7 @@ target 'New-Super-Bekala-iOS' do
   pod 'SkeletonView'
   pod 'Moya'
   pod 'iOSDropDown'
- 
+  pod 'BSImagePicker'
 
   target 'New-Super-Bekala-iOSTests' do
     inherit! :search_paths

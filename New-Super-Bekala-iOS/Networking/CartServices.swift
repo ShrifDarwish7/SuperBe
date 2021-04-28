@@ -28,43 +28,55 @@ class CartServices{
                     self.addCartItemWith(branch, item, nil)
                     completed(true)
                 }else{
-                    var cartId = "\(item.id)"
-                    item.variations?.forEach({ (variation) in
-                        cartId += variation.options!.map({String($0.id!)}).joined()
-                    })
-                    print("cartId",cartId)
-                    self.getCartItems(itemId: Int(cartId)!, branch: -1/*Int(branches.first!.id)*/) { (items) in
-                        if let items = items{
-                            if items.isEmpty{
-                                let cartItem = CartItem(context: CartServices.managedObjectContext)
-                                cartItem.product_id = Int16(Int(item.id))
-                                cartItem.name_en = item.branchProductLanguage?.first?.name
-                                cartItem.name_ar = item.branchProductLanguage?[0].name
-                                cartItem.logo = item.images?.first
-                                cartItem.notes = item.notes
-                                cartItem.price = Double(item.price!)
-                                cartItem.quantity = Int16(item.quantity)
-                                cartItem.branch = branches.first
-                                cartItem.cart_id = Int64(cartId)!
-                                cartItem.desc = item.desc
-                                if let variations = item.variations{
-                                    let data = try! JSONEncoder.init().encode(variations)
-                                    cartItem.variations = data
+                    let cartItem = CartItem(context: CartServices.managedObjectContext)
+                    if let _ = item.photos{
+                        
+                        cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
+                        
+                    }else if let _ = item.voice{
+                        
+                        cartItem.voice = item.voice
+                        
+                    }else{
+                        
+                        var cartId = "\(item.id!)"
+                        item.variations?.forEach({ (variation) in
+                            cartId += variation.options!.map({String($0.id!)}).joined()
+                        })
+                        print("cartId",cartId)
+                        self.getCartItems(itemId: Int(cartId)!, branch: -1/*Int(branches.first!.id)*/) { (items) in
+                            if let items = items{
+                                if items.isEmpty{
+                                    cartItem.product_id = Int16(Int(item.id!))
+                                    cartItem.name_en = item.branchProductLanguage?.first?.name
+                                    cartItem.name_ar = item.branchProductLanguage?[0].name
+                                    cartItem.logo = item.images?.first
+                                    cartItem.notes = item.notes
+                                    cartItem.price = Double(item.price!)
+                                    cartItem.quantity = Int16(item.quantity)
+                                    cartItem.cart_id = Int64(cartId)!
+                                    cartItem.desc = item.desc
+                                    if let variations = item.variations{
+                                        let data = try! JSONEncoder.init().encode(variations)
+                                        cartItem.variations = data
+                                    }
+                                }else{
+                                    exist(true)
                                 }
-                                do {
-                                    try CartServices.managedObjectContext.save()
-                                    print("add to cart success")
-                                    completed(true)
-                                }catch let error{
-                                    completed(false)
-                                    print("context error",error)
-                                }
-                            }else{
-                                exist(true)
                             }
                         }
                     }
                     
+                    cartItem.branch = branches.first
+                    
+                    do {
+                        try CartServices.managedObjectContext.save()
+                        print("add to cart success")
+                        completed(true)
+                    }catch let error{
+                        completed(false)
+                        print("context error",error)
+                    }
                 }
             }else{
                 completed(false)
@@ -76,26 +88,30 @@ class CartServices{
     
     func addCartItemWith(_ branch: Branch, _ item: Product,_ completed: ((Bool)->Void)?){
         let cartItem = CartItem(context: CartServices.managedObjectContext)
-        cartItem.product_id = Int16(item.id)
-        cartItem.name_en = item.branchProductLanguage?.first?.name
-        cartItem.name_ar = item.branchProductLanguage?[0].name
-        cartItem.logo = item.images?.first
-        cartItem.notes = item.notes
-        cartItem.price = Double(item.price!)
-        cartItem.quantity = Int16(item.quantity)
-        cartItem.desc = item.desc
-        var cartId = "\(item.id)"
-        item.variations?.forEach({ (variation) in
-            cartId += variation.options!.map({String($0.id!)}).joined()
-        })
-        print("cartId",cartId)
-        cartItem.cart_id = Int64(cartId)!
-        
-        if let variations = item.variations{
-            let data = try! JSONEncoder.init().encode(variations)
-            cartItem.variations = data
+        if let _ = item.photos{
+            let cartItem = CartItem(context: CartServices.managedObjectContext)
+            cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
+        }else{
+            cartItem.product_id = Int16(item.id!)
+            cartItem.name_en = item.branchProductLanguage?.first?.name
+            cartItem.name_ar = item.branchProductLanguage?[0].name
+            cartItem.logo = item.images?.first
+            cartItem.notes = item.notes
+            cartItem.price = Double(item.price!)
+            cartItem.quantity = Int16(item.quantity)
+            cartItem.desc = item.desc
+            var cartId = "\(item.id!)"
+            item.variations?.forEach({ (variation) in
+                cartId += variation.options!.map({String($0.id!)}).joined()
+            })
+            print("cartId",cartId)
+            cartItem.cart_id = Int64(cartId)!
+            
+            if let variations = item.variations{
+                let data = try! JSONEncoder.init().encode(variations)
+                cartItem.variations = data
+            }
         }
-        
         let cartBranch = CartBranch(context: CartServices.managedObjectContext)
         cartBranch.id = Int16(branch.id)
         cartBranch.logo = branch.logo
@@ -104,7 +120,7 @@ class CartServices{
         cartItem.branch = cartBranch
         
         do{
-           try CartServices.managedObjectContext.save()
+            try CartServices.managedObjectContext.save()
             print("cart item added")
             completed?(true)
         }catch let error{
@@ -112,7 +128,6 @@ class CartServices{
             print("contextSave",error)
         }
     }
-    
     func getCartItems(itemId: Int, branch: Int, completedWith items: @escaping ([CartItem]?)->Void){
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
         if branch != -1{

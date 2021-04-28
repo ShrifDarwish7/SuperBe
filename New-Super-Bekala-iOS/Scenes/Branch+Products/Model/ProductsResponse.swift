@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - ProductsResponse
 struct ProductsResponse: Codable {
@@ -16,20 +17,23 @@ struct ProductsResponse: Codable {
 }
 
 struct Product: Codable {
-    let id: Int
-    let sku: String?
-    let inStock: Int?
-    let images: [String]?
-    let price, salePrice: Int?
-    let startTime, endTime, productionDate, expDate: String?
-    let saleStartDate, saleEndDate: String?
-    let branchID, productID, branchCategoryID: Int?
-    let branchProductLanguage: [BranchProductLanguage]?
+    var id: Int?
+    var sku: String?
+    var inStock: Int?
+    var images: [String]?
+    var price, salePrice: Int?
+    var startTime, endTime, productionDate, expDate: String?
+    var saleStartDate, saleEndDate: String?
+    var branchID, productID, branchCategoryID: Int?
+    var branchProductLanguage: [BranchProductLanguage]?
     var variations: [Variation]?
     
     var quantity: Int = 1
     var notes: String = ""
     var desc: String = ""
+    var voice: Data?
+    var photos: [UIImage]?
+    var text: String?
 
     enum CodingKeys: String, CodingKey {
         case id

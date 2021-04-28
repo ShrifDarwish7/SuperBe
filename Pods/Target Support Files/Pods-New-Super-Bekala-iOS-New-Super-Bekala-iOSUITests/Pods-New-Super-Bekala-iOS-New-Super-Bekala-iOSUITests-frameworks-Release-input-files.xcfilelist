@@ -1,6 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests/Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework
+${BUILT_PRODUCTS_DIR}/BSImagePicker/BSImagePicker.framework
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
 ${BUILT_PRODUCTS_DIR}/Closures/Closures.framework
 ${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework

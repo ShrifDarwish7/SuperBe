@@ -11,6 +11,7 @@ PODS:
   - Bolts/AppLinks (1.9.1):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.1)
+  - BSImagePicker (3.3.1)
   - Closures (0.7)
   - Cosmos (21.0.0)
   - FacebookCore (0.5.0):
@@ -121,6 +122,7 @@ PODS:
   - UITextField-Navigation (4.2)
 
 DEPENDENCIES:
+  - BSImagePicker
   - Closures
   - Cosmos
   - FacebookCore
@@ -149,6 +151,7 @@ SPEC REPOS:
     - Alamofire
     - AppAuth
     - Bolts
+    - BSImagePicker
     - Closures
     - Cosmos
     - FacebookCore
@@ -189,6 +192,7 @@ SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Closures: a83b9892a5b1c4125a9dfcd53e2754db5d7f6d22
   Cosmos: 3dfb6e4ba48bd48b8c9aa2a77048ae11ed114f96
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
@@ -225,6 +229,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UITextField-Navigation: 25c2614b41096ade830fe015961dd2dbc4e108cb
 
-PODFILE CHECKSUM: d15942e972280c28eab596bcbb54f9d945bdd127
+PODFILE CHECKSUM: a79c675bbafc6bf4d1f2c648d334e4fb06f75054
 
 COCOAPODS: 1.10.0
