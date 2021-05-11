@@ -225,6 +225,9 @@
                                             <constraint firstAttribute="width" constant="50" id="NzB-iO-eXx"/>
                                         </constraints>
                                         <state key="normal" image="search_icon"/>
+                                        <connections>
+                                            <action selector="toSearch:" destination="aPf-Ku-lZ5" eventType="touchUpInside" id="E0i-ka-DCs"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsB-9b-z1n">
                                         <rect key="frame" x="50" y="1" width="50" height="50"/>
@@ -325,6 +328,162 @@
             </objects>
             <point key="canvasLocation" x="-697" y="179"/>
         </scene>
+        <!--SearchVC-->
+        <scene sceneID="PHx-sP-3On">
+            <objects>
+                <viewController storyboardIdentifier="SearchVC" id="weR-Hc-OzI" customClass="SearchVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KyW-Cl-CAh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ukl-6W-YJz">
+                                <rect key="frame" x="10" y="230" width="394" height="617"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trC-Zd-Tjq">
+                                <rect key="frame" x="0.0" y="-10" width="414" height="240"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 120" translatesAutoresizingMaskIntoConstraints="NO" id="R0q-wy-OFb">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="GLc-M3-xDF">
+                                        <rect key="frame" x="20" y="74" width="161.5" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gF-SJ-GK6" customClass="LocalizedBtn" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="46" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="EkZ-MK-g2M"/>
+                                                    <constraint firstAttribute="width" constant="46" id="UTW-k3-01K"/>
+                                                </constraints>
+                                                <state key="normal" image="back"/>
+                                                <connections>
+                                                    <action selector="back:" destination="weR-Hc-OzI" eventType="touchUpInside" id="9fl-nS-sLo"/>
+                                                    <action selector="back:" destination="roR-N8-fbF" eventType="touchUpInside" id="r02-BR-oBM"/>
+                                                    <action selector="back:" destination="iV9-Df-c5M" eventType="touchUpInside" id="x8S-8c-d4Y"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GF-Zp-Isa">
+                                                <rect key="frame" x="61" y="4" width="100.5" height="37.5"/>
+                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAf-LX-qrU" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="155" width="384" height="55"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-Kt-79b">
+                                                <rect key="frame" x="10" y="7.5" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="4RM-IC-gCX"/>
+                                                    <constraint firstAttribute="width" constant="40" id="szq-q5-8UN"/>
+                                                </constraints>
+                                            </imageView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="vendors" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GuG-rN-Akp" customClass="DropDown" customModule="iOSDropDown">
+                                                <rect key="frame" x="269" y="10" width="100" height="35"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="19L-WH-0NI"/>
+                                                    <constraint firstAttribute="height" constant="35" id="Vpt-FS-TIq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedRowColor">
+                                                        <color key="value" name="LightGray"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="checkMarkEnabled" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchEnable" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="nSm1kz3lEE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kv8-1U-1Cd">
+                                                <rect key="frame" x="60" y="5" width="204" height="45"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="weR-Hc-OzI" id="4wc-x9-IHf"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="kv8-1U-1Cd" secondAttribute="bottom" constant="5" id="8Ib-oJ-KsA"/>
+                                            <constraint firstItem="kv8-1U-1Cd" firstAttribute="leading" secondItem="Dbm-Kt-79b" secondAttribute="trailing" constant="10" id="Etn-3n-EXd"/>
+                                            <constraint firstAttribute="trailing" secondItem="GuG-rN-Akp" secondAttribute="trailing" constant="15" id="Gsg-bf-cFc"/>
+                                            <constraint firstItem="Dbm-Kt-79b" firstAttribute="leading" secondItem="IAf-LX-qrU" secondAttribute="leading" constant="10" id="Lo8-xB-AVX"/>
+                                            <constraint firstAttribute="height" constant="55" id="PW5-gB-q3Q"/>
+                                            <constraint firstItem="Dbm-Kt-79b" firstAttribute="centerY" secondItem="IAf-LX-qrU" secondAttribute="centerY" id="WMH-Lb-VyK"/>
+                                            <constraint firstItem="GuG-rN-Akp" firstAttribute="leading" secondItem="kv8-1U-1Cd" secondAttribute="trailing" constant="5" id="cv2-kJ-rmy"/>
+                                            <constraint firstItem="kv8-1U-1Cd" firstAttribute="centerY" secondItem="IAf-LX-qrU" secondAttribute="centerY" id="hgV-gg-fXc"/>
+                                            <constraint firstItem="kv8-1U-1Cd" firstAttribute="top" secondItem="IAf-LX-qrU" secondAttribute="top" constant="5" id="oUk-aW-zR3"/>
+                                            <constraint firstItem="GuG-rN-Akp" firstAttribute="centerY" secondItem="IAf-LX-qrU" secondAttribute="centerY" id="rDb-Nc-nQr"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="IAf-LX-qrU" firstAttribute="leading" secondItem="trC-Zd-Tjq" secondAttribute="leading" constant="15" id="ARr-xC-mus"/>
+                                    <constraint firstAttribute="bottom" secondItem="R0q-wy-OFb" secondAttribute="bottom" id="Kuc-9Y-0dE"/>
+                                    <constraint firstItem="R0q-wy-OFb" firstAttribute="top" secondItem="trC-Zd-Tjq" secondAttribute="top" id="N3X-s5-zIe"/>
+                                    <constraint firstAttribute="trailing" secondItem="IAf-LX-qrU" secondAttribute="trailing" constant="15" id="byH-54-SxA"/>
+                                    <constraint firstAttribute="bottom" secondItem="IAf-LX-qrU" secondAttribute="bottom" constant="30" id="kGt-4C-y4S"/>
+                                    <constraint firstAttribute="height" constant="240" id="kZ9-Cz-eBQ"/>
+                                    <constraint firstItem="R0q-wy-OFb" firstAttribute="leading" secondItem="trC-Zd-Tjq" secondAttribute="leading" id="rxj-Ta-Bex"/>
+                                    <constraint firstAttribute="trailing" secondItem="R0q-wy-OFb" secondAttribute="trailing" id="xzy-HQ-0AN"/>
+                                </constraints>
+                            </view>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3GC-zk-r38">
+                                <rect key="frame" x="111.5" y="439" width="191" height="199.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="NBi-1n-KnK">
+                                        <rect key="frame" x="13" y="0.0" width="165" height="165"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGM-w3-glc">
+                                        <rect key="frame" x="0.0" y="170" width="191" height="29.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dGM-w3-glc" secondAttribute="trailing" id="6bW-hW-FcF"/>
+                                    <constraint firstItem="dGM-w3-glc" firstAttribute="leading" secondItem="3GC-zk-r38" secondAttribute="leading" id="zaA-Uy-P8y"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pWA-0r-5Dx"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pWA-0r-5Dx" firstAttribute="trailing" secondItem="ukl-6W-YJz" secondAttribute="trailing" constant="10" id="Ewd-eu-bD8"/>
+                            <constraint firstItem="ukl-6W-YJz" firstAttribute="top" secondItem="trC-Zd-Tjq" secondAttribute="bottom" id="L2l-Sr-nia"/>
+                            <constraint firstItem="GLc-M3-xDF" firstAttribute="leading" secondItem="pWA-0r-5Dx" secondAttribute="leading" constant="20" id="QKK-Q2-7ut"/>
+                            <constraint firstItem="3GC-zk-r38" firstAttribute="centerY" secondItem="ukl-6W-YJz" secondAttribute="centerY" id="T3J-UX-kCZ"/>
+                            <constraint firstItem="ukl-6W-YJz" firstAttribute="leading" secondItem="pWA-0r-5Dx" secondAttribute="leading" constant="10" id="Tpy-A1-ez2"/>
+                            <constraint firstItem="GLc-M3-xDF" firstAttribute="top" secondItem="pWA-0r-5Dx" secondAttribute="top" constant="20" id="YId-dD-gTh"/>
+                            <constraint firstItem="pWA-0r-5Dx" firstAttribute="bottom" secondItem="ukl-6W-YJz" secondAttribute="bottom" constant="15" id="poB-Gc-Eju"/>
+                            <constraint firstItem="trC-Zd-Tjq" firstAttribute="top" secondItem="KyW-Cl-CAh" secondAttribute="top" constant="-10" id="pqc-jt-LKg"/>
+                            <constraint firstItem="3GC-zk-r38" firstAttribute="centerX" secondItem="ukl-6W-YJz" secondAttribute="centerX" id="tIM-S3-J9l"/>
+                            <constraint firstItem="trC-Zd-Tjq" firstAttribute="leading" secondItem="KyW-Cl-CAh" secondAttribute="leading" id="vPM-J9-uwq"/>
+                            <constraint firstAttribute="trailing" secondItem="trC-Zd-Tjq" secondAttribute="trailing" id="zkT-9H-Qjw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="notFoundStack" destination="3GC-zk-r38" id="oK9-vw-w9n"/>
+                        <outlet property="queryTF" destination="kv8-1U-1Cd" id="QQ6-eh-Hu2"/>
+                        <outlet property="resultTableView" destination="ukl-6W-YJz" id="2le-pF-Ach"/>
+                        <outlet property="searchType" destination="GuG-rN-Akp" id="ZLD-Oy-9QG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHg-9z-91Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-697" y="867"/>
+        </scene>
         <!--MapVC-->
         <scene sceneID="2dZ-aL-sCw">
             <objects>
@@ -351,7 +510,7 @@
                                         <rect key="frame" x="10" y="10" width="220" height="65"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please zoom in more to find your exact delivery location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27H-fy-tRI">
-                                                <rect key="frame" x="10" y="10" width="200" height="45"/>
+                                                <rect key="frame" x="10" y="18.5" width="200" height="28"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1532,6 +1691,9 @@
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yb-mZ-DEb">
                                                                 <rect key="frame" x="0.0" y="0.0" width="131.5" height="50"/>
+                                                                <connections>
+                                                                    <action selector="toTextOrder:" destination="oBb-wB-WfQ" eventType="touchUpInside" id="Frm-sr-VX9"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" name="Gold"/>
@@ -2884,16 +3046,16 @@ has been the industry's</string>
                                 <rect key="frame" x="0.0" y="596" width="414" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2IV-R6-Djv">
-                                        <rect key="frame" x="50" y="30" width="314" height="96"/>
+                                        <rect key="frame" x="50" y="30" width="314" height="65.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-pV-DxG">
-                                                <rect key="frame" x="79.5" y="0.0" width="155" height="36"/>
+                                                <rect key="frame" x="75" y="0.0" width="164.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If we have your location, we can do a better job to find what you want and deliver it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMd-sl-DPC">
-                                                <rect key="frame" x="5" y="51" width="304.5" height="45"/>
+                                                <rect key="frame" x="9.5" y="37.5" width="295" height="28"/>
                                                 <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="12"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3098,6 +3260,9 @@ has been the industry's</string>
         </scene>
     </scenes>
     <designables>
+        <designable name="3gF-SJ-GK6">
+            <size key="intrinsicContentSize" width="39" height="39"/>
+        </designable>
         <designable name="68C-SE-jas">
             <size key="intrinsicContentSize" width="34" height="30"/>
         </designable>
@@ -3108,7 +3273,7 @@ has been the industry's</string>
             <size key="intrinsicContentSize" width="79" height="30"/>
         </designable>
         <designable name="G5q-35-6fV">
-            <size key="intrinsicContentSize" width="170" height="41"/>
+            <size key="intrinsicContentSize" width="181" height="30"/>
         </designable>
         <designable name="H8G-FD-GWA">
             <size key="intrinsicContentSize" width="96" height="20"/>
@@ -3140,6 +3305,7 @@ has been the industry's</string>
     </designables>
     <resources>
         <image name="3-9" width="600" height="400"/>
+        <image name="Rectangle 120" width="417" height="207"/>
         <image name="Rectangle 152" width="375" height="5"/>
         <image name="SB_logo" width="2000" height="413"/>
         <image name="addIcon" width="34" height="35"/>
@@ -3154,6 +3320,7 @@ has been the industry's</string>
         <image name="delivery-truck" width="55" height="55"/>
         <image name="delivery_fees" width="23" height="23"/>
         <image name="delivery_time" width="14" height="14"/>
+        <image name="empty" width="165" height="165"/>
         <image name="favourite_icon" width="52" height="52"/>
         <image name="favourites-unselect" width="60" height="61"/>
         <image name="hint" width="512" height="512"/>

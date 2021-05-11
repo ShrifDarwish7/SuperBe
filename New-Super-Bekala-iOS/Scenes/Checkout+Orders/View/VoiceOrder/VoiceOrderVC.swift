@@ -89,12 +89,13 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
     
     func takeTheAction(){
         
+        self.addToCart.alpha = 1
+        
         switch recorderState {
             
         case .initial:
             
             playRecordRing()
-            
             actionImage.image = UIImage(named: "stop_recording")
             recorderState = .recording
             recordTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -115,6 +116,7 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
                 self.microphone.isHidden = false
                 self.microphone.alpha = 1
             }
+            self.addToCart.alpha = 0.5
             
         case .readyToPlay:
             
@@ -155,13 +157,6 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
             scheduledTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setSliderValue), userInfo: nil, repeats: true)
     
         }
-        
-        
-        do{
-            let _ = try Data(contentsOf: Recorder.getURL())
-            self.addToCart.alpha = 1
-        }catch{}
-        
     }
     
     @objc func setSliderValue(){
@@ -227,11 +222,13 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func addToCart(_ sender: Any) {
+        guard recorderState != .recording else { return }
         do{
             let voiceData = try Data(contentsOf: Recorder.getURL())
             var product = Product()
             product.voice = voiceData
-            CartServices.shared.addToCart(self.branch!, product) { (completed) in
+            product.branch = branch
+            CartServices.shared.addToCart(product) { (completed) in
                 if completed{
                     self.navigationController?.popViewController(animated: true)
                 }

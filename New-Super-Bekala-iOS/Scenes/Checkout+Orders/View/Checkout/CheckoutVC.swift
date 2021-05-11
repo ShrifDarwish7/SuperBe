@@ -78,7 +78,7 @@ class CheckoutVC: UIViewController {
         creditStack.alpha = branch?.onlinePayment == 1 ? 1 : 0.3
         promoViewContainer.isHidden = branch?.acceptCoupons == 1 ? false : true
         
-        CartServices.shared.getCartItems(itemId: -1, branch: branch!.id) { (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: branch!.id) { (items) in
             if let items = items{
                 self.items = items
                 for item in items{

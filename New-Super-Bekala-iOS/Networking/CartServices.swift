@@ -20,22 +20,36 @@ class CartServices{
     static let shared = CartServices()
     static let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func addToCart(_ branch: Branch, _ item: Product, completed: @escaping (Bool)->Void, exist: @escaping (Bool)->Void){
+    func addToCart(_ item: Product, completed: @escaping (Bool)->Void, exist: @escaping (Bool)->Void){
         
-        self.getCartBranches(id: branch.id) { (branches) in
+        self.getCartBranches(id: item.branch?.id) { (branches) in
             if let branches = branches{
                 if branches.isEmpty{
-                    self.addCartItemWith(branch, item, nil)
+                    self.addCartItemWith(item, nil)
                     completed(true)
                 }else{
                     let cartItem = CartItem(context: CartServices.managedObjectContext)
+                    
                     if let _ = item.photos{
                         
                         cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
+                        //                        Shared.cartIncrementalID += 1
+                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+                        cartItem.cart_id = UUID().uuidString
                         
                     }else if let _ = item.voice{
                         
                         cartItem.voice = item.voice
+                        //                        Shared.cartIncrementalID += 1
+                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+                        cartItem.cart_id = UUID().uuidString
+                        
+                    }else if let _ = item.text{
+                        
+                        cartItem.text = item.text
+                        //                        Shared.cartIncrementalID += 1
+                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+                        cartItem.cart_id = UUID().uuidString
                         
                     }else{
                         
@@ -44,7 +58,7 @@ class CartServices{
                             cartId += variation.options!.map({String($0.id!)}).joined()
                         })
                         print("cartId",cartId)
-                        self.getCartItems(itemId: Int(cartId)!, branch: -1/*Int(branches.first!.id)*/) { (items) in
+                        self.getCartItems(itemId: cartId, branch: -1/*Int(branches.first!.id)*/) { (items) in
                             if let items = items{
                                 if items.isEmpty{
                                     cartItem.product_id = Int16(Int(item.id!))
@@ -54,7 +68,7 @@ class CartServices{
                                     cartItem.notes = item.notes
                                     cartItem.price = Double(item.price!)
                                     cartItem.quantity = Int16(item.quantity)
-                                    cartItem.cart_id = Int64(cartId)!
+                                    cartItem.cart_id = cartId
                                     cartItem.desc = item.desc
                                     if let variations = item.variations{
                                         let data = try! JSONEncoder.init().encode(variations)
@@ -86,11 +100,30 @@ class CartServices{
         
     }
     
-    func addCartItemWith(_ branch: Branch, _ item: Product,_ completed: ((Bool)->Void)?){
+    func addCartItemWith(_ item: Product,_ completed: ((Bool)->Void)?){
         let cartItem = CartItem(context: CartServices.managedObjectContext)
         if let _ = item.photos{
+            
             let cartItem = CartItem(context: CartServices.managedObjectContext)
             cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
+            //                        Shared.cartIncrementalID += 1
+            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+            cartItem.cart_id = UUID().uuidString
+            
+        }else if let _ = item.voice{
+            
+            cartItem.voice = item.voice
+            //                        Shared.cartIncrementalID += 1
+            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+            cartItem.cart_id = UUID().uuidString
+            
+        }else if let _ = item.text{
+            
+            cartItem.text = item.text
+            //                        Shared.cartIncrementalID += 1
+            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
+            cartItem.cart_id = UUID().uuidString
+            
         }else{
             cartItem.product_id = Int16(item.id!)
             cartItem.name_en = item.branchProductLanguage?.first?.name
@@ -105,7 +138,7 @@ class CartServices{
                 cartId += variation.options!.map({String($0.id!)}).joined()
             })
             print("cartId",cartId)
-            cartItem.cart_id = Int64(cartId)!
+            cartItem.cart_id = cartId
             
             if let variations = item.variations{
                 let data = try! JSONEncoder.init().encode(variations)
@@ -113,10 +146,10 @@ class CartServices{
             }
         }
         let cartBranch = CartBranch(context: CartServices.managedObjectContext)
-        cartBranch.id = Int16(branch.id)
-        cartBranch.logo = branch.logo
-        cartBranch.name_en = branch.branchLanguage?.first?.name
-        cartBranch.name_ar = branch.branchLanguage![0].name
+        cartBranch.id = Int16(item.branch!.id)
+        cartBranch.logo = item.branch?.logo
+        cartBranch.name_en = item.branch?.branchLanguage?.first?.name
+        cartBranch.name_ar = item.branch?.branchLanguage![0].name
         cartItem.branch = cartBranch
         
         do{
@@ -128,13 +161,14 @@ class CartServices{
             print("contextSave",error)
         }
     }
-    func getCartItems(itemId: Int, branch: Int, completedWith items: @escaping ([CartItem]?)->Void){
+    
+    func getCartItems(itemId: String, branch: Int, completedWith items: @escaping ([CartItem]?)->Void){
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
         if branch != -1{
-            fetchRequest.predicate = itemId != -1 ? NSPredicate(format: "ANY branch.id == %i && cart_id == %i", branch, itemId) : NSPredicate(format: "ANY branch.id == %i", branch)
+            fetchRequest.predicate = itemId != "-1" ? NSPredicate(format: "ANY branch.id == %i && cart_id == %@", branch, itemId) : NSPredicate(format: "ANY branch.id == %i", branch)
         }
-        if itemId != -1{
-            fetchRequest.predicate = branch != -1 ? NSPredicate(format: "ANY branch.id == %i && cart_id == %i", branch, itemId) : NSPredicate(format: "cart_id == %i", itemId)
+        if itemId != "-1"{
+            fetchRequest.predicate = branch != -1 ? NSPredicate(format: "ANY branch.id == %i && cart_id == %@", branch, itemId) : NSPredicate(format: "cart_id == %@", itemId)
         }
         do {
             let cartItems = try CartServices.managedObjectContext.fetch(fetchRequest)
@@ -164,13 +198,13 @@ class CartServices{
     
     func removeItemAt(_ item: CartItem,_ removed: ((Bool)->Void)?){
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "cart_id == %i", item.cart_id)
+        fetchRequest.predicate = NSPredicate(format: "cart_id == %@", item.cart_id!)
         let temp = item.branch?.id
         do{
             let fetchResult = try CartServices.managedObjectContext.fetch(fetchRequest)
             print(fetchResult)
             CartServices.managedObjectContext.delete(fetchResult.first!)
-            CartServices.shared.getCartItems(itemId: -1, branch: Int(temp!)) { (items) in
+            CartServices.shared.getCartItems(itemId: "-1", branch: Int(temp!)) { (items) in
                 if let items = items,
                    items.isEmpty{
                     CartServices.shared.removeBranchAt(Int(temp!), nil)
@@ -196,9 +230,9 @@ class CartServices{
         }
     }
     
-    func updateQuantity(newValue: Int, id: Int,_ completed: ((Bool)->Void)?){
+    func updateQuantity(newValue: Int, id: String,_ completed: ((Bool)->Void)?){
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "cart_id == %i", id)
+        fetchRequest.predicate = NSPredicate(format: "cart_id == %@", id)
         do{
             let fetchResult = try CartServices.managedObjectContext.fetch(fetchRequest)
           //  fetchResult.first!.setValue(newValue, forKey: "quantity")

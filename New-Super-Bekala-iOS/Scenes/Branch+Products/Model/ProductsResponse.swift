@@ -25,7 +25,9 @@ struct Product: Codable {
     var startTime, endTime, productionDate, expDate: String?
     var saleStartDate, saleEndDate: String?
     var branchID, productID, branchCategoryID: Int?
+    var branchImage: String?
     var branchProductLanguage: [BranchProductLanguage]?
+    var branch: Branch?
     var variations: [Variation]?
     
     var quantity: Int = 1
@@ -51,7 +53,8 @@ struct Product: Codable {
         case productID = "product_id"
         case branchCategoryID = "branch_category_id"
         case branchProductLanguage = "branch_product_language"
-        case variations
+        case variations, branch
+        case branchImage = "branch_image"
     }
 }
 

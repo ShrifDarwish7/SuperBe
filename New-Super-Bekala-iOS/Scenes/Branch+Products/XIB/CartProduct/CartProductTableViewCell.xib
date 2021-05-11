@@ -39,7 +39,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-aY-Yjp" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="20" width="60" height="60"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3-9" translatesAutoresizingMaskIntoConstraints="NO" id="zZ9-hZ-CJA">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3-9" translatesAutoresizingMaskIntoConstraints="NO" id="zZ9-hZ-CJA" customClass="CircluarImage" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                     </imageView>
                                                 </subviews>
@@ -207,6 +207,11 @@
             <point key="canvasLocation" x="28.985507246376812" y="171.09375"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="zZ9-hZ-CJA">
+            <size key="intrinsicContentSize" width="600" height="400"/>
+        </designable>
+    </designables>
     <resources>
         <image name="3-9" width="600" height="400"/>
         <image name="add" width="512" height="512"/>

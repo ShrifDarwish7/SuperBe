@@ -40,9 +40,9 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case filtersCollectionView:
-            return self.categories?.count ?? 1
+            return self.categories?.count ?? 0
         case featuredVendorsCollection:
-            return self.branches?.count ?? 1
+            return self.branches?.count ?? 0
         default:
             return 0
         }

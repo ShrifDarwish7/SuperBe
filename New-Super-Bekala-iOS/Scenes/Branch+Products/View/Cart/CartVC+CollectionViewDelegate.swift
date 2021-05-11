@@ -45,7 +45,7 @@ extension CartVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         self.selectedBranch = branches![indexPath.row]
         try! CartServices.managedObjectContext.save()
         filtersCollectionView.reloadData()
-        CartServices.shared.getCartItems(itemId: -1, branch: Int(self.branches![indexPath.row].id)) { (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: Int(self.branches![indexPath.row].id)) { (items) in
             if let items = items{
                 self.items = items
                 self.productsTableView.reloadData()

@@ -85,8 +85,8 @@ class ImagesOrderVC: UIViewController {
         guard !selectedImages.isEmpty else { return }
         var product = Product()
         product.photos = selectedImages
-        
-        CartServices.shared.addToCart(self.branch!, product) { (completed) in
+        product.branch = branch
+        CartServices.shared.addToCart(product) { (completed) in
             if completed{
                 self.navigationController?.popViewController(animated: true)
             }

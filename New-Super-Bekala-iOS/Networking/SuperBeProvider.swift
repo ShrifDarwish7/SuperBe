@@ -25,6 +25,7 @@ public enum SuperBe{
     case getProductByID(_ branchId: Int,_ productId: Int,_ prms: [String: String])
     case placeOrder(_ bodyData: Data)
     case getMyOrders(_ prms: [String: String])
+    case search(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
@@ -58,6 +59,8 @@ extension SuperBe: TargetType{
             return "branches/\(branchId)/products/\(id)"
         case .placeOrder(_), .getMyOrders(_):
             return "orders"
+        case .search(_):
+            return "search"
         }
     }
     
@@ -90,7 +93,8 @@ extension SuperBe: TargetType{
              .getBranchProducts(let prms, _),
              .updateAddress(_, let prms),
              .getProductByID(_, _, let prms),
-             .getMyOrders(let prms):
+             .getMyOrders(let prms),
+             .search(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms):
             var multipartFormData = [MultipartFormData]()

@@ -76,9 +76,8 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toProduct(_ sender: UIViewController,_ branch: Branch?,_ product: Product?){
+    static func toProduct(_ sender: UIViewController,_ product: Product?){
         let vc = self.instantiate(appStoryboard: .home, identifier: "ProductVC") as! ProductVC
-        vc.branch = branch
         vc.product = product
         sender.navigationController?.pushViewController(vc, animated: true)
     }
@@ -109,6 +108,17 @@ class Router {
     static func toVoiceOrder(_ sender: UIViewController,_ branch: Branch){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "VoiceOrderVC") as! VoiceOrderVC
         vc.branch = branch
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    static func toTextOrder(_ sender: UIViewController,_ branch: Branch){
+        let vc = self.instantiate(appStoryboard: .orders, identifier: "TextOrderVC") as! TextOrderVC
+        vc.branch = branch
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    static func toSearch(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .home, identifier: "SearchVC") as! SearchVC
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     

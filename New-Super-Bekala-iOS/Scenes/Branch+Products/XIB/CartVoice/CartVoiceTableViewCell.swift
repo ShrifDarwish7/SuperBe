@@ -59,7 +59,7 @@ class CartVoiceTableViewCell: UITableViewCell {
         seconds = audioLength - minutes! * 60
         self.voiceLength.text = "\(minutes ?? 00):\(seconds ?? 00)"
         voiceSlider.maximumValue = Float(player!.duration)
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setSliderValue), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(setSliderValue), userInfo: nil, repeats: true)
         
     }
     
@@ -69,13 +69,13 @@ class CartVoiceTableViewCell: UITableViewCell {
         
         if player?.isPlaying == false {
             
-            pause_resume_btn.setImage(UIImage(named: "play"), for: .normal)
+            pause_resume_btn.setImage(UIImage(named: "play-icon"), for: .normal)
             
         }else{
             
-            pause_resume_btn.setImage(UIImage(named: "pause"), for: .normal)
+            pause_resume_btn.setImage(UIImage(named: "pause-1"), for: .normal)
             currentPlayingTime = Float((player?.currentTime)!)
-            UIView.animate(withDuration: 1.5, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 self.voiceSlider.setValue(self.currentPlayingTime!, animated: true)
             }) { (_) in
                 
@@ -103,12 +103,12 @@ class CartVoiceTableViewCell: UITableViewCell {
         
         if player?.isPlaying == false{
             
-            pause_resume_btn.setImage(UIImage(named: "pause"), for: .normal)
+            pause_resume_btn.setImage(UIImage(named: "pause-1"), for: .normal)
             player?.play()
             
         }else{
             
-            pause_resume_btn.setImage(UIImage(named: "play"), for: .normal)
+            pause_resume_btn.setImage(UIImage(named: "play-icon"), for: .normal)
             player?.pause()
             
         }

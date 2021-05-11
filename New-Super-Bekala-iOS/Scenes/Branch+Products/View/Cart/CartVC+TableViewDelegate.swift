@@ -22,9 +22,9 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let _ = items![indexPath.row].photos{
+        if let photos = items![indexPath.row].photos{
             
-            let photosData = try! JSONDecoder.init().decode([Data].self, from: items![indexPath.row].photos!)
+            let photosData = try! JSONDecoder.init().decode([Data].self, from: photos)
             let photos = photosData.map({ UIImage(data: $0) })
             let nib = UINib(nibName: CartPhotosTableViewCell.identifier, bundle: nil)
             productsTableView.register(nib, forCellReuseIdentifier: CartPhotosTableViewCell.identifier)
@@ -47,13 +47,22 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
             }
             
             cell.photosCollectionView.reloadData()
+            return cell
             
-        }else if let _ = items![indexPath.row].voice{
+        }else if let voiceData = items![indexPath.row].voice{
             
             let nib = UINib(nibName: CartVoiceTableViewCell.identifier, bundle: nil)
             productsTableView.register(nib, forCellReuseIdentifier: CartVoiceTableViewCell.identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: CartVoiceTableViewCell.identifier, for: indexPath) as! CartVoiceTableViewCell
-            cell.loadFrom(data: items![indexPath.row].voice!)
+            cell.loadFrom(data: voiceData)
+            return cell
+            
+        }else if let text = items![indexPath.row].text{
+            
+            let nib = UINib(nibName: CartTextTableViewCell.identifier, bundle: nil)
+            productsTableView.register(nib, forCellReuseIdentifier: CartTextTableViewCell.identifier)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CartTextTableViewCell.identifier, for: indexPath) as! CartTextTableViewCell
+            cell.textOrder.text = text
             return cell
             
         }else{
@@ -61,7 +70,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
             let nib = UINib(nibName: CartProductTableViewCell.identifier, bundle: nil)
             productsTableView.register(nib, forCellReuseIdentifier: CartProductTableViewCell.identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: CartProductTableViewCell.identifier, for: indexPath) as! CartProductTableViewCell
-            cell.name.text = "\(items![indexPath.row].cart_id)"//"lang".localized == "en" ? items![indexPath.row].nameEn : items![indexPath.row].nameAr
+            cell.name.text = "\(items![indexPath.row].cart_id ?? "")"//"lang".localized == "en" ? items![indexPath.row].nameEn : items![indexPath.row].nameAr
             cell.quantity.text = "\(items![indexPath.row].quantity)"
             cell.desc.text = items![indexPath.row].desc
             cell.desc.isHidden = items![indexPath.row].desc == "" ? true : false
@@ -72,7 +81,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                 var newQty: Int = Int(cell.quantity.text!)!
                 newQty += 1
                 cell.quantity.text = "\(newQty)"
-                CartServices.shared.updateQuantity(newValue: newQty, id: Int(self.items![indexPath.row].cart_id), nil)
+                CartServices.shared.updateQuantity(newValue: newQty, id: self.items![indexPath.row].cart_id!, nil)
                 productsTableView.reloadData()
             }
             cell.decreaseBtn.onTap { [self] in
@@ -82,7 +91,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                 var newQty: Int = Int(cell.quantity.text!)!
                 newQty -= 1
                 cell.quantity.text = "\(newQty)"
-                CartServices.shared.updateQuantity(newValue: newQty, id: Int(self.items![indexPath.row].cart_id), nil)
+                CartServices.shared.updateQuantity(newValue: newQty, id: (self.items![indexPath.row].cart_id)!, nil)
                 productsTableView.reloadData()
             }
             cell.price.text = "\(items![indexPath.row].price * Double(cell.quantity.text!)!) EGP"
@@ -90,33 +99,25 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
             return cell
             
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let _ = items![indexPath.row].photos{
             return 140
         }else if let _ = items![indexPath.row].voice{
-            return 115
+            return 130
         }else{
             return UITableView.automaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if let _ = items![indexPath.row].photos{
-            
-        }else if let _ = items![indexPath.row].voice{
-            
-        }else{
-            let contextualAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-                CartServices.shared.removeItemAt(self.items![indexPath.row]) { (completed) in
-                    self.fetchCartBranches()
-                    self.fetchCartItems()
-                }
+        let contextualAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+            CartServices.shared.removeItemAt(self.items![indexPath.row]) { (completed) in
+                self.fetchCartBranches()
+                self.fetchCartItems()
             }
-            return UISwipeActionsConfiguration(actions: [contextualAction])
         }
-        return UISwipeActionsConfiguration(actions: [])
+        return UISwipeActionsConfiguration(actions: [contextualAction])
     }
 }

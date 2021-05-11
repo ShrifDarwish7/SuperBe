@@ -26,15 +26,14 @@ class CartVC: UIViewController {
         presenter = MainPresenter(self)
                 
         fetchCartBranches()
-        fetchCartItems()
-        
+            
     }
     
     func fetchCartBranches(){
-        CartServices.shared.getCartBranches(id: nil) { (branches) in
+        CartServices.shared.getCartBranches(id: nil) { [self] (branches) in
             if let branches = branches{
                 self.branches = branches
-                let selectedBranches = self.branches!.filter({ return $0.selected == true })
+                guard let selectedBranches = self.branches?.filter({ return $0.selected == true }) else { return }
                 if selectedBranches.isEmpty{
                     guard !self.branches!.isEmpty else{
                         self.navigationController?.popViewController(animated: true)
@@ -45,15 +44,16 @@ class CartVC: UIViewController {
                 }else{
                     self.selectedBranch = selectedBranches.first
                 }
+                fetchCartItems()
                 self.loadFiltersCollection()
             }
         }
     }
     
     func fetchCartItems(){
-        CartServices.shared.getCartItems(itemId: -1, branch: Int((self.selectedBranch!.id))) { (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: Int((self.selectedBranch!.id))) { (items) in
             if let items = items{
-                self.items = items
+                self.items = items                
                 for item in items{
                    // let variations = item.variations?.getDecodedObject(from: [Variation].self)
                     if let _ = item.photos{

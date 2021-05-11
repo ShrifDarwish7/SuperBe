@@ -9,7 +9,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CartItem" inverseName="branch" inverseEntity="CartItem"/>
     </entity>
     <entity name="CartItem" representedClassName=".CartItem" syncable="YES">
-        <attribute name="cart_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="cart_id" optional="YES" attributeType="String"/>
         <attribute name="desc" attributeType="String" defaultValueString=""/>
         <attribute name="logo" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="name_ar" optional="YES" attributeType="String" defaultValueString=""/>

@@ -29,6 +29,8 @@ protocol MainViewDelegate {
     func didCompleteDeleteAddress(_ error: String?)
     func didCompletePlaceOrder(_ error: String?)
     func didCompleteWithMyOrders(_ data: [LastOrder]?)
+    func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?)
+    func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -50,6 +52,8 @@ extension MainViewDelegate{
     func didCompleteDeleteAddress(_ error: String?){}
     func didCompletePlaceOrder(_ error: String?){}
     func didCompleteWithMyOrders(_ data: [LastOrder]?){}
+    func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?){}
+    func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
 }
 
 class MainPresenter{
@@ -58,6 +62,36 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func searchWith( query prms: inout [String: String],_ context: Context){
+        prms.updateValue(context.rawValue, forKey: "context")
+        switch context {
+        case .products:
+            prms.updateValue("branch.branchLanguage,variations.options", forKey: "with")
+        default:
+            break
+        }
+        print(prms)
+        APIServices.shared.call(.search(prms)) { (data) in
+            print(JSON(data))
+            if let data = data{
+                switch context {
+                case .vendors:
+                    guard let dataModel = data.getDecodedObject(from: BranchesResponse.self) else {
+                        self.delegate?.didCompeleteBranchesSearch(nil, Shared.errorMsg)
+                        return
+                    }
+                    self.delegate?.didCompeleteBranchesSearch(dataModel.data, nil)
+                case .products:
+                    guard let dataModel = data.getDecodedObject(from: ProductsResponse.self) else {
+                        self.delegate?.didCompeleteProductsSearch(nil, Shared.errorMsg)
+                        return
+                    }
+                    self.delegate?.didCompeleteProductsSearch(dataModel.data, nil)
+                }
+            }
+        }
     }
     
     func getMyOrders(){

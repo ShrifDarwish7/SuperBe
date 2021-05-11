@@ -60,7 +60,7 @@ class BranchVC: UIViewController {
     }
     
     func fetchCartItems(){
-        CartServices.shared.getCartItems(itemId: -1, branch: self.branch!.id) { [self] (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: self.branch!.id) { [self] (items) in
             self.cartItems = items
             if let items = items,
                !items.isEmpty{
@@ -96,18 +96,22 @@ class BranchVC: UIViewController {
     }
     
     @IBAction func toImageOrder(_ sender: Any) {
-        Router.toImagesOrder(self,self.branch!)
+        Router.toImagesOrder(self, branch!)
     }
     
     @IBAction func toVoiceOrder(_ sender: Any) {
         Router.toVoiceOrder(self, branch!)
     }
     
+    @IBAction func toTextOrder(_ sender: Any) {
+        Router.toTextOrder(self, branch!)
+    }
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func toCart(_ sender: Any) {
-        CartServices.shared.getCartItems(itemId: -1, branch: self.branch!.id) { [self] (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: self.branch!.id) { [self] (items) in
             if let items = items,
                items.isEmpty{
                 showToast("Cart of this vendor is empty")

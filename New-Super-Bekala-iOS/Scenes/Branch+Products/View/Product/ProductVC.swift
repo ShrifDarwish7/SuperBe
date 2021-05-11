@@ -35,7 +35,6 @@ class ProductVC: UIViewController {
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     let maxHeaderViewHeight: CGFloat = 270
-    var branch: Branch?
     var product: Product?
     var popFlage = false
     
@@ -160,7 +159,7 @@ class ProductVC: UIViewController {
                 }
             }
             
-            CartServices.shared.addToCart(self.branch!, product!) { (completed) in
+            CartServices.shared.addToCart(product!) { (completed) in
                 if completed{
                     self.navigationController?.popViewController(animated: true)
                 }

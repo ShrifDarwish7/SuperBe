@@ -54,6 +54,14 @@ class LocalizedBtn: UIButton {
 }
 
 @IBDesignable
+class CircluarImage: UIImageView{
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.height/2
+    }
+}
+
+@IBDesignable
 class LocalizedImg: UIImageView {
     
     override func layoutSubviews() {

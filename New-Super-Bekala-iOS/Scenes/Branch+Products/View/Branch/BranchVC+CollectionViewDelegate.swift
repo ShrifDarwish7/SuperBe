@@ -77,7 +77,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                 cell.productImage.layer.cornerRadius = 25
                 cell.loadFrom(data: self.products![indexPath.row])
                 
-                let inCartItems = self.cartItems?.filter({ return $0.cart_id == self.products![indexPath.row].id! })
+                let inCartItems = self.cartItems?.filter({ return $0.cart_id == String(self.products![indexPath.row].id!) })
                 if inCartItems!.isEmpty{
                     cell.inCartView.isHidden = true
                     cell.addToCartBtn.isHidden = false
@@ -90,7 +90,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                 cell.addToCartBtn.onTap {
                     
                     guard self.products![indexPath.row].variations == nil || (self.products![indexPath.row].variations?.isEmpty == true) else {
-                        Router.toProduct(self, self.branch, self.products![indexPath.row])
+                        Router.toProduct(self, self.products![indexPath.row])
                         return
                     }
                     
@@ -100,7 +100,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                     self.products![indexPath.row].quantity = 1
                     self.products![indexPath.row].notes = ""
                     
-                    CartServices.shared.addToCart(self.branch!, self.products![indexPath.row]) { (completed) in
+                    CartServices.shared.addToCart(self.products![indexPath.row]) { (completed) in
                         if completed{
                             self.fetchCartItems()
                            // self.showToast("Product added successfully to your cart")
@@ -119,7 +119,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                     var newQty: Int = Int(cell.quantity.text!)!
                     newQty += 1
                     cell.quantity.text = "\(newQty)"
-                    CartServices.shared.updateQuantity(newValue: newQty, id: Int(inCartItems!.first!.cart_id), nil)
+                    CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
                     fetchCartItems()
                 }
                 
@@ -130,7 +130,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                     var newQty: Int = Int(cell.quantity.text!)!
                     newQty -= 1
                     cell.quantity.text = "\(newQty)"
-                    CartServices.shared.updateQuantity(newValue: newQty, id: Int(inCartItems!.first!.cart_id), nil)
+                    CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
                     fetchCartItems()
                 }
                 
@@ -218,7 +218,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
 //                SVProgressHUD.dismiss()
 //                Router.toProduct(self, self.branch,try! JSON(data!)["data"].rawData().getDecodedObject(from: Product.self))
 //            }
-            Router.toProduct(self, self.branch, self.products![indexPath.row])
+            Router.toProduct(self, self.products![indexPath.row])
         default:
             break
         }

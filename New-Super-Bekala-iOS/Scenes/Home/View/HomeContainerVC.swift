@@ -47,7 +47,7 @@ class HomeContainerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        CartServices.shared.getCartItems(itemId: -1, branch: -1) { [self] (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
             self.cartItems = items
             if let items = items,
                !items.isEmpty{
@@ -59,7 +59,7 @@ class HomeContainerVC: UIViewController {
     }
     
     @IBAction func toCart(_ sender: Any) {
-        CartServices.shared.getCartItems(itemId: -1, branch: -1) { [self] (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
             if let items = items,
                items.isEmpty{
                 showToast("Your cart is empty")
@@ -156,6 +156,10 @@ class HomeContainerVC: UIViewController {
 //
 //        }
         
+    }
+    
+    @IBAction func toSearch(_ sender: Any) {
+        Router.toSearch(self)
     }
     
     func replaceView(identifier: String, storyboard: AppStoryboard) {
