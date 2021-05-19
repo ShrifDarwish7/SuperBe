@@ -28,8 +28,9 @@ target 'New-Super-Bekala-iOS' do
   pod 'FBSDKLoginKit'
   pod 'SkeletonView'
   pod 'Moya'
-  pod 'iOSDropDown'
+  #pod 'iOSDropDown'
   pod 'BSImagePicker'
+  pod 'DropDown'
 
   target 'New-Super-Bekala-iOSTests' do
     inherit! :search_paths

@@ -13,6 +13,7 @@ enum AppStoryboard: String {
     case main = "Main"
     case home = "Home"
     case orders = "Orders"
+    case profile = "Profile"
 }
 
 class Router {
@@ -119,6 +120,16 @@ class Router {
     
     static func toSearch(_ sender: UIViewController){
         let vc = self.instantiate(appStoryboard: .home, identifier: "SearchVC") as! SearchVC
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    static func toFilters(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .home, identifier: "FiltersVC") as! FiltersVC
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toProfile(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .profile, identifier: "ProfileVC") as! ProfileVC
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     

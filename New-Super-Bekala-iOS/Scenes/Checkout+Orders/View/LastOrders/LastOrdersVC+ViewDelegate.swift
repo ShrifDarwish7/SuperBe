@@ -20,6 +20,9 @@ extension LastOrderVC: MainViewDelegate{
                 self.isLoading = false
                 self.loadFromNib()
             }
+        }else{
+            lastOrdersTableView.isHidden = true
+            emptyView.isHidden = false
         }
     }
 }

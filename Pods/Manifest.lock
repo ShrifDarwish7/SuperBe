@@ -14,6 +14,7 @@ PODS:
   - BSImagePicker (3.3.1)
   - Closures (0.7)
   - Cosmos (21.0.0)
+  - DropDown (2.3.13)
   - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
     - FBSDKCoreKit (~> 4.37)
@@ -98,7 +99,6 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
-  - iOSDropDown (0.3.4)
   - IQKeyboardManagerSwift (6.5.5)
   - leveldb-library (1.22)
   - Moya (14.0.0):
@@ -125,6 +125,7 @@ DEPENDENCIES:
   - BSImagePicker
   - Closures
   - Cosmos
+  - DropDown
   - FacebookCore
   - FacebookLogin
   - FBSDKCoreKit
@@ -135,7 +136,6 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
-  - iOSDropDown
   - IQKeyboardManagerSwift
   - Moya
   - SDWebImage
@@ -154,6 +154,7 @@ SPEC REPOS:
     - BSImagePicker
     - Closures
     - Cosmos
+    - DropDown
     - FacebookCore
     - FacebookLogin
     - FBSDKCoreKit
@@ -174,7 +175,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
-    - iOSDropDown
     - IQKeyboardManagerSwift
     - leveldb-library
     - Moya
@@ -195,6 +195,7 @@ SPEC CHECKSUMS:
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   Closures: a83b9892a5b1c4125a9dfcd53e2754db5d7f6d22
   Cosmos: 3dfb6e4ba48bd48b8c9aa2a77048ae11ed114f96
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
@@ -215,7 +216,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
@@ -229,6 +229,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UITextField-Navigation: 25c2614b41096ade830fe015961dd2dbc4e108cb
 
-PODFILE CHECKSUM: a79c675bbafc6bf4d1f2c648d334e4fb06f75054
+PODFILE CHECKSUM: bb6632c01ca078bbf44dd825529dd55808288d6e
 
 COCOAPODS: 1.10.0

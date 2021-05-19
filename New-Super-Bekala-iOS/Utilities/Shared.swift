@@ -69,4 +69,11 @@ extension String{
         map.forEach { str = str.replacingOccurrences(of: $0, with: $1) }
         return str
     }
+    public func firstIndex(char: Character) -> Int? {
+        if let idx = self.firstIndex(of: char) {
+            return self.distance(from: self.startIndex, to: idx)
+        }
+        return nil
+    }
 }
+
