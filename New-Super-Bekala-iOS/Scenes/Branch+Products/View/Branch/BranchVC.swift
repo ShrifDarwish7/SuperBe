@@ -51,7 +51,7 @@ class BranchVC: UIViewController {
         loadProductsCollection()
         presenter = MainPresenter(self)
         initUI()
-        presenter?.getBranchCats(prms: ["lang": "lang".localized], id: branch!.id)
+        presenter?.getBranchCats(prms: [:], id: branch!.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {

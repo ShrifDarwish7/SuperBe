@@ -133,4 +133,9 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
+    static func toPointsContainer(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .profile, identifier: "PointsContainerVC") as! PointsContainerVC
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

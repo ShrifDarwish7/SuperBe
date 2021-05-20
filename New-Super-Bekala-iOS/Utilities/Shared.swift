@@ -77,3 +77,16 @@ extension String{
     }
 }
 
+
+extension UIViewController{
+    func replaceView(containerView: UIView, identifier: String, storyboard: AppStoryboard) {
+        containerView.subviews.forEach({ $0.removeFromSuperview() })
+        let vc =
+       // self.storyboard!.instantiateViewController(withIdentifier: identifier)
+        Router.instantiate(appStoryboard: storyboard, identifier: identifier)
+        vc.view.frame = containerView.bounds;
+        containerView.addSubview(vc.view)
+        self.addChild(vc)
+        vc.didMove(toParent: self)
+    }
+}

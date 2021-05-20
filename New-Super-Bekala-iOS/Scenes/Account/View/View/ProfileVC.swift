@@ -21,7 +21,12 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var expandAddressImg: UIImageView!
     @IBOutlet weak var profileDataStack: UIStackView!
     @IBOutlet weak var dashboardContainer: UIView!
+    @IBOutlet weak var draggableView: UIView!
+    @IBOutlet weak var bottomSheetTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var blockView: UIView!
     
+    var bottomSheetPanStartingTopConstant : CGFloat = 30.0
     var presenter: MainPresenter?
     var addresses: [Address]?
     let menu: DropDown = {
@@ -54,11 +59,101 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bottomSheetTopConstraint.constant = self.view.frame.height
+        
+        let viewPan = UIPanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
+        viewPan.delaysTouchesBegan = false
+        viewPan.delaysTouchesEnded = false
+        self.draggableView.addGestureRecognizer(viewPan)
+        
         menu.anchorView = menuContainer
         dashboardTab.layer.cornerRadius = dashboardTab.frame.height/2
         dashboardTab.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         dashboardTab.alpha = 0.5
+        
+        menu.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.menu.deselectRow(at: self.menu.indexForSelectedRow)
+            switch index{
+            case 0:
+                self.replaceView(containerView: containerView, identifier: "PointsContainerVC", storyboard: .profile)
+                self.menu.hide()
+                self.blockView.isHidden = false
+                self.bottomSheetTopConstraint.constant = 350
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+                    self.view.layoutIfNeeded()
+                } completion: { (_) in
+                    
+                }
+            default:
+                break
+            }
+        }
     }
+    
+    @objc func viewPanned(_ panRecognizer: UIPanGestureRecognizer){
+        let translation = panRecognizer.translation(in: self.view)
+        _ = panRecognizer.velocity(in: self.view)
+    print(translation.y)
+        switch panRecognizer.state {
+        case .began:
+            bottomSheetPanStartingTopConstant = self.bottomSheetTopConstraint.constant
+        case .changed:
+            
+            self.bottomSheetTopConstraint.constant = self.bottomSheetPanStartingTopConstant + translation.y
+
+        case .ended:
+            
+            if translation.y < 0 {
+                self.bottomSheetTopConstraint.constant = UIApplication.shared.statusBarFrame.height + 20
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+                    self.view.layoutIfNeeded()
+                } completion: { (_) in
+                    
+                }
+
+            }else{
+                self.dismissBottomSheet(self)
+            }
+           // print(velocity.y)
+//            if velocity.y > 1500.0 {
+//
+//                let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height
+//             //   let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom
+//                self.bottomSheetTopConstraint.constant = safeAreaHeight! - CGFloat(35)
+//
+//              UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, animations: {
+//                  self.view.layoutIfNeeded()
+//              }) { (_) in
+//
+//                }
+//            }else if velocity.y < 10{
+//
+//                self.bottomSheetTopConstraint.constant = UIApplication.shared.statusBarFrame.height + CGFloat(110)
+//
+//                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, animations: {
+//                    self.view.layoutIfNeeded()
+//                }) { (_) in
+//
+//                }
+//
+//            }
+            
+        default:
+            break
+        }
+    }
+    
+    @IBAction func dismissBottomSheet(_ sender: Any) {
+        self.bottomSheetTopConstraint.constant = self.view.frame.height
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        } completion: { (_) in
+            self.blockView.isHidden = true
+        }
+
+    }
+    
 
     @IBAction func showMenu(_ sender: Any) {
         menu.show()

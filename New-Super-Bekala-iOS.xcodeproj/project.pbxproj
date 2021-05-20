@@ -104,6 +104,10 @@
 		10B986A22614959300F0DD65 /* BranchVC+BranchViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B986A12614959300F0DD65 /* BranchVC+BranchViewDelegate.swift */; };
 		10B986AB2614AB5000F0DD65 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B986A92614AB5000F0DD65 /* ProductCollectionViewCell.swift */; };
 		10B986AC2614AB5000F0DD65 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10B986AA2614AB5000F0DD65 /* ProductCollectionViewCell.xib */; };
+		10C3007B265527620014340A /* PointsContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3007A265527620014340A /* PointsContainerVC.swift */; };
+		10C300842655284B0014340A /* PointsContainerVC+CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C300832655284B0014340A /* PointsContainerVC+CollectionViewDelegate.swift */; };
+		10C3008926552E000014340A /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3008826552E000014340A /* BalanceVC.swift */; };
+		10C3008E265533280014340A /* PointsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3008D265533280014340A /* PointsVC.swift */; };
 		10C64D7425C9570100FB01F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10C64D7325C9570100FB01F8 /* GoogleService-Info.plist */; };
 		10DF0E8D25BD7E870084D83C /* AskLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10DF0E8C25BD7E870084D83C /* AskLocationView.xib */; };
 		10DF0E9225BD7E940084D83C /* AskLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF0E9125BD7E940084D83C /* AskLocationView.swift */; };
@@ -291,6 +295,10 @@
 		10B986A12614959300F0DD65 /* BranchVC+BranchViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BranchVC+BranchViewDelegate.swift"; sourceTree = "<group>"; };
 		10B986A92614AB5000F0DD65 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductCollectionViewCell.swift; path = "New-Super-Bekala-iOS/Scenes/Branch+Products/View/Branch/ProductCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		10B986AA2614AB5000F0DD65 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductCollectionViewCell.xib; path = "New-Super-Bekala-iOS/Scenes/Branch+Products/View/Branch/ProductCollectionViewCell.xib"; sourceTree = SOURCE_ROOT; };
+		10C3007A265527620014340A /* PointsContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsContainerVC.swift; sourceTree = "<group>"; };
+		10C300832655284B0014340A /* PointsContainerVC+CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointsContainerVC+CollectionViewDelegate.swift"; sourceTree = "<group>"; };
+		10C3008826552E000014340A /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
+		10C3008D265533280014340A /* PointsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsVC.swift; sourceTree = "<group>"; };
 		10C64D7325C9570100FB01F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10DF0E8C25BD7E870084D83C /* AskLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskLocationView.xib; sourceTree = "<group>"; };
 		10DF0E9125BD7E940084D83C /* AskLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskLocationView.swift; sourceTree = "<group>"; };
@@ -524,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				104C3B6226551AC4000043A2 /* View */,
+				10C3007F265527E20014340A /* XIB */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -531,10 +540,30 @@
 		104C3B6226551AC4000043A2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				100BA1352653EAF3000ED66C /* DashboardVC.swift */,
+				104C3B7D26551D0B000043A2 /* Points+Balance */,
+				104C3B7626551C7A000043A2 /* Dashboard */,
 				1047A5EA2652A2100007C3EE /* Profile */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		104C3B7626551C7A000043A2 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				100BA1352653EAF3000ED66C /* DashboardVC.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		104C3B7D26551D0B000043A2 /* Points+Balance */ = {
+			isa = PBXGroup;
+			children = (
+				10C3007A265527620014340A /* PointsContainerVC.swift */,
+				10C300832655284B0014340A /* PointsContainerVC+CollectionViewDelegate.swift */,
+				10C3008826552E000014340A /* BalanceVC.swift */,
+				10C3008D265533280014340A /* PointsVC.swift */,
+			);
+			path = "Points+Balance";
 			sourceTree = "<group>";
 		};
 		1052372D261DDC2E00C06520 /* Checkout+Orders */ = {
@@ -838,6 +867,13 @@
 				10B986AA2614AB5000F0DD65 /* ProductCollectionViewCell.xib */,
 			);
 			path = Product;
+			sourceTree = "<group>";
+		};
+		10C3007F265527E20014340A /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = XIB;
 			sourceTree = "<group>";
 		};
 		10DF0E9B25BD81D80084D83C /* AskLocationView */ = {
@@ -1530,6 +1566,7 @@
 				88DDB5A824E1866C0003D1A7 /* OffersTableViewCell.swift in Sources */,
 				88DDA71324BB5BC0002C674F /* FeaturedCollectionViewCell.swift in Sources */,
 				100A661E26482C830080190B /* SearchVC+TableViewDelegate.swift in Sources */,
+				10C3008926552E000014340A /* BalanceVC.swift in Sources */,
 				885D2DD724E2AC8900B7CD6E /* AllFeaturedVC.swift in Sources */,
 				104E8A142619DD7C00756B62 /* CartItemModel.swift in Sources */,
 				106CFFD4261878F400203580 /* CartServices.swift in Sources */,
@@ -1606,11 +1643,14 @@
 				88DDA71824BB69F7002C674F /* OrdinaryVendorTableViewCell.swift in Sources */,
 				1026E96F2625C2C0004F1DEA /* VariationsTableViewCell.swift in Sources */,
 				88DDB5A424E185D70003D1A7 /* FilterCollectionViewCell.swift in Sources */,
+				10C300842655284B0014340A /* PointsContainerVC+CollectionViewDelegate.swift in Sources */,
 				105FF3B9261F28400027F8DB /* CartVC+ViewDelegate.swift in Sources */,
 				10B044B726512FD200905CBA /* FiltersVC.swift in Sources */,
 				105FF3BE261F51210027F8DB /* AddressesResponse.swift in Sources */,
 				100BA12B2653E806000ED66C /* ProfileVC+MainViewDelegate.swift in Sources */,
 				10ADFF6725BC65A80009F430 /* APIServices.swift in Sources */,
+				10C3007B265527620014340A /* PointsContainerVC.swift in Sources */,
+				10C3008E265533280014340A /* PointsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
