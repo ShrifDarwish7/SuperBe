@@ -88,7 +88,7 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toCheckout(_ sender: UIViewController, _ branch: Branch){
+    static func toCheckout(_ sender: UIViewController, _ branch: Branch?){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "CheckoutVC") as! CheckoutVC
         vc.branch = branch
         sender.navigationController?.pushViewController(vc, animated: true)
@@ -100,19 +100,19 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toImagesOrder(_ sender: UIViewController,_ branch: Branch){
+    static func toImagesOrder(_ sender: UIViewController,_ branch: Branch?){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "ImagesOrderVC") as! ImagesOrderVC
         vc.branch = branch
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toVoiceOrder(_ sender: UIViewController,_ branch: Branch){
+    static func toVoiceOrder(_ sender: UIViewController,_ branch: Branch?){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "VoiceOrderVC") as! VoiceOrderVC
         vc.branch = branch
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toTextOrder(_ sender: UIViewController,_ branch: Branch){
+    static func toTextOrder(_ sender: UIViewController,_ branch: Branch?){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "TextOrderVC") as! TextOrderVC
         vc.branch = branch
         sender.navigationController?.pushViewController(vc, animated: true)

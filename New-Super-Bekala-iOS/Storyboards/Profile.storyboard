@@ -1023,7 +1023,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6of-3z-wQR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5046" y="-777"/>
+            <point key="canvasLocation" x="3800" y="-109"/>
         </scene>
         <!--BalanceVC-->
         <scene sceneID="13F-Mg-Naj">
@@ -1033,11 +1033,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ris-oW-far" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OzH-nz-hxR">
+                                <rect key="frame" x="0.0" y="119" width="414" height="728"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ris-oW-far" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="414" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ5-xc-kde">
-                                        <rect key="frame" x="15" y="18" width="219" height="24.5"/>
+                                        <rect key="frame" x="15" y="18" width="195.5" height="24.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My balance is " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bj-vd-XZx">
                                                 <rect key="frame" x="0.0" y="0.0" width="135.5" height="24.5"/>
@@ -1045,8 +1049,8 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="340 EGP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPW-bz-s1F">
-                                                <rect key="frame" x="135.5" y="0.0" width="83.5" height="24.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 EGP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPW-bz-s1F">
+                                                <rect key="frame" x="135.5" y="0.0" width="60" height="24.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1082,23 +1086,30 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OzH-nz-hxR">
-                                <rect key="frame" x="0.0" y="119" width="414" height="728"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ebO-KN-hUR">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="keR-FJ-iPI"/>
                         <color key="backgroundColor" name="BgColor"/>
                         <constraints>
                             <constraint firstItem="keR-FJ-iPI" firstAttribute="bottom" secondItem="OzH-nz-hxR" secondAttribute="bottom" constant="15" id="13o-Xj-uGC"/>
                             <constraint firstItem="OzH-nz-hxR" firstAttribute="trailing" secondItem="keR-FJ-iPI" secondAttribute="trailing" id="1vq-aw-xId"/>
+                            <constraint firstItem="ebO-KN-hUR" firstAttribute="centerY" secondItem="ZOG-iq-BQm" secondAttribute="centerY" id="5YW-AU-1cC"/>
                             <constraint firstItem="ris-oW-far" firstAttribute="top" secondItem="keR-FJ-iPI" secondAttribute="top" id="E6P-rA-deg"/>
                             <constraint firstItem="OzH-nz-hxR" firstAttribute="top" secondItem="ris-oW-far" secondAttribute="bottom" constant="15" id="SOh-ek-JYk"/>
                             <constraint firstItem="OzH-nz-hxR" firstAttribute="leading" secondItem="keR-FJ-iPI" secondAttribute="leading" id="TK8-Fj-mHr"/>
+                            <constraint firstItem="ebO-KN-hUR" firstAttribute="centerX" secondItem="ZOG-iq-BQm" secondAttribute="centerX" id="jv7-0q-Bbi"/>
                             <constraint firstItem="ris-oW-far" firstAttribute="leading" secondItem="keR-FJ-iPI" secondAttribute="leading" id="mh3-L6-odf"/>
                             <constraint firstItem="keR-FJ-iPI" firstAttribute="trailing" secondItem="ris-oW-far" secondAttribute="trailing" id="whK-5X-96h"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="ebO-KN-hUR" id="FZw-bT-eOe"/>
+                        <outlet property="balanceLbl" destination="sPW-bz-s1F" id="BDc-DA-6HT"/>
+                        <outlet property="balanceView" destination="ris-oW-far" id="LJg-mo-6Vq"/>
+                        <outlet property="transactionsTableView" destination="OzH-nz-hxR" id="c0n-Pe-dUb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71x-9s-X7c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

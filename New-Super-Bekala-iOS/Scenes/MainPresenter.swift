@@ -31,6 +31,7 @@ protocol MainViewDelegate {
     func didCompleteWithMyOrders(_ data: [LastOrder]?)
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?)
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
+    func didCompleteWithPoints(_ data: PointsData?,_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -54,6 +55,7 @@ extension MainViewDelegate{
     func didCompleteWithMyOrders(_ data: [LastOrder]?){}
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?){}
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
+    func didCompleteWithPoints(_ data: PointsData?,_ error: String?){}
 }
 
 class MainPresenter{
@@ -62,6 +64,18 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func getPoints(){
+        APIServices.shared.call(.points) { (data) in
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: PointsResponse.self),
+               let pointsData = dataModel.data{
+                self.delegate?.didCompleteWithPoints(pointsData, nil)
+            }else{
+                self.delegate?.didCompleteWithPoints(nil, Shared.errorMsg)
+            }
+        }
     }
     
     func searchWith( query prms: inout [String: String],_ context: Context){

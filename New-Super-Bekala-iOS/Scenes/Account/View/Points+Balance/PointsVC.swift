@@ -16,3 +16,12 @@ class PointsVC: UIViewController {
     }
 
 }
+
+extension PointsVC: MainViewDelegate{
+    func didCompleteWithPoints(_ data: PointsData?, _ error: String?) {
+        if let data = data,
+           let points = data.total{
+           // balanceLbl.text = "\(points) EGP"
+        }
+    }
+}

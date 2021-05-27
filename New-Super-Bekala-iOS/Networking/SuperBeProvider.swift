@@ -26,6 +26,7 @@ public enum SuperBe{
     case placeOrder(_ bodyData: Data)
     case getMyOrders(_ prms: [String: String])
     case search(_ prms: [String: String])
+    case points
 }
 
 extension SuperBe: TargetType{
@@ -61,6 +62,8 @@ extension SuperBe: TargetType{
             return "orders"
         case .search(_):
             return "search"
+        case .points:
+            return "loyalty"
         }
     }
     

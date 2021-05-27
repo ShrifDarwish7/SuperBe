@@ -129,6 +129,8 @@ class FiltersVC: UIViewController {
             query.remove(at: query.firstIndex(of: ",")!)
         }
         
+        print(query)
+        
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: NSNotification.Name("QUERY"), object: nil, userInfo: ["query": query])
     }

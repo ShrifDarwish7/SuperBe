@@ -24,7 +24,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     func loadFrom(data: Product){
         name.text = "\(data.id!)"
         price.text = "\(data.price ?? 0) EGP"
-     //   productImage.sd_setImage(with: URL(string: Shared.storageBase + (data.images?.first)! ))
+        productImage.sd_setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ))
     }
     
 

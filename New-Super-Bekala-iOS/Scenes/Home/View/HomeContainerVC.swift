@@ -35,6 +35,7 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var cartFlage: ViewCorners!
     @IBOutlet weak var orderMethodsView: UIView!
     @IBOutlet weak var blockBlurView: UIVisualEffectView!
+    @IBOutlet weak var contactUsView: UIView!
     
     var cartItems: [CartItem]?
     
@@ -143,15 +144,29 @@ class HomeContainerVC: UIViewController {
         }
     }
     
+    @IBAction func dismissContactUs(_ sender: Any) {
+        UIView.animate(withDuration: 0.2) {
+            self.contactUsView.alpha = 0
+        } completion: { (_) in
+            self.contactUsView.isHidden = true
+        }
+
+    }
+    
+    @IBAction func showContactUs(_ sender: Any) {
+        self.contactUsView.isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.contactUsView.alpha = 1
+        }
+    }
+    
+    
     @IBAction func TabsActions(_ sender: UIButton) {
         
         shoopingTab.isHidden = true
         offersTab.isHidden = true
         ordersTab.isHidden = true
         favouriteTab.isHidden = true
-        
-//        shoppingContainer.isHidden = true
-//        offersContainer.isHidden = true
         
         shoopingTabBtn.setImage(UIImage(named: "shooping-unselect"), for: .normal)
         offersTabBtn.setImage(UIImage(named: "offers-unselect"), for: .normal)
@@ -163,7 +178,6 @@ class HomeContainerVC: UIViewController {
         case 0:
             
             shoopingTab.isHidden = false
-            //shoppingContainer.isHidden = false
             self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
             shoopingTabBtn.setImage(UIImage(named: "shooping-select"), for: .normal)
             tabTitle.text = "Shooping"
@@ -171,7 +185,6 @@ class HomeContainerVC: UIViewController {
         case 1:
             
             offersTab.isHidden = false
-           // offersContainer.isHidden = false
             self.replaceView(containerView: containerView, identifier: "OffersVC", storyboard: .home)
             offersTabBtn.setImage(UIImage(named: "offers-select"), for: .normal)
             tabTitle.text = "Offers"
@@ -181,7 +194,6 @@ class HomeContainerVC: UIViewController {
             ordersTab.isHidden = false
             ordersTabBtn.setImage(UIImage(named: "last-orders-select"), for: .normal)
             tabTitle.text = "Last orders"
-            expandCover()
             self.replaceView(containerView: containerView, identifier: "LastOrderVC", storyboard: .orders)
             
         case 3:

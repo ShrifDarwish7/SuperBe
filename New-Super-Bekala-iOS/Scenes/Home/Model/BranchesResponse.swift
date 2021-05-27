@@ -50,6 +50,7 @@ struct Branch: Codable {
     let vendorID, userID, regionID: Int?
     let branchLanguage: [BranchLanguage]?
     let user: BranchUser?
+    var products: [Product]?
     //let openCloseTimes: String?
     
     var selected: Bool?
@@ -112,6 +113,7 @@ struct Branch: Codable {
       //  case openCloseTimes = "open_close_times"
         case supportDelivery = "support_delivery"
         case creditOnDelivery = "credit_on_delivery"
+        case products = "branch_products"
     }
 }
 

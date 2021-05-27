@@ -24,6 +24,7 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var length: UILabel!
     @IBOutlet weak var microphone: UIImageView!
     @IBOutlet weak var addToCart: ViewCorners!
+    @IBOutlet weak var actionLbl: UILabel!
     
     var recordTimer: Timer?
     var avRecorder: AVAudioRecorder!
@@ -61,6 +62,10 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
             }
             self.hideHideRecordAgainBtn()
             self.voiceCounter = 0
+        }
+        
+        if branch == nil{
+            actionLbl.text = "Checkout"
         }
         
     }
@@ -102,6 +107,7 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
             timer.text = "00:00"
             counter = 0
             avRecorder.record()
+            self.addToCart.alpha = 0.5
             
         case .recording:
             
@@ -116,7 +122,6 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
                 self.microphone.isHidden = false
                 self.microphone.alpha = 1
             }
-            self.addToCart.alpha = 0.5
             
         case .readyToPlay:
             
@@ -222,20 +227,24 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func addToCart(_ sender: Any) {
-        guard recorderState != .recording else { return }
-        do{
-            let voiceData = try Data(contentsOf: Recorder.getURL())
-            var product = Product()
-            product.voice = voiceData
-            product.branch = branch
-            CartServices.shared.addToCart(product) { (completed) in
-                if completed{
-                    self.navigationController?.popViewController(animated: true)
+        guard recorderState != .recording, recorderState != .initial else { return }
+        if let _ = branch{
+            do{
+                let voiceData = try Data(contentsOf: Recorder.getURL())
+                var product = Product()
+                product.voice = voiceData
+                product.branch = branch
+                CartServices.shared.addToCart(product) { (completed) in
+                    if completed{
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } exist: { (_) in
+                    
                 }
-            } exist: { (_) in
-                
-            }
-        }catch{}
+            }catch{}
+        }else{
+            Router.toCheckout(self, <#T##branch: Branch##Branch#>)
+        }
     }
     
 

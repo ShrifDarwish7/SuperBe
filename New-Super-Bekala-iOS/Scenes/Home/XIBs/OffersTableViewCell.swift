@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import Cosmos
 
 class OffersTableViewCell: UITableViewCell {
+    
+    static let identifier = "OffersTableViewCell"
 
     @IBOutlet weak var onsaleCollectionView: UICollectionView!
     @IBOutlet weak var vendorImage: UIImageView!
+    @IBOutlet weak var branchName: UILabel!
+    @IBOutlet weak var branchRate: CosmosView!
+    @IBOutlet weak var showMore: UIButton!
     
-    func loadUI(){
-        vendorImage.layer.cornerRadius = vendorImage.frame.height/2
-    }
+    
 }
