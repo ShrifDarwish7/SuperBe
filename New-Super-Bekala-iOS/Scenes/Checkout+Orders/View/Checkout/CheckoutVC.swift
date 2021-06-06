@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import SwiftyJSON
+import SVProgressHUD
 
 class CheckoutVC: UIViewController {
 
@@ -43,6 +44,12 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var selectedAddressLbl: UILabel!
     @IBOutlet weak var expandAddressImg: UIImageView!
     @IBOutlet weak var notesView: ViewCorners!
+    @IBOutlet weak var blockView: UIView!
+    @IBOutlet weak var bottomSheetTopCnst: NSLayoutConstraint!
+    @IBOutlet weak var cardHolderTF: UITextField!
+    @IBOutlet weak var cardNumberTF: UITextField!
+    @IBOutlet weak var expiryTF: UITextField!
+    @IBOutlet weak var cvvTF: UITextField!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -52,6 +59,8 @@ class CheckoutVC: UIViewController {
     var presenter: MainPresenter?
     var addresses: [Address]?
     var items: [CartItem]?
+    var transaction: Transaction?
+    var payPresenter: PayPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,13 +80,16 @@ class CheckoutVC: UIViewController {
         promoViewHeight.constant = 60
         promoView.isHidden = true
         
+        blockView.isHidden = true
+        bottomSheetTopCnst.constant = self.view.frame.height
+        
         receiveFromShopStack.alpha = branch?.receiveFromShop == 1 ? 1 : 0.3
         receiveDeliveryStack.alpha = branch?.supportDelivery == 1 ? 1 : 0.3
-        cashOnDeliveryStack.alpha = branch?.cashOnDelivery == 1 ? 1 : 0.3
+       // cashOnDeliveryStack.alpha = branch?.cashOnDelivery == 1 ? 1 : 0.3
         creditOnDeliveryStack.alpha = branch?.creditOnDelivery == 1 ? 1 : 0.3
         creditStack.alpha = branch?.onlinePayment == 1 ? 1 : 0.3
         promoViewContainer.isHidden = branch?.acceptCoupons == 1 ? false : true
-        
+                
         CartServices.shared.getCartItems(itemId: "-1", branch: branch!.id) { (items) in
             if let items = items{
                 self.items = items
@@ -272,12 +284,106 @@ class CheckoutVC: UIViewController {
         self.view.endEditing(true)
     }
     
+    @IBAction func cardNameTFdidChange(_ sender: UITextField) {
+        sender.text = sender.text!.arToEnDigits
+    }
+    
+    
+    @IBAction func cardNumberTFdidChange(_ sender: UITextField) {
+        guard sender.text!.count <= 19 else {
+            sender.text = String(sender.text!.dropLast(1))
+            return
+        }
+        sender.text = sender.text!.arToEnDigits
+        if sender.text!.count == 4 || sender.text!.count == 9 || sender.text!.count == 14{
+            sender.text = sender.text! + " "
+        }
+    }
+    
+    @IBAction func expiryTFdidChange(_ sender: UITextField) {
+        guard sender.text!.count <= 5 else {
+            sender.text = String(sender.text!.dropLast(1))
+            return
+        }
+        
+        sender.text = sender.text!.arToEnDigits
+        
+        if !(sender.text?.starts(with: "1"))! && sender.text!.count < 2{
+            let temp = sender.text
+            sender.text = ""
+            sender.text = "0" + temp! + "/"
+        }else if sender.text!.starts(with: "1") && sender.text!.count == 2{
+            let index = sender.text!.index(sender.text!.startIndex, offsetBy: 1)
+            let secondDigit = sender.text![index]
+            guard Int(String(secondDigit).arToEnDigits!)! < 3 else {
+                sender.text = String(sender.text!.dropLast(1))
+                return
+            }
+            sender.text = sender.text! + "/"
+        }else if sender.text!.count == 2{
+            sender.text = sender.text! + "/"
+        }
+    }
+    
+    @IBAction func cvvTFdidChange(_ sender: UITextField) {
+        sender.text = sender.text!.arToEnDigits
+    }
+    
+    
+    func showPaySheet(){
+        self.blockView.isHidden = false
+        self.bottomSheetTopCnst.constant = 300
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+            self.view.layoutIfNeeded()
+        } completion: { (_) in
+            
+        }
+    }
+    
+    func dismissPaySheet(){
+        
+        self.view.endEditing(true)
+        let alert = UIAlertController(title: "Cancel Payment", message: "cancelling payment session will clear off your card details", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            self.blockView.isHidden = true
+            self.bottomSheetTopCnst.constant = self.view.frame.height
+            self.view.layoutIfNeeded()
+            self.cardHolderTF.text = ""
+            self.cardNumberTF.text = ""
+            self.expiryTF.text = ""
+            self.cvvTF.text = ""
+            self.creditBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            self.selectedPayment = nil
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func dismissPaySheetAction(_ sender: Any) {
+        dismissPaySheet()
+    }
+    
+    
+    @IBAction func makePayment(_ sender: Any) {
+        payPresenter = PayPresenter(delegate: self)
+        payPresenter?.createSession()
+        SVProgressHUD.show()
+    }
+    
     @IBAction func placeOrderAction(_ sender: Any) {
+        
+        if selectedPayment == 2{
+            showPaySheet()
+            return
+        }
+        
         var lineItems = [LineItem]()
         
         for item in self.items!{
+            guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
             var variations = [LineItemVariation]()
-            for variation in item.variations!.getDecodedObject(from: [Variation].self)!{
+            for variation in itemVariations{
 //                var selectedOtps = [Int]()
 //                variation.options?.filter({ return $0.selected == true }).forEach({ (option) in
 //                    selectedOtps.append(option.id!)
@@ -337,5 +443,30 @@ extension CheckoutVC: UIScrollViewDelegate{
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
+    }
+}
+
+extension CheckoutVC: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let  char = string.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b")
+        
+        if (isBackSpace == -92) {
+            if textField === expiryTF{
+                if expiryTF.text!.count == 5{
+                    expiryTF.text = String(expiryTF.text!.dropLast(2))
+                }else{
+                    expiryTF.text = ""
+                }
+            }else if textField == cardNumberTF{
+                if cardNumberTF.text!.count == 5 || cardNumberTF.text!.count == 10 || cardNumberTF.text!.count == 15{
+                    cardNumberTF.text = String(cardNumberTF.text!.dropLast(1))
+                }
+            }
+        }
+        
+        
+        return true
     }
 }

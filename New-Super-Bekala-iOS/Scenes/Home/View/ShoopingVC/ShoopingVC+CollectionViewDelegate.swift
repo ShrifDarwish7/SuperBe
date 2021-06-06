@@ -79,7 +79,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         
         switch collectionView {
         case filtersCollectionView:
-            
+
             for i in 0...self.categories!.count-1{
                 self.categories![i].selected = false
             }
@@ -89,15 +89,15 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             self.filtersCollectionView.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
             self.showSkeletonView()
             self.updateBranches()
-            
+
         case featuredVendorsCollection:
-            
+
             Router.toBranch(self, self.featuredBranches![indexPath.row])
-            
+
         default:
             break
         }
-        
+
         
     }
     

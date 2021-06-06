@@ -19,7 +19,7 @@ class Shared{
     static let storageBase = "https://new.superbekala.com/storage/app/public/"
     static var headers = [
 //        "Authorization": "Bearer " + (APIServices.shared.user?.token ?? ""),
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWEzMWZiMmYyMzkzZjAzZGM3MDZkNmRkYzNjOGExM2VjOTgyNDdkNGI1NmQ2MTM0ZGQ4MTQ4YWMxNzIzMmM0MTYwOTRjYmI5ZWIxYzg0NmYiLCJpYXQiOiIxNjE4MjQxNTc2Ljg2NjUwNCIsIm5iZiI6IjE2MTgyNDE1NzYuODY2NTA4IiwiZXhwIjoiMTY0OTc3NzU3Ni44NTk2NzAiLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.M9DVakhcLoOqWIe7-xxV-6hNmsz8Q7jzz1bvh9BRf9hXUvsJlQVb0dzE1E7KbHkn6eZu2ipa-lqtbS0-a9VKow6wdWXYfi4femqKoAGutzF-oELzs0e97GJg93yHh-dfcPVeTTVglIZp2l_VDA2kzHuCmsAE4-eswhMzqe0jpEtbS2rIuTQX4aH1U0KRkxH7zM6uw7Of1oJzFeHi70P_9PxZfrBkF89tIkh7GBZFnif1bP2uQsIzQ-e2yIrbZJkIsdfCXDxeO1uQuiD3iwLYGExKfg8APrPMpAJZGb-4pHJyUVtMbtNMvBpxyLNjIvDM4elpuuZ6JYkQi2I0uObEBa5-mYWDtPCQ9QvbiaoyfyA1nc_SJWHMXNwzQ3ClpnWKwlSIycBJr7IYxv_pK3SDrgN_uZPXoW2A08JXklYpH6ZDKTSdv8RWvQbsFAgdmWURiz7iaYCMCE7YOTLz_IsZ-qZHmuLUYTZE4yEfpZgNoQ3DJEVM6zxD6JrcyjZLTvp4CavN-yM2kR7vmxJ3MDe_rh5k-1GIMQDeFHyKuSD_GCl19uwNqdGsXmEdNce8Axf_gTjK9WUbBvxcx-BkGJI6ba72Jl7NeEADKIhwpqkn7TcirjolC_up-o3_ApTqilsdcgmSf5d3ZgWO8xmvG-ujD0Gl6S4NoVRTtJ92GXGxp7I",
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjM5YjE2YjU5MTE4MmJjZDUyNTM1ZDUxZTgxYzI1MTg3NDk1Zjk3MmU0YTkzN2IyNDdhMzNkOTRjMmRkZWI2NWUzN2Q2OGI0MDE2Y2FhN2MiLCJpYXQiOjE2MjI5NzM4NzcuMTE1NjYzMDUxNjA1MjI0NjA5Mzc1LCJuYmYiOjE2MjI5NzM4NzcuMTE1NjY4MDU4Mzk1Mzg1NzQyMTg3NSwiZXhwIjoxNjU0NTA5ODc3LjExMTE2NDA5MzAxNzU3ODEyNSwic3ViIjoiMSIsInNjb3BlcyI6W119.lqoJnNbIbmWIakd8d75qqJj97IyOijYZk5orlmSGhxYZaVLhEi49vlV7sjbQnxv9H5BFl1deWtSBbdtV2kbyz5MXS9E2aRSMt3BoByyt1VIjzX_SiOIuuVrPmNkGMyFEO3iIlK0fJeJG4syg5-UNvuyyl85-xXa1XKgl_f3rcTzsYjZqeZRDsUgi97IMM2Jn-14s65G6ry0BtRhLLnTLXdzpjOkbk_srloH5vPmCca6XHqjsgpUrvonCXAOv3UWLdEStBcwpa2GYNT549Pox_J3_i72IAsEPoCp_R8a1qE5OsUsnoQ0D23FPyelV18rARNH9BWlPrQLrD7njWPxVhIqivHm70brvduZE23NeTUuKsX_K68UJGFZdOEt3D3UbwQ9ak5uT-NVCy104mkFF4YW0dVQpquM37JZ3idmGm7oUQOAWYbgYES3gRfNRqi7__Ub26dJko2LSCFnlUPS8rKdFww3vl2TnuEOW5gazl8jHW2DD5e6gCQYxwkUonv5oZl5RueVBxI4xPpiULl6l3jbi9OBtT-69-ufvWLUy_KLVTQlJ3tKPjuw6_-otqXHrc-cWeK7ueXQ-uSUGeRYwYOodrauh9bUHppx_Yjd-tmggtY25AqhCJhRKmMeHkmIcAQNIumdDfd0pBz6Xs0B4pYfW62LQc9fmIsoGZsrsPiY",
         "Accept": "application/json",
        // "lang": "lang".localized
     ]
@@ -42,6 +42,15 @@ class Shared{
     static var userSelectLocation: Bool{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
+    }
+    static var transaction: Transaction?{
+        set{
+            UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "transaction")
+        }
+        get{
+            let data = UserDefaults.init().data(forKey: "transaction")
+            return (data?.getDecodedObject(from: Transaction.self)) ?? nil
+        }
     }
 //    static var cartIncrementalID: Int{
 //        set { UserDefaults.init().setValue(newValue, forKey: "cart_quick_orders_incremental_id") }

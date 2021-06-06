@@ -25,6 +25,7 @@ class APIServices{
     static let shared = APIServices()
     let googleProvider = MoyaProvider<Google>()
     let superbeProvider = MoyaProvider<SuperBe>()
+    let nbeProvider = MoyaProvider<NBE>()
     var user: LoginResult?{
         set{
             UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "user")
@@ -59,6 +60,20 @@ class APIServices{
     
     func call(_ target: SuperBe , _ completed: @escaping (Data?)->Void){
         self.superbeProvider.request(target) {
+            [weak self] result in
+            guard self != nil else { return }
+            switch result{
+            case .success(let response):
+                completed(response.data)
+            case .failure(let err):
+                print(err)
+                completed(nil)
+            }
+        }
+    }
+    
+    func call(_ target: NBE , _ completed: @escaping (Data?)->Void){
+        self.nbeProvider.request(target) {
             [weak self] result in
             guard self != nil else { return }
             switch result{

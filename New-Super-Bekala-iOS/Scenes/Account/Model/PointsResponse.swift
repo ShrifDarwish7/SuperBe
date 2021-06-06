@@ -17,11 +17,11 @@ struct PointsResponse: Codable {
 
 struct PointsData: Codable {
     let total: Int?
-    let transactions: [Transaction]?
+    let transactions: [PointTransaction]?
 }
 
 // MARK: - Transaction
-struct Transaction: Codable {
+struct PointTransaction: Codable {
     let id, value, orderID, userID: Int
     let createdAt, updatedAt: String
 

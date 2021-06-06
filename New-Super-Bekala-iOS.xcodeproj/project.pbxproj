@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		101CEB6625FCF3640014D96E /* RegionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 101CEB6425FCF3620014D96E /* RegionsTableViewCell.xib */; };
 		101CEB6725FCF3640014D96E /* RegionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101CEB6525FCF3640014D96E /* RegionsTableViewCell.swift */; };
 		101F2FEA26306B9200E916E1 /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101F2FE926306B9200E916E1 /* OrderVC.swift */; };
+		102121272667C69500CB3720 /* NBEProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102121262667C69500CB3720 /* NBEProvider.swift */; };
 		1023D4E62600D78600C9B877 /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023D4E52600D78600C9B877 /* CategoriesResponse.swift */; };
 		1023D4EC2600D99600C9B877 /* ShoopingVC+CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1023D4EB2600D99600C9B877 /* ShoopingVC+CollectionViewDelegate.swift */; };
 		1026E96F2625C2C0004F1DEA /* VariationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1026E96D2625C2C0004F1DEA /* VariationsTableViewCell.swift */; };
@@ -76,6 +77,9 @@
 		106CFFD4261878F400203580 /* CartServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106CFFD3261878F400203580 /* CartServices.swift */; };
 		106E3AEB2654073B00CDD4D3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 106E3AEA2654073B00CDD4D3 /* Profile.storyboard */; };
 		106EFFDA262DB5F2008940D3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106EFFD9262DB5F2008940D3 /* Order.swift */; };
+		10726427266CD699007FD243 /* PayPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10726426266CD699007FD243 /* PayPresenter.swift */; };
+		1072642A266CD9F3007FD243 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10726429266CD9F3007FD243 /* Transaction.swift */; };
+		1072642C266D15D7007FD243 /* CheckoutVC+PayDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1072642B266D15D7007FD243 /* CheckoutVC+PayDelegate.swift */; };
 		107900A7265BC20000D3DFAA /* OffersVC+CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107900A6265BC20000D3DFAA /* OffersVC+CollectionViewDelegate.swift */; };
 		10911107263976040059BF28 /* CartTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10911105263976040059BF28 /* CartTextTableViewCell.swift */; };
 		10911108263976040059BF28 /* CartTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10911106263976040059BF28 /* CartTextTableViewCell.xib */; };
@@ -116,6 +120,9 @@
 		10C3008926552E000014340A /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3008826552E000014340A /* BalanceVC.swift */; };
 		10C3008E265533280014340A /* PointsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3008D265533280014340A /* PointsVC.swift */; };
 		10C64D7425C9570100FB01F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10C64D7325C9570100FB01F8 /* GoogleService-Info.plist */; };
+		10CA3127266BD15A00271BCA /* MPGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CA3126266BD15A00271BCA /* MPGSDK.framework */; platformFilter = ios; };
+		10CA3128266BD33F00271BCA /* MPGSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CA3126266BD15A00271BCA /* MPGSDK.framework */; };
+		10CA3129266BD33F00271BCA /* MPGSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10CA3126266BD15A00271BCA /* MPGSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		10DF0E8D25BD7E870084D83C /* AskLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10DF0E8C25BD7E870084D83C /* AskLocationView.xib */; };
 		10DF0E9225BD7E940084D83C /* AskLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF0E9125BD7E940084D83C /* AskLocationView.swift */; };
 		10DF0E9725BD7F250084D83C /* MapVC+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF0E9625BD7F250084D83C /* MapVC+CLLocationManagerDelegate.swift */; };
@@ -201,6 +208,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		106C9292266264A100B92217 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				10CA3129266BD33F00271BCA /* MPGSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0B1FAEFAB2FD079FC75ED416 /* Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests/Pods-New-Super-Bekala-iOS-New-Super-Bekala-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1006E16525FCDD3400D325F0 /* CitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesVC.swift; sourceTree = "<group>"; };
@@ -220,6 +241,7 @@
 		101CEB6425FCF3620014D96E /* RegionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegionsTableViewCell.xib; sourceTree = "<group>"; };
 		101CEB6525FCF3640014D96E /* RegionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionsTableViewCell.swift; sourceTree = "<group>"; };
 		101F2FE926306B9200E916E1 /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
+		102121262667C69500CB3720 /* NBEProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBEProvider.swift; sourceTree = "<group>"; };
 		1023D4E52600D78600C9B877 /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
 		1023D4EB2600D99600C9B877 /* ShoopingVC+CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoopingVC+CollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		1026E96D2625C2C0004F1DEA /* VariationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationsTableViewCell.swift; sourceTree = "<group>"; };
@@ -272,6 +294,9 @@
 		106CFFD3261878F400203580 /* CartServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartServices.swift; sourceTree = "<group>"; };
 		106E3AEA2654073B00CDD4D3 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		106EFFD9262DB5F2008940D3 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		10726426266CD699007FD243 /* PayPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPresenter.swift; sourceTree = "<group>"; };
+		10726429266CD9F3007FD243 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		1072642B266D15D7007FD243 /* CheckoutVC+PayDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckoutVC+PayDelegate.swift"; sourceTree = "<group>"; };
 		107900A6265BC20000D3DFAA /* OffersVC+CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OffersVC+CollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		10911105263976040059BF28 /* CartTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTextTableViewCell.swift; sourceTree = "<group>"; };
 		10911106263976040059BF28 /* CartTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTextTableViewCell.xib; sourceTree = "<group>"; };
@@ -315,6 +340,7 @@
 		10C3008826552E000014340A /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
 		10C3008D265533280014340A /* PointsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsVC.swift; sourceTree = "<group>"; };
 		10C64D7325C9570100FB01F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10CA3126266BD15A00271BCA /* MPGSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MPGSDK.framework; path = Carthage/Build/iOS/MPGSDK.framework; sourceTree = "<group>"; };
 		10DF0E8C25BD7E870084D83C /* AskLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskLocationView.xib; sourceTree = "<group>"; };
 		10DF0E9125BD7E940084D83C /* AskLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskLocationView.swift; sourceTree = "<group>"; };
 		10DF0E9625BD7F250084D83C /* MapVC+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
@@ -399,6 +425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CA3128266BD33F00271BCA /* MPGSDK.framework in Frameworks */,
 				D8E2F63E06C67DDD6798847C /* Pods_New_Super_Bekala_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +434,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CA3127266BD15A00271BCA /* MPGSDK.framework in Frameworks */,
 				98C54446F14C99393404545B /* Pods_New_Super_Bekala_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +640,7 @@
 				105FF3BD261F51210027F8DB /* AddressesResponse.swift */,
 				106EFFD9262DB5F2008940D3 /* Order.swift */,
 				1054718826304CCA001EE33F /* LastOrdersResponse.swift */,
+				10726429266CD9F3007FD243 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -640,6 +669,7 @@
 				1052372F261DDCA200C06520 /* CheckoutVC.swift */,
 				105FF3CA261F5B4E0027F8DB /* CheckoutVC+TableViewDelegate.swift */,
 				105FF3CF261F5C640027F8DB /* CheckoutVC+ViewDelegate.swift */,
+				1072642B266D15D7007FD243 /* CheckoutVC+PayDelegate.swift */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -742,6 +772,15 @@
 				1064AE6D26021F9900EBC7BA /* SkeletonLoadingCollectionViewCell.xib */,
 			);
 			path = SkeletonLoading;
+			sourceTree = "<group>";
+		};
+		10726428266CD6B1007FD243 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				10ADFF7525BC6ADB0009F430 /* MainPresenter.swift */,
+				10726426266CD699007FD243 /* PayPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		1079009F265BC1B200D3DFAA /* Offers */ = {
@@ -867,6 +906,7 @@
 				10ADFF6B25BC66550009F430 /* GoogleProvider.swift */,
 				10ADFF7025BC6A6D0009F430 /* SuperBeProvider.swift */,
 				106CFFD3261878F400203580 /* CartServices.swift */,
+				102121262667C69500CB3720 /* NBEProvider.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -984,6 +1024,7 @@
 		4653EC5AF616C81E9355CD57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10CA3126266BD15A00271BCA /* MPGSDK.framework */,
 				E8BDC9AE2754BEE5CBFDD206 /* Pods_New_Super_Bekala_iOS.framework */,
 				C7DB29F28469E42E556D7C5C /* Pods_New_Super_Bekala_iOS_New_Super_Bekala_iOSUITests.framework */,
 				E50084FD7F8EBB49C979BEDC /* Pods_New_Super_Bekala_iOSTests.framework */,
@@ -1020,6 +1061,7 @@
 				8823DDB624B9C879009A83C5 /* Storyboards */,
 				10ADFF6525BC5FF70009F430 /* Networking */,
 				8823DDB824B9CBC5009A83C5 /* Scenes */,
+				10726428266CD6B1007FD243 /* Presenter */,
 				8823DDBF24B9CCDA009A83C5 /* UI Helpers */,
 				8823DDB924B9CBDD009A83C5 /* Utilities */,
 			);
@@ -1073,7 +1115,6 @@
 			isa = PBXGroup;
 			children = (
 				10A076DC25F78B18000EE39F /* SplashVC.swift */,
-				10ADFF7525BC6ADB0009F430 /* MainPresenter.swift */,
 				8823DDE224B9E34C009A83C5 /* About Us */,
 				88DDA6FE24BB0646002C674F /* Login */,
 				104C3B6126551AAF000043A2 /* Account */,
@@ -1285,6 +1326,7 @@
 				881594B624B610FF008BE195 /* Resources */,
 				FE02D76E29837BAC1DDE7658 /* [CP] Embed Pods Frameworks */,
 				43A1A7BD4D3E6E92343871C6 /* [CP] Copy Pods Resources */,
+				106C9292266264A100B92217 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1600,6 +1642,7 @@
 				109524542659332F00C8C769 /* TransactionsTableViewCell.swift in Sources */,
 				104E8A5C2619E39A00756B62 /* CartBranchModel.swift in Sources */,
 				1054718E26304FC3001EE33F /* LastOrderVC+TableViewDelegate.swift in Sources */,
+				1072642A266CD9F3007FD243 /* Transaction.swift in Sources */,
 				8823DDE124B9E33C009A83C5 /* AboutUsViewController.swift in Sources */,
 				10B986AB2614AB5000F0DD65 /* ProductCollectionViewCell.swift in Sources */,
 				103A23C0264834BA00945EBC /* SearchVC+ViewDelegate.swift in Sources */,
@@ -1610,6 +1653,7 @@
 				1064AE6E26021F9900EBC7BA /* SkeletonLoadingCollectionViewCell.swift in Sources */,
 				10911107263976040059BF28 /* CartTextTableViewCell.swift in Sources */,
 				106EFFDA262DB5F2008940D3 /* Order.swift in Sources */,
+				102121272667C69500CB3720 /* NBEProvider.swift in Sources */,
 				1054718926304CCA001EE33F /* LastOrdersResponse.swift in Sources */,
 				105471812630475A001EE33F /* LastOrderVC.swift in Sources */,
 				107900A7265BC20000D3DFAA /* OffersVC+CollectionViewDelegate.swift in Sources */,
@@ -1627,6 +1671,7 @@
 				88DDA71324BB5BC0002C674F /* FeaturedCollectionViewCell.swift in Sources */,
 				100A661E26482C830080190B /* SearchVC+TableViewDelegate.swift in Sources */,
 				10E2D826265BC48500A1FDB6 /* OffersVC+ViewDelegate.swift in Sources */,
+				1072642C266D15D7007FD243 /* CheckoutVC+PayDelegate.swift in Sources */,
 				10C3008926552E000014340A /* BalanceVC.swift in Sources */,
 				885D2DD724E2AC8900B7CD6E /* AllFeaturedVC.swift in Sources */,
 				104E8A142619DD7C00756B62 /* CartItemModel.swift in Sources */,
@@ -1667,6 +1712,7 @@
 				10A076DD25F78B18000EE39F /* SplashVC.swift in Sources */,
 				1097057926189CE700C0E4DD /* CartVC.swift in Sources */,
 				10ADFF7125BC6A6D0009F430 /* SuperBeProvider.swift in Sources */,
+				10726427266CD699007FD243 /* PayPresenter.swift in Sources */,
 				885D2DD524E2A8B800B7CD6E /* SpecialOffersCollectionViewCell.swift in Sources */,
 				8823DDE724B9EE63009A83C5 /* Guide.swift in Sources */,
 				10BECD0E265BC890007F96FD /* OffersVC+TableViewDelegate.swift in Sources */,
@@ -1904,11 +1950,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/New-Super-Bekala-iOS",
+				);
 				INFOPLIST_FILE = "New-Super-Bekala-iOS/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/MPGSDK.framework",
 				);
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.superbekala.SuperBekaaIOS-demo";
@@ -1926,11 +1981,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/New-Super-Bekala-iOS",
+				);
 				INFOPLIST_FILE = "New-Super-Bekala-iOS/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/MPGSDK.framework",
 				);
 				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.superbekala.SuperBekaaIOS-demo";
@@ -1947,6 +2011,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "New-Super-Bekala-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1969,6 +2037,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "New-Super-Bekala-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -243,7 +243,7 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
                 }
             }catch{}
         }else{
-            Router.toCheckout(self, <#T##branch: Branch##Branch#>)
+            
         }
     }
     

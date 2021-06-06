@@ -94,5 +94,5 @@ extension BalanceVC: MainViewDelegate{
 
 struct Trans{
     var day: String
-    var trans: [Transaction]
+    var trans: [PointTransaction]
 }
