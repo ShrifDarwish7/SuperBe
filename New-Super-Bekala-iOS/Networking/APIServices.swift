@@ -86,27 +86,29 @@ class APIServices{
         }
     }
     
-    func signinWith(credential: AuthCredential, _ completed: @escaping (_ token: String?)->Void){
+    func signinWith(credential: AuthCredential, _ completed: @escaping (_ uid: String?)->Void){
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if error != nil {
                 print("err auth",error)
                 completed(nil)
                 return
             }
+            print(authResult?.user.uid)
+            completed(authResult?.user.uid)
             
-            authResult?.user.getIDToken(completion: { (token, error) in
-                
-                if let token = token {
-                
-                    print("Token",token)
-                    completed(token)
-
-                }else{
-                    print("token fail")
-                    completed(nil)
-                }
-                
-            })
+//            authResult?.user.getIDToken(completion: { (token, error) in
+//
+//                if let token = token {
+//
+//                    print("Token",token)
+//                    completed(token)
+//
+//                }else{
+//                    print("token fail")
+//                    completed(nil)
+//                }
+//
+//            })
         }
     }
     

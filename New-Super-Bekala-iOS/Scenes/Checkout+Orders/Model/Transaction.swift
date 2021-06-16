@@ -13,10 +13,9 @@ struct Transaction: Codable {
     var session: String?
     
     // basic transaction properties
-    var amount: Double = 1.0
-    var amountString = "1.00"
-    var amountFormatted = "1.00 EGP"
-    var currency = "EGP"
+    var amount: Double?
+    var amountString: String?
+    var currency: String?
     
     // card information
     var nameOnCard: String?

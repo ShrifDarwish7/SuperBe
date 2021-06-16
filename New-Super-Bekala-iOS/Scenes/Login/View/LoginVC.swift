@@ -141,6 +141,7 @@ class LoginVC: UIViewController {
     
     @objc func didReceiveGoogleCredential(sender: NSNotification){
         if let credential = sender.userInfo!["GoogleCredential"]{
+            print(credential)
             self.loginViewPresenter?.signWithCredential(credential: credential as! AuthCredential)
         }
     }

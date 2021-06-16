@@ -41,12 +41,15 @@ extension LoginVC: LoginViewDelegate{
         
     }
     
-    func didSuccessLogin(token: String) {
+    func didSuccessLogin(uid: String) {
      
         let prms: [String: String] = [
             "email": "admin@gmail.com",
             "password": "admin"
         ]
+//        let prms: [String: String] = [
+//            "uid": uid
+//        ]
         loginViewPresenter?.signinToApi(prms: prms)
     }
     
@@ -59,7 +62,7 @@ extension LoginVC: LoginViewDelegate{
     
     func didFailLogin() {
         
-        self.showAlert(title: "", message: "Please make sure you entered a correct code")
+        self.showAlert(title: "", message: "error login")
         
     }
     

@@ -15,7 +15,7 @@ protocol LoginViewDelegate {
     func showSVProgress()
     func dismissSVProgress()
     func didSuccessSendingCode()
-    func didSuccessLogin(token: String)
+    func didSuccessLogin(uid: String)
     func didFailSendingCode()
     func didFailLogin()
     func didCompleteWithNewUser()
@@ -28,7 +28,7 @@ extension LoginViewDelegate{
     func showSVProgress(){}
     func dismissSVProgress(){}
     func didSuccessSendingCode(){}
-    func didSuccessLogin(token: String){}
+    func didSuccessLogin(uid: String){}
     func didFailSendingCode(){}
     func didFailLogin(){}
     func didCompleteWithNewUser(){}
@@ -67,10 +67,10 @@ class LoginViewPresenter{
             withVerificationID: UserDefaults.init().string(forKey: "authVerificationID")!,
             verificationCode: code)
         
-        APIServices.shared.signinWith(credential: credential) { (token) in
+        APIServices.shared.signinWith(credential: credential) { (uid) in
             self.loginViewDelegate?.dismissSVProgress()
-            if let token = token{
-                self.loginViewDelegate?.didSuccessLogin(token: token)
+            if let uid = uid{
+                self.loginViewDelegate?.didSuccessLogin(uid: uid)
             }else{
                 self.loginViewDelegate?.didFailLogin()
             }
@@ -80,10 +80,10 @@ class LoginViewPresenter{
     
     func signWithCredential(credential: AuthCredential){
         self.loginViewDelegate?.showSVProgress()
-        APIServices.shared.signinWith(credential: credential) { (token) in
+        APIServices.shared.signinWith(credential: credential) { (uid) in
             self.loginViewDelegate?.dismissSVProgress()
-            if let token = token{
-                self.loginViewDelegate?.didSuccessLogin(token: token)
+            if let uid = uid{
+                self.loginViewDelegate?.didSuccessLogin(uid: uid)
             }else{
                 self.loginViewDelegate?.didFailLogin()
             }

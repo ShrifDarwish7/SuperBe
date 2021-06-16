@@ -43,20 +43,21 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
     }
-    static var transaction: Transaction?{
-        set{
-            UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "transaction")
-        }
-        get{
-            let data = UserDefaults.init().data(forKey: "transaction")
-            return (data?.getDecodedObject(from: Transaction.self)) ?? nil
-        }
-    }
+//    static var transaction: Transaction?{
+//        set{
+//            UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "transaction")
+//        }
+//        get{
+//            let data = UserDefaults.init().data(forKey: "transaction")
+//            return (data?.getDecodedObject(from: Transaction.self)) ?? nil
+//        }
+//    }
 //    static var cartIncrementalID: Int{
 //        set { UserDefaults.init().setValue(newValue, forKey: "cart_quick_orders_incremental_id") }
 //        get { return UserDefaults.init().integer(forKey: "cart_quick_orders_incremental_id") }
 //    }
     static var mapState: MapState?
+    static var transaction: Transaction?
 }
 
 extension String{

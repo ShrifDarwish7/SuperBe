@@ -13,12 +13,12 @@ import MPGSDK
 public enum NBE{
     case createSession
     case updateSession(_ session: String, _ payload: GatewayMap)
-    case updateTransaction(_ orderId: String, _ payload: GatewayMap)
+    case updateTransaction(_ orderId: String, _ payload: GatewayMap,_ transactionNumber: String)
 }
 
 extension NBE: TargetType{
     public var baseURL: URL {
-        return URL(string: "https://nbe.gateway.mastercard.com/api/rest/version/59/merchant/testnbetest/")!
+        return URL(string: "https://nbe.gateway.mastercard.com/api/rest/version/59/merchant/superbe/")!
     }
     
     public var path: String {
@@ -27,8 +27,8 @@ extension NBE: TargetType{
             return "session"
         case .updateSession(let session,_):
             return "session/\(session)"
-        case .updateTransaction(let orderId,_):
-            return "order/\(orderId)/transaction/txn6"
+        case .updateTransaction(let orderId,_, let transactionNumber):
+            return "order/\(orderId)/transaction/txn\(transactionNumber)"
         }
     }
     
@@ -50,15 +50,15 @@ extension NBE: TargetType{
         case .createSession:
             return .requestPlain
         case .updateSession(_, let payload),
-             .updateTransaction(_,let payload):
+             .updateTransaction(_,let payload,_):
             return .requestCompositeData(bodyData: try! JSONEncoder().encode(payload), urlParameters: [:])
         }
     }
     
     public var headers: [String : String]? {
-        
-        let username = "merchant.testnbetest"
-        let password = "804fac154e7ef329c550072d9fd1343e"
+
+        let username = "merchant.SUPERBE"
+        let password = "1bd9bdfb7aeed3bfc41472393c282778"
         let loginString = String(format: "%@:%@", username, password)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()

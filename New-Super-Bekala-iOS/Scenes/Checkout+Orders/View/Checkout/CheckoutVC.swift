@@ -46,10 +46,7 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var notesView: ViewCorners!
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var bottomSheetTopCnst: NSLayoutConstraint!
-    @IBOutlet weak var cardHolderTF: UITextField!
-    @IBOutlet weak var cardNumberTF: UITextField!
-    @IBOutlet weak var expiryTF: UITextField!
-    @IBOutlet weak var cvvTF: UITextField!
+    @IBOutlet weak var paymentContainerView: UIView!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -59,14 +56,13 @@ class CheckoutVC: UIViewController {
     var presenter: MainPresenter?
     var addresses: [Address]?
     var items: [CartItem]?
-    var transaction: Transaction?
-    var payPresenter: PayPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter = MainPresenter(self)
-    
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissPaymentSheet(sender:)), name: NSNotification.Name("DISMISS_PAYMENT"), object: nil)
        // branchName.text = "lang".localized == "en" ? branch?.branchLanguage?.first?.name : branch?.branchLanguage![0].name
         branchName.text = "\(branch?.id ?? 0)"
         branchLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
@@ -99,6 +95,28 @@ class CheckoutVC: UIViewController {
                     print("here vars count", variations?.count)
                 }
             }
+        }
+    }
+    
+    @objc func dismissPaymentSheet(sender: NSNotification){
+        
+        self.bottomSheetTopCnst.constant = self.view.frame.height
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+            self.view.layoutIfNeeded()
+        } completion: { (_) in
+            self.blockView.isHidden = true
+        }
+        
+        self.paymentContainerView.subviews.forEach({ $0.removeFromSuperview() })
+        
+        guard let userInfo = sender.userInfo as? [String: String] else { return }
+        if let success = userInfo["success"],
+           let transactionId = userInfo["transactionId"],
+           success == "1"{
+            showToast("Transaction success")
+        }else{
+            showToast("Transaction failed, please make sure you entered correct card information and the card is valid")
         }
     }
     
@@ -284,53 +302,11 @@ class CheckoutVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    @IBAction func cardNameTFdidChange(_ sender: UITextField) {
-        sender.text = sender.text!.arToEnDigits
-    }
-    
-    
-    @IBAction func cardNumberTFdidChange(_ sender: UITextField) {
-        guard sender.text!.count <= 19 else {
-            sender.text = String(sender.text!.dropLast(1))
-            return
-        }
-        sender.text = sender.text!.arToEnDigits
-        if sender.text!.count == 4 || sender.text!.count == 9 || sender.text!.count == 14{
-            sender.text = sender.text! + " "
-        }
-    }
-    
-    @IBAction func expiryTFdidChange(_ sender: UITextField) {
-        guard sender.text!.count <= 5 else {
-            sender.text = String(sender.text!.dropLast(1))
-            return
-        }
-        
-        sender.text = sender.text!.arToEnDigits
-        
-        if !(sender.text?.starts(with: "1"))! && sender.text!.count < 2{
-            let temp = sender.text
-            sender.text = ""
-            sender.text = "0" + temp! + "/"
-        }else if sender.text!.starts(with: "1") && sender.text!.count == 2{
-            let index = sender.text!.index(sender.text!.startIndex, offsetBy: 1)
-            let secondDigit = sender.text![index]
-            guard Int(String(secondDigit).arToEnDigits!)! < 3 else {
-                sender.text = String(sender.text!.dropLast(1))
-                return
-            }
-            sender.text = sender.text! + "/"
-        }else if sender.text!.count == 2{
-            sender.text = sender.text! + "/"
-        }
-    }
-    
-    @IBAction func cvvTFdidChange(_ sender: UITextField) {
-        sender.text = sender.text!.arToEnDigits
-    }
-    
-    
     func showPaySheet(){
+        Shared.transaction = Transaction()
+        Shared.transaction?.amount = 0.5
+        Shared.transaction?.currency = "EGP"
+        self.replaceView(containerView: paymentContainerView, identifier: "PaymentVC", storyboard: .orders)
         self.blockView.isHidden = false
         self.bottomSheetTopCnst.constant = 300
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
@@ -348,10 +324,7 @@ class CheckoutVC: UIViewController {
             self.blockView.isHidden = true
             self.bottomSheetTopCnst.constant = self.view.frame.height
             self.view.layoutIfNeeded()
-            self.cardHolderTF.text = ""
-            self.cardNumberTF.text = ""
-            self.expiryTF.text = ""
-            self.cvvTF.text = ""
+            self.paymentContainerView.subviews.forEach({ $0.removeFromSuperview() })
             self.creditBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
             self.selectedPayment = nil
         }))
@@ -362,13 +335,6 @@ class CheckoutVC: UIViewController {
     
     @IBAction func dismissPaySheetAction(_ sender: Any) {
         dismissPaySheet()
-    }
-    
-    
-    @IBAction func makePayment(_ sender: Any) {
-        payPresenter = PayPresenter(delegate: self)
-        payPresenter?.createSession()
-        SVProgressHUD.show()
     }
     
     @IBAction func placeOrderAction(_ sender: Any) {
@@ -446,27 +412,3 @@ extension CheckoutVC: UIScrollViewDelegate{
     }
 }
 
-extension CheckoutVC: UITextFieldDelegate{
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        let  char = string.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        
-        if (isBackSpace == -92) {
-            if textField === expiryTF{
-                if expiryTF.text!.count == 5{
-                    expiryTF.text = String(expiryTF.text!.dropLast(2))
-                }else{
-                    expiryTF.text = ""
-                }
-            }else if textField == cardNumberTF{
-                if cardNumberTF.text!.count == 5 || cardNumberTF.text!.count == 10 || cardNumberTF.text!.count == 15{
-                    cardNumberTF.text = String(cardNumberTF.text!.dropLast(1))
-                }
-            }
-        }
-        
-        
-        return true
-    }
-}
