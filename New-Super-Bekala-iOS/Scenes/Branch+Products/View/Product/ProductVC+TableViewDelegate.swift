@@ -29,7 +29,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: VariationsTableViewCell.identifier, for: indexPath) as! VariationsTableViewCell
         let variation = product!.variations![indexPath.row]
-        cell.variationName.text = "lang".localized == "en" ? variation.nameEn : variation.nameAr
+        cell.variationName.text = "lang".localized == "en" ? variation.name?.en : variation.name?.ar
         cell.expandBtn.tag = indexPath.row
         cell.expandBtn.addTarget(self, action: #selector(expandVars(_:)), for: .touchUpInside)
         
@@ -41,7 +41,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         }else if selected!.isEmpty && variation.isAddition == 1{
             cell.chosedVariation.text = variation.isRequired == 0 ? "(Optional)".localized : ""
         }else if !selected!.isEmpty && variation.isAddition == 0{
-            cell.chosedVariation.text = "lang".localized == "en" ? selected?.first?.nameEn : selected?.first?.nameAr
+            cell.chosedVariation.text = "lang".localized == "en" ? selected?.first?.name?.en : selected?.first?.name?.ar
         }else if !selected!.isEmpty && variation.isAddition == 1{
             var totalAdditions = 0
             selected?.forEach({ (option) in
@@ -86,10 +86,18 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             cell.optionsTableView.register(nib, forCellReuseIdentifier: OptionsTableViewCell.identifier)
             let option = product?.variations?[indexPath.row].options![optionIndex.row]
             let cell = cell.optionsTableView.dequeueReusableCell(withIdentifier: OptionsTableViewCell.identifier, for: optionIndex) as! OptionsTableViewCell
-            cell.optionName.text = "lang".localized == "en" ? option?.nameEn : option?.nameAr
+            cell.optionName.text = "lang".localized == "en" ? option?.name?.en : option?.name?.ar
             cell.price.isHidden = option?.price == 0 ? true : false
             cell.price.text = "\(option?.price ?? 0) EGP"
-           // cell.container.alpha = option?.inStock == 1 ? 1.0 : 0.3
+            cell.container.alpha = option?.inStock == 1 ? 1.0 : 0.3
+            
+            if let salePrice = option?.salePrice,
+               salePrice != 0{
+                cell.salePrice.text = "\(salePrice) EGP"
+                cell.salePriceView.isHidden = false
+            }else{
+                cell.salePriceView.isHidden = true
+            }
             
             if product?.variations?[indexPath.row].isAddition == 1 {
 //                cell.radionImg.image = option?.checked == true ? UIImage(named: "checked") : UIImage(named: "unchecked")
@@ -108,7 +116,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
                     self.product!.variations![indexPath.row].options![optionIndex.row].selected = !(self.product!.variations![indexPath.row].options![optionIndex.row].selected)
 //                    let options = self.product!.variations?[indexPath.row].options!.filter({ return $0.checked == true })
                     let options = self.product!.variations?[indexPath.row].options!.filter({ return $0.selected == true })
-                    if let max = product?.variations![indexPath.row].min,
+                    if let max = product?.variations![indexPath.row].max,
                        options!.count > max{
 //                        self.product!.variations![indexPath.row].options![optionIndex.row].checked = !(self.product!.variations![indexPath.row].options![optionIndex.row].checked)
                         self.product!.variations![indexPath.row].options![optionIndex.row].selected = !(self.product!.variations![indexPath.row].options![optionIndex.row].selected)
@@ -133,7 +141,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
                     self.viewDidLayoutSubviews()
                     self.scroller.setContentOffset(contentOffset, animated: false)
                     let option = self.product!.variations?[indexPath.row].options![optionIndex.row]
-                    cell.chosedVariation.text = "lang".localized == "en" ? option?.nameEn : option?.nameAr
+                    cell.chosedVariation.text = "lang".localized == "en" ? option?.name?.en : option?.name?.ar
                     
                 }
                 
@@ -143,14 +151,14 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             }
             
         }.heightForRowAt { (_) -> CGFloat in
-            return 30
+            return 40
         }
         
         cell.optionsTableView.reloadData()
         
         if product!.variations![indexPath.row].expanded {
             cell.optionsContainer.alpha = 1
-            cell.optionsTableViewHeight.constant = CGFloat(product!.variations![indexPath.row].options!.count * 30)
+            cell.optionsTableViewHeight.constant = CGFloat(product!.variations![indexPath.row].options!.count * 40)
             UIView.animate(withDuration: 0.25) {
                 cell.expandBtn.transform = CGAffineTransform(rotationAngle: .pi)
                 self.view.layoutIfNeeded()
@@ -183,7 +191,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         }
         
         if product!.variations![indexPath.row].expanded{
-            return CGFloat(product!.variations![indexPath.row].options!.count * 30) + 140
+            return CGFloat(product!.variations![indexPath.row].options!.count * 40) + 140
         }else{
             return 75
         }

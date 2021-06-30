@@ -117,12 +117,12 @@ extension PaymentVC: PayDelegate{
         
         if success{
             guard let transactionId = transactionId else { return }
-            NotificationCenter.default.post(name: NSNotification.Name("DISMISS_PAYMENT"), object: nil, userInfo: [
+            NotificationCenter.default.post(name: NSNotification.Name("FINISH_PAYMENT"), object: nil, userInfo: [
                 "success": "1",
                 "transactionId": transactionId
             ])
         }else{
-            NotificationCenter.default.post(name: NSNotification.Name("DISMISS_PAYMENT"), object: nil, userInfo: [
+            NotificationCenter.default.post(name: NSNotification.Name("FINISH_PAYMENT"), object: nil, userInfo: [
                 "success": "0",
                 "transactionId": ""
             ])

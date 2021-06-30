@@ -76,6 +76,7 @@ class MapVC: UIViewController {
         switch Shared.mapState {
         case .fetchLocation:
             Shared.isCoords = true
+            Shared.isRegion = false
             Shared.selectedCoords = "\(Shared.userLat ?? 0.0),\(Shared.userLng ?? 0.0)"
             Shared.userSelectLocation = true
             Router.toHome(self)

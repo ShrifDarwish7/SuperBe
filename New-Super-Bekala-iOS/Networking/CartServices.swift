@@ -62,8 +62,8 @@ class CartServices{
                             if let items = items{
                                 if items.isEmpty{
                                     cartItem.product_id = Int16(Int(item.id!))
-                                    cartItem.name_en = item.branchProductLanguage?.first?.name
-                                    cartItem.name_ar = item.branchProductLanguage?[0].name
+                                    cartItem.name_en = item.name?.en
+                                    cartItem.name_ar = item.name?.ar
                                     cartItem.logo = item.images?.first
                                     cartItem.notes = item.notes
                                     cartItem.price = Double(item.price!)
@@ -126,8 +126,8 @@ class CartServices{
             
         }else{
             cartItem.product_id = Int16(item.id!)
-            cartItem.name_en = item.branchProductLanguage?.first?.name
-            cartItem.name_ar = item.branchProductLanguage?[0].name
+            cartItem.name_en = item.name?.en
+            cartItem.name_ar = item.name?.ar
             cartItem.logo = item.images?.first
             cartItem.notes = item.notes
             cartItem.price = Double(item.price!)
@@ -148,8 +148,8 @@ class CartServices{
         let cartBranch = CartBranch(context: CartServices.managedObjectContext)
         cartBranch.id = Int16(item.branch!.id)
         cartBranch.logo = item.branch?.logo
-        cartBranch.name_en = item.branch?.branchLanguage?.first?.name
-        cartBranch.name_ar = item.branch?.branchLanguage![0].name
+        cartBranch.name_en = item.branch?.name?.en
+        cartBranch.name_ar = item.branch?.name?.ar
         cartItem.branch = cartBranch
         
         do{

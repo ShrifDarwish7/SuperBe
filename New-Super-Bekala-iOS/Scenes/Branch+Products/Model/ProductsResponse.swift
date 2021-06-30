@@ -17,6 +17,8 @@ struct ProductsResponse: Codable {
 }
 
 struct Product: Codable {
+    var name: Localized?
+    var description: Localized?
     var id: Int?
     var sku: String?
     var inStock: Int?
@@ -26,7 +28,6 @@ struct Product: Codable {
     var saleStartDate, saleEndDate: String?
     var branchID, productID, branchCategoryID: Int?
     var branchImage: String?
-    var branchProductLanguage: [BranchProductLanguage]?
     var branch: Branch?
     var variations: [Variation]?
     
@@ -38,7 +39,7 @@ struct Product: Codable {
     var text: String?
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case id, name, description
         case sku = "SKU"
         case inStock = "in_stock"
         case images, price
@@ -52,24 +53,8 @@ struct Product: Codable {
         case branchID = "branch_id"
         case productID = "product_id"
         case branchCategoryID = "branch_category_id"
-        case branchProductLanguage = "branch_product_language"
         case variations, branch
         case branchImage = "branch_image"
-    }
-}
-
-// MARK: - BranchProductLanguage
-struct BranchProductLanguage: Codable {
-    let id: Int
-    let name, branchProductLanguageDescription: String?
-    let language: String?
-    let branchProductID: Int
-
-    enum CodingKeys: String, CodingKey {
-        case id, name
-        case branchProductLanguageDescription = "description"
-        case language
-        case branchProductID = "branch_product_id"
     }
 }
 
@@ -77,7 +62,7 @@ struct BranchProductLanguage: Codable {
 struct Variation: Codable {
     
     var id: Int?
-    var nameEn, nameAr: String?
+    var name: Localized?
     var isAddition, variationID, branchProductID: Int?
     var isRequired: Int?
     var max, min: Int?
@@ -86,9 +71,7 @@ struct Variation: Codable {
     var expanded = true
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nameEn = "name_en"
-        case nameAr = "name_ar"
+        case id, name
         case isAddition = "is_addition"
         case variationID = "variation_id"
         case branchProductID = "branch_product_id"
@@ -103,19 +86,18 @@ struct Variation: Codable {
 struct Option: Codable{
     
     var id: Int?
-    var nameEn, nameAr: String?
-    var price, branchVariationID, inStock: Int?
+    var name: Localized?
+    var price, branchVariationID, inStock, salePrice: Int?
     
     var selected: Bool = false
     //var checked: Bool = false
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case nameEn = "name_en"
-        case nameAr = "name_ar"
+        case id, name
         case price
         case branchVariationID = "branch_variation_id"
         case inStock = "in_stock"
+        case salePrice = "sale_price"
         
     }
     

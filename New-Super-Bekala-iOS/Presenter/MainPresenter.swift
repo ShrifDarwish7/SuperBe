@@ -216,6 +216,7 @@ class MainPresenter{
     
     func getBranchProduct(id: Int, prms: [String: String]){
         APIServices.shared.call(.getBranchProducts(prms, id)) { (data) in
+            print("getBranchProduct", JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: ProductsResponse.self){
                 self.delegate?.didCompleteWithBranchProducts(dataModel.data)
@@ -229,6 +230,7 @@ class MainPresenter{
        // self.delegate?.showProgress()
         APIServices.shared.call(.getBranchCats(id, prms)) { (data) in
          //   self.delegate?.dismissProgress()
+            print(JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: BranchCatsResponse.self){
                 self.delegate?.didCompleteWithBranchCats(dataModel.data)
@@ -256,6 +258,7 @@ class MainPresenter{
     func getCities(_ prms: [String: String]){
         delegate?.showProgress()
         APIServices.shared.call(.getCities(prms)) { [self] (data) in
+            print(JSON(data))
             delegate?.dismissProgress()
             if let data = data,
                let dataModel = data.getDecodedObject(from: CitiesResponse.self){
@@ -293,9 +296,10 @@ class MainPresenter{
     }
     
     func getFeaturedBranches(_ prms: [String:String]){
-//        var prms = prms
-//        prms.updateValue("is_featured=1", forKey: "filter")
+        var prms = prms
+        prms.updateValue("is_featured=1", forKey: "filter")
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
+            print("is_featured branches", JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: BranchesResponse.self){
                 delegate?.didCompleteWithFeaturedBranches(dataModel.data)

@@ -8,25 +8,23 @@
 
 import Foundation
 
+// MARK: - PointsResponse
 struct LoginResponse: Codable {
-    let status: Int
-    let data: LoginResult
-    let message: String
+    let status: Int?
+    let data: User?
+    let meta: [String]?
+    let message: String?
 }
 
-struct LoginResult: Codable {
-    let token: String
-    let user: User
-}
-
+// MARK: - DataClass
 struct User: Codable {
     let id: Int
     let name, email: String
-    let createdAt, updatedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, email
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-    }
+    let phone: String?
+    let token: String
+    let birthdate: String?
+    let avatar: String
+    let uid: String
+    let gender: String?
+    //let orders, wallet, points, addresses: [String]?
 }

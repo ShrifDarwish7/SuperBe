@@ -56,7 +56,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
         case filtersCollectionView:
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as! FilterCollectionViewCell
-            cell.filterName.text = self.categories?[indexPath.row].branchCategoryLanguage.first?.name
+            cell.filterName.text = "lang".localized == "en" ? self.categories?[indexPath.row].name?.en : self.categories?[indexPath.row].name?.ar
             if self.categories![indexPath.row].selected ?? false{
                 cell.underLine.isHidden = false
             }else{
@@ -181,7 +181,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
         case filtersCollectionView:
             let font = UIFont(name: "Lato-Bold", size: 16)
             let fontAttributes = [NSAttributedString.Key.font: font]
-            let size = ((self.categories?[indexPath.row].branchCategoryLanguage.first?.name ?? "") as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+            let size = (("lang".localized == "en" ? self.categories?[indexPath.row].name?.en ?? "" : self.categories?[indexPath.row].name?.ar ?? "") as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
             return CGSize(width: size.width + 30 , height: size.height + 20)
         case productsCollectionView:
             return CGSize(width: self.productsCollectionView.frame.width/2, height: 250)
@@ -201,7 +201,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case filtersCollectionView:
-            for i in 0...self.categories!.count-1{ self.categories![i].selected = false }
+            for i in 0...self.categories!.count-1 { self.categories![i].selected = false }
             self.categories![indexPath.row].selected = true
             self.selectedCat = self.categories![indexPath.row]
             self.filtersCollectionView.reloadData()
@@ -209,7 +209,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
             isLoading = true
             productsCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
             loadProductsCollection()
-            //prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
+            prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
             presenter?.getBranchProduct(id: branch!.id, prms: prms)
         case productsCollectionView:
 //            SVProgressHUD.show()

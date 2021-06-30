@@ -14,8 +14,11 @@ extension ShoopingVC: MainViewDelegate{
     func updateBranches(){
         self.filtersCollectionView.hideSkeleton()
         self.parameters.updateValue("\(self.selectedCategory?.id ?? 0)", forKey: "category_id")
-        self.presenter?.getBranches(parameters)
+        
         self.presenter?.getFeaturedBranches(parameters)
+        self.presenter?.getBranches(parameters)
+        
+        print("here parameters",parameters)
     }
     
     func didCompleteWithCategories(_ data: [Category]?) {
@@ -35,7 +38,7 @@ extension ShoopingVC: MainViewDelegate{
         if let data = data,
            !data.isEmpty{
             self.branches = data
-            self.isLoading = false
+            self.ordinaryLoading = false
             self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
             self.ordinaryVendorsTAbleView.stopSkeletonAnimation()
             self.tableViewHeight.constant = self.ordinaryVendorsTAbleView.contentSize.height + 20
@@ -47,8 +50,12 @@ extension ShoopingVC: MainViewDelegate{
         featuredVendorsCollection.hideSkeleton()
         if let data = data,
            !data.isEmpty{
+            //self.showSkeletonView()
+            self.featuredLoading = false
+            self.featuredVendorsCollection.isHidden = false
             self.featuredBranches = data
             self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+            
         }
     }
 }

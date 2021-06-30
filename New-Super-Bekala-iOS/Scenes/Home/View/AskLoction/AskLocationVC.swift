@@ -26,9 +26,8 @@ class AskLocationVC: UIViewController {
     
     @IBAction func toRegions(_ sender: Any) {
         let prms: [String: String] = [
-          //  "lang": "lang".localized,
             "country_id": "1",
-            "with": "cityLanguage, regions.regionLanguage, regions.subregions, regions.subregions.subregionLanguage"
+            "with": "regions"
         ]
         self.presenter?.getCities(prms)
     }

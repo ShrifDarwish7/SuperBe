@@ -17,7 +17,8 @@ struct BranchesResponse: Codable {
 
 struct Branch: Codable {
     let id: Int
-    let bio: String?
+    let bio: Localized?
+    let name: Localized?
     let phones, emails, fax: [String]?
     let website: String?
     let isNewBranch: Int?
@@ -48,7 +49,7 @@ struct Branch: Codable {
     let beingEdited: Int?
     let beingEditedBy: String?
     let vendorID, userID, regionID: Int?
-    let branchLanguage: [BranchLanguage]?
+  //  let branchLanguage: [BranchLanguage]?
     let user: BranchUser?
     var products: [Product]?
     //let openCloseTimes: String?
@@ -56,7 +57,7 @@ struct Branch: Codable {
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, bio, phones, emails, fax, website
+        case id, bio, phones, emails, fax, website, name
         case isNewBranch = "is_new_branch"
         case postalCode = "postal_code"
         case street, landmark
@@ -108,7 +109,7 @@ struct Branch: Codable {
         case vendorID = "vendor_id"
         case userID = "user_id"
         case regionID = "region_id"
-        case branchLanguage = "branch_language"
+      //  case branchLanguage = "branch_language"
         case user
       //  case openCloseTimes = "open_close_times"
         case supportDelivery = "support_delivery"
@@ -117,17 +118,21 @@ struct Branch: Codable {
     }
 }
 
-// MARK: - BranchLanguage
-struct BranchLanguage: Codable {
-    let id: Int
-    let name, language: String?
-    let branchID: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, language
-        case branchID = "branch_id"
-    }
+struct Localized: Codable {
+    let en, ar: String?
 }
+
+//// MARK: - BranchLanguage
+//struct BranchLanguage: Codable {
+//    let id: Int
+//    let name, language: String?
+//    let branchID: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, language
+//        case branchID = "branch_id"
+//    }
+//}
 
 // MARK: - User
 struct BranchUser: Codable {

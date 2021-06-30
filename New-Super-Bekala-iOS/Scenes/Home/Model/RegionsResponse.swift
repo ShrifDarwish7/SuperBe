@@ -17,66 +17,35 @@ struct RegionsResponse: Codable {
 // MARK: - Datum
 struct Region: Codable {
     let id: Int
-    let coordinates, postalCode: String?
+    let postalCode: String?
+    let coordinates: [String]?
+    let name: Localized?
     let cityID: Int?
-    let regionLanguage: [Language]?
     let subregions: [Subregion]?
     let city: City?
     
     var expanded: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, coordinates
+        case id, coordinates, name
         case postalCode = "postal_code"
         case cityID = "city_id"
-        case regionLanguage = "region_language"
         case subregions, city
     }
 }
 
-//// MARK: - City
-//struct City: Codable {
-//    let id, countryID: Int
-//    let phoneCode: String
-//    let cityLanguage: [Language]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case countryID = "country_id"
-//        case phoneCode = "phone_code"
-//        case cityLanguage = "city_language"
-//    }
-//}
-
-// MARK: - Language
-struct Language: Codable {
-    let id: Int
-    let name: String
-    let language: String?
-    let cityID: Int?
-    let regionID, subregionID: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, language
-        case cityID = "city_id"
-        case regionID = "region_id"
-        case subregionID = "subregion_id"
-    }
-}
-
-
 // MARK: - Subregion
 struct Subregion: Codable {
     let id: Int
-    let coordinates, postalCode: String?
+    let name: Localized?
+    let postalCode: String?
+    let coordinates: [String]?
     let regionID: Int?
-    let subregionLanguage: [Language]?
 
     enum CodingKeys: String, CodingKey {
-        case id, coordinates
+        case id, coordinates, name
         case postalCode = "postal_code"
         case regionID = "region_id"
-        case subregionLanguage = "subregion_language"
     }
 }
 

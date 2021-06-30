@@ -42,7 +42,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case filtersCollectionView:
             return self.categories?.count ?? 0
         case featuredVendorsCollection:
-            return self.branches?.count ?? 0
+            return self.branches?.count ?? 5
         default:
             return 0
         }
@@ -53,7 +53,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case filtersCollectionView:
             
             let cell = filtersCollectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as! FilterCollectionViewCell
-            cell.filterName.text = "lang".localized == "en" ? self.categories?[indexPath.row].categoryLanguage?.first?.name: self.categories?[indexPath.row].categoryLanguage?[1].name
+            cell.filterName.text = "lang".localized == "en" ? self.categories?[indexPath.row].name?.en: self.categories?[indexPath.row].name?.ar
             cell.filterName.sizeToFit()
             cell.filterName.lineBreakMode = .byCharWrapping
             if self.categories?[indexPath.row].selected ?? false{
@@ -66,9 +66,18 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             
         case featuredVendorsCollection:
             
-            let cell = self.featuredVendorsCollection.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.identifier, for: indexPath) as! FeaturedCollectionViewCell
-            cell.loadFrom(data: self.branches![indexPath.row])
-            return cell
+            if featuredLoading{
+                
+                let cell = self.featuredVendorsCollection.dequeueReusableCell(withReuseIdentifier: SkeletonLoadingCollectionViewCell.identifier, for: indexPath) as! SkeletonLoadingCollectionViewCell
+                return cell
+                
+            }else{
+                
+                let cell = self.featuredVendorsCollection.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.identifier, for: indexPath) as! FeaturedCollectionViewCell
+                cell.loadFrom(data: self.featuredBranches![indexPath.row])
+                return cell
+                
+            }
             
         default:
             return UICollectionViewCell()
@@ -87,6 +96,8 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             self.selectedCategory = self.categories![indexPath.row]
             self.filtersCollectionView.reloadData()
             self.filtersCollectionView.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
+            self.featuredLoading = true
+            self.ordinaryLoading = true
             self.showSkeletonView()
             self.updateBranches()
 
@@ -108,7 +119,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case filtersCollectionView:
             let font = UIFont(name: "Lato-Bold", size: 16)
             let fontAttributes = [NSAttributedString.Key.font: font]
-            let size = ((self.categories?[indexPath.row].categoryLanguage?.first?.name ?? "") as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+            let size = (("lang".localized == "en" ? self.categories?[indexPath.row].name?.en ?? "" : self.categories?[indexPath.row].name?.ar ?? "") as NSString ).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
             return CGSize(width: size.width + 10 , height: size.height + 20)
         default:
             return CGSize.zero

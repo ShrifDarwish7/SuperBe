@@ -43,7 +43,7 @@ class BranchVC: UIViewController {
     var branch: Branch?
     var products: [Product]?
     var isLoading: Bool = true
-    var prms: [String: String] = [ "lang": "lang".localized ]
+    var prms: [String: String] = [:]
     var cartItems: [CartItem]?
     
     override func viewDidLoad() {
@@ -87,7 +87,7 @@ class BranchVC: UIViewController {
 
         fastOrderContainer.isHidden = branch?.quickOrder == 1 ? true : false
         rateView.rating = branch?.rating ?? 1.0
-        branchName.text = "\(branch?.id ?? 0)"//branch?.branchLanguage?.first?.name
+        branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
         logo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
         bgLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
         duration.text = "\(branch?.deliveryDuration ?? 0) Min"

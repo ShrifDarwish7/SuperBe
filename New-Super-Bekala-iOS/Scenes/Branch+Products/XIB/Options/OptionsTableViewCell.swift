@@ -16,4 +16,6 @@ class OptionsTableViewCell: UITableViewCell {
     @IBOutlet weak var optionName: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var container: UIView!
+    @IBOutlet weak var salePriceView: UIView!
+    @IBOutlet weak var salePrice: UILabel!
 }

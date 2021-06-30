@@ -85,6 +85,9 @@ class ProfileVC: UIViewController {
                 } completion: { (_) in
                     
                 }
+            case 2:
+                APIServices.shared.isLogged = false
+                Router.toMainNav(self)
             default:
                 break
             }
@@ -94,7 +97,6 @@ class ProfileVC: UIViewController {
     @objc func viewPanned(_ panRecognizer: UIPanGestureRecognizer){
         let translation = panRecognizer.translation(in: self.view)
         _ = panRecognizer.velocity(in: self.view)
-    print(translation.y)
         switch panRecognizer.state {
         case .began:
             bottomSheetPanStartingTopConstant = self.bottomSheetTopConstraint.constant
@@ -115,29 +117,6 @@ class ProfileVC: UIViewController {
             }else{
                 self.dismissBottomSheet(self)
             }
-           // print(velocity.y)
-//            if velocity.y > 1500.0 {
-//
-//                let safeAreaHeight = UIApplication.shared.keyWindow?.safeAreaLayoutGuide.layoutFrame.size.height
-//             //   let bottomPadding = UIApplication.shared.keyWindow?.safeAreaInsets.bottom
-//                self.bottomSheetTopConstraint.constant = safeAreaHeight! - CGFloat(35)
-//
-//              UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, animations: {
-//                  self.view.layoutIfNeeded()
-//              }) { (_) in
-//
-//                }
-//            }else if velocity.y < 10{
-//
-//                self.bottomSheetTopConstraint.constant = UIApplication.shared.statusBarFrame.height + CGFloat(110)
-//
-//                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, animations: {
-//                    self.view.layoutIfNeeded()
-//                }) { (_) in
-//
-//                }
-//
-//            }
             
         default:
             break

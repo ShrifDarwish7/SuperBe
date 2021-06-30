@@ -26,7 +26,7 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RegionsTableViewCell", for: indexPath) as! RegionsTableViewCell
         
-        cell.cityName.text = "lang".localized == "en" ? self.regions![indexPath.row].regionLanguage?.first?.name : self.regions![indexPath.row].regionLanguage?[1].name
+        cell.cityName.text = "lang".localized == "en" ? self.regions![indexPath.row].name?.en : self.regions![indexPath.row].name?.ar
         
         if let subregions = self.regions![indexPath.row].subregions,
            !subregions.isEmpty{
@@ -34,7 +34,7 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
                 return self.regions![indexPath.row].subregions!.count
             }.cellForRow { (index) -> UITableViewCell in
                 let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
-                cell.textLabel?.text = "lang".localized == "en" ? self.regions![indexPath.row].subregions![index.row].subregionLanguage?.first?.name : self.regions![indexPath.row].subregions![index.row].subregionLanguage?[1].name
+                cell.textLabel?.text = "lang".localized == "en" ? self.regions![indexPath.row].subregions![index.row].name?.en : self.regions![indexPath.row].subregions![index.row].name?.ar
                // cell.textLabel?.font = UIFont(name: "Cairo-SemiBold", size: 13)
                 cell.selectionStyle = .none
                 return cell
@@ -46,11 +46,11 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
                 Shared.isRegion = true
                 Shared.selectedArea = SelectedArea(
                     regionsID: self.regions![indexPath.row].id,
-                    regionsNameEn: self.regions![indexPath.row].regionLanguage?.first?.name,
-                    regionNameAr: self.regions![indexPath.row].regionLanguage?[1].name,
+                    regionsNameEn: self.regions![indexPath.row].name?.en,
+                    regionNameAr: self.regions![indexPath.row].name?.ar,
                     subregionID: self.regions![indexPath.row].subregions![index.row].id,
-                    subregionEn: self.regions![indexPath.row].subregions![index.row].subregionLanguage?.first?.name,
-                    subregionAr: self.regions![indexPath.row].subregions![index.row].subregionLanguage?[1].name)
+                    subregionEn: self.regions![indexPath.row].subregions![index.row].name?.en,
+                    subregionAr: self.regions![indexPath.row].subregions![index.row].name?.ar)
                 Router.toHome(self)
             }
             cell.regionTableView.reloadData()
@@ -88,8 +88,8 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
             Shared.isRegion = true
             Shared.selectedArea = SelectedArea(
                 regionsID: self.regions![indexPath.row].id,
-                regionsNameEn: self.regions![indexPath.row].regionLanguage?.first?.name,
-                regionNameAr: self.regions![indexPath.row].regionLanguage?[1].name,
+                regionsNameEn: self.regions![indexPath.row].name?.en,
+                regionNameAr: self.regions![indexPath.row].name?.ar,
                 subregionID: 0,
                 subregionEn: "",
                 subregionAr: ""

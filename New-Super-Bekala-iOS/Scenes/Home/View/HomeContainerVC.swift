@@ -36,11 +36,16 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var orderMethodsView: UIView!
     @IBOutlet weak var blockBlurView: UIVisualEffectView!
     @IBOutlet weak var contactUsView: UIView!
+    @IBOutlet weak var changeLocationBlockView: UIView!
+    @IBOutlet weak var locationSheetTopCnst: NSLayoutConstraint!
+    @IBOutlet weak var addressesContainer: UIView!
     
     var cartItems: [CartItem]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didChooseAddress), name: NSNotification.Name("DID_CHOOSE_ADDRESS"), object: nil)
         
         orderMethodsView.transform = CGAffineTransform(scaleX: 0, y: 0)
         addView.layer.cornerRadius = 10
@@ -48,6 +53,8 @@ class HomeContainerVC: UIViewController {
         coverView.roundCorners([.layerMaxXMinYCorner,.layerMaxXMaxYCorner], radius: self.coverView.frame.height/2)
         
         self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+        
+        self.dismissChangeLocationSheet()
         
         profilePic.addTapGesture { (_) in
             Router.toProfile(self)
@@ -69,6 +76,44 @@ class HomeContainerVC: UIViewController {
             }else{
                 cartFlage.isHidden = true
             }
+        }
+    }
+    
+    @IBAction func toQuickOrder(_ sender: UIButton) {
+        Router.toShareLocation(self)
+    }
+    
+    
+    @objc func didChooseAddress(){
+        self.dismissChangeLocationSheet()
+        self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+    }
+    
+    @IBAction func changeLocation(_ sender: Any) {
+        self.showChangeLocationSheet()
+    }
+    
+    @IBAction func dismissSheet(_ sender: Any) {
+        self.dismissChangeLocationSheet()
+    }
+    
+    func showChangeLocationSheet(){
+        self.replaceView(containerView: self.addressesContainer, identifier: "ChangeLocationVC", storyboard: .profile)
+        changeLocationBlockView.isHidden = false
+        locationSheetTopCnst.constant = 350
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            
+        }
+    }
+    
+    func dismissChangeLocationSheet(){
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
+            self.locationSheetTopCnst.constant = self.view.frame.height
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.changeLocationBlockView.isHidden = true
         }
     }
     

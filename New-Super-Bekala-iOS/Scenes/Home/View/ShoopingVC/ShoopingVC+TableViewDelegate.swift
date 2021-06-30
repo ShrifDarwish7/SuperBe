@@ -26,7 +26,7 @@ extension ShoopingVC: SkeletonTableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isLoading == true{
+        if self.ordinaryLoading{
             let cell = tableView.dequeueReusableCell(withIdentifier: OrdinaryVendorsSkeletonTableViewCell.identifier) as! OrdinaryVendorsSkeletonTableViewCell
             self.view.layoutSubviews()
             self.viewWillLayoutSubviews()

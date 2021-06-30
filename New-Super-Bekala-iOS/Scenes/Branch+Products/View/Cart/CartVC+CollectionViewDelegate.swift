@@ -23,7 +23,7 @@ extension CartVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let branch = self.branches![indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CartFiltersCollectionViewCell.identifier, for: indexPath) as! CartFiltersCollectionViewCell
-        cell.name.text = "\(branch.id)"//"lang".localized == "en" ? branch.nameEn : branch.nameAr
+        cell.name.text = "lang".localized == "en" ? branch.name_en : branch.name_ar
         cell.img.sd_setImage(with: URL(string: Shared.storageBase + branch.logo!))
         
         if branch.selected {

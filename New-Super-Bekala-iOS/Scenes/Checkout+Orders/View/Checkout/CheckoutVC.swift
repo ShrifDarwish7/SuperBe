@@ -62,7 +62,7 @@ class CheckoutVC: UIViewController {
         
         presenter = MainPresenter(self)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissPaymentSheet(sender:)), name: NSNotification.Name("DISMISS_PAYMENT"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(paymentDidFinish(sender:)), name: NSNotification.Name("FINISH_PAYMENT"), object: nil)
        // branchName.text = "lang".localized == "en" ? branch?.branchLanguage?.first?.name : branch?.branchLanguage![0].name
         branchName.text = "\(branch?.id ?? 0)"
         branchLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
@@ -98,7 +98,7 @@ class CheckoutVC: UIViewController {
         }
     }
     
-    @objc func dismissPaymentSheet(sender: NSNotification){
+    @objc func paymentDidFinish(sender: NSNotification){
         
         self.bottomSheetTopCnst.constant = self.view.frame.height
         

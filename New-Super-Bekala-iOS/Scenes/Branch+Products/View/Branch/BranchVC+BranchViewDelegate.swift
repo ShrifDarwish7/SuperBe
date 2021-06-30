@@ -17,7 +17,7 @@ extension BranchVC: MainViewDelegate{
             self.selectedCat = data.first
             self.loadFiltersCollection()
             prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
-            prms.updateValue("variations.options,branch.branchLanguage", forKey: "with")
+            prms.updateValue("variations.options,branch", forKey: "with")
             presenter?.getBranchProduct(id: branch!.id, prms: prms)
         }
     }
@@ -27,7 +27,6 @@ extension BranchVC: MainViewDelegate{
             self.products = data
             isLoading = false
             loadProductsCollection()
-            
         }
     }
 }

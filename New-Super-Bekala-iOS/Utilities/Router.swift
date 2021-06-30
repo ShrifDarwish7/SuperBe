@@ -14,6 +14,7 @@ enum AppStoryboard: String {
     case home = "Home"
     case orders = "Orders"
     case profile = "Profile"
+    case quickOrder = "QuickOrder"
 }
 
 class Router {
@@ -21,6 +22,12 @@ class Router {
     static func instantiate<T: UIViewController>(appStoryboard: AppStoryboard, identifier: String) -> T {
         let storyboard = UIStoryboard(name: appStoryboard.rawValue, bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: identifier) as! T
+    }
+    
+    static func toMainNav(_ sender: UIViewController){
+        let nv = self.instantiate(appStoryboard: .main, identifier: "NavGuide") as! UINavigationController
+        nv.modalPresentationStyle = .fullScreen
+        sender.present(nv, animated: true, completion: nil)
     }
     
     static func toHome(_ sender: UIViewController){
@@ -138,4 +145,16 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
+    static func toShareLocation(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .quickOrder, identifier: "QuickOrderNav") as! UINavigationController
+        vc.modalPresentationStyle = .fullScreen
+        sender.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    static func toPickLocation(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .quickOrder, identifier: "PickLocationVC") as! PickLocationVC
+        sender.present(vc, animated: true, completion: nil)
+    }
 }

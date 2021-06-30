@@ -43,13 +43,13 @@ extension LoginVC: LoginViewDelegate{
     
     func didSuccessLogin(uid: String) {
      
-        let prms: [String: String] = [
-            "email": "admin@gmail.com",
-            "password": "admin"
-        ]
 //        let prms: [String: String] = [
-//            "uid": uid
+//            "email": "admin@gmail.com",
+//            "password": "admin"
 //        ]
+        let prms: [String: String] = [
+            "uid": uid
+        ]
         loginViewPresenter?.signinToApi(prms: prms)
     }
     

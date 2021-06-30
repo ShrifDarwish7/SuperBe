@@ -28,7 +28,7 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource{
         cell.decreaseBtn.isHidden = true
         cell.increaseBtn.isHidden = true
         let product = order?.lineItems![indexPath.row]
-        cell.name.text = "lang".localized == "en" ? product?.branchProduct.branchProductLanguage?.first?.name : product?.branchProduct.branchProductLanguage![1].name
+        cell.name.text = "lang".localized == "en" ? product?.branchProduct.name?.en : product?.branchProduct.name?.ar
         cell.price.text = "\(product?.linePrice ?? 0) " + "EGP"
         cell.quantity.text = "\(product?.quantity ?? 0)"
         
@@ -44,9 +44,9 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource{
             variations.forEach { (variation) in
                 var opts = ""
                 variation.options?.forEach({ (option) in
-                    opts += (("lang".localized == "en" ? "\(option.nameEn ?? ""), " : "\(option.nameAr ?? ""), "))
+                    opts += (("lang".localized == "en" ? "\(option.name?.en ?? ""), " : "\(option.name?.ar ?? ""), "))
                 })
-                desc += (( "lang".localized == "en" ? "\(variation.nameEn ?? ""): " : "\(variation.nameAr ?? ""): " ) + opts + "\n")
+                desc += (( "lang".localized == "en" ? "\(variation.name?.en ?? ""): " : "\(variation.name?.ar ?? ""): " ) + opts + "\n")
             }
             cell.desc.text = desc
         }else{

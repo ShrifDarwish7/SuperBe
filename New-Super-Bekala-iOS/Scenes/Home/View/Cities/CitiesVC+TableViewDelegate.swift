@@ -17,7 +17,7 @@ extension CitiesVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = self.cities![indexPath.row].cityLanguage?.first?.name
+        cell.textLabel?.text = "lang".localized == "en" ? self.cities![indexPath.row].name?.en : self.cities![indexPath.row].name?.ar
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell

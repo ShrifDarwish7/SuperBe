@@ -31,13 +31,13 @@ public enum SuperBe{
 
 extension SuperBe: TargetType{
     public var baseURL: URL{
-        return URL(string: "https://new.superbekala.com/public/dashboardApi/")!
+        return URL(string: "https://dev4.superbekala.com/api/v1/")!
     }
     
     public var path: String{
         switch self {
         case .login:
-            return "login"
+            return "firebase/login"
         case .logout:
             return "logout"
         case .getCities:

@@ -22,6 +22,7 @@ class SplashVC: UIViewController {
         }else{
             Router.toAboutUs(self)
         }
+        
     }
 
 }

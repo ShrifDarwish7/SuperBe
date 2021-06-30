@@ -70,7 +70,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
             let nib = UINib(nibName: CartProductTableViewCell.identifier, bundle: nil)
             productsTableView.register(nib, forCellReuseIdentifier: CartProductTableViewCell.identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: CartProductTableViewCell.identifier, for: indexPath) as! CartProductTableViewCell
-            cell.name.text = "\(items![indexPath.row].cart_id ?? "")"//"lang".localized == "en" ? items![indexPath.row].nameEn : items![indexPath.row].nameAr
+            cell.name.text = "lang".localized == "en" ? items![indexPath.row].name_en : items![indexPath.row].name_ar
             cell.quantity.text = "\(items![indexPath.row].quantity)"
             cell.desc.text = items![indexPath.row].desc
             cell.desc.isHidden = items![indexPath.row].desc == "" ? true : false

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,15 +42,50 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCe-FF-r40">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5DV-o2-AUP">
                                         <rect key="frame" x="240" y="0.0" width="90" height="81"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="SRM-zk-t8u"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCe-FF-r40">
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="38"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="90" id="SRM-zk-t8u"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAA-Il-Car">
+                                                <rect key="frame" x="0.0" y="43" width="90" height="38"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KW-GR-mIx">
+                                                        <rect key="frame" x="0.0" y="10.5" width="90" height="17"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="90" id="4OP-7W-8AI"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doL-AR-y6z">
+                                                        <rect key="frame" x="15" y="18.5" width="60" height="1.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1.5" id="jCT-Z5-XOO"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="doL-AR-y6z" firstAttribute="centerX" secondItem="tAA-Il-Car" secondAttribute="centerX" id="1YC-Fn-lTX"/>
+                                                    <constraint firstItem="4KW-GR-mIx" firstAttribute="centerY" secondItem="tAA-Il-Car" secondAttribute="centerY" id="KIr-M0-OqY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="doL-AR-y6z" secondAttribute="trailing" constant="15" id="PeF-Fd-dBi"/>
+                                                    <constraint firstItem="doL-AR-y6z" firstAttribute="leading" secondItem="tAA-Il-Car" secondAttribute="leading" constant="15" id="dgb-H1-iDQ"/>
+                                                    <constraint firstItem="4KW-GR-mIx" firstAttribute="centerX" secondItem="tAA-Il-Car" secondAttribute="centerX" id="gtR-AY-SJW"/>
+                                                    <constraint firstItem="doL-AR-y6z" firstAttribute="centerY" secondItem="tAA-Il-Car" secondAttribute="centerY" id="pxx-lG-wS0"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -79,6 +114,8 @@
                 <outlet property="optionName" destination="EyU-Pt-HYI" id="GNf-Yu-mjo"/>
                 <outlet property="price" destination="TCe-FF-r40" id="jat-8z-auA"/>
                 <outlet property="radionImg" destination="49q-Xg-QfS" id="Pwg-am-icU"/>
+                <outlet property="salePrice" destination="4KW-GR-mIx" id="4Pp-Dv-77C"/>
+                <outlet property="salePriceView" destination="tAA-Il-Car" id="gXj-nz-oPp"/>
             </connections>
             <point key="canvasLocation" x="30.434782608695656" y="106.13839285714285"/>
         </tableViewCell>

@@ -31,7 +31,7 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as! FilterCollectionViewCell
-        cell.filterName.text = "lang".localized == "en" ? self.categories?[indexPath.row].categoryLanguage?.first?.name: self.categories?[indexPath.row].categoryLanguage?[1].name
+        cell.filterName.text = "lang".localized == "en" ? self.categories?[indexPath.row].name?.en: self.categories?[indexPath.row].name?.ar
         cell.filterName.sizeToFit()
         cell.filterName.lineBreakMode = .byCharWrapping
         if self.categories?[indexPath.row].selected ?? false{
@@ -61,7 +61,7 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let font = UIFont(name: "Lato-Bold", size: 16)
         let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = ((self.categories?[indexPath.row].categoryLanguage?.first?.name ?? "") as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+        let size = (("lang".localized == "en" ? self.categories?[indexPath.row].name!.en : self.categories?[indexPath.row].name!.ar)! as NSString ).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
         return CGSize(width: size.width + 10 , height: size.height + 20)
     }
     

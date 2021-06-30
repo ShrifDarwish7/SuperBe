@@ -156,6 +156,7 @@ class PayPresenter{
     }
     
     func performPay(_ authToken: String,_ transactionId: String,_ veResEnrolled: String){
+        
         var payload = GatewayMap(["apiOperation": ApiOperations.pay.rawValue])
         payload[at: "session.id"] = Shared.transaction?.session
         payload[at: "order.amount"] = Shared.transaction?.amount

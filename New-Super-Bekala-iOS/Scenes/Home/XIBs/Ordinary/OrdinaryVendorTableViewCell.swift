@@ -31,7 +31,7 @@ class OrdinaryVendorTableViewCell: UITableViewCell {
     func loadFrom(data: Branch){
         loadUI()
         vendorPhoto.sd_setImage(with: URL(string: Shared.storageBase + data.logo!)!)
-        vendorName.text = data.branchLanguage?.first?.name
+        vendorName.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
         vendorRate.rating = data.rating ?? 0.0
         deliveryTime.text = "\(data.deliveryDuration ?? 0) MIN"
         deliveryTime.text = "\(data.minOrder ?? 0) EGP"

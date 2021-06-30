@@ -23,24 +23,34 @@ class ShoopingVC: UIViewController {
     var featuredBranches: [Branch]?
     var branches: [Branch]?
     var parameters: [String:String] = [/*"lang": "lang".localized*/:]
-    var isLoading = true
+    var featuredLoading = true
+    var ordinaryLoading = true
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         
         showSkeletonView()
         
         presenter = MainPresenter(self)
 
         loadActions()
+        
+        if Shared.isRegion{
+            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
+            if Shared.selectedArea.subregionID != 0{
+                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
+            }
+        }else if Shared.isCoords{
+            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
+        }
+        print("cats prms",parameters)
+        self.presenter?.getCategories(parameters)
     }
     
     func showSkeletonView(){
         ordinaryVendorsTAbleView.hideSkeleton()
         featuredVendorsCollection.hideSkeleton()
-        
-        isLoading = true
-        
+                
         loadFiltersCollection()
         loadFeaturedCollection(identifier: SkeletonLoadingCollectionViewCell.identifier)
         loadOrdinaryTable(identifier: OrdinaryVendorsSkeletonTableViewCell.identifier)
@@ -54,21 +64,6 @@ class ShoopingVC: UIViewController {
         featuredVendorsCollection.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
        
         ordinaryVendorsTAbleView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        if Shared.isRegion{
-            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
-            if Shared.selectedArea.subregionID != 0{
-                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
-            }
-        }else if Shared.isCoords{
-            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
-        }
-        self.presenter?.getCategories(parameters)
-        
     }
     
     override func viewDidLayoutSubviews() {

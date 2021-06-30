@@ -30,7 +30,7 @@ class ProductSearchResultTableViewCell: UITableViewCell {
         branchImage.layer.cornerRadius = branchImage.frame.height/2
         productImage.sd_setImage(with: URL(string: Shared.storageBase + (product.images?.first)!))
         branchImage.sd_setImage(with: URL(string: Shared.storageBase + (product.branch?.logo ?? "")))
-        name.text = product.branchProductLanguage?.first?.name
+        name.text = "lang".localized == "en" ? product.name?.en : product.name?.ar
         if let vars = product.variations,
            vars.isEmpty{
             price.isHidden = true

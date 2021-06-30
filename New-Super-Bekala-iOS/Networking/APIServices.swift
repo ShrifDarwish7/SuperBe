@@ -26,13 +26,13 @@ class APIServices{
     let googleProvider = MoyaProvider<Google>()
     let superbeProvider = MoyaProvider<SuperBe>()
     let nbeProvider = MoyaProvider<NBE>()
-    var user: LoginResult?{
+    var user: User?{
         set{
             UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "user")
         }
         get{
             let data = UserDefaults.init().data(forKey: "user")
-            return (data?.getDecodedObject(from: LoginResult.self)) ?? nil
+            return (data?.getDecodedObject(from: User.self)) ?? nil
         }
     }
     var isLogged: Bool{

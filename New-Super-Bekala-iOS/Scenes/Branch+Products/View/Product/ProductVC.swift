@@ -61,10 +61,10 @@ class ProductVC: UIViewController {
 //        pageControl.onChange { (page) in
 //            self.productImagesCollectionView.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
 //        }
-        productName.text = "\(product?.id ?? 0)"
-        productName1.text = "lang".localized == "en" ? product?.branchProductLanguage?.first?.name : product?.branchProductLanguage![1].name
+        productName.text = "lang".localized == "en" ? product?.name?.en : product?.name?.ar
+        productName1.text = "lang".localized == "en" ? product?.name?.en : product?.name?.ar
         
-        productDesc.text = "lang".localized == "en" ? product?.branchProductLanguage?.first?.branchProductLanguageDescription : product?.branchProductLanguage?[1].branchProductLanguageDescription
+        productDesc.text = "lang".localized == "en" ? product?.description?.en : product?.description?.ar
         price.isHidden = product?.price == 0 ? true : false
         price.text = "\(product?.price ?? 0) EGP"
         price1.isHidden = product?.price == 0 ? true : false
@@ -180,7 +180,7 @@ class ProductVC: UIViewController {
         if let variations = product?.variations,
            !variations.isEmpty{
             for variation in variations{
-                if variation.isRequired == 1{
+                if variation.isRequired == 1, variation.isAddition != 1{
                     
                     let selectedOtps = variation.options?.filter({ return $0.selected == true })
                     guard !(selectedOtps?.isEmpty)! else { continue }
@@ -226,7 +226,7 @@ class ProductVC: UIViewController {
             
             let selectedOpts = variation.options?.filter({ return $0.selected == true })
             selectedOpts!.forEach({ (option) in
-                selectedOptsStr += ("lang".localized == "en" ? "\(option.nameEn!), " : "\(option.nameAr!), ")
+                selectedOptsStr += ("lang".localized == "en" ? "\(option.name?.en ?? ""), " : "\(option.name?.ar ?? ""), ")
             })
             
             if variation.isRequired == 1 && variation.isAddition == 0{

@@ -17,16 +17,15 @@ struct CitiesResponse: Codable {
 struct City: Codable {
     let id, countryID: Int?
     let phoneCode: String?
+    let name: Localized?
     let regionsCount: Int?
-    let cityLanguage: [Language]?
     let regions: [Region]?
 
     enum CodingKeys: String, CodingKey {
-        case id
+        case id, name
         case countryID = "country_id"
         case phoneCode = "phone_code"
         case regionsCount = "regions_count"
-        case cityLanguage = "city_language"
         case regions
     }
 }

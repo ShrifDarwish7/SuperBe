@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Cairo-SemiBold.ttf">
+            <string>Cairo-SemiBold</string>
+        </array>
         <array key="Lato-Black.ttf">
             <string>Lato-Black</string>
         </array>
@@ -581,6 +584,102 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDV-KL-vIT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2302.898550724638" y="-109.15178571428571"/>
+        </scene>
+        <!--Change LocationVC-->
+        <scene sceneID="ySQ-ox-iV8">
+            <objects>
+                <viewController storyboardIdentifier="ChangeLocationVC" id="S2d-KO-Ty6" customClass="ChangeLocationVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wk5-B0-IYF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eQi-c1-iTi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="360"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woD-3X-RbS">
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="20"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R0k-Wy-No7">
+                                        <rect key="frame" x="0.0" y="35" width="414" height="200"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="m7v-Qs-65q"/>
+                                        </constraints>
+                                    </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HHg-3R-CEM">
+                                        <rect key="frame" x="0.0" y="250" width="414" height="110"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXq-pl-pzw" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <color key="backgroundColor" name="Main"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="IY0-1c-Q8p"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="15"/>
+                                                <state key="normal" title="Detect my location on map">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="toMap:" destination="S2d-KO-Ty6" eventType="touchUpInside" id="JiB-0H-en1"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h13-ml-1fT">
+                                                <rect key="frame" x="0.0" y="60" width="414" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="LY4-bt-yoJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="15"/>
+                                                <state key="normal" title="See all locations">
+                                                    <color key="titleColor" name="Main"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="toAllLocations:" destination="S2d-KO-Ty6" eventType="touchUpInside" id="sp0-4B-XMU"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="wXq-pl-pzw" secondAttribute="trailing" id="HWh-UW-uUv"/>
+                                            <constraint firstAttribute="trailing" secondItem="h13-ml-1fT" secondAttribute="trailing" id="afZ-HM-Pfz"/>
+                                            <constraint firstItem="h13-ml-1fT" firstAttribute="leading" secondItem="HHg-3R-CEM" secondAttribute="leading" id="opf-EU-6tf"/>
+                                            <constraint firstItem="wXq-pl-pzw" firstAttribute="leading" secondItem="HHg-3R-CEM" secondAttribute="leading" id="y67-oS-22W"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="R0k-Wy-No7" secondAttribute="trailing" id="jI2-N0-2zl"/>
+                                    <constraint firstAttribute="trailing" secondItem="HHg-3R-CEM" secondAttribute="trailing" id="jrZ-Gj-pS7"/>
+                                </constraints>
+                            </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="gdi-7m-gN2">
+                                <rect key="frame" x="188.5" y="160.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bHI-aR-dDw"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eQi-c1-iTi" firstAttribute="leading" secondItem="bHI-aR-dDw" secondAttribute="leading" id="1KQ-OQ-dHL"/>
+                            <constraint firstItem="gdi-7m-gN2" firstAttribute="centerX" secondItem="Wk5-B0-IYF" secondAttribute="centerX" id="EJu-05-Ffk"/>
+                            <constraint firstItem="eQi-c1-iTi" firstAttribute="top" secondItem="bHI-aR-dDw" secondAttribute="top" id="O26-en-3qy"/>
+                            <constraint firstItem="gdi-7m-gN2" firstAttribute="centerY" secondItem="R0k-Wy-No7" secondAttribute="centerY" id="XIV-SC-Fpn"/>
+                            <constraint firstItem="bHI-aR-dDw" firstAttribute="trailing" secondItem="eQi-c1-iTi" secondAttribute="trailing" id="cJD-gC-UxN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="gdi-7m-gN2" id="qJk-D7-GDP"/>
+                        <outlet property="addressesTableView" destination="R0k-Wy-No7" id="BH0-nH-63r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mif-Ra-3xF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2526.0869565217395" y="628.79464285714278"/>
         </scene>
         <!--DashboardVC-->
         <scene sceneID="zqC-JN-yJt">
@@ -1604,6 +1703,9 @@
         <designable name="uCm-cl-Mpd">
             <size key="intrinsicContentSize" width="512" height="512"/>
         </designable>
+        <designable name="wXq-pl-pzw">
+            <size key="intrinsicContentSize" width="181" height="30"/>
+        </designable>
     </designables>
     <resources>
         <image name="2037257" width="148" height="158"/>
@@ -1629,6 +1731,9 @@
         </namedColor>
         <namedColor name="LightGray">
             <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Main">
+            <color red="0.95300000905990601" green="0.28999999165534973" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White2">
             <color red="0.98400002717971802" green="0.98400002717971802" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
