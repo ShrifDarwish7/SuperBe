@@ -37,16 +37,22 @@ class ProductVC: UIViewController {
     let maxHeaderViewHeight: CGFloat = 270
     var product: Product?
     var popFlage = false
+    var productSelectedTotal = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let variations = product!.variations,
            !variations.isEmpty{
-            self.addToCartBtn.alpha = 0.5
-            self.addToCartBtn.tag = 0
             self.variationsTableView.isHidden = false
             loadVariationTableView()
+            if !(variations.filter({ return $0.isRequired == 1 }).isEmpty){
+                self.addToCartBtn.alpha = 0.5
+                self.addToCartBtn.tag = 0
+            }else{
+                self.addToCartBtn.alpha = 1
+                self.addToCartBtn.tag = 1
+            }
         }else{
             self.addToCartBtn.alpha = 1
             self.addToCartBtn.tag = 1
@@ -57,10 +63,10 @@ class ProductVC: UIViewController {
         productImagesCollectionView.dataSource = self
         productImagesCollectionView.reloadData()
         
-        pageControl.numberOfPages = 3
-//        pageControl.onChange { (page) in
-//            self.productImagesCollectionView.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
-//        }
+        pageControl.numberOfPages = product?.images?.count ?? 0
+        pageControl.onChange { (page) in
+            self.productImagesCollectionView.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
+        }
         productName.text = "lang".localized == "en" ? product?.name?.en : product?.name?.ar
         productName1.text = "lang".localized == "en" ? product?.name?.en : product?.name?.ar
         
@@ -152,6 +158,7 @@ class ProductVC: UIViewController {
             product?.quantity = Int(quantity.text!)!
             product?.notes = notesTV.text!
             product?.desc = selectedOptions.text!
+            product?.price = productSelectedTotal
             
             if let variations = product?.variations, !variations.isEmpty{
                 for i in 0...(product?.variations!.count)!-1{
@@ -176,33 +183,27 @@ class ProductVC: UIViewController {
     }
     
     func updateUI(_ index: Int?){
+        
         var total = product?.price ?? 0
+        
         if let variations = product?.variations,
            !variations.isEmpty{
             for variation in variations{
+                
+                let selectedOtps = variation.options?.filter({ return $0.selected == true })
+                
                 if variation.isRequired == 1, variation.isAddition != 1{
                     
-                    let selectedOtps = variation.options?.filter({ return $0.selected == true })
                     guard !(selectedOtps?.isEmpty)! else { continue }
-                    total = (selectedOtps?.first?.price)!
+                    total += (selectedOtps?.first?.price)!
                     
-                }else if variation.isAddition == 1{
+                }else if variation.isRequired != 1{
                     
-//                    let checkedOtps = variation.options?.filter({ return $0.checked == true })
-                    let checkedOtps = variation.options?.filter({ return $0.selected == true })
-                    checkedOtps!.forEach({ (option) in
-                        total = total + option.price!
+                    selectedOtps!.forEach({ (option) in
+                        total += option.price!
                     })
                     
-                }/*else{
-                    
-//                    let opts = variation.options?.filter({ return $0.selected == true || $0.checked == true })
-                    let opts = variation.options?.filter({ return $0.selected == true })
-                    opts!.forEach({ (option) in
-                        total = total + option.price!
-                    })
-                    
-                }*/
+                }
             }
         }
         
@@ -210,64 +211,69 @@ class ProductVC: UIViewController {
         price.text = "\(total * Int(quantity.text!)!) EGP"
         price1.isHidden = false
         price1.text = "\(total * Int(quantity.text!)!) EGP"
+        productSelectedTotal = total
         
         var selectedOptsStr = ""
         
-        for variation in product!.variations!{
-            
-//            let selectedOpts = variation.options?.filter({ return $0.selected == true })
-//            selectedOpts!.forEach({ (option) in
-//                selectedOptsStr += ("lang".localized == "en" ? "\(variation.nameEn!): \(option.nameEn!), " : "\(variation.nameAr!): \(option.nameAr!), ")
-//            })
-//            let checkedOpts = variation.options?.filter({ return $0.checked == true })
-//            checkedOpts!.forEach({ (option) in
-//                selectedOptsStr += ("lang".localized == "en" ? " \(option.nameEn!), " : " \(option.nameAr!), ")
-//            })
-            
-            let selectedOpts = variation.options?.filter({ return $0.selected == true })
-            selectedOpts!.forEach({ (option) in
-                selectedOptsStr += ("lang".localized == "en" ? "\(option.name?.en ?? ""), " : "\(option.name?.ar ?? ""), ")
-            })
-            
-            if variation.isRequired == 1 && variation.isAddition == 0{
-                let selectedOtps = variation.options?.filter({ return $0.selected == true })
-                if !(selectedOtps?.isEmpty)! {
-                    self.addToCartBtn.alpha = 1
-                    self.addToCartBtn.tag = 1
-                }else{
-                    self.addToCartBtn.alpha = 0.5
-                    self.addToCartBtn.tag = 0
-                }
-            }else if variation.isRequired == 1 && variation.isAddition == 1{
-//                let checkedOtps = variation.options?.filter({ return $0.checked == true })
-                let checkedOtps = variation.options?.filter({ return $0.selected == true })
-                if let min = variation.min {
-                    guard checkedOtps!.count >= min else {
+        if let variations = product?.variations,
+            !(variations.filter({ return $0.isRequired == 1 }).isEmpty){
+
+            for variation in product!.variations!{
+
+                let selectedOpts = variation.options?.filter({ return $0.selected == true })
+                selectedOpts!.forEach({ (option) in
+                    selectedOptsStr += ("lang".localized == "en" ? "\(option.name?.en ?? ""), " : "\(option.name?.ar ?? ""), ")
+                })
+
+                if variation.isRequired == 1 && variation.isAddition == 0{
+                    let selectedOtps = variation.options?.filter({ return $0.selected == true })
+                    if !(selectedOtps?.isEmpty)! {
+                        self.addToCartBtn.alpha = 1
+                        self.addToCartBtn.tag = 1
+                    }else{
                         self.addToCartBtn.alpha = 0.5
                         self.addToCartBtn.tag = 0
                         break
                     }
-                    self.addToCartBtn.alpha = 1
-                    self.addToCartBtn.tag = 1
-                }
-                if let max = variation.max{
-                    guard checkedOtps!.count <= max else{
-                        self.addToCartBtn.alpha = 0.5
-                        self.addToCartBtn.tag = 0
-                        if let index = index{ product!.variations![index].expanded = false }
-                        let contentOffset = self.scroller.contentOffset
-                        self.variationsTableView.reloadData()
-                        self.view.layoutIfNeeded()
-                        self.viewDidLayoutSubviews()
-                        self.scroller.setContentOffset(contentOffset, animated: false)
-                        break
+                }else if variation.isRequired == 1 && variation.isAddition == 1{
+                    let checkedOtps = variation.options?.filter({ return $0.selected == true })
+                    if let min = variation.min, min != 0{
+                        guard checkedOtps!.count >= min else {
+                            self.addToCartBtn.alpha = 0.5
+                            self.addToCartBtn.tag = 0
+                            break
+                        }
+                        self.addToCartBtn.alpha = 1
+                        self.addToCartBtn.tag = 1
+                    }else{
+                        self.addToCartBtn.alpha = 1
+                        self.addToCartBtn.tag = 1
                     }
-                    self.addToCartBtn.alpha = 1
-                    self.addToCartBtn.tag = 1
+                    if let max = variation.max, max != 0{
+                        guard checkedOtps!.count <= max else{
+                            self.addToCartBtn.alpha = 0.5
+                            self.addToCartBtn.tag = 0
+                            if let index = index{ product!.variations![index].expanded = false }
+                            let contentOffset = self.scroller.contentOffset
+                            self.variationsTableView.reloadData()
+                            self.view.layoutIfNeeded()
+                            self.viewDidLayoutSubviews()
+                            self.scroller.setContentOffset(contentOffset, animated: false)
+                            break
+                        }
+                        self.addToCartBtn.alpha = 1
+                        self.addToCartBtn.tag = 1
+                    }else{
+                        self.addToCartBtn.alpha = 1
+                        self.addToCartBtn.tag = 1
+                    }
+
                 }
-                
+
             }
-            
+        }else{
+            self.addToCartBtn.alpha = 1
+            self.addToCartBtn.tag = 1
         }
         
         selectedOptions.text = selectedOptsStr

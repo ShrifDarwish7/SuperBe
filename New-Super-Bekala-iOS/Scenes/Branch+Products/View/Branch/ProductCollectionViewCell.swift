@@ -24,6 +24,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     func loadFrom(data: Product){
         name.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
         price.text = "\(data.price ?? 0) EGP"
+        price.isHidden = data.price == 0 ? true : false
         productImage.sd_setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ))
     }
     

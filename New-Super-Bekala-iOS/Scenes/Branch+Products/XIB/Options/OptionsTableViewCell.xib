@@ -46,7 +46,7 @@
                                         <rect key="frame" x="240" y="0.0" width="90" height="81"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCe-FF-r40">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="38"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="81"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="SRM-zk-t8u"/>
                                                 </constraints>
@@ -54,11 +54,11 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAA-Il-Car">
-                                                <rect key="frame" x="0.0" y="43" width="90" height="38"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAA-Il-Car">
+                                                <rect key="frame" x="0.0" y="81" width="90" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KW-GR-mIx">
-                                                        <rect key="frame" x="0.0" y="10.5" width="90" height="17"/>
+                                                        <rect key="frame" x="0.0" y="-8.5" width="90" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="90" id="4OP-7W-8AI"/>
                                                         </constraints>
@@ -67,7 +67,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doL-AR-y6z">
-                                                        <rect key="frame" x="15" y="18.5" width="60" height="1.5"/>
+                                                        <rect key="frame" x="15" y="-0.5" width="60" height="1.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1.5" id="jCT-Z5-XOO"/>
@@ -113,6 +113,7 @@
                 <outlet property="container" destination="5Xh-I3-Hlt" id="AbN-Lh-4xq"/>
                 <outlet property="optionName" destination="EyU-Pt-HYI" id="GNf-Yu-mjo"/>
                 <outlet property="price" destination="TCe-FF-r40" id="jat-8z-auA"/>
+                <outlet property="priceStack" destination="5DV-o2-AUP" id="8g8-Av-pWI"/>
                 <outlet property="radionImg" destination="49q-Xg-QfS" id="Pwg-am-icU"/>
                 <outlet property="salePrice" destination="4KW-GR-mIx" id="4Pp-Dv-77C"/>
                 <outlet property="salePriceView" destination="tAA-Il-Car" id="gXj-nz-oPp"/>

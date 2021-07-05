@@ -16,12 +16,10 @@ class Shared{
     static var userLat: CLLocationDegrees?
     static var userLng: CLLocationDegrees?
     static let errorMsg = "An error occuered, please try again later".localized
-    static let storageBase = "https://new.superbekala.com/storage/app/public/"
+    static let storageBase = "https://dev4.superbekala.com/storage/"
     static var headers = [
         "Authorization": "Bearer " + (APIServices.shared.user?.token ?? ""),
-//        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjM5YjE2YjU5MTE4MmJjZDUyNTM1ZDUxZTgxYzI1MTg3NDk1Zjk3MmU0YTkzN2IyNDdhMzNkOTRjMmRkZWI2NWUzN2Q2OGI0MDE2Y2FhN2MiLCJpYXQiOjE2MjI5NzM4NzcuMTE1NjYzMDUxNjA1MjI0NjA5Mzc1LCJuYmYiOjE2MjI5NzM4NzcuMTE1NjY4MDU4Mzk1Mzg1NzQyMTg3NSwiZXhwIjoxNjU0NTA5ODc3LjExMTE2NDA5MzAxNzU3ODEyNSwic3ViIjoiMSIsInNjb3BlcyI6W119.lqoJnNbIbmWIakd8d75qqJj97IyOijYZk5orlmSGhxYZaVLhEi49vlV7sjbQnxv9H5BFl1deWtSBbdtV2kbyz5MXS9E2aRSMt3BoByyt1VIjzX_SiOIuuVrPmNkGMyFEO3iIlK0fJeJG4syg5-UNvuyyl85-xXa1XKgl_f3rcTzsYjZqeZRDsUgi97IMM2Jn-14s65G6ry0BtRhLLnTLXdzpjOkbk_srloH5vPmCca6XHqjsgpUrvonCXAOv3UWLdEStBcwpa2GYNT549Pox_J3_i72IAsEPoCp_R8a1qE5OsUsnoQ0D23FPyelV18rARNH9BWlPrQLrD7njWPxVhIqivHm70brvduZE23NeTUuKsX_K68UJGFZdOEt3D3UbwQ9ak5uT-NVCy104mkFF4YW0dVQpquM37JZ3idmGm7oUQOAWYbgYES3gRfNRqi7__Ub26dJko2LSCFnlUPS8rKdFww3vl2TnuEOW5gazl8jHW2DD5e6gCQYxwkUonv5oZl5RueVBxI4xPpiULl6l3jbi9OBtT-69-ufvWLUy_KLVTQlJ3tKPjuw6_-otqXHrc-cWeK7ueXQ-uSUGeRYwYOodrauh9bUHppx_Yjd-tmggtY25AqhCJhRKmMeHkmIcAQNIumdDfd0pBz6Xs0B4pYfW62LQc9fmIsoGZsrsPiY",
         "Accept": "application/json",
-       // "lang": "lang".localized
     ]
     static var isRegion: Bool{
         set { UserDefaults.init().setValue(newValue, forKey: "is_region") }
@@ -43,21 +41,16 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
     }
-//    static var transaction: Transaction?{
-//        set{
-//            UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "transaction")
-//        }
-//        get{
-//            let data = UserDefaults.init().data(forKey: "transaction")
-//            return (data?.getDecodedObject(from: Transaction.self)) ?? nil
-//        }
-//    }
-//    static var cartIncrementalID: Int{
-//        set { UserDefaults.init().setValue(newValue, forKey: "cart_quick_orders_incremental_id") }
-//        get { return UserDefaults.init().integer(forKey: "cart_quick_orders_incremental_id") }
-//    }
     static var mapState: MapState?
     static var transaction: Transaction?
+    static var selectedServices: SelectedServices?
+    static var superService: SuperService?
+}
+
+enum SelectedServices{
+    case images
+    case voice
+    case text
 }
 
 extension String{
@@ -98,5 +91,12 @@ extension UIViewController{
         containerView.addSubview(vc.view)
         self.addChild(vc)
         vc.didMove(toParent: self)
+    }
+}
+
+extension Double {
+    func roundToDecimal(_ fractionDigits: Int) -> Double {
+        let multiplier = pow(10, Double(fractionDigits))
+        return Darwin.round(self * multiplier) / multiplier
     }
 }

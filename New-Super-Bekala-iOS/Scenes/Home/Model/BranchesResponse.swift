@@ -33,7 +33,7 @@ struct Branch: Codable {
     let hasOnsaleProducts, hasFeaturedProducts, minOrder: Int?
     let deliveryFees, isOpen, isBusy, isOnhold: Int?
     let closedMessage, openingTime, closingTime, deliveryStartTime: String?
-    let rating: Double?
+   // let rating: Double?
     let deliveryEndTime: String?
     let deliveryAreas: [String]?
     let deliveryDuration: Int?
@@ -80,7 +80,7 @@ struct Branch: Codable {
         case isFeatured = "is_featured"
         case hasOnsaleProducts = "has_onsale_products"
         case hasFeaturedProducts = "has_featured_products"
-        case rating
+       // case rating
         case minOrder = "min_order"
         case deliveryFees = "delivery_fees"
         case isOpen = "is_open"

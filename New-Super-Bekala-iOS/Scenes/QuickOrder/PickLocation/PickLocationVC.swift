@@ -17,13 +17,34 @@ class PickLocationVC: UIViewController {
     @IBOutlet weak var hintZoomView: UIView!
     @IBOutlet weak var markerImageView: UIImageView!
     @IBOutlet weak var locationLbl: UILabel!
+    @IBOutlet weak var titleTop: UILabel!
+    @IBOutlet weak var confirmBtn: RoundedButton!
+    @IBOutlet weak var landmarkTF: UITextField!
     
     var camera: GMSCameraPosition?
     var presenter: MainPresenter?
     var autocompleteVC: GMSAutocompleteViewController?
+    var locationState: LocationState?
+    var pickedCoords: String?{
+        didSet{
+            confirmBtn.isEnabled = true
+            confirmBtn.alpha = 1
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        switch locationState {
+        case .pickup:
+            titleTop.text = "Pick up location"
+            confirmBtn.setTitle("Confirm Pick Up", for: .normal)
+        case .dropOff:
+            titleTop.text = "Drop off location"
+            confirmBtn.setTitle("Confirm Drop Off", for: .normal)
+        default:
+            break
+        }
         
         mapView.delegate = self
         hintZoomView.transform = CGAffineTransform(scaleX: 0, y: 0)
@@ -90,4 +111,21 @@ class PickLocationVC: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    @IBAction func confirmPin(_ sender: Any) {
+        guard let pickedCoords = pickedCoords else { return }
+        self.dismiss(animated: true, completion: nil)
+        let userInfo = [
+            "formatted_address": locationLbl.text!,
+            "coordinates": pickedCoords,
+            "landmark": landmarkTF.text!
+        ]
+        NotificationCenter.default.post(name: NSNotification.Name("DID_RECEIVE_PICKED_COORDS"), object: nil, userInfo: userInfo)
+    }
+    
+    
+}
+
+enum LocationState{
+    case pickup
+    case dropOff
 }

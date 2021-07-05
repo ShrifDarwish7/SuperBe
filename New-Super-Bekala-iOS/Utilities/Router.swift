@@ -14,7 +14,7 @@ enum AppStoryboard: String {
     case home = "Home"
     case orders = "Orders"
     case profile = "Profile"
-    case quickOrder = "QuickOrder"
+    case services = "Services"
 }
 
 class Router {
@@ -146,15 +146,16 @@ class Router {
     }
     
     static func toShareLocation(_ sender: UIViewController){
-        let vc = self.instantiate(appStoryboard: .quickOrder, identifier: "QuickOrderNav") as! UINavigationController
+        let vc = self.instantiate(appStoryboard: .services, identifier: "ServicesNav") as! UINavigationController
         vc.modalPresentationStyle = .fullScreen
         sender.present(vc, animated: true, completion: nil)
         
     }
     
     
-    static func toPickLocation(_ sender: UIViewController){
-        let vc = self.instantiate(appStoryboard: .quickOrder, identifier: "PickLocationVC") as! PickLocationVC
+    static func toPickLocation(_ sender: UIViewController,_ state: LocationState){
+        let vc = self.instantiate(appStoryboard: .services, identifier: "PickLocationVC") as! PickLocationVC
+        vc.locationState = state
         sender.present(vc, animated: true, completion: nil)
     }
 }

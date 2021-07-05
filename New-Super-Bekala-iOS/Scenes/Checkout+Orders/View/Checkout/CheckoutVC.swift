@@ -66,7 +66,7 @@ class CheckoutVC: UIViewController {
        // branchName.text = "lang".localized == "en" ? branch?.branchLanguage?.first?.name : branch?.branchLanguage![0].name
         branchName.text = "\(branch?.id ?? 0)"
         branchLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
-        branchRate.rating = branch?.rating ?? 3.0
+//        branchRate.rating = branch?.rating ?? 3.0
         
         receiveViewHeight.constant = 60
         receiveOptionView.isHidden = true

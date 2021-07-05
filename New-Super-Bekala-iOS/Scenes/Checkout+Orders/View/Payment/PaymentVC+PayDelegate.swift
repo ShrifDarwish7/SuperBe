@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MPGSDK
 import UIKit
 import SVProgressHUD
 

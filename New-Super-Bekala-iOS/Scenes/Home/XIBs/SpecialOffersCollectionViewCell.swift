@@ -9,5 +9,6 @@
 import UIKit
 
 class SpecialOffersCollectionViewCell: UICollectionViewCell {
-    
+    static let identifier = "SpecialOffersCollectionViewCell"
+    @IBOutlet weak var image: UIImageView!
 }

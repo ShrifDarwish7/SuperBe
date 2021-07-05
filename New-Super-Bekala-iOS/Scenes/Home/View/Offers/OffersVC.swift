@@ -15,7 +15,6 @@ class OffersVC: UIViewController {
     @IBOutlet weak var specialOffersStack: UIStackView!
     @IBOutlet weak var filtersCollection: UICollectionView!
     @IBOutlet weak var offersTableView: UITableView!
-    @IBOutlet weak var stackHeightCnst: NSLayoutConstraint!
     @IBOutlet weak var specialOffersView: UIView!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     
@@ -31,6 +30,19 @@ class OffersVC: UIViewController {
         }
     }
     var isLoading = true
+    var sliderIsLoading = true
+    var slider: [Slider]?{
+        didSet{
+            pageControl.isHidden = false
+            pageControl.numberOfPages = slider!.count
+            pageControl.onChange { (page) in
+                self.specialOffersCollection.scrollToItem(at: IndexPath(item: page, section: 0), at: .centeredHorizontally, animated: true)
+            }
+            sliderIsLoading = false
+            specialOffersCollection.reloadData()
+            performAutoSliding()
+        }
+    }
     var categories: [Category]?{
         didSet{
             self.loadFiltersCollection()
@@ -52,6 +64,13 @@ class OffersVC: UIViewController {
         }
         self.presenter?.getCategories(parameters)
         showSkeletonView()
+        
+        presenter?.getSlider(["region_id": "1"])
+        
+        let nib = UINib(nibName: ProductSkeletonCollectionViewCell.identifier, bundle: nil)
+        specialOffersCollection.register(nib, forCellWithReuseIdentifier: ProductSkeletonCollectionViewCell.identifier)
+        self.specialOffersCollection.reloadData()
+        specialOffersCollection.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
     
@@ -90,18 +109,14 @@ class OffersVC: UIViewController {
         
     }
     
-//    func loadSpecialOffersCollection(){
-//
-//        specialOffersCollection.numberOfItemsInSection { (_) -> Int in
-//            return 1
-//        }.cellForItemAt { (index) -> UICollectionViewCell in
-//
-//            let cell = self.specialOffersCollection.dequeueReusableCell(withReuseIdentifier: "SpecialOffersCell", for: index) as! SpecialOffersCollectionViewCell
-//            return cell
-//
-//        }
-//
-//    }
+    func performAutoSliding(){
+        var index = 0
+        _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true, block: { [self] timer in
+            index = index < slider!.count ? index : 0
+            specialOffersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+            index += 1
+        })
+    }
     
 
 }

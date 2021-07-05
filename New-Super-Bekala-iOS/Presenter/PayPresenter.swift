@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MPGSDK
 import SwiftyJSON
 
 enum ApiOperations: String{
@@ -49,12 +48,15 @@ class PayPresenter{
     
     func updateSessionWithOrder(){
         
-        var payload = GatewayMap()
-        payload[at: "order.currency"] = Shared.transaction?.currency
-        payload[at: "order.amount"] = Shared.transaction?.amount
-        payload[at: "order.id"] = Shared.transaction?.orderId
+        let payload = TransactionPayload(
+            apiOperation: nil,
+            order: TransactionOrder(id: nil, amount: String((Shared.transaction?.amount)!), currency: Shared.transaction?.currency),
+            session: nil,
+            authentication: nil,
+            customer: nil,
+            device: nil, sourceOfFunds: nil)
         
-        APIServices.shared.call(.updateSession((Shared.transaction?.session!)!, payload)) { data in
+        APIServices.shared.call(.updateSession((Shared.transaction?.session!)!, try! JSONEncoder.init().encode(payload))) { data in
             print("updateSessionWithOrder ",JSON(data))
             if let data = data,
                let json = try? JSON(data: data),
@@ -68,15 +70,21 @@ class PayPresenter{
     
     func updateSessionWithPayerData(){
         
-        var payload = GatewayMap()
-        payload[at: "sourceOfFunds.provided.card.nameOnCard"] = Shared.transaction?.nameOnCard
-        payload[at: "sourceOfFunds.provided.card.number"] = Shared.transaction?.cardNumber
-        payload[at: "sourceOfFunds.provided.card.securityCode"] = Shared.transaction?.cvv
-        payload[at: "sourceOfFunds.provided.card.expiry.month"] = Shared.transaction?.expiryMM
-        payload[at: "sourceOfFunds.provided.card.expiry.year"] = Shared.transaction?.expiryYY
-        payload[at: "sourceOfFunds.type"] = "CARD"
+        let payload = CardPayload(
+            sourceOfFunds:
+                SourceOfFunds(
+                    provided: Provided(
+                        card: Card(
+                            expiry: Expiry(
+                                month: (Shared.transaction?.expiryMM)!,
+                                year: (Shared.transaction?.expiryYY)!),
+                            number: (Shared.transaction?.cardNumber)!,
+                            securityCode: String((Shared.transaction?.cvv)!),
+                            storedOnFile: "TO_BE_STORED",
+                            nameOnCard: (Shared.transaction?.nameOnCard)!)),
+                    type: "CARD"))
         
-        APIServices.shared.call(.updateSession((Shared.transaction?.session!)!, payload)) { data in
+        APIServices.shared.call(.updateSession((Shared.transaction?.session!)!, try! JSONEncoder.init().encode(payload))) { data in
             print("updateSessionWithPayerData ", JSON(data))
             if let data = data,
                let json = try? JSON(data: data),
@@ -90,18 +98,21 @@ class PayPresenter{
     
     func check3DSEnrollment(){
         
-        var payload = GatewayMap(["apiOperation": ApiOperations.initiateAuthentication.rawValue])
+        let payload = TransactionPayload(
+            apiOperation: ApiOperations.initiateAuthentication.rawValue,
+            order: TransactionOrder(id: nil, amount: nil, currency: Shared.transaction?.currency),
+            session: Session(id: (Shared.transaction?.session)!),
+            authentication: Authentication(
+                redirectResponseURL: nil,
+                acceptVersions: "3DS1,3DS2",
+                channel: "PAYER_BROWSER",
+                purpose: "PAYMENT_TRANSACTION",
+                the3Ds: nil,
+                the3Ds1: nil),
+            customer: nil,
+            device: nil, sourceOfFunds: nil)
         
-       // payload[at: "order.amount"] = "1.0"
-        payload[at: "order.currency"] = Shared.transaction?.currency
-        payload[at: "session.id"] = Shared.transaction?.session
-      //  payload[at: "3DSecure.authenticationRedirect.responseUrl"] = redirectURL
-        
-        payload[at: "authentication.acceptVersions"] = "3DS1,3DS2"
-        payload[at: "authentication.channel"] = "PAYER_BROWSER"
-        payload[at: "authentication.purpose"] = "PAYMENT_TRANSACTION"
-        
-        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId, payload, "6")) { data in
+        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId,  try! JSONEncoder.init().encode(payload), "6")) { data in
             print("check3DSEnrollment ",JSON(data))
             if let data = data,
                let json = try? JSON(data: data),
@@ -116,28 +127,38 @@ class PayPresenter{
     
     func authPayer(_ redirectURL: String){
         
-        var payload = GatewayMap(["apiOperation": ApiOperations.authenticatePayer.rawValue])
+        let payload = TransactionPayload(
+            apiOperation: ApiOperations.authenticatePayer.rawValue,
+            order: TransactionOrder(
+                id: nil,
+                amount: String((Shared.transaction?.amount)!),
+                currency: String((Shared.transaction?.currency)!)),
+            session: Session(id: (Shared.transaction?.session)!),
+            authentication: Authentication(
+                redirectResponseURL: redirectURL,
+                acceptVersions: nil,
+                channel: nil,
+                purpose: nil,
+                the3Ds: nil,
+                the3Ds1: nil),
+            customer: Customer(
+                firstName: UserDefaults.init().string(forKey: "name") ?? "",
+                email: (UserDefaults.init().string(forKey: "email") ?? ""),
+                lastName: "_"),
+            device: Device(
+                browserDetails: BrowserDetails(
+                    javaEnabled: "true",
+                    language: "json",
+                    screenHeight: "200",
+                    screenWidth: "200",
+                    timeZone: "+200",
+                    colorDepth: "20",
+                    acceptHeaders: "512",
+                    the3DSecureChallengeWindowSize: "FULL_SCREEN"),
+                browser: "Chrome",
+                ipAddress: "192.0.1.1"), sourceOfFunds: nil)
         
-        payload[at: "order.amount"] = Shared.transaction?.amount
-        payload[at: "order.currency"] = Shared.transaction?.currency
-        payload[at: "session.id"] = Shared.transaction?.session
-      //  payload[at: "3DSecure.authenticationRedirect.responseUrl"] = redirectURL
-        payload[at: "authentication.redirectResponseUrl"] = redirectURL
-        payload[at: "customer.firstName"] = "sherif"
-        payload[at: "customer.email"] = "sherifdarwish900@gmail.com"
-        payload[at: "customer.lastName"] = "darwish"
-        payload[at: "device.browserDetails.javaEnabled"] = "true"
-        payload[at: "device.browserDetails.language"] = "json"
-        payload[at: "device.browserDetails.screenHeight"] = "200"
-        payload[at: "device.browserDetails.screenWidth"] = "200"
-        payload[at: "device.browserDetails.timeZone"] = "+200"
-        payload[at: "device.browserDetails.colorDepth"] = "20"
-        payload[at: "device.browserDetails.acceptHeaders"] = "512"
-        payload[at: "device.browserDetails.3DSecureChallengeWindowSize"] = "FULL_SCREEN"
-        payload[at: "device.browser"] = "Chrome"
-        payload[at: "device.ipAddress"] = "192.0.1.1"
-        
-        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId, payload, "6")) { data in
+        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId,  try! JSONEncoder.init().encode(payload), "6")) { data in
             print("authPayer ",JSON(data))
             if let data = data,
                let json = try? JSON(data: data){
@@ -157,18 +178,30 @@ class PayPresenter{
     
     func performPay(_ authToken: String,_ transactionId: String,_ veResEnrolled: String){
         
-        var payload = GatewayMap(["apiOperation": ApiOperations.pay.rawValue])
-        payload[at: "session.id"] = Shared.transaction?.session
-        payload[at: "order.amount"] = Shared.transaction?.amount
-        payload[at: "order.currency"] = Shared.transaction?.currency
-        payload[at: "sourceOfFunds.type"] = "CARD"
-        payload[at: "authentication.3ds.acsEci"] = "05"
-        payload[at: "authentication.3ds.authenticationToken"] = authToken
-        payload[at: "authentication.3ds.transactionId"] = transactionId
-        payload[at: "authentication.3ds1.veResEnrolled"] = veResEnrolled
-        payload[at: "authentication.3ds1.paResStatus"] = "Y"
+        let payload = TransactionPayload(
+            apiOperation: ApiOperations.pay.rawValue,
+            order: TransactionOrder(
+                id: nil,
+                amount: String((Shared.transaction?.amount)!),
+                currency: String((Shared.transaction?.currency)!)),
+            session: Session(id: (Shared.transaction?.session!)!),
+            authentication: Authentication(
+                redirectResponseURL: nil,
+                acceptVersions: nil,
+                channel: nil,
+                purpose: nil,
+                the3Ds: The3Ds(
+                    acsEci: "05",
+                    authenticationToken: authToken,
+                    transactionID: transactionId),
+                the3Ds1: The3Ds1(
+                    paResStatus: "Y",
+                    veResEnrolled: veResEnrolled)),
+            customer: nil,
+            device: nil,
+            sourceOfFunds: SourceOfFunds(provided: nil, type: "CARD"))
         
-        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId, payload, "7")) { data in
+        APIServices.shared.call(.updateTransaction(Shared.transaction!.orderId,  try! JSONEncoder.init().encode(payload), "7")) { data in
             print("performPay", JSON(data))
             if let data = data,
                let json = try? JSON(data: data),

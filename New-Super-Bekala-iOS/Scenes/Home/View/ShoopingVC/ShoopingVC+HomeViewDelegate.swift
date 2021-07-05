@@ -37,7 +37,7 @@ extension ShoopingVC: MainViewDelegate{
         ordinaryVendorsTAbleView.hideSkeleton()
         if let data = data,
            !data.isEmpty{
-            self.branches = data
+            self.branches = data.reversed()
             self.ordinaryLoading = false
             self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
             self.ordinaryVendorsTAbleView.stopSkeletonAnimation()
@@ -53,7 +53,7 @@ extension ShoopingVC: MainViewDelegate{
             //self.showSkeletonView()
             self.featuredLoading = false
             self.featuredVendorsCollection.isHidden = false
-            self.featuredBranches = data
+            self.featuredBranches = data.reversed()
             self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
             
         }

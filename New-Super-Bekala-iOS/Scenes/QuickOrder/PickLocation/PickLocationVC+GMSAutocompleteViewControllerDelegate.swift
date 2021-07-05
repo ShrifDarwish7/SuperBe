@@ -18,6 +18,7 @@ extension PickLocationVC: GMSAutocompleteViewControllerDelegate{
         mapView.camera = camera!
         dismissHintZoom()
         locationLbl.text = place.formattedAddress ?? ""
+        self.pickedCoords = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
         dismiss(animated: true, completion: nil)
         
     }

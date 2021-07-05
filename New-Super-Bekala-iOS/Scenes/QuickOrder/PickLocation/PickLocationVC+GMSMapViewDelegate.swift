@@ -29,16 +29,17 @@ extension PickLocationVC: GMSMapViewDelegate{
         
         if mapView.camera.zoom <= 15{
             showHintZoom()
+            confirmBtn.isEnabled = false
+            confirmBtn.alpha = 0.5
         }else{
             dismissHintZoom()
-            
+            self.pickedCoords = "\(coordinates.latitude),\(coordinates.longitude)"
             let parameters: [String: String] = [
                 "key": Shared.GMS_KEY,
                 "language": "lang".localized,
                 "latlng": "\(coordinates.latitude),\(coordinates.longitude)"
             ]
             presenter?.getGeocode(parameters)
-            
         }
     }
     

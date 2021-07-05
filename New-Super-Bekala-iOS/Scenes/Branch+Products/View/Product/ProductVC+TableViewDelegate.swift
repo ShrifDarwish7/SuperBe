@@ -34,7 +34,6 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         cell.expandBtn.addTarget(self, action: #selector(expandVars(_:)), for: .touchUpInside)
         
         let selected = variation.options?.filter({ return $0.selected == true })
-      //  let checked = variation.options?.filter({ return $0.checked == true })
         
         if selected!.isEmpty && variation.isAddition == 0{
             cell.chosedVariation.text = variation.isRequired == 1 ? "(Choose 1)".localized : "(Optional)".localized
@@ -50,26 +49,16 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             cell.chosedVariation.text = "+\(totalAdditions) EGP"
         }
         
-//        if checked!.isEmpty && variation.isAddition == 1{
-//            cell.chosedVariation.text = variation.isRequired == 0 ? "(Optional)".localized : ""
-//        }else if !checked!.isEmpty{
-//            var totalAdditions = 0
-//            checked?.forEach({ (option) in
-//                totalAdditions += option.price!
-//            })
-//            cell.chosedVariation.text = "+\(totalAdditions) EGP"
-//        }
-        
         var min_max = ""
         
-        if let min = variation.min{
+        if let min = variation.min, min != 0{
             min_max = "Min: \(min), "
             cell.min_max.isHidden = false
         }else{
             cell.min_max.isHidden = true
         }
         
-        if let max = variation.max{
+        if let max = variation.max, max != 0{
             min_max += "Max: \(max)"
             cell.min_max.isHidden = false
         }else{
@@ -77,6 +66,10 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         }
         
         cell.min_max.text = min_max
+        
+        if variation.isAddition == 0{
+            cell.min_max.isHidden = true
+        }
         
         cell.optionsTableView.numberOfRows { [self] (_) -> Int in
             return (product?.variations?[indexPath.row].options?.count)!
@@ -87,7 +80,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             let option = product?.variations?[indexPath.row].options![optionIndex.row]
             let cell = cell.optionsTableView.dequeueReusableCell(withIdentifier: OptionsTableViewCell.identifier, for: optionIndex) as! OptionsTableViewCell
             cell.optionName.text = "lang".localized == "en" ? option?.name?.en : option?.name?.ar
-            cell.price.isHidden = option?.price == 0 ? true : false
+            cell.priceStack.isHidden = option?.price == 0 ? true : false
             cell.price.text = "\(option?.price ?? 0) EGP"
             cell.container.alpha = option?.inStock == 1 ? 1.0 : 0.3
             
@@ -100,7 +93,6 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             }
             
             if product?.variations?[indexPath.row].isAddition == 1 {
-//                cell.radionImg.image = option?.checked == true ? UIImage(named: "checked") : UIImage(named: "unchecked")
                 cell.radionImg.image = option?.selected == true ? UIImage(named: "checked") : UIImage(named: "unchecked")
             }else{
                 cell.radionImg.image = option?.selected == true ? UIImage(named: "radio_selected") : UIImage(named: "radio_unselected")
@@ -109,16 +101,14 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             
         }.didSelectRowAt { (optionIndex) in
             
-            //  guard self.product!.variations![indexPath.row].options![optionIndex.row].inStock == 1 else { return }
+            guard self.product!.variations![indexPath.row].options![optionIndex.row].inStock == 1 else { return }
             UIView.animate(withDuration: 0.25) { [self] in
                 
                 if self.product?.variations?[indexPath.row].isAddition == 1 {
                     self.product!.variations![indexPath.row].options![optionIndex.row].selected = !(self.product!.variations![indexPath.row].options![optionIndex.row].selected)
-//                    let options = self.product!.variations?[indexPath.row].options!.filter({ return $0.checked == true })
                     let options = self.product!.variations?[indexPath.row].options!.filter({ return $0.selected == true })
                     if let max = product?.variations![indexPath.row].max,
                        options!.count > max{
-//                        self.product!.variations![indexPath.row].options![optionIndex.row].checked = !(self.product!.variations![indexPath.row].options![optionIndex.row].checked)
                         self.product!.variations![indexPath.row].options![optionIndex.row].selected = !(self.product!.variations![indexPath.row].options![optionIndex.row].selected)
                         return
                     }

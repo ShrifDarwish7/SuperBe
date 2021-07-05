@@ -86,7 +86,7 @@ class BranchVC: UIViewController {
         productsCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
 
         fastOrderContainer.isHidden = branch?.quickOrder == 1 ? true : false
-        rateView.rating = branch?.rating ?? 1.0
+//        rateView.rating = branch?.rating ?? 1.0
         branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
         logo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
         bgLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))

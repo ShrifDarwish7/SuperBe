@@ -32,4 +32,15 @@ extension OffersVC: MainViewDelegate{
             self.branches = data.filter({ return !$0.products!.isEmpty })
         }
     }
+    func didCompleteWithSlider(_ data: [Slider]?, _ error: String?) {
+        specialOffersCollection.hideSkeleton()
+        if let data = data{
+            self.slider = data
+        }
+    }
+    func didCompleteWithBranchById(_ data: Branch?) {
+        if let branch = data{
+            Router.toBranch(self, branch)
+        }
+    }
 }

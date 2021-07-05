@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import MPGSDK
 import SVProgressHUD
 
 class ThreeDSecureVC: UIViewController {

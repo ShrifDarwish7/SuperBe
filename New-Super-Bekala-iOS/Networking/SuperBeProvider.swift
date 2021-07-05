@@ -27,6 +27,7 @@ public enum SuperBe{
     case getMyOrders(_ prms: [String: String])
     case search(_ prms: [String: String])
     case points
+    case slider(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
@@ -64,6 +65,8 @@ extension SuperBe: TargetType{
             return "search"
         case .points:
             return "loyalty"
+        case .slider(_):
+            return "sliders"
         }
     }
     
@@ -97,7 +100,8 @@ extension SuperBe: TargetType{
              .updateAddress(_, let prms),
              .getProductByID(_, _, let prms),
              .getMyOrders(let prms),
-             .search(let prms):
+             .search(let prms),
+             .slider(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms):
             var multipartFormData = [MultipartFormData]()

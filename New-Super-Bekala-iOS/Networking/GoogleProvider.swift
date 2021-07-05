@@ -10,7 +10,8 @@ import Foundation
 import Moya
 
 public enum Google{
-    case getGeocode(_ parameters: [String:String])
+    case getGeocode(_ parameters: [String: String])
+    case getDistance(_ parameters: [String: String])
 }
 
 extension Google: TargetType{
@@ -21,6 +22,7 @@ extension Google: TargetType{
     public var path: String {
         switch self {
         case .getGeocode(_): return "geocode/json"
+        case .getDistance(_): return "distancematrix/json"
         }
     }
     
@@ -34,7 +36,8 @@ extension Google: TargetType{
     
     public var task: Task {
         switch self {
-        case .getGeocode(let parms):
+        case .getGeocode(let parms),
+             .getDistance(let parms):
             return .requestParameters(parameters: parms, encoding: URLEncoding.queryString)
         }
     }

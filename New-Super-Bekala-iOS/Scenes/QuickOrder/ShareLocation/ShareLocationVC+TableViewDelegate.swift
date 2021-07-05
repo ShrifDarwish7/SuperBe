@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMaps
 
 extension ShareLocationVC: UITableViewDelegate, UITableViewDataSource{
     func loadAddressesTable(){
@@ -23,22 +24,25 @@ extension ShareLocationVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AddressesTableViewCell.identifier, for: indexPath) as! AddressesTableViewCell
         cell.name.text = self.addresses![indexPath.row].title
-        
-        if self.addresses![indexPath.row].selected == 1{
-            cell.selectedImg.isHidden = false
-            cell.name.alpha = 1
-        }else{
-            cell.selectedImg.isHidden = true
-            cell.name.alpha = 0.3
-        }
-        
+        cell.name.alpha = 1
+        cell.selectedImg.isHidden = true
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter?.updateAddress(self.addresses![indexPath.row].id, ["selected": "1"])
+        let coords = self.addresses![indexPath.row].coordinates
+        switch locationState {
+        case .pickup:
+            pickupTF.text = self.addresses![indexPath.row].title
+            pickupLocation = coords
+        case .dropOff:
+            dropOffTF.text = self.addresses![indexPath.row].title
+            dropOffLocation = coords
+        default:
+            break
+        }
     }
 }
 

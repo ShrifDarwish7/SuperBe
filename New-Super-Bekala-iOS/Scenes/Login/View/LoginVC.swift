@@ -160,23 +160,23 @@ class LoginVC: UIViewController {
     @IBAction func signinWithFacebookAction(_ sender: Any) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logOut()
-        fbLoginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self) { (result) in
-            let accessToken = AccessToken.current?.authenticationToken
-            GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion).start { (res, result) in
-              
-                let json = JSON(result)
-                print(json)
-                UserDefaults.init().set(accessToken, forKey: "token")
-                UserDefaults.init().set("facebook", forKey: "type")
-                UserDefaults.init().set(json["name"].stringValue, forKey: "name")
-                UserDefaults.init().set(json["email"].stringValue, forKey: "email")
-                UserDefaults.init().set("http://graph.facebook.com/\(json["id"].stringValue)/picture?type=large&width=240&height=240", forKey: "image")
-                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken!)
-                self.loginViewPresenter?.signWithCredential(credential: credential)
-            }
-            
-            
-        }
+//        fbLoginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+//            let accessToken = AccessToken.current
+//            GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: "GET", apiVersion: .defaultVersion).start { (res, result) in
+//
+//                let json = JSON(result)
+//                print(json)
+//                UserDefaults.init().set(accessToken, forKey: "token")
+//                UserDefaults.init().set("facebook", forKey: "type")
+//                UserDefaults.init().set(json["name"].stringValue, forKey: "name")
+//                UserDefaults.init().set(json["email"].stringValue, forKey: "email")
+//                UserDefaults.init().set("http://graph.facebook.com/\(json["id"].stringValue)/picture?type=large&width=240&height=240", forKey: "image")
+//                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken!)
+//                self.loginViewPresenter?.signWithCredential(credential: credential)
+//            }
+//
+//
+//        }
         
     }
     

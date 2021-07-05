@@ -32,6 +32,7 @@ protocol MainViewDelegate {
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?)
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?)
+    func didCompleteWithSlider(_ data: [Slider]?,_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -56,6 +57,7 @@ extension MainViewDelegate{
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?){}
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?){}
+    func didCompleteWithSlider(_ data: [Slider]?,_ error: String?){}
 }
 
 class MainPresenter{
@@ -305,6 +307,18 @@ class MainPresenter{
                 delegate?.didCompleteWithFeaturedBranches(dataModel.data)
             }else{
                 delegate?.didCompleteWithFeaturedBranches(nil)
+            }
+        }
+    }
+    
+    func getSlider(_ prms: [String: String]){
+        APIServices.shared.call(.slider(prms)) { [self] data in
+            print("getSlider",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: SliderResponse.self){
+                delegate?.didCompleteWithSlider(dataModel.data, nil)
+            }else{
+                delegate?.didCompleteWithSlider(nil, Shared.errorMsg)
             }
         }
     }

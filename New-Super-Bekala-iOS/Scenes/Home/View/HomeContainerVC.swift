@@ -80,6 +80,16 @@ class HomeContainerVC: UIViewController {
     }
     
     @IBAction func toQuickOrder(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            Shared.selectedServices = .voice
+        case 1:
+            Shared.selectedServices = .text
+        case 2:
+            Shared.selectedServices = .images
+        default:
+            break
+        }
         Router.toShareLocation(self)
     }
     

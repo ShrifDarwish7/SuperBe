@@ -36,7 +36,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: OffersTableViewCell.identifier, for: indexPath) as! OffersTableViewCell
             //cell.branchName.text = "lang".localized == "en" ? self.branches![indexPath.row].branchLanguage?.first?.name : self.branches![indexPath.row].branchLanguage?[1].name
             cell.branchName.text = "\(self.branches![indexPath.row].id)"
-            cell.branchRate.rating = self.branches![indexPath.row].rating ?? 2.0
+//            cell.branchRate.rating = self.branches![indexPath.row].rating ?? 2.0
             cell.vendorImage.sd_setImage(with: URL(string: Shared.storageBase + self.branches![indexPath.row].logo!))
             
             cell.onsaleCollectionView.numberOfItemsInSection { (_) -> Int in

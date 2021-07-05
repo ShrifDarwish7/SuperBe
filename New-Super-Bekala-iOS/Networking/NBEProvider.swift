@@ -8,12 +8,11 @@
 
 import Foundation
 import Moya
-import MPGSDK
 
 public enum NBE{
     case createSession
-    case updateSession(_ session: String, _ payload: GatewayMap)
-    case updateTransaction(_ orderId: String, _ payload: GatewayMap,_ transactionNumber: String)
+    case updateSession(_ session: String, _ payload: Data)
+    case updateTransaction(_ orderId: String, _ payload: Data,_ transactionNumber: String)
 }
 
 extension NBE: TargetType{
@@ -51,7 +50,7 @@ extension NBE: TargetType{
             return .requestPlain
         case .updateSession(_, let payload),
              .updateTransaction(_,let payload,_):
-            return .requestCompositeData(bodyData: try! JSONEncoder().encode(payload), urlParameters: [:])
+            return .requestCompositeData(bodyData: payload, urlParameters: [:])
         }
     }
     
