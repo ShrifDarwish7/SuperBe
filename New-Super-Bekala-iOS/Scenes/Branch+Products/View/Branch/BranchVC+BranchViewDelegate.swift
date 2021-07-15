@@ -13,11 +13,12 @@ extension BranchVC: MainViewDelegate{
         self.filtersCollectionView.hideSkeleton()
         if let data = data{
             self.categories = data
+            guard !self.categories!.isEmpty else { return }
             self.categories?[0].selected = true
             self.selectedCat = data.first
             self.loadFiltersCollection()
             prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
-            prms.updateValue("variations.options,branch", forKey: "with")
+            prms.updateValue("variations.options", forKey: "with")
             presenter?.getBranchProduct(id: branch!.id, prms: prms)
         }
     }

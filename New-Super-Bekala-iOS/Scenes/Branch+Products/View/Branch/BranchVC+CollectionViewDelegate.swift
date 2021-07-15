@@ -105,10 +105,6 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                             self.fetchCartItems()
                            // self.showToast("Product added successfully to your cart")
                         }
-                    } exist: { (exist) in
-                        if exist{
-                            self.showToast("Your cart contains the same product, please choose another one or choose any other variations if exists")
-                        }
                     }
                 }
                 
@@ -201,6 +197,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case filtersCollectionView:
+            
             for i in 0...self.categories!.count-1 { self.categories![i].selected = false }
             self.categories![indexPath.row].selected = true
             self.selectedCat = self.categories![indexPath.row]
@@ -211,14 +208,12 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
             loadProductsCollection()
             prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
             presenter?.getBranchProduct(id: branch!.id, prms: prms)
+            
         case productsCollectionView:
-//            SVProgressHUD.show()
-//            APIServices.shared.call(.getProductByID(1, 3, ["with": "variations.options"])) { (data) in
-//                print(JSON(data))
-//                SVProgressHUD.dismiss()
-//                Router.toProduct(self, self.branch,try! JSON(data!)["data"].rawData().getDecodedObject(from: Product.self))
-//            }
+            
+            self.products![indexPath.row].branch = self.branch
             Router.toProduct(self, self.products![indexPath.row])
+            
         default:
             break
         }

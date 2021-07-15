@@ -32,15 +32,20 @@ class ProductVC: UIViewController {
     @IBOutlet weak var selectedOptions: UILabel!
     @IBOutlet weak var addToCartBtn: ViewCorners!
     @IBOutlet weak var notesView: ViewCorners!
+    @IBOutlet weak var salePriceView: UIView!
+    @IBOutlet weak var salePrice: UILabel!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     let maxHeaderViewHeight: CGFloat = 270
     var product: Product?
     var popFlage = false
-    var productSelectedTotal = 0
+    var productSelectedTotal = 0.0
+    var presenter: MainPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = MainPresenter(self)
         
         if let variations = product!.variations,
            !variations.isEmpty{
@@ -57,6 +62,14 @@ class ProductVC: UIViewController {
             self.addToCartBtn.alpha = 1
             self.addToCartBtn.tag = 1
             self.variationsTableView.isHidden = true
+        }
+        
+        if let salePrice = product?.salePrice,
+           salePrice > 0{
+            salePriceView.isHidden = false
+            self.salePrice.text = "\(salePrice) EGP"
+        }else{
+            salePriceView.isHidden = true
         }
 
         productImagesCollectionView.delegate = self
@@ -76,8 +89,16 @@ class ProductVC: UIViewController {
         price1.isHidden = product?.price == 0 ? true : false
         price1.text = "\(product?.price ?? 0) EGP"
         
-        expandNotesBTn.transform = CGAffineTransform(rotationAngle: .pi)
-        notesHeight.constant = 100
+        self.updateUI(nil)
+        
+        if let favs = Shared.favProducts,
+           !favs.isEmpty,
+           !favs.filter({ return $0.id == self.product?.id }).isEmpty{
+            favouriteBtn.setImage(UIImage(named: "favourite"), for: .normal)
+            favouriteBtn.tag = 1
+        }else{
+            favouriteBtn.setImage(UIImage(named: "unfavourite"), for: .normal)
+        }
         
     }
     
@@ -109,6 +130,22 @@ class ProductVC: UIViewController {
         
     }
     
+    @IBAction func favourite(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            let prms = [
+                "model_id": "\(self.product!.id!)",
+                "model": "BranchProduct"
+            ]
+            self.presenter?.addToFavourite(prms, nil, nil)
+        case 1:
+            self.presenter?.removeFromFavourites((self.product?.favouriteId)!, nil, nil)
+        default:
+            break
+        }
+    }
+    
+    
     @IBAction func openNotes(_ sender: UIButton) {
         
         switch sender.tag {
@@ -117,14 +154,14 @@ class ProductVC: UIViewController {
             sender.tag = 1
             notesView.isHidden = false
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
+                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
         case 1:
             self.notesHeight.constant = 0
             sender.tag = 0
             notesView.isHidden = true
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: (.pi*2))
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
         default:
             break
@@ -158,7 +195,7 @@ class ProductVC: UIViewController {
             product?.quantity = Int(quantity.text!)!
             product?.notes = notesTV.text!
             product?.desc = selectedOptions.text!
-            product?.price = productSelectedTotal
+            product?.price = Double(productSelectedTotal)
             
             if let variations = product?.variations, !variations.isEmpty{
                 for i in 0...(product?.variations!.count)!-1{
@@ -170,11 +207,11 @@ class ProductVC: UIViewController {
                 if completed{
                     self.navigationController?.popViewController(animated: true)
                 }
-            } exist: { (exist) in
+            } /*exist: { (exist) in
                 if exist{
                     self.showToast("Your cart contains the same product, please choose another one or choose any other variations if exists")
                 }
-            }
+            }*/
             
         default:
             break
@@ -184,7 +221,7 @@ class ProductVC: UIViewController {
     
     func updateUI(_ index: Int?){
         
-        var total = product?.price ?? 0
+        var total = product?.price ?? 0.0
         
         if let variations = product?.variations,
            !variations.isEmpty{
@@ -207,11 +244,11 @@ class ProductVC: UIViewController {
             }
         }
         
-        price.isHidden = false
-        price.text = "\(total * Int(quantity.text!)!) EGP"
-        price1.isHidden = false
-        price1.text = "\(total * Int(quantity.text!)!) EGP"
-        productSelectedTotal = total
+        price.isHidden = total == 0.0 ? true : false
+        price.text = "\(total * Double(quantity.text!)!) EGP"
+        price1.isHidden = total == 0.0 ? true : false
+        price1.text = "\(total * Double(quantity.text!)!) EGP"
+        productSelectedTotal = Double(total)
         
         var selectedOptsStr = ""
         

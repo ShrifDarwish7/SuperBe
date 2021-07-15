@@ -21,6 +21,20 @@ extension ShoopingVC: MainViewDelegate{
         print("here parameters",parameters)
     }
     
+    func didCompleteWithFavourites() {
+        
+        if Shared.isRegion{
+            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
+            if Shared.selectedArea.subregionID != 0{
+                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
+            }
+        }else if Shared.isCoords{
+            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
+        }
+        print("cats prms",parameters)
+        self.presenter?.getCategories(parameters)
+    }
+    
     func didCompleteWithCategories(_ data: [Category]?) {
         if let _ = data{
             self.categories = data
@@ -50,7 +64,6 @@ extension ShoopingVC: MainViewDelegate{
         featuredVendorsCollection.hideSkeleton()
         if let data = data,
            !data.isEmpty{
-            //self.showSkeletonView()
             self.featuredLoading = false
             self.featuredVendorsCollection.isHidden = false
             self.featuredBranches = data.reversed()
@@ -58,4 +71,41 @@ extension ShoopingVC: MainViewDelegate{
             
         }
     }
+    
+    func didCompleteAddToFavourite(_ error: String?, _ index: Int?,_ isFeatured: Bool?) {
+        if let error = error{
+            showToast(error)
+        }else{
+            if isFeatured!{
+                self.featuredBranches![index!].isFavourite = 1
+                let contentOffset = featuredVendorsCollection.contentOffset
+                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+                featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
+            }else{
+                self.branches![index!].isFavourite = 1
+                let contentOffset = ordinaryVendorsTAbleView.contentOffset
+                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
+                ordinaryVendorsTAbleView.setContentOffset(contentOffset, animated: true)
+            }
+        }
+    }
+    
+    func didCompleteRemoveFromFavourites(_ error: String?, _ index: Int?, _ isFeatured: Bool?) {
+        if let error = error{
+            showToast(error)
+        }else{
+            if isFeatured!{
+                self.featuredBranches![index!].isFavourite = 0
+                let contentOffset = featuredVendorsCollection.contentOffset
+                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+                featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
+            }else{
+                self.branches![index!].isFavourite = 0
+                let contentOffset = ordinaryVendorsTAbleView.contentOffset
+                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
+                ordinaryVendorsTAbleView.setContentOffset(contentOffset, animated: true)
+            }
+        }
+    }
+    
 }

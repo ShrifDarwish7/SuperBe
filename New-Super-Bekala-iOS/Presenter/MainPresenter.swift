@@ -33,6 +33,10 @@ protocol MainViewDelegate {
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?)
     func didCompleteWithSlider(_ data: [Slider]?,_ error: String?)
+    func didCompleteAddToFavourite(_ error: String?,_ index: Int?,_ isFeatured: Bool?)
+    func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?)
+    func didCompleteWithFavourites()
+    func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -58,6 +62,10 @@ extension MainViewDelegate{
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?){}
     func didCompleteWithSlider(_ data: [Slider]?,_ error: String?){}
+    func didCompleteAddToFavourite(_ error: String?,_ index: Int?,_ isFeatured: Bool?){}
+    func didCompleteWithFavourites(){}
+    func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?){}
+    func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?){}
 }
 
 class MainPresenter{
@@ -80,11 +88,11 @@ class MainPresenter{
         }
     }
     
-    func searchWith( query prms: inout [String: String],_ context: Context){
+    func searchWith(query prms: inout [String: String],_ context: Context){
         prms.updateValue(context.rawValue, forKey: "context")
         switch context {
         case .products:
-            prms.updateValue("branch.branchLanguage,variations.options", forKey: "with")
+            prms.updateValue("variations.options", forKey: "with")
         default:
             break
         }
@@ -111,10 +119,10 @@ class MainPresenter{
     }
     
     func getMyOrders(){
-       // let prms = ["filter": "user_id=\(APIServices.shared.user?.user.id ?? 0)"]
-        let prms = ["filter": "user_id=1"]
+        let prms = ["filter": "user_id=\(APIServices.shared.user?.id ?? 0)"]
+       // let prms = ["filter": "user_id=1"]
         APIServices.shared.call(.getMyOrders(prms)) { (data) in
-            print(JSON(data))
+            print("getMyOrders",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: LastOrdersResponse.self){
                 self.delegate?.didCompleteWithMyOrders(dataModel.data)
@@ -128,7 +136,8 @@ class MainPresenter{
         self.delegate?.showProgress()
         let data = try! JSONEncoder.init().encode(order)
         print("order prms",JSON(data))
-        APIServices.shared.call(.placeOrder(data)) { (data) in
+        print(APIServices.shared.user?.token)
+        APIServices.shared.call(.placeOrder(order)) { (data) in
             self.delegate?.dismissProgress()
             if let data = data{
                 let json = JSON(data)
@@ -319,6 +328,144 @@ class MainPresenter{
                 delegate?.didCompleteWithSlider(dataModel.data, nil)
             }else{
                 delegate?.didCompleteWithSlider(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func addToFavourite(_ prms: [String: String],_ index: Int?,_ isFeatured: Bool?){
+        APIServices.shared.call(.addToFavourite(prms)) { data in
+            print("addToFavourite",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: FavouritesResponse.self){
+                
+                var branches = [Branch]()
+                var products = [Product]()
+                
+                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                    var branch: Branch = favBranch.favouritable!
+                    branch.favouriteId = favBranch.id
+                    branches.append(branch)
+                })
+                
+                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                    var product: Product = favProduct.favouritable!
+                    product.favouriteId = favProduct.id
+                    products.append(product)
+                })
+                
+                Shared.favBranches = branches
+                Shared.favProducts = products
+                
+                self.delegate?.didCompleteAddToFavourite(nil, index, isFeatured)
+            }else{
+                self.delegate?.didCompleteAddToFavourite(Shared.errorMsg, index, isFeatured)
+            }
+        }
+    }
+    
+    func removeFromFavourites(_ id: Int,_ index: Int?,_ isFeatured: Bool?){
+        APIServices.shared.call(.removeFromFavourtie(id)) { data in
+            print("removeFromFavourites",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: FavouritesResponse.self){
+                
+                var branches = [Branch]()
+                var products = [Product]()
+                
+                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                    var branch: Branch = favBranch.favouritable!
+                    branch.favouriteId = favBranch.id
+                    branches.append(branch)
+                })
+                
+                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                    var product: Product = favProduct.favouritable!
+                    product.favouriteId = favProduct.id
+                    products.append(product)
+                })
+                
+                Shared.favBranches = branches
+                Shared.favProducts = products
+                
+                self.delegate?.didCompleteRemoveFromFavourites(nil, index, isFeatured)
+            }else{
+                self.delegate?.didCompleteRemoveFromFavourites(Shared.errorMsg, index, isFeatured)
+            }
+        }
+    }
+    
+    func getFavourites(){
+        APIServices.shared.call(.favourite) { data in
+            print("getFavourites",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: FavouritesResponse.self){
+                
+                var branches = [Branch]()
+                var products = [Product]()
+                
+                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                    var branch: Branch = favBranch.favouritable!
+                    branch.favouriteId = favBranch.id
+                    branches.append(branch)
+                })
+                
+                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                    var product: Product = favProduct.favouritable!
+                    product.favouriteId = favProduct.id
+                    products.append(product)
+                })
+                
+                Shared.favBranches = branches
+                Shared.favProducts = products
+                
+                self.delegate?.didCompleteWithFavourites()
+               
+            }else{
+                self.delegate?.didCompleteWithFavourites()
+            }
+        }
+    }
+    
+//    func favouritesParser(json: JSON,_ completed: @escaping ([Branch]?,[Product]?)->Void){
+//        var branches = [Branch]()
+//        var products = [Product]()
+//
+//        if let branchesData = json["data"].array?.filter({ return $0["favouritable_type"].stringValue == "App\\Models\\Branch" }){
+//            branchesData.forEach { json in
+//                guard var branch = try? json["favouritable"].rawData().getDecodedObject(from: Branch.self) else { return }
+//                branch.favouriteId = json["id"].intValue
+//                branches.append(branch)
+//            }
+//        }
+//
+//        if let productsData = json["data"].array?.filter({ return $0["favouritable_type"].stringValue == "App\\Models\\BranchProduct" }){
+//            productsData.forEach { json in
+//                guard var product = try? json["favouritable"].rawData().getDecodedObject(from: Product.self) else { return }
+//                product.favouriteId = json["id"].intValue
+//                products.append(product)
+//            }
+//        }
+//        Shared.favBranches = branches
+//        Shared.favProducts = products
+//        completed(branches,products)
+//    }
+    
+    func updateOrder(id: Int, prms: [String: String]){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.updateOrder(id, prms)) { data in
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                print("cas",json)
+                if json["status"].int == 1 {
+                    guard let data = try? json["data"].rawData() else { return }
+                    self.delegate?.didCompleteUpdateOrder(data.getDecodedObject(from: LastOrder.self), nil)
+                }else{
+                    self.delegate?.didCompleteUpdateOrder(nil, json["message"].stringValue)
+                }
+                
+            }else{
+                self.delegate?.didCompleteUpdateOrder(nil, Shared.errorMsg)
             }
         }
     }

@@ -19,8 +19,8 @@ struct LastOrdersResponse: Codable {
 struct LastOrder: Codable {
     let id: Int?
     let status: String?
-    let linesTotal, shippingTotal, taxesTotal, discountTotal: Int?
-    let orderTotal: Int?
+    let linesTotal, shippingTotal, taxesTotal, discountTotal: Double?
+    let orderTotal: Double?
     let customerNote, paymentMethod: String?
     let userID, addressID, branchID, beingEdited: Int?
     let createdAt, updatedAt: String?
@@ -53,7 +53,9 @@ struct LastOrder: Codable {
 struct LastOrderBranch: Codable {
     let id: Int?
     let nameEn, nameAr, logo: String?
-    let rating, vendorID: Int?
+    let vendorID: Int?
+    let rating: String?
+    let name: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -61,16 +63,18 @@ struct LastOrderBranch: Codable {
         case nameAr = "name_ar"
         case logo, rating
         case vendorID = "vendor_id"
+        case name
     }
 }
 
 // MARK: - LineItem
 struct LastOrderLineItem: Codable {
-    let id, linePrice, quantity: Int
+    let id, quantity: Int
+    let linePrice: Double?
     let lineNotes: String?
     let orderID: Int
     let variations: [Variation]?
-    let branchProduct: Product
+    let branchProduct: Product?
 
     enum CodingKeys: String, CodingKey {
         case id

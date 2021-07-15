@@ -238,9 +238,7 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
                     if completed{
                         self.navigationController?.popViewController(animated: true)
                     }
-                } exist: { (_) in
-                    
-                }
+                } 
             }catch{}
         }else{
             

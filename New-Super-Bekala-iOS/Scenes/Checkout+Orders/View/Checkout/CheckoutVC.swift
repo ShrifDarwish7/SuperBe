@@ -10,6 +10,7 @@ import UIKit
 import Cosmos
 import SwiftyJSON
 import SVProgressHUD
+import GoogleMaps
 
 class CheckoutVC: UIViewController {
 
@@ -47,6 +48,10 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var bottomSheetTopCnst: NSLayoutConstraint!
     @IBOutlet weak var paymentContainerView: UIView!
+    @IBOutlet weak var branchLogo1: UIImageView!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var phoneNumber: UITextField!
+    @IBOutlet weak var selectedAddressTF: UITextField!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -63,25 +68,21 @@ class CheckoutVC: UIViewController {
         presenter = MainPresenter(self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(paymentDidFinish(sender:)), name: NSNotification.Name("FINISH_PAYMENT"), object: nil)
-       // branchName.text = "lang".localized == "en" ? branch?.branchLanguage?.first?.name : branch?.branchLanguage![0].name
-        branchName.text = "\(branch?.id ?? 0)"
-        branchLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
-//        branchRate.rating = branch?.rating ?? 3.0
+        branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
+        branchLogo.kf.indicatorType = .activity
+        branchLogo.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        branchLogo1.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
         
-        receiveViewHeight.constant = 60
-        receiveOptionView.isHidden = true
-        paymentViewHeight.constant = 60
-        paymentOptionView.isHidden = true
-        notesHeight.constant = 0
-        promoViewHeight.constant = 60
-        promoView.isHidden = true
+//        branchRate.rating = branch?.rating ?? 3.0
+        username.text = APIServices.shared.user?.name
+        phoneNumber.text = APIServices.shared.user?.phone ?? ""
         
         blockView.isHidden = true
         bottomSheetTopCnst.constant = self.view.frame.height
         
         receiveFromShopStack.alpha = branch?.receiveFromShop == 1 ? 1 : 0.3
         receiveDeliveryStack.alpha = branch?.supportDelivery == 1 ? 1 : 0.3
-       // cashOnDeliveryStack.alpha = branch?.cashOnDelivery == 1 ? 1 : 0.3
+        cashOnDeliveryStack.alpha = branch?.cashOnDelivery == 1 ? 1 : 0.3
         creditOnDeliveryStack.alpha = branch?.creditOnDelivery == 1 ? 1 : 0.3
         creditStack.alpha = branch?.onlinePayment == 1 ? 1 : 0.3
         promoViewContainer.isHidden = branch?.acceptCoupons == 1 ? false : true
@@ -148,7 +149,15 @@ class CheckoutVC: UIViewController {
     }
     
     @IBAction func toAddAddress(_ sender: Any) {
-        Router.toAddAddress(self)
+        if let deliveryRegions = branch?.deliveryRegions{
+            let path = GMSMutablePath()
+            deliveryRegions.forEach { region in
+                region.coordinates.forEach { coord in
+                    path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+                }
+            }
+            Router.toAddAddress(self, path)
+        }
     }
     
     @IBAction func chooseReceiveOption(_ sender: UIButton) {
@@ -196,11 +205,10 @@ class CheckoutVC: UIViewController {
         default:
             break
         }
-        
+         
         self.selectedPayment = sender.tag
         
     }
-    
     
     
     @IBAction func expandReceive(_ sender: UIButton) {
@@ -210,14 +218,14 @@ class CheckoutVC: UIViewController {
             self.receiveOptionView.isHidden = false
             sender.tag = 1
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
+                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
         case 1:
             self.receiveViewHeight.constant = 60
             self.receiveOptionView.isHidden = true
             sender.tag = 0
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
         default:
             break
@@ -234,14 +242,14 @@ class CheckoutVC: UIViewController {
             self.paymentOptionView.isHidden = false
             sender.tag = 1
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
+                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
         case 1:
             self.paymentViewHeight.constant = 60
             self.paymentOptionView.isHidden = true
             sender.tag = 0
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
         default:
             break
@@ -259,14 +267,14 @@ class CheckoutVC: UIViewController {
             self.promoView.isHidden = false
             sender.tag = 1
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
+                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
         case 1:
             self.promoViewHeight.constant = 60
             self.promoView.isHidden = true
             sender.tag = 0
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
         default:
             break
@@ -284,14 +292,14 @@ class CheckoutVC: UIViewController {
             sender.tag = 1
             notesView.isHidden = false
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
+                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
         case 1:
             self.notesHeight.constant = 0
             sender.tag = 0
             notesView.isHidden = true
             UIView.animate(withDuration: 0.2) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi*2)
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
         default:
             break
@@ -344,42 +352,73 @@ class CheckoutVC: UIViewController {
             return
         }
         
+        guard let selectedPayment = selectedPayment else {
+            showToast("Please choose payment method")
+            return
+        }
+        
+        guard let selectedReceiveOption = selectedReceiveOption else{
+            showToast("Please choose receive option")
+            return
+        }
+        
+        if selectedReceiveOption == 0{
+            guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first!) else {
+                showToast("Please add address")
+                return
+            }
+        }
+        
+        if let deliveryRegions = branch?.deliveryRegions{
+            let path = GMSMutablePath()
+            deliveryRegions.forEach { region in
+                region.coordinates.forEach { coord in
+                    path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+                }
+            }
+            
+            let bounds = GMSCoordinateBounds(path: path)
+            guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!), bounds.contains(CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)) else{
+                
+                let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds", preferredStyle: .alert)
+                let addAction = UIAlertAction(title: "Add Address", style: .default) { _ in
+                    Router.toAddAddress(self, path)
+                }
+                let cencel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(addAction)
+                alert.addAction(cencel)
+                self.present(alert, animated: true, completion: nil)
+                return
+                
+            }
+        }
+        
         var lineItems = [LineItem]()
         
         for item in self.items!{
             guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
             var variations = [LineItemVariation]()
             for variation in itemVariations{
-//                var selectedOtps = [Int]()
-//                variation.options?.filter({ return $0.selected == true }).forEach({ (option) in
-//                    selectedOtps.append(option.id!)
-//                })
-//                var checkedOtps = [Int]()
-//                checkedOtps = variation.options!.map({ $0.id! })
-//                variation.options?.filter({ return $0.checked == true }).forEach({ (option) in
-//                    checkedOtps.append(option.id!)
-//                })
                 variations.append(
                     LineItemVariation(
                         id: variation.id,
-                        options: variation.options!.map({ $0.id! })))//variation.isAddition == 0 ? selectedOtps : checkedOtps))
+                        options: variation.options!.map({ $0.id! })))
             }
             
             lineItems.append(
-                LineItem(branchProductID: Int(item.product_id),
-                         quantity: Int(item.quantity),
+                LineItem(variations: variations,
                          lineNotes: item.notes,
-                         variations: variations))
+                         quantity: Int(item.quantity),
+                         branchProductID: Int(item.product_id)))
         }
         
-        let order = Order(
-            deliveryMethod: selectedReceiveOption ?? 0,
-            paymentMethod: selectedPayment ?? 0,
-            addressID: ((addresses?.filter({ return $0.selected == 1 }))?.first?.id)!,
-            customerNote: notesTV.text!,
-            couponID: 123,
-            branchID: branch!.id,
-            lineItems: lineItems)
+        let order = Order(deliveryMethod: selectedReceiveOption,
+                          paymentMethod: selectedPayment,
+                          addressID: ((addresses?.filter({ return $0.selected == 1 }))?.first?.id)!,
+                          customerNote: notesTV.text!,
+                          couponID: ["30off"],
+                          branchID: branch!.id,
+                          lineItems: lineItems)
         
         self.presenter?.placeOrder(order)
         

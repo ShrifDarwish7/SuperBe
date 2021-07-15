@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
@@ -20,12 +21,22 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var increaseBtn: UIButton!
     @IBOutlet weak var decreaseBtn: UIButton!
     @IBOutlet weak var quantity: UILabel!
+    @IBOutlet weak var salePrice: UILabel!
+    @IBOutlet weak var salePriceView: UIView!
     
     func loadFrom(data: Product){
+        if let salePrice = data.salePrice,
+           salePrice > 0{
+            self.salePriceView.isHidden = false
+            self.salePrice.text = "\(salePrice) EGP"
+        }else{
+            self.salePriceView.isHidden = true
+        }
         name.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
-        price.text = "\(data.price ?? 0) EGP"
-        price.isHidden = data.price == 0 ? true : false
-        productImage.sd_setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ))
+        price.text = data.price == 0 ? "Price on selection" : "\(data.price ?? 0) EGP"
+        productImage.roundCorners([.layerMinXMinYCorner,.layerMaxXMinYCorner], radius: 25)
+        productImage.kf.indicatorType = .activity
+        productImage.kf.setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ), placeholder: nil, options: [], completionHandler: nil)
     }
     
 

@@ -27,21 +27,28 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: CartProductTableViewCell.identifier, for: indexPath) as! CartProductTableViewCell
         cell.decreaseBtn.isHidden = true
         cell.increaseBtn.isHidden = true
-        let product = order?.lineItems![indexPath.row]
-        cell.name.text = "lang".localized == "en" ? product?.branchProduct.name?.en : product?.branchProduct.name?.ar
-        cell.price.text = "\(product?.linePrice ?? 0) " + "EGP"
-        cell.quantity.text = "\(product?.quantity ?? 0)"
+        let lineItem = order?.lineItems![indexPath.row]
+        cell.name.text = "lang".localized == "en" ? lineItem?.branchProduct?.name?.en : lineItem?.branchProduct?.name?.ar
+        var linePrice = lineItem?.linePrice ?? 0.0
         
-        if let images = product?.branchProduct.images{
-            cell.productImage.sd_setImage(with: URL(string: Shared.storageBase + (images.first)!))
+        cell.productImage.kf.indicatorType = .activity
+        if let images = lineItem?.branchProduct?.images{
+            cell.productImage.kf.setImage(with: URL(string: Shared.storageBase + (images.first)!), placeholder: nil, options: [], completionHandler: nil)
         }else{
-            cell.productImage.sd_setImage(with: URL(string: Shared.storageBase + (order?.branch?.logo)!))
+            cell.productImage.kf.setImage(with: URL(string: Shared.storageBase + (order?.branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
         }
         
-        if let variations = product?.variations, !variations.isEmpty{
+        if let variations = lineItem?.variations, !variations.isEmpty{
             cell.desc.isHidden = false
             var desc = ""
             variations.forEach { (variation) in
+                
+                variations.forEach { variation in
+                    variation.options?.forEach({ option in
+                        linePrice += (option.price ?? 0.0)
+                    })
+                }
+                
                 var opts = ""
                 variation.options?.forEach({ (option) in
                     opts += (("lang".localized == "en" ? "\(option.name?.en ?? ""), " : "\(option.name?.ar ?? ""), "))
@@ -52,6 +59,10 @@ extension OrderVC: UITableViewDelegate, UITableViewDataSource{
         }else{
             cell.desc.isHidden = true
         }
+        
+        cell.price.text = "\(linePrice) EGP"
+        cell.quantity.text = "\(lineItem?.quantity ?? 0)"
+        
         self.viewWillLayoutSubviews()
         return cell
     }

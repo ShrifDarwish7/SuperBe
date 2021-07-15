@@ -18,7 +18,6 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
         if let flowLayout = filtersCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-         //   flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
             flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         }
         filtersCollectionView.reloadData()
@@ -42,7 +41,13 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case filtersCollectionView:
             return self.categories?.count ?? 0
         case featuredVendorsCollection:
-            return self.branches?.count ?? 5
+            if (self.featuredBranches?.count ?? 5) > 3{
+                self.allFeaturedBtn.isHidden = false
+                return 3
+            }else{
+                self.allFeaturedBtn.isHidden = true
+                return self.branches?.count ?? 3
+            }
         default:
             return 0
         }
@@ -74,7 +79,14 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             }else{
                 
                 let cell = self.featuredVendorsCollection.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.identifier, for: indexPath) as! FeaturedCollectionViewCell
+                if let favBranches = Shared.favBranches,
+                   !favBranches.isEmpty,
+                   !favBranches.filter({ return $0.id == self.featuredBranches![indexPath.row].id}).isEmpty{
+                    self.featuredBranches![indexPath.row].isFavourite = 1
+                }
                 cell.loadFrom(data: self.featuredBranches![indexPath.row])
+                cell.favouriteBtn.tag = indexPath.row
+                cell.favouriteBtn.addTarget(self, action: #selector(addToFavourite(sender:)), for: .touchUpInside)
                 return cell
                 
             }
@@ -115,7 +127,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case featuredVendorsCollection:
-            return CGSize(width: 180, height: 220)
+            return CGSize(width: 180, height: 250)
         case filtersCollectionView:
             let font = UIFont(name: "Lato-Bold", size: 16)
             let fontAttributes = [NSAttributedString.Key.font: font]
@@ -162,6 +174,21 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             return FeaturedCollectionViewCell.identifier
         default:
             return ""
+        }
+    }
+    
+    @objc func addToFavourite(sender: UIButton){
+        if let favBranches = Shared.favBranches,
+           !favBranches.isEmpty,
+           !favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).isEmpty{
+            let fav = favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).first
+            presenter?.removeFromFavourites((fav?.favouriteId)!, sender.tag, true)
+        }else{
+            let prms = [
+                "model_id": "\(self.featuredBranches![sender.tag].id)",
+                "model": "Branch"
+            ]
+            self.presenter?.addToFavourite(prms, sender.tag, true)
         }
     }
     

@@ -26,27 +26,22 @@ extension MapVC: GMSMapViewDelegate{
         dismissHintZoom()
         markerImageView.alpha = 1
         addressContainer.isHidden = false
-      //  dismissHintZoom()
         
         let coordinates = mapView.projection.coordinate(for: mapView.center)
         Shared.userLat = coordinates.latitude
         Shared.userLng = coordinates.longitude
         
-//        switch mapState {
-//        case .AddAddressToOrder:
-//            self.bounds = GMSCoordinateBounds(path: self.path)
-//            guard bounds.contains(CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)) else{
-//                markerImage.image = UIImage(named: "marker-black")
-//                hintZoomLbl.text = "Sorry, this vendor doesn`t deliver to this area".localized
-//                showHintZoom()
-//                return
-//            }
-//        default:
-//            break
-//        }
+        if let path = path{
+            let bounds = GMSCoordinateBounds(path: path)
+            guard bounds.contains(CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)) else{
+                markerImageView.alpha = 0.5
+                hintZoom.text = "Sorry, this vendor doesn`t deliver to this area".localized
+                showHintZoom()
+                return
+            }
+        }
         
-        
-//        hintZoomLbl.text = "Please zoom in more to find your exact delivery location".localized
+        hintZoom.text = "Please zoom in more to find your exact delivery location".localized
         
         if mapView.camera.zoom <= 15{
             showHintZoom()

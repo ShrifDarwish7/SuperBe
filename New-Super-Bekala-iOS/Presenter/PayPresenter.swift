@@ -142,8 +142,8 @@ class PayPresenter{
                 the3Ds: nil,
                 the3Ds1: nil),
             customer: Customer(
-                firstName: UserDefaults.init().string(forKey: "name") ?? "",
-                email: (UserDefaults.init().string(forKey: "email") ?? ""),
+                firstName: "name",
+                email: "info@sb.com",
                 lastName: "_"),
             device: Device(
                 browserDetails: BrowserDetails(

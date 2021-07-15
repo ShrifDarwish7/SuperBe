@@ -31,7 +31,7 @@ extension MapVC: MainViewDelegate{
         if let error = error{
             showToast(error.localized)
         }else{
-            showToast("Address has been added successfully")
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

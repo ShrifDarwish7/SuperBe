@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-public enum SuperBe{
+enum SuperBe{
     case login(_ prms: [String: String])
     case logout
     case getCities(_ prms: [String: String])
@@ -23,11 +23,16 @@ public enum SuperBe{
     case updateAddress(_ id: Int,_ prms: [String: String])
     case deleteAddress(_ id: Int)
     case getProductByID(_ branchId: Int,_ productId: Int,_ prms: [String: String])
-    case placeOrder(_ bodyData: Data)
+    case placeOrder(_ encodable: Order)
     case getMyOrders(_ prms: [String: String])
     case search(_ prms: [String: String])
     case points
     case slider(_ prms: [String: String])
+    case favourite
+    case addToFavourite(_ prms: [String: String])
+    case removeFromFavourtie(_ id: Int)
+    case updateOrder(_ id: Int,_ bodyData: [String: String])
+    //case getOrderBy(_ id: Int)
 }
 
 extension SuperBe: TargetType{
@@ -67,6 +72,12 @@ extension SuperBe: TargetType{
             return "loyalty"
         case .slider(_):
             return "sliders"
+        case .favourite, .addToFavourite(_):
+            return "favourites"
+        case .removeFromFavourtie(let id):
+            return "favourites/\(id)"
+        case .updateOrder(let id, _):
+            return "orders/\(id)"
         }
     }
     
@@ -74,11 +85,13 @@ extension SuperBe: TargetType{
         switch self {
         case .login,
              .postAddress(_),
-             .placeOrder(_):
+             .placeOrder(_),
+             .addToFavourite(_):
             return .post
-        case .updateAddress(_, _):
+        case .updateAddress(_, _),
+             .updateOrder(_, _):
             return .put
-        case .deleteAddress(_):
+        case .deleteAddress(_), .removeFromFavourtie(_):
             return .delete
         default:
             return .get
@@ -103,15 +116,18 @@ extension SuperBe: TargetType{
              .search(let prms),
              .slider(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
-        case .postAddress(let prms):
+        case .postAddress(let prms),
+             .addToFavourite(let prms):
             var multipartFormData = [MultipartFormData]()
             for (key,value) in prms{
                 let formData = MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key)
                 multipartFormData.append(formData)
             }
             return .uploadMultipart(multipartFormData)
-        case .placeOrder(let bodyData):
-            return .requestCompositeData(bodyData: bodyData, urlParameters: [:])
+        case .updateOrder(_, let prms):
+            return .requestParameters(parameters: prms, encoding: JSONEncoding.default)
+        case .placeOrder(let encodable):
+            return .requestJSONEncodable(encodable)
         default:
             return .requestPlain
         }

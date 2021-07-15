@@ -28,9 +28,13 @@ class ProductSearchResultTableViewCell: UITableViewCell {
     func loadFrom(_ product: Product){
         productImage.layer.cornerRadius = productImage.frame.height/2
         branchImage.layer.cornerRadius = branchImage.frame.height/2
-        productImage.sd_setImage(with: URL(string: Shared.storageBase + (product.images?.first)!))
-        branchImage.sd_setImage(with: URL(string: Shared.storageBase + (product.branch?.logo ?? "")))
+        
+        productImage.kf.indicatorType = .activity
+        productImage.kf.setImage(with: URL(string: Shared.storageBase + ((product.images?.first ?? product.branch?.logo) ?? "")))
+        
+        branchImage.kf.setImage(with: URL(string: Shared.storageBase + (product.branch?.logo ?? "")))
         name.text = "lang".localized == "en" ? product.name?.en : product.name?.ar
+        price.text = "\(product.price ?? 0.0) EGP"
         if let vars = product.variations,
            vars.isEmpty{
             price.isHidden = true

@@ -35,6 +35,7 @@ class BranchVC: UIViewController {
     @IBOutlet weak var minimumOrder: UILabel!
     @IBOutlet weak var fees: UILabel!
     @IBOutlet weak var cartFlage: ViewCorners!
+    @IBOutlet weak var replacableView: UIView!
     
     var bottomSheetPanStartingTopConstant : CGFloat = 30.0
     var categories: [BranchCategory]?
@@ -88,8 +89,11 @@ class BranchVC: UIViewController {
         fastOrderContainer.isHidden = branch?.quickOrder == 1 ? true : false
 //        rateView.rating = branch?.rating ?? 1.0
         branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
-        logo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
-        bgLogo.sd_setImage(with: URL(string: Shared.storageBase + (branch?.logo)!))
+        
+        logo.kf.indicatorType = .activity
+        logo.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        bgLogo.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        
         duration.text = "\(branch?.deliveryDuration ?? 0) Min"
         minimumOrder.text = "\(branch?.minOrder ?? 0) EGP"
         fees.text = "\(branch?.deliveryFees ?? 0 ) EGP"
@@ -169,8 +173,14 @@ class BranchVC: UIViewController {
         switch sender.tag {
         case 0:
             self.popularLbl.isHidden = false
+            self.replacableView.isHidden = true
         case 1:
             self.allLbl.isHidden = false
+            replacableView.isHidden = false
+        
+            self.replaceView(containerView: replacableView, identifier: "InfoVC", storyboard: .home)
+            NotificationCenter.default.post(name: NSNotification.Name("SEND_BRANCH"), object: nil, userInfo: ["branch": self.branch!])
+            
         case 2:
             self.offersLbl.isHidden = false
         case 3:

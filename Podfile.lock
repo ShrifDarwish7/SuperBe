@@ -98,6 +98,7 @@ PODS:
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
   - IQKeyboardManagerSwift (6.5.5)
+  - Kingfisher (6.0.1)
   - leveldb-library (1.22)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -109,9 +110,6 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.8)
-  - SDWebImage (5.8.0):
-    - SDWebImage/Core (= 5.8.0)
-  - SDWebImage/Core (5.8.0)
   - SkeletonView (1.11.0)
   - SVProgressHUD (2.2.5)
   - SwiftyGif (5.3.0)
@@ -135,8 +133,8 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn
   - IQKeyboardManagerSwift
+  - Kingfisher
   - Moya
-  - SDWebImage
   - SkeletonView
   - SVProgressHUD
   - SwiftyGif
@@ -173,11 +171,11 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - Kingfisher
     - leveldb-library
     - Moya
     - nanopb
     - PromisesObjC
-    - SDWebImage
     - SkeletonView
     - SVProgressHUD
     - SwiftyGif
@@ -213,11 +211,11 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  Kingfisher: adde87a4f74f6a3845395769354efff593581740
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
-  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SkeletonView: cc84ce90a804dd0dd7198dd802833411c8a64eaf
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
@@ -225,6 +223,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   UITextField-Navigation: 25c2614b41096ade830fe015961dd2dbc4e108cb
 
-PODFILE CHECKSUM: dd3eb4481913fee112d9692591e946340e836981
+PODFILE CHECKSUM: 2dc1578608296faa78410e2f7c3f8d4a7353ff9e
 
 COCOAPODS: 1.10.0

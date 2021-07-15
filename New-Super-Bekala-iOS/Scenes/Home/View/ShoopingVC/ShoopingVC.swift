@@ -11,18 +11,18 @@ import SkeletonView
 
 class ShoopingVC: UIViewController {
 
-    @IBOutlet weak var moreFeaturedVendors: UIButton!
     @IBOutlet weak var featuredVendorsCollection: UICollectionView!
     @IBOutlet weak var ordinaryVendorsTAbleView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
+    @IBOutlet weak var allFeaturedBtn: UIButton!
     
     var presenter: MainPresenter?
     var categories: [Category]?
     var selectedCategory: Category?
     var featuredBranches: [Branch]?
     var branches: [Branch]?
-    var parameters: [String:String] = [/*"lang": "lang".localized*/:]
+    var parameters: [String:String] = [:]
     var featuredLoading = true
     var ordinaryLoading = true
     
@@ -32,19 +32,8 @@ class ShoopingVC: UIViewController {
         showSkeletonView()
         
         presenter = MainPresenter(self)
+        presenter?.getFavourites()
 
-        loadActions()
-        
-        if Shared.isRegion{
-            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
-            if Shared.selectedArea.subregionID != 0{
-                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
-            }
-        }else if Shared.isCoords{
-            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
-        }
-        print("cats prms",parameters)
-        self.presenter?.getCategories(parameters)
     }
     
     func showSkeletonView(){
@@ -68,17 +57,12 @@ class ShoopingVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.updateViewConstraints()
-        tableViewHeight.constant = ordinaryVendorsTAbleView.contentSize.height + 20
+        tableViewHeight.constant = ordinaryVendorsTAbleView.contentSize.height + 125
         self.view.layoutIfNeeded()
     }
-    
-    
-    func loadActions(){
-        
-        moreFeaturedVendors.onTap {
-            self.performSegue(withIdentifier: "moreFeatured", sender: self)
-        }
-        
-    }
 
+    @IBAction func toAllFeatured(_ sender: Any) {
+        Router.toViewAllFeatured(self, self.featuredBranches!)
+    }
+    
 }

@@ -33,6 +33,13 @@ extension ShoopingVC: SkeletonTableViewDelegate, UITableViewDataSource{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: OrdinaryVendorTableViewCell.identifier) as! OrdinaryVendorTableViewCell
+            cell.favouriteBtn.tag = indexPath.row
+            cell.favouriteBtn.addTarget(self, action: #selector(addOrdinaryToFavourite(sender:)), for: .touchUpInside)
+            if let favBranches = Shared.favBranches,
+               !favBranches.isEmpty,
+               !favBranches.filter({ return $0.id == self.branches![indexPath.row].id}).isEmpty{
+                self.branches![indexPath.row].isFavourite = 1
+            }
             cell.loadFrom(data: self.branches![indexPath.row])
             self.viewWillLayoutSubviews()
             return cell
@@ -45,5 +52,20 @@ extension ShoopingVC: SkeletonTableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Router.toBranch(self, self.branches![indexPath.row])
+    }
+    
+    @objc func addOrdinaryToFavourite(sender: UIButton){
+        if let favBranches = Shared.favBranches,
+           !favBranches.isEmpty,
+           !favBranches.filter({ return $0.id == self.branches![sender.tag].id}).isEmpty{
+            let fav = favBranches.filter({ return $0.id == self.branches![sender.tag].id}).first
+            presenter?.removeFromFavourites((fav?.favouriteId)!, sender.tag, false)
+        }else{
+            let prms = [
+                "model_id": "\(self.branches![sender.tag].id)",
+                "model": "Branch"
+            ]
+            self.presenter?.addToFavourite(prms, sender.tag, false)
+        }
     }
 }

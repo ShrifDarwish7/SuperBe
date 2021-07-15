@@ -46,6 +46,7 @@ class CartVC: UIViewController {
                 }
                 fetchCartItems()
                 self.loadFiltersCollection()
+                
             }
         }
     }
@@ -63,8 +64,17 @@ class CartVC: UIViewController {
                     
                 }
                 self.loadProductsTableView()
+                self.updateBill()
             }
         }
+    }
+    
+    func updateBill(){
+        var total = 0.0
+        self.items?.forEach({ item in
+            total += (item.price * Double(item.quantity))
+        })
+        self.total.text = "\(total) EGP"
     }
     
     @IBAction func back(_ sender: Any) {
@@ -72,6 +82,24 @@ class CartVC: UIViewController {
     }
     
     @IBAction func toCheckout(_ sender: Any) {
+        
+        for item in self.items!{
+            
+            if item.min_qty > 0,
+               item.quantity < item.min_qty{
+                let errorMsg = "You must have at least \(item.min_qty) of " + ("lang".localized == "en" ? item.name_en! : item.name_ar!) + " in your cart"
+                showToast(errorMsg)
+                return
+            }
+            if item.max_qty > 0,
+               item.quantity > item.max_qty{
+                let errorMsg = "You exceeds the maximum quantity of " + ("lang".localized == "en" ? item.name_en! : item.name_ar!) + " in your cart, quatity must be less than \(item.max_qty)"
+                showToast(errorMsg)
+                return
+            }
+            
+        }
+        
         presenter?.getBranchBy(Int(selectedBranch!.id))
     }
     

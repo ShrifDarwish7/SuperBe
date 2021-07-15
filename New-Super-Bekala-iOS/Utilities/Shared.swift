@@ -45,6 +45,8 @@ class Shared{
     static var transaction: Transaction?
     static var selectedServices: SelectedServices?
     static var superService: SuperService?
+    static var favBranches: [Branch]?
+    static var favProducts: [Product]?
 }
 
 enum SelectedServices{

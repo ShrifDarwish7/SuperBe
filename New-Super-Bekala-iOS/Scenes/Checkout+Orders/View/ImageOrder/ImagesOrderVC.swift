@@ -90,9 +90,7 @@ class ImagesOrderVC: UIViewController {
             if completed{
                 self.navigationController?.popViewController(animated: true)
             }
-        } exist: { (_) in
-            
-        }
+        } 
 
     }
     

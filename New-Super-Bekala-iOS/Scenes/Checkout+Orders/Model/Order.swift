@@ -10,9 +10,10 @@ import Foundation
 
 // MARK: - Order
 struct Order: Codable {
-    let deliveryMethod, paymentMethod, addressID: Int
+    let deliveryMethod,paymentMethod, addressID: Int
     let customerNote: String
-    let couponID, branchID: Int
+    let couponID: [String]
+    let branchID: Int
     let lineItems: [LineItem]
 
     enum CodingKeys: String, CodingKey {
@@ -28,9 +29,9 @@ struct Order: Codable {
 
 // MARK: - LineItem
 struct LineItem: Codable {
-    let branchProductID, quantity: Int?
-    let lineNotes: String?
     let variations: [LineItemVariation]?
+    let lineNotes: String?
+    let quantity, branchProductID: Int?
 
     enum CodingKeys: String, CodingKey {
         case branchProductID = "branch_product_id"

@@ -13,7 +13,7 @@ extension ProfileVC: MainViewDelegate{
         self.acitvityIndicator.stopAnimating()
         if let addresses = data{
             self.addresses = addresses
-            self.selectedAddressLbl.text = self.addresses?.filter({ return $0.selected == 1 }).first?.title
+            self.selectedAddressTF.text = self.addresses?.filter({ return $0.selected == 1 }).first?.title
             self.loadAddressesTable()
         }
     }

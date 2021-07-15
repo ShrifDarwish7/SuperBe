@@ -39,11 +39,14 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var changeLocationBlockView: UIView!
     @IBOutlet weak var locationSheetTopCnst: NSLayoutConstraint!
     @IBOutlet weak var addressesContainer: UIView!
+    @IBOutlet weak var profileImage: CircluarImage!
     
     var cartItems: [CartItem]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileImage.kf.setImage(with: URL(string: Shared.storageBase + APIServices.shared.user!.avatar))
         
         NotificationCenter.default.addObserver(self, selector: #selector(didChooseAddress), name: NSNotification.Name("DID_CHOOSE_ADDRESS"), object: nil)
         
@@ -56,7 +59,7 @@ class HomeContainerVC: UIViewController {
         
         self.dismissChangeLocationSheet()
         
-        profilePic.addTapGesture { (_) in
+        profileImage.addTapGesture { (_) in
             Router.toProfile(self)
         }
         
@@ -256,6 +259,7 @@ class HomeContainerVC: UIViewController {
             favouriteTab.isHidden = false
             favouriteTabBtn.setImage(UIImage(named: "favourites-select"), for: .normal)
             tabTitle.text = "Favourites"
+            self.replaceView(containerView: containerView, identifier: "FavouritesVC", storyboard: .profile)
             
         default:
             break

@@ -23,12 +23,13 @@ struct Product: Codable {
     var sku: String?
     var inStock: Int?
     var images: [String]?
-    var price, salePrice: Int?
+    var price, salePrice: Double?
     var startTime, endTime, productionDate, expDate: String?
     var saleStartDate, saleEndDate: String?
     var branchID, productID, branchCategoryID: Int?
     var branchImage: String?
     var branch: Branch?
+    var minQty, maxQty: Int?
     var variations: [Variation]?
     
     var quantity: Int = 1
@@ -37,6 +38,7 @@ struct Product: Codable {
     var voice: Data?
     var photos: [UIImage]?
     var text: String?
+    var favouriteId: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -55,6 +57,8 @@ struct Product: Codable {
         case branchCategoryID = "branch_category_id"
         case variations, branch
         case branchImage = "branch_image"
+        case minQty = "min_number"
+        case maxQty = "max_number"
     }
 }
 
@@ -87,8 +91,8 @@ struct Option: Codable{
     
     var id: Int?
     var name: Localized?
-    var price, branchVariationID, inStock, salePrice: Int?
-    
+    var branchVariationID, inStock, salePrice: Int?
+    var price: Double?
     var selected: Bool = false
     //var checked: Bool = false
 

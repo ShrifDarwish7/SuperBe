@@ -2,7 +2,7 @@
 //  CartItem+CoreDataClass.swift
 //  New-Super-Bekala-iOS
 //
-//  Created by Sherif Darwish on 11/05/2021.
+//  Created by Sherif Darwish on 15/07/2021.
 //  Copyright © 2021 Super Bekala. All rights reserved.
 //
 //

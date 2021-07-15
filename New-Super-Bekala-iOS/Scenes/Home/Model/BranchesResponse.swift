@@ -19,7 +19,7 @@ struct Branch: Codable {
     let id: Int
     let bio: Localized?
     let name: Localized?
-    let phones, emails, fax: [String]?
+    let phones, emails, fax: [String?]?
     let website: String?
     let isNewBranch: Int?
     let postalCode, street: String?
@@ -47,12 +47,16 @@ struct Branch: Codable {
     let addedBy: Int?
     let updatedBy: Int?
     let beingEdited: Int?
+    let customOpenCloseTimes: CustomOpenCloseTimes?
+    let deliveryRegions: [DeliveryRegion]?
     let beingEditedBy: String?
     let vendorID, userID, regionID: Int?
-  //  let branchLanguage: [BranchLanguage]?
-    let user: BranchUser?
+   // let user: BranchUser?
+    var isFavourite: Int?
     var products: [Product]?
     //let openCloseTimes: String?
+    var favouriteId: Int?
+    var useCustomTimes: Int?
     
     var selected: Bool?
 
@@ -109,12 +113,15 @@ struct Branch: Codable {
         case vendorID = "vendor_id"
         case userID = "user_id"
         case regionID = "region_id"
-      //  case branchLanguage = "branch_language"
-        case user
+       // case user
       //  case openCloseTimes = "open_close_times"
         case supportDelivery = "support_delivery"
         case creditOnDelivery = "credit_on_delivery"
         case products = "branch_products"
+        case isFavourite = "is_favourite"
+        case customOpenCloseTimes = "custom_open_close_times"
+        case deliveryRegions = "delivery_regions"
+        case useCustomTimes = "use_custom_times"
     }
 }
 
@@ -122,19 +129,45 @@ struct Localized: Codable {
     let en, ar: String?
 }
 
-//// MARK: - BranchLanguage
-//struct BranchLanguage: Codable {
-//    let id: Int
-//    let name, language: String?
-//    let branchID: Int?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id, name, language
-//        case branchID = "branch_id"
-//    }
-//}
+struct DeliveryRegion: Codable {
+    let id: Int
+    let name: String
+    let cityID: Int
+    let coordinates: [String]
 
-// MARK: - User
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case cityID = "city_id"
+        case coordinates
+    }
+}
+
+struct CustomOpenCloseTimes: Codable {
+    let openingTimeSaturday, openingTimeSunday, openingTimeMonday, openingTimeTuesday: String?
+    let openingTimeWednesday, openingTimeThursday: String?
+    let openingTimeFriday: String?
+    let closingTimeSaturday, closingTimeSunday, closingTimeMonday, closingTimeTuesday: String?
+    let closingTimeWednesday, closingTimeThursday: String?
+    let closingTimeFriday: String?
+
+    enum CodingKeys: String, CodingKey {
+        case openingTimeSaturday = "opening_time_saturday"
+        case openingTimeSunday = "opening_time_sunday"
+        case openingTimeMonday = "opening_time_monday"
+        case openingTimeTuesday = "opening_time_tuesday"
+        case openingTimeWednesday = "opening_time_wednesday"
+        case openingTimeThursday = "opening_time_thursday"
+        case openingTimeFriday = "opening_time_friday"
+        case closingTimeSaturday = "closing_time_saturday"
+        case closingTimeSunday = "closing_time_sunday"
+        case closingTimeMonday = "closing_time_monday"
+        case closingTimeTuesday = "closing_time_tuesday"
+        case closingTimeWednesday = "closing_time_wednesday"
+        case closingTimeThursday = "closing_time_thursday"
+        case closingTimeFriday = "closing_time_friday"
+    }
+}
+
 struct BranchUser: Codable {
     let id: Int?
     let name, email: String?

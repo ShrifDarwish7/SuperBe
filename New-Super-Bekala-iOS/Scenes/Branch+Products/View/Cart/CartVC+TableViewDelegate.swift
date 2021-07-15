@@ -95,7 +95,8 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                 productsTableView.reloadData()
             }
             cell.price.text = "\(items![indexPath.row].price * Double(cell.quantity.text!)!) EGP"
-            cell.productImage.sd_setImage(with: URL(string: Shared.storageBase + (items![indexPath.row].logo ?? "")))
+            cell.productImage.kf.indicatorType = .activity
+            cell.productImage.kf.setImage(with: URL(string: Shared.storageBase + (items![indexPath.row].logo ?? "")), placeholder: nil, options: [], completionHandler: nil)
             return cell
             
         }

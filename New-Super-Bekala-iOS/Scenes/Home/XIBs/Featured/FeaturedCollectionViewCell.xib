@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,7 +30,7 @@
                         <rect key="frame" x="10" y="10" width="239" height="221"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3-9" translatesAutoresizingMaskIntoConstraints="NO" id="1LM-Ly-Npq">
-                                <rect key="frame" x="0.0" y="0.0" width="239" height="88.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="239" height="110.5"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
@@ -44,13 +44,13 @@
                                     <constraint firstAttribute="width" constant="50" id="sms-o7-aaU"/>
                                     <constraint firstAttribute="height" constant="50" id="zzG-Uy-dmu"/>
                                 </constraints>
-                                <state key="normal" image="favourite_icon"/>
+                                <state key="normal" image="unfavourite"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-0S-eT1">
-                                <rect key="frame" x="0.0" y="93.5" width="239" height="127.5"/>
+                                <rect key="frame" x="0.0" y="115.5" width="239" height="100.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McDonald's" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUY-P1-Aan">
-                                        <rect key="frame" x="76.5" y="0.0" width="86" height="47.5"/>
+                                        <rect key="frame" x="76.5" y="0.0" width="86" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fyt-y4-qER" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="71.5" y="47.5" width="96" height="30"/>
+                                        <rect key="frame" x="71.5" y="20.5" width="96" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="13y-cI-BRG"/>
@@ -87,7 +87,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="L7C-FW-FkR">
-                                        <rect key="frame" x="75" y="77.5" width="89" height="50"/>
+                                        <rect key="frame" x="75" y="50.5" width="89" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7AB-nr-hIU">
                                                 <rect key="frame" x="0.0" y="0.0" width="23" height="28.5"/>
@@ -173,14 +173,14 @@
                         <constraints>
                             <constraint firstItem="YB8-Ww-lpc" firstAttribute="top" secondItem="ISg-DG-v7C" secondAttribute="top" constant="-10" id="2AH-xT-Mzk"/>
                             <constraint firstItem="YB8-Ww-lpc" firstAttribute="leading" secondItem="ISg-DG-v7C" secondAttribute="leading" constant="-10" id="5Ci-IQ-2O6"/>
-                            <constraint firstItem="1LM-Ly-Npq" firstAttribute="height" secondItem="ISg-DG-v7C" secondAttribute="height" multiplier="0.4" id="ImF-Ai-Gi4"/>
+                            <constraint firstItem="1LM-Ly-Npq" firstAttribute="height" secondItem="ISg-DG-v7C" secondAttribute="height" multiplier="0.5" id="ImF-Ai-Gi4"/>
                             <constraint firstAttribute="trailing" secondItem="mAL-0S-eT1" secondAttribute="trailing" id="M2i-jf-Cve"/>
                             <constraint firstItem="1LM-Ly-Npq" firstAttribute="leading" secondItem="ISg-DG-v7C" secondAttribute="leading" id="UBS-KT-8rM"/>
                             <constraint firstAttribute="trailing" secondItem="1LM-Ly-Npq" secondAttribute="trailing" id="ekK-DR-zsk"/>
                             <constraint firstItem="mAL-0S-eT1" firstAttribute="top" secondItem="1LM-Ly-Npq" secondAttribute="bottom" constant="5" id="jdM-ft-LzS"/>
                             <constraint firstItem="1LM-Ly-Npq" firstAttribute="top" secondItem="ISg-DG-v7C" secondAttribute="top" id="jzf-wH-Fr8"/>
                             <constraint firstItem="mAL-0S-eT1" firstAttribute="leading" secondItem="ISg-DG-v7C" secondAttribute="leading" id="n49-dZ-3Px"/>
-                            <constraint firstAttribute="bottom" secondItem="mAL-0S-eT1" secondAttribute="bottom" id="nrf-vs-Vqz"/>
+                            <constraint firstAttribute="bottom" secondItem="mAL-0S-eT1" secondAttribute="bottom" constant="5" id="nrf-vs-Vqz"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
@@ -206,6 +206,7 @@
                 <outlet property="container" destination="ISg-DG-v7C" id="MGP-j4-fri"/>
                 <outlet property="deliveryFees" destination="1Tq-qm-vnJ" id="Umg-wo-kpx"/>
                 <outlet property="deliveryTime" destination="sWi-S0-AxF" id="T4F-ZY-2UA"/>
+                <outlet property="favouriteBtn" destination="YB8-Ww-lpc" id="dj8-IT-Tu9"/>
                 <outlet property="minimumOrder" destination="DX2-Ex-WZt" id="abs-TN-FVk"/>
                 <outlet property="vendorName" destination="yUY-P1-Aan" id="jGv-an-LF4"/>
                 <outlet property="vendorPhoto" destination="1LM-Ly-Npq" id="tdj-kd-ye7"/>
@@ -223,8 +224,8 @@
         <image name="3-9" width="600" height="400"/>
         <image name="delivery_fees" width="23" height="23"/>
         <image name="delivery_time" width="14" height="14"/>
-        <image name="favourite_icon" width="52" height="52"/>
         <image name="minimum_order" width="18" height="14"/>
+        <image name="unfavourite" width="52" height="52"/>
         <namedColor name="Dark-Blue">
             <color red="0.16099999845027924" green="0.21199999749660492" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

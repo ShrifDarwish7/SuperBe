@@ -20,35 +20,32 @@ class CartServices{
     static let shared = CartServices()
     static let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func addToCart(_ item: Product, completed: @escaping (Bool)->Void, exist: @escaping (Bool)->Void){
+    func addToCart(_ item: Product, completed: @escaping (Bool)->Void){
         
         self.getCartBranches(id: item.branch?.id) { (branches) in
             if let branches = branches{
                 if branches.isEmpty{
+                    
                     self.addCartItemWith(item, nil)
                     completed(true)
+                    
                 }else{
+                    
                     let cartItem = CartItem(context: CartServices.managedObjectContext)
                     
                     if let _ = item.photos{
                         
                         cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
-                        //                        Shared.cartIncrementalID += 1
-                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
                         cartItem.cart_id = UUID().uuidString
                         
                     }else if let _ = item.voice{
                         
                         cartItem.voice = item.voice
-                        //                        Shared.cartIncrementalID += 1
-                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
                         cartItem.cart_id = UUID().uuidString
                         
                     }else if let _ = item.text{
                         
                         cartItem.text = item.text
-                        //                        Shared.cartIncrementalID += 1
-                        //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
                         cartItem.cart_id = UUID().uuidString
                         
                     }else{
@@ -58,7 +55,7 @@ class CartServices{
                             cartId += variation.options!.map({String($0.id!)}).joined()
                         })
                         print("cartId",cartId)
-                        self.getCartItems(itemId: cartId, branch: -1/*Int(branches.first!.id)*/) { (items) in
+                        self.getCartItems(itemId: cartId, branch: -1) { (items) in
                             if let items = items{
                                 if items.isEmpty{
                                     cartItem.product_id = Int16(Int(item.id!))
@@ -70,17 +67,19 @@ class CartServices{
                                     cartItem.quantity = Int16(item.quantity)
                                     cartItem.cart_id = cartId
                                     cartItem.desc = item.desc
+                                    cartItem.min_qty = Int16(item.minQty ?? 0)
+                                    cartItem.max_qty = Int16(item.maxQty ?? 0)
                                     if let variations = item.variations{
                                         let data = try! JSONEncoder.init().encode(variations)
                                         cartItem.variations = data
                                     }
                                 }else{
-                                    exist(true)
+                                    self.updateQuantity(newValue: Int(items.first!.quantity) + item.quantity, id: (items.first?.cart_id)!, nil)
                                 }
                             }
                         }
                     }
-                    
+                                        
                     cartItem.branch = branches.first
                     
                     do {
@@ -106,22 +105,16 @@ class CartServices{
             
             let cartItem = CartItem(context: CartServices.managedObjectContext)
             cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
-            //                        Shared.cartIncrementalID += 1
-            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
             cartItem.cart_id = UUID().uuidString
             
         }else if let _ = item.voice{
             
             cartItem.voice = item.voice
-            //                        Shared.cartIncrementalID += 1
-            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
             cartItem.cart_id = UUID().uuidString
             
         }else if let _ = item.text{
             
             cartItem.text = item.text
-            //                        Shared.cartIncrementalID += 1
-            //                        cartItem.cart_id = Int64(Shared.cartIncrementalID)
             cartItem.cart_id = UUID().uuidString
             
         }else{
@@ -133,6 +126,8 @@ class CartServices{
             cartItem.price = Double(item.price!)
             cartItem.quantity = Int16(item.quantity)
             cartItem.desc = item.desc
+            cartItem.min_qty = Int16(item.minQty ?? 0)
+            cartItem.max_qty = Int16(item.maxQty ?? 0)
             var cartId = "\(item.id!)"
             item.variations?.forEach({ (variation) in
                 cartId += variation.options!.map({String($0.id!)}).joined()

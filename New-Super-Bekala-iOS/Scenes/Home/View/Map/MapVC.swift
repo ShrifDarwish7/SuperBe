@@ -32,11 +32,13 @@ class MapVC: UIViewController {
     @IBOutlet weak var flatTF: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var notesTF: UITextField!
+    @IBOutlet weak var hintZoom: UILabel!
     
     let locationManager = CLLocationManager()
     var camera: GMSCameraPosition?
     var autocompleteVC: GMSAutocompleteViewController?
     var presenter: MainPresenter?
+    var path: GMSPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +70,14 @@ class MapVC: UIViewController {
             UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             
             self.present(self.autocompleteVC!, animated: true, completion: nil)
+        }
+        
+        if let path = path{
+            let polyline = GMSPolyline(path: path)
+            polyline.strokeColor = UIColor(named: "Main")!
+            polyline.strokeWidth = 3
+            polyline.geodesic = true
+            polyline.map = self.mapView
         }
         
     }

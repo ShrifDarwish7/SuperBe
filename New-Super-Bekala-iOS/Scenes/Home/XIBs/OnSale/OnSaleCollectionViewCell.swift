@@ -31,7 +31,8 @@ class OnSaleCollectionViewCell: UICollectionViewCell {
         name.text = "\(data.id!)"
         previousPrice.text = "\(data.price ?? 0) EGP"
         currentPrice.text = "\(data.salePrice ?? 0) EGP"
-        productImage.sd_setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ))
+        productImage.kf.indicatorType = .activity
+        productImage.kf.setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ), placeholder: nil, options: [], completionHandler: nil)
     }
     
 }

@@ -61,7 +61,8 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpecialOffersCollectionViewCell.identifier, for: indexPath) as! SpecialOffersCollectionViewCell
                 let urlStr = "lang".localized == "en" ? self.slider![indexPath.row].image.en : self.slider![indexPath.row].image.ar
-                cell.image.sd_setImage(with: URL(string: Shared.storageBase + urlStr!))
+                cell.image.kf.indicatorType = .activity
+                cell.image.kf.setImage(with: URL(string: Shared.storageBase + urlStr!), placeholder: nil, options: [], completionHandler: nil)
                 return cell
             }
             

@@ -33,8 +33,6 @@ class TextOrderVC: UIViewController {
             if completed{
                 self.navigationController?.popViewController(animated: true)
             }
-        } exist: { (_) in
-            
         }
     }
     

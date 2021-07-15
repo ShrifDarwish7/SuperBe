@@ -17,8 +17,6 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         variationsTableView.delegate = self
         variationsTableView.dataSource = self
         variationsTableView.reloadData()
-       // variationTableViewHeight.constant = variationsTableView.contentSize.height + 15
-      //  self.view.layoutIfNeeded()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,7 +40,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
         }else if !selected!.isEmpty && variation.isAddition == 0{
             cell.chosedVariation.text = "lang".localized == "en" ? selected?.first?.name?.en : selected?.first?.name?.ar
         }else if !selected!.isEmpty && variation.isAddition == 1{
-            var totalAdditions = 0
+            var totalAdditions = 0.0
             selected?.forEach({ (option) in
                 totalAdditions += option.price!
             })
@@ -112,7 +110,7 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
                         self.product!.variations![indexPath.row].options![optionIndex.row].selected = !(self.product!.variations![indexPath.row].options![optionIndex.row].selected)
                         return
                     }
-                    var totalAdditions = 0
+                    var totalAdditions = 0.0
                     options?.forEach({ (option) in
                         totalAdditions += option.price!
                     })
@@ -172,16 +170,16 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if product!.variations![indexPath.row].isAddition == 1 && product!.variations![indexPath.row].isRequired != 1{
-            for variation in product!.variations!{
-                if variation.isRequired == 1{
-                    guard !variation.options!.filter({ return $0.selected == true }).isEmpty else { return 0 }
-                }
-            }
-        }
+//        if product!.variations![indexPath.row].isAddition == 1 && product!.variations![indexPath.row].isRequired != 1{
+//            for variation in product!.variations!{
+//                if variation.isRequired == 1{
+//                    guard !variation.options!.filter({ return $0.selected == true }).isEmpty else { return 0 }
+//                }
+//            }
+//        }
         
         if product!.variations![indexPath.row].expanded{
-            return CGFloat(product!.variations![indexPath.row].options!.count * 40) + 140
+            return CGFloat(product!.variations![indexPath.row].options!.count * 40) + 130
         }else{
             return 75
         }

@@ -8,7 +8,6 @@
 
 import UIKit
 import Cosmos
-import SDWebImage
 
 class FeaturedCollectionViewCell: UICollectionViewCell {
 
@@ -21,6 +20,7 @@ class FeaturedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var deliveryTime: UILabel!
     @IBOutlet weak var minimumOrder: UILabel!
     @IBOutlet weak var deliveryFees: UILabel!
+    @IBOutlet weak var favouriteBtn: UIButton!
     
     func loadUI(){
         
@@ -32,12 +32,19 @@ class FeaturedCollectionViewCell: UICollectionViewCell {
     
     func loadFrom(data: Branch){
         loadUI()
-        vendorPhoto.sd_setImage(with: URL(string: Shared.storageBase + data.logo! ))
+        vendorPhoto.kf.indicatorType = .activity
+        vendorPhoto.kf.setImage(with: URL(string: Shared.storageBase + data.logo! ), placeholder: nil, options: [], completionHandler: nil)
         vendorName.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
 //        vendorRate.rating = data.rating ?? 0.0
         deliveryTime.text = "\(data.deliveryDuration ?? 0) MIN"
-        deliveryTime.text = "\(data.minOrder ?? 0) EGP"
+        minimumOrder.text = "\(data.minOrder ?? 0) EGP"
         deliveryFees.text = "\(data.deliveryFees ?? 0) EGP"
+        if let _ = data.isFavourite,
+           data.isFavourite == 1{
+            favouriteBtn.setImage(UIImage(named: "favourite"), for: .normal)
+        }else{
+            favouriteBtn.setImage(UIImage(named: "unfavourite"), for: .normal)
+        }
     }
 
 }

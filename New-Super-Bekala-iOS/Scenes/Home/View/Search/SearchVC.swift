@@ -133,11 +133,11 @@ class SearchVC: UIViewController{
     }
     
     @objc func queryDidChange(){
+        guard !queryTF.text!.isEmpty else { return }
         self.isLoading = true
         self.loadFromNib()
         self.showSkeleton()
         var query: [String: String] = [
-           // "lang": "lang".localized,
             "q": queryTF.text!
         ]
         presenter?.searchWith(query: &query, self.context)

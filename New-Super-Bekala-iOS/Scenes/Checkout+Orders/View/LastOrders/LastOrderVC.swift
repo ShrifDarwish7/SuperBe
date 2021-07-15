@@ -22,12 +22,26 @@ class LastOrderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchAndReload()
+    }
+    
+    func fetchAndReload(){
+        isLoading = true
+        
         presenter = MainPresenter(self)
         presenter?.getMyOrders()
         
         loadFromNib()
         lastOrdersTableView.isSkeletonable = true
         showSkeleton()
+        
+        selectOrders()
+        self.view.layoutIfNeeded()
         
         fastTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
@@ -37,22 +51,24 @@ class LastOrderVC: UIViewController {
         lastOrdersTableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
+    func selectOrders(){
+        ordersTabView.backgroundColor = UIColor(named: "Buttons-Red")
+        fastTabView.backgroundColor = UIColor.lightGray
+        ordersTabView.alpha = 1
+        fastTabView.alpha = 0.5
+        self.emptyView.isHidden = true
+        self.lastOrdersTableView.isHidden = false
+        fastTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        ordersTabView.transform = CGAffineTransform(scaleX: 1, y: 1)
+    }
+    
     
     @IBAction func tabsAction(_ sender: UIButton) {
         switch sender.tag {
         case 0:
             
-            ordersTabView.backgroundColor = UIColor(named: "Buttons-Red")
-            fastTabView.backgroundColor = UIColor.lightGray
-            ordersTabView.alpha = 1
-            fastTabView.alpha = 0.5
-            self.emptyView.isHidden = true
-            self.lastOrdersTableView.isHidden = false
-            self.isLoading = true
-            self.viewDidLoad()
             UIView.animate(withDuration: 0.2) { [self] in
-                fastTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                ordersTabView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.selectOrders()
                 self.view.layoutIfNeeded()
             }
             
@@ -76,7 +92,7 @@ class LastOrderVC: UIViewController {
     @IBAction func reload(_ sender: Any) {
         self.emptyView.isHidden = true
         self.lastOrdersTableView.isHidden = false
-        self.viewDidLoad()
+        self.fetchAndReload()
     }
     
 }

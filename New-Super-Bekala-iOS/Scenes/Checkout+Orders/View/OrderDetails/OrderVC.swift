@@ -38,11 +38,18 @@ class OrderVC: UIViewController {
     @IBOutlet weak var completedStatusView: UIView!
     @IBOutlet weak var rateBtn: RoundedButton!
     @IBOutlet weak var completedLbl: UILabel!
+    @IBOutlet weak var deliveryFees: UILabel!
+    @IBOutlet weak var tax: UILabel!
+    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var discount: UILabel!
     
     var order: LastOrder?
+    var presenter: MainPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = MainPresenter(self)
         
         cancelLbl.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         reasonBtn.transform = CGAffineTransform(rotationAngle: -(.pi/2))
@@ -69,10 +76,15 @@ class OrderVC: UIViewController {
            !products.isEmpty{
             self.loadProductsTable()
         }
-        
-        branchName.text = "lang".localized == "en" ? order?.branch?.nameEn : order?.branch?.nameAr
+        branchImage.kf.indicatorType = .activity
+        branchImage.kf.setImage(with: URL(string: Shared.storageBase + (order?.branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        branchName.text = order?.branch?.name//"lang".localized == "en" ? order?.branch?.nameEn : order?.branch?.nameAr
         orderDate.text = order?.createdAt
         cancelBtn.isHidden = order?.status == "processing" ? false : true
+        deliveryFees.text = "\(order?.shippingTotal ?? 0.0) EGP"
+        discount.text = "\(order?.discountTotal ?? 0.0) EGP"
+        tax.text = "\(order?.taxesTotal ?? 0.0) EGP"
+        total.text = "\(order?.orderTotal ?? 0.0) EGP"
                 
         switch order?.status {
         case "processing":
@@ -104,7 +116,7 @@ class OrderVC: UIViewController {
 //            status3.alpha = 0.5
 //            status1.alpha = 0.5
             completedStatusView.isHidden = false
-        case "canceled", "failed":
+        case "cancelled", "failed":
             failedStatusView.isHidden = false
         default:
             break
@@ -123,7 +135,7 @@ class OrderVC: UIViewController {
     
     
     @IBAction func cancelOrderAction(_ sender: Any) {
-        
+        self.presenter?.updateOrder(id: (order?.id)!, prms: ["status": "cancelled"])
     }
     
     
@@ -145,4 +157,14 @@ class OrderVC: UIViewController {
     }
 
 
+}
+
+extension OrderVC: MainViewDelegate{
+    func didCompleteUpdateOrder(_ data: LastOrder?, _ error: String?) {
+        if let _ = data{
+            self.navigationController?.popViewController(animated: true)
+        }else{
+            showToast(error!)
+        }
+    }
 }

@@ -19,8 +19,9 @@ class LastOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var statusContainer: ViewCorners!
     
     func loadFrom(_ order: LastOrder){
-        logo.sd_setImage(with: URL(string: Shared.storageBase + (order.branch?.logo)!))
-        branchName.text = "lang".localized == "en" ? order.branch?.nameEn : order.branch?.nameAr
+        logo.kf.indicatorType = .activity
+        logo.kf.setImage(with: URL(string: Shared.storageBase + (order.branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        branchName.text = order.branch?.name
         orderDate.text = order.createdAt
         status.text = order.status
     }

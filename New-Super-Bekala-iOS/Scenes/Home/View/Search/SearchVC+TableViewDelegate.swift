@@ -87,8 +87,6 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource{
                                 self.resultTableView.reloadData()
                             }
                         }
-                    } exist: { (_) in
-                        
                     }
                     
                 }

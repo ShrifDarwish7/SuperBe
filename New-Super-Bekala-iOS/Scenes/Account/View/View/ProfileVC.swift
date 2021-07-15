@@ -17,7 +17,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var addressesTableView: UITableView!
     @IBOutlet weak var acitvityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addressesView: ViewCorners!
-    @IBOutlet weak var selectedAddressLbl: UILabel!
+    @IBOutlet weak var selectedAddressTF: UITextField!
     @IBOutlet weak var expandAddressImg: UIImageView!
     @IBOutlet weak var profileDataStack: UIStackView!
     @IBOutlet weak var dashboardContainer: UIView!
@@ -25,6 +25,9 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var bottomSheetTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var blockView: UIView!
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var phone: UITextField!
+    @IBOutlet weak var profileImg: CircluarImage!
     
     var bottomSheetPanStartingTopConstant : CGFloat = 30.0
     var presenter: MainPresenter?
@@ -52,6 +55,12 @@ class ProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        name.text = APIServices.shared.user?.name ?? ""
+        phone.text = APIServices.shared.user?.phone ?? ""
+        profileImg.kf.indicatorType = .activity
+        profileImg.kf.setImage(with: URL(string: Shared.storageBase + (APIServices.shared.user?.avatar ?? "")))
+        
         acitvityIndicator.startAnimating()
         presenter = MainPresenter(self)
         presenter?.getAddresses()
@@ -165,7 +174,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func toAddAddress(_ sender: Any) {
-        Router.toAddAddress(self)
+        Router.toAddAddress(self, nil)
     }
     
     @IBAction func showAddresses(_ sender: UIButton) {

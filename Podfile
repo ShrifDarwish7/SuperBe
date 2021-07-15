@@ -11,7 +11,6 @@ target 'New-Super-Bekala-iOS' do
   pod 'Toast-Swift'
   pod 'SwiftyJSON'
   pod 'IQKeyboardManagerSwift'
-  pod 'SDWebImage'
   pod 'Closures'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
@@ -30,6 +29,7 @@ target 'New-Super-Bekala-iOS' do
   pod 'Moya'
   #pod 'iOSDropDown'
   pod 'BSImagePicker'
+  pod 'Kingfisher'
   pod 'DropDown'
 
   target 'New-Super-Bekala-iOSTests' do

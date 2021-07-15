@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GoogleMaps
 
 enum AppStoryboard: String {
     case main = "Main"
@@ -42,9 +43,10 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toAddAddress(_ sender: UIViewController){
+    static func toAddAddress(_ sender: UIViewController,_ path: GMSPath?){
         let vc = self.instantiate(appStoryboard: .home, identifier: "MapVC") as! MapVC
         Shared.mapState = .addAddress
+        vc.path = path
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -152,10 +154,18 @@ class Router {
         
     }
     
-    
     static func toPickLocation(_ sender: UIViewController,_ state: LocationState){
         let vc = self.instantiate(appStoryboard: .services, identifier: "PickLocationVC") as! PickLocationVC
         vc.locationState = state
         sender.present(vc, animated: true, completion: nil)
     }
+    
+    static func toViewAllFeatured(_ sender: UIViewController,_ branches: [Branch]?){
+        let vc = self.instantiate(appStoryboard: .home, identifier: "AllFeaturedVC") as! AllFeaturedVC
+        vc.branches = branches
+        sender.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
 }

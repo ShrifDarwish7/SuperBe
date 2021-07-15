@@ -16,6 +16,9 @@ extension CartVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
         filtersCollectionView.reloadData()
+        
+        filtersCollectionView.scrollToItem(at: IndexPath(row: (self.branches!.firstIndex(of: self.selectedBranch!))!, section: 0), at: .centeredHorizontally, animated: true)
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.branches!.count
@@ -24,7 +27,8 @@ extension CartVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         let branch = self.branches![indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CartFiltersCollectionViewCell.identifier, for: indexPath) as! CartFiltersCollectionViewCell
         cell.name.text = "lang".localized == "en" ? branch.name_en : branch.name_ar
-        cell.img.sd_setImage(with: URL(string: Shared.storageBase + branch.logo!))
+        cell.img.kf.indicatorType = .activity
+        cell.img.kf.setImage(with: URL(string: Shared.storageBase + branch.logo!), placeholder: nil, options: [], completionHandler: nil)
         
         if branch.selected {
             cell.name.textColor = .white
@@ -45,10 +49,12 @@ extension CartVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         self.selectedBranch = branches![indexPath.row]
         try! CartServices.managedObjectContext.save()
         filtersCollectionView.reloadData()
+        filtersCollectionView.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
         CartServices.shared.getCartItems(itemId: "-1", branch: Int(self.branches![indexPath.row].id)) { (items) in
             if let items = items{
                 self.items = items
                 self.productsTableView.reloadData()
+                self.updateBill()
             }
         }
         
