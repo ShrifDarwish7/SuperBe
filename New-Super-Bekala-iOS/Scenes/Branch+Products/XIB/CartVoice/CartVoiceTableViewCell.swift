@@ -20,7 +20,6 @@ class CartVoiceTableViewCell: UITableViewCell {
     
     var player : AVAudioPlayer?
     var timer : Timer?
-    var fileUrl : URL?
     var currentPlayingTime : Float?
     var minutes : Int?
     var seconds : Int?
@@ -29,7 +28,6 @@ class CartVoiceTableViewCell: UITableViewCell {
         super.prepareForReuse()
         player = nil
         timer = nil
-        fileUrl = nil
         voiceSlider.value = 0
         currentDuration.text = "00:00"
         voiceLength.text = "00:00"

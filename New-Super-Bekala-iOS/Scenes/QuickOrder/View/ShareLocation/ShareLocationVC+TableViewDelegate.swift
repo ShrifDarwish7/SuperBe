@@ -32,14 +32,21 @@ extension ShareLocationVC: UITableViewDelegate, UITableViewDataSource{
         return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let coords = self.addresses![indexPath.row].coordinates
+        let landmark = self.addresses![indexPath.row].landmark!.replacingOccurrences(of: ",", with: " ") + " , " +  self.addresses![indexPath.row].street!.replacingOccurrences(of: ",", with: " ") + " , " + self.addresses![indexPath.row].building!.replacingOccurrences(of: ",", with: " ") + " , " + self.addresses![indexPath.row].floor!.replacingOccurrences(of: ",", with: " ") + " , " + self.addresses![indexPath.row].flat!.replacingOccurrences(of: ",", with: " ")
+        
         switch locationState {
         case .pickup:
             pickupTF.text = self.addresses![indexPath.row].title
             pickupLocation = coords
+            pickupLandmark = landmark
+            selectedPickupAddressId = self.addresses![indexPath.row].id
         case .dropOff:
             dropOffTF.text = self.addresses![indexPath.row].title
             dropOffLocation = coords
+            dropOffLandmark = landmark
+            selectedDropoffAddressId = self.addresses![indexPath.row].id
         default:
             break
         }

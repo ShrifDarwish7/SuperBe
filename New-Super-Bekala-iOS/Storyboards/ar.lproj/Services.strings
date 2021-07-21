@@ -1,0 +1,60 @@
+
+/* Class = "UILabel"; text = "Please zoom in more to find your exact delivery location"; ObjectID = "6iy-3I-48N"; */
+"6iy-3I-48N.text" = "الرجاء التكبير أكثر للعثور على موقع التسليم الخاص بك بالضبط";
+
+/* Class = "UILabel"; text = "Label Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label Label"; ObjectID = "7X0-eE-zwQ"; */
+"7X0-eE-zwQ.text" = "Label Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label Label";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "9SA-zx-2uD"; */
+"9SA-zx-2uD.text" = "00:00";
+
+/* Class = "UILabel"; text = "Continue"; ObjectID = "BVk-fN-jHc"; */
+"BVk-fN-jHc.text" = "متابعة";
+
+/* Class = "UILabel"; text = "Select from map "; ObjectID = "K4L-jG-M2h"; */
+"K4L-jG-M2h.text" = "اختيار من الخريطة";
+
+/* Class = "UITextField"; placeholder = "landmark / building / floor (optional)"; ObjectID = "LZV-2e-eUL"; */
+"LZV-2e-eUL.placeholder" = "معلم / مبنى / طابق (اختياري)";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "S4q-1x-mo8"; */
+"S4q-1x-mo8.text" = "00:00";
+
+/* Class = "UITextField"; placeholder = "Drop off"; ObjectID = "Sva-Gc-YPe"; */
+"Sva-Gc-YPe.placeholder" = "التسليم";
+
+/* Class = "UILabel"; text = "Drop off location"; ObjectID = "Teq-jO-EnT"; */
+"Teq-jO-EnT.text" = "موقع التسليم";
+
+/* Class = "UILabel"; text = "Label Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label Label"; ObjectID = "UU7-Pg-vCu"; */
+"UU7-Pg-vCu.text" = "Label Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label LabelLabel Label Label Label";
+
+/* Class = "UILabel"; text = "Checkout"; ObjectID = "Y6c-hB-pMN"; */
+"Y6c-hB-pMN.text" = "إكمال الطلب";
+
+/* Class = "UITextField"; placeholder = "Pick up"; ObjectID = "bGa-T6-3bF"; */
+"bGa-T6-3bF.placeholder" = "الاستلام";
+
+/* Class = "UIButton"; normalTitle = "Cancel order"; ObjectID = "bkr-it-AwS"; */
+"bkr-it-AwS.normalTitle" = "إلغاء الطلب";
+
+/* Class = "UILabel"; text = "Pick up"; ObjectID = "gO4-BS-jS2"; */
+"gO4-BS-jS2.text" = "الاستلام";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hYE-uL-E98"; */
+"hYE-uL-E98.text" = "Label";
+
+/* Class = "UILabel"; text = "Pick up location"; ObjectID = "i3Y-31-7we"; */
+"i3Y-31-7we.text" = "موقع الاستلام";
+
+/* Class = "UILabel"; text = "Service details"; ObjectID = "iNN-It-3T6"; */
+"iNN-It-3T6.text" = "تفاصيل الخدمة";
+
+/* Class = "UIButton"; normalTitle = "Confirm pin"; ObjectID = "iQ5-CK-hr8"; */
+"iQ5-CK-hr8.normalTitle" = "تآكيد العنوان";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "uur-VJ-fWM"; */
+"uur-VJ-fWM.normalTitle" = "تنفيذ";
+
+/* Class = "UILabel"; text = "Share location"; ObjectID = "xg1-IO-yZM"; */
+"xg1-IO-yZM.text" = "مشاركة الموقع";

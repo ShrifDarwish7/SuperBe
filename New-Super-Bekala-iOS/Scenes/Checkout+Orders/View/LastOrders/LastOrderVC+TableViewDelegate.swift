@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 extension LastOrderVC: UITableViewDelegate, UITableViewDataSource{
     
@@ -45,7 +46,63 @@ extension LastOrderVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Router.toOrder(self, self.lastOrders![indexPath.row])
+        
+        if let _ = self.lastOrders![indexPath.row].branch{
+            
+            Router.toOrder(self, self.lastOrders![indexPath.row])
+            
+        }else{
+            
+            let order = self.lastOrders![indexPath.row]
+            let service = SuperService()
+            service.orderId = order.id
+            service.status == order.status
+            service.pickupCoords = order.originCoords
+            service.pickupLandmark = order.originAddress
+            service.dropOffCoords = order.destinationCoords
+            service.dropOffLandmark = order.destinationAddress
+
+            if let files = order.files, !files.isEmpty{
+                if let ext = files.first?.fileExtension{
+                    switch ext {
+                    case ".jpeg",".png",".jpg":
+                        
+                        DispatchQueue.global(qos: .background).async {
+                            DispatchQueue.main.async {
+                                SVProgressHUD.show()
+                            }
+                            service.images = files.map({ UIImage(data: try! Data(contentsOf: URL(string: Shared.storageBase + $0)!))! })
+                            DispatchQueue.main.async {
+                                SVProgressHUD.dismiss()
+                                Router.toSuperServicesSummary(self, service)
+                            }
+                            
+                        }
+                        
+                    case ".m4a",".mp3":
+                        
+                        DispatchQueue.global(qos: .background).async {
+                            DispatchQueue.main.async {
+                                SVProgressHUD.show()
+                            }
+                            service.voice = files.map({ try! Data(contentsOf: URL(string: Shared.storageBase + $0)!) }).first
+                            DispatchQueue.main.async {
+                                SVProgressHUD.dismiss()
+                                Router.toSuperServicesSummary(self, service)
+                            }
+                            
+                        }
+                        
+                    default:
+                        break
+                    }
+                }
+            }else{
+                service.text = order.customerNote
+                Router.toSuperServicesSummary(self, service)
+            }
+            
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

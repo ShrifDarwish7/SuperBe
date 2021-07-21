@@ -60,7 +60,7 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 return cell
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpecialOffersCollectionViewCell.identifier, for: indexPath) as! SpecialOffersCollectionViewCell
-                let urlStr = "lang".localized == "en" ? self.slider![indexPath.row].image.en : self.slider![indexPath.row].image.ar
+                let urlStr = "lang".localized == "en" ? self.slider![indexPath.row].image?.en : self.slider![indexPath.row].image?.ar
                 cell.image.kf.indicatorType = .activity
                 cell.image.kf.setImage(with: URL(string: Shared.storageBase + urlStr!), placeholder: nil, options: [], completionHandler: nil)
                 return cell
@@ -96,11 +96,10 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.showSkeletonView()
             self.updateBranches()
         case specialOffersCollection:
-            switch self.slider![indexPath.row].slidableType {
-            case .branch:
-                self.presenter?.getBranchBy(self.slider![indexPath.row].slidableID)
-            default:
-                break
+            if let branch = self.slider![indexPath.row].branch{
+                Router.toBranch(self, branch)
+            }else if let product = self.slider![indexPath.row].product{
+                Router.toProduct(self, product)
             }
         default:
             break

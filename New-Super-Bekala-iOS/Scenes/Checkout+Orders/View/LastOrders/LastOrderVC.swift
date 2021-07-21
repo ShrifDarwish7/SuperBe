@@ -19,6 +19,7 @@ class LastOrderVC: UIViewController {
     var lastOrders: [LastOrder]?
     var isLoading = true
     var presenter: MainPresenter?
+    var selectedOrders = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,29 +28,33 @@ class LastOrderVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        fetchAndReload()
-    }
-    
-    func fetchAndReload(){
-        isLoading = true
-        
         presenter = MainPresenter(self)
-        presenter?.getMyOrders()
-        
-        loadFromNib()
-        lastOrdersTableView.isSkeletonable = true
+
         showSkeleton()
         
-        selectOrders()
+        if selectedOrders{
+            selectOrders()
+            presenter?.getMyOrders()
+        }else{
+            selectServices()
+            presenter?.getMyServices()
+        }
+    }
+    
+    func showSkeleton(){
+        isLoading = true
+
+        loadFromNib()
+        lastOrdersTableView.isSkeletonable = true
+        
+        lastOrdersTableView.hideSkeleton()
+        lastOrdersTableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        
         self.view.layoutIfNeeded()
         
         fastTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
     
-    func showSkeleton(){
-        lastOrdersTableView.hideSkeleton()
-        lastOrdersTableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-    }
     
     func selectOrders(){
         ordersTabView.backgroundColor = UIColor(named: "Buttons-Red")
@@ -62,37 +67,47 @@ class LastOrderVC: UIViewController {
         ordersTabView.transform = CGAffineTransform(scaleX: 1, y: 1)
     }
     
+    func selectServices(){
+        fastTabView.backgroundColor = UIColor(named: "Buttons-Red")
+        ordersTabView.backgroundColor = UIColor.lightGray
+        fastTabView.alpha = 1
+        ordersTabView.alpha = 0.5
+        ordersTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        fastTabView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.emptyView.isHidden = true
+        self.lastOrdersTableView.isHidden = false
+    }
+    
     
     @IBAction func tabsAction(_ sender: UIButton) {
         switch sender.tag {
         case 0:
             
             UIView.animate(withDuration: 0.2) { [self] in
+                self.selectedOrders = true
                 self.selectOrders()
                 self.view.layoutIfNeeded()
             }
             
         case 1:
             
-            fastTabView.backgroundColor = UIColor(named: "Buttons-Red")
-            ordersTabView.backgroundColor = UIColor.lightGray
-            fastTabView.alpha = 1
-            ordersTabView.alpha = 0.5
             UIView.animate(withDuration: 0.2) { [self] in
-                ordersTabView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-                fastTabView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.selectedOrders = false
+                self.selectServices()
                 self.view.layoutIfNeeded()
             }
             
         default:
             break
         }
+        self.viewWillAppear(true)
     }
     
     @IBAction func reload(_ sender: Any) {
         self.emptyView.isHidden = true
         self.lastOrdersTableView.isHidden = false
-        self.fetchAndReload()
+        self.viewWillAppear(true)
     }
     
 }
+

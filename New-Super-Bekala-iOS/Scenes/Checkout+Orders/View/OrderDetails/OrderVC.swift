@@ -42,6 +42,11 @@ class OrderVC: UIViewController {
     @IBOutlet weak var tax: UILabel!
     @IBOutlet weak var total: UILabel!
     @IBOutlet weak var discount: UILabel!
+    @IBOutlet weak var wallet: UILabel!
+    @IBOutlet weak var deliveryStack: UIStackView!
+    @IBOutlet weak var discountStack: UIStackView!
+    @IBOutlet weak var taxStack: UIStackView!
+    @IBOutlet weak var walletStack: UIStackView!
     
     var order: LastOrder?
     var presenter: MainPresenter?
@@ -57,7 +62,17 @@ class OrderVC: UIViewController {
         rateBtn.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         
         orderId.text = "#\(order?.id ?? 000000)"
-        address.text = order?.address?.title
+        
+        if let address = order?.address{
+            self.address.text = address.title
+        }else{
+            address.text = "Receive from vendor".localized
+        }
+        
+        deliveryStack.isHidden = order?.shippingTotal == 0 ? true : false
+        discountStack.isHidden = order?.discountTotal == 0 ? true : false
+        taxStack.isHidden = order?.taxesTotal == 0 ? true : false
+        walletStack.isHidden = order?.paidFromWallet == 0 ? true : false
         
         let swipLeft = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
         swipLeft.direction = .left
@@ -67,6 +82,12 @@ class OrderVC: UIViewController {
         swipRight.direction = .right
         self.view.addGestureRecognizer(swipRight)
 
+        if let coupons = order?.coupons, !coupons.isEmpty{
+            orderCoupon.text = coupons.joined(separator: ", ")
+            couponStack.isHidden = false
+        }else{
+            couponStack.isHidden = true
+        }
         
         for lbl in statusCol{
             lbl.transform = CGAffineTransform(rotationAngle: -(.pi/2))
@@ -76,16 +97,31 @@ class OrderVC: UIViewController {
            !products.isEmpty{
             self.loadProductsTable()
         }
+        
         branchImage.kf.indicatorType = .activity
         branchImage.kf.setImage(with: URL(string: Shared.storageBase + (order?.branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
         branchName.text = order?.branch?.name//"lang".localized == "en" ? order?.branch?.nameEn : order?.branch?.nameAr
         orderDate.text = order?.createdAt
         cancelBtn.isHidden = order?.status == "processing" ? false : true
-        deliveryFees.text = "\(order?.shippingTotal ?? 0.0) EGP"
-        discount.text = "\(order?.discountTotal ?? 0.0) EGP"
-        tax.text = "\(order?.taxesTotal ?? 0.0) EGP"
-        total.text = "\(order?.orderTotal ?? 0.0) EGP"
-                
+        deliveryFees.text = "\(order?.shippingTotal?.roundToDecimal(2) ?? 0.0) EGP"
+        discount.text = "\(order?.discountTotal?.roundToDecimal(2) ?? 0.0) EGP"
+        tax.text = "\(order?.taxesTotal?.roundToDecimal(2) ?? 0.0) EGP"
+        total.text = "\(order?.orderTotal?.roundToDecimal(2) ?? 0.0) EGP"
+        
+        switch order?.paymentMethod {
+        case 0:
+            paymentMethod.text = "Cash".localized
+        case 1:
+            paymentMethod.text = "Card on delivery".localized
+        case 2:
+            paymentMethod.text = "Online payment".localized
+        case 3:
+            paymentMethod.text = "Wallet".localized
+        case 4:
+            paymentMethod.text = "Cash & Wallet".localized
+        default : break
+        }
+        
         switch order?.status {
         case "processing":
             status2Indicator.alpha = 0.5
@@ -121,16 +157,25 @@ class OrderVC: UIViewController {
         default:
             break
         }
+        
+       
     }
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
         productsTableViewHeight.constant = productsTableView.contentSize.height
         self.view.layoutIfNeeded()
+       // hideStatusView()
     }
     
+    @IBAction func openAddressInMaps(_ sender: Any) {
+        guard let address = self.order?.address else { return }
+        self.openInMaps(coordinates: address.coordinates ?? "0.0")
+    }
+    
+    
     @IBAction func back(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -140,22 +185,55 @@ class OrderVC: UIViewController {
     
     
     @objc func didSwipe(_ sender: UISwipeGestureRecognizer) {
-        switch sender.direction {
-        case .left:
-            UIView.animate(withDuration: 0.2) {
-                self.statusViewWidth.constant = 0
-                self.view.layoutIfNeeded()
+        if "lang".localized == "en"{
+            switch sender.direction {
+            case .left:
+                hideStatusView()
+            case .right:
+                showStatusView()
+            default:
+                break
             }
-        case .right:
-            UIView.animate(withDuration: 0.2) {
-                self.statusViewWidth.constant = 85
-                self.view.layoutIfNeeded()
+        }else{
+            switch sender.direction {
+            case .right:
+                hideStatusView()
+            case .left:
+                showStatusView()
+            default:
+                break
             }
+        }
+        
+    }
+    
+    @IBAction func statusAction(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            showStatusView()
+            sender.tag = 1
+        case 1:
+            hideStatusView()
+            sender.tag = 0
         default:
             break
         }
     }
+    
+    
+    func showStatusView(){
+        UIView.animate(withDuration: 0.2) {
+            self.statusViewWidth.constant = 85
+            self.view.layoutIfNeeded()
+        }
+    }
 
+    func hideStatusView(){
+        UIView.animate(withDuration: 0.2) {
+            self.statusViewWidth.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
 
 }
 

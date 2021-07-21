@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 class SuperService{
     
+    var orderId: Int?
+    var status: String?
     // Pick up data
     var pickupCoords: String?
     var pickupLandmark: String?
+    
+    var pickupAddressId: Int?
+    var dropoffAddressId: Int?
     
     // Drop off data
     var dropOffCoords: String?
@@ -20,7 +26,7 @@ class SuperService{
     
     var phoneNumber: String?
     
-    var images: [Data]?
+    var images: [UIImage]?
     var voice: Data?
     var text: String?
 }

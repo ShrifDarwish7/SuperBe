@@ -24,6 +24,8 @@ class ShareLocationVC: UIViewController {
     @IBOutlet weak var distance: UILabel!
     
     var locationState: LocationState?
+    var selectedPickupAddressId: Int?
+    var selectedDropoffAddressId: Int?
     var addresses: [Address]?{
         didSet{
             self.loadAddressesTable()
@@ -108,6 +110,8 @@ class ShareLocationVC: UIViewController {
         superService.pickupLandmark = pickupLandmark
         superService.dropOffCoords = dropOffLocation
         superService.dropOffLandmark = dropOffLandmark
+        superService.pickupAddressId = selectedPickupAddressId
+        superService.dropoffAddressId = selectedDropoffAddressId
         Shared.superService = superService
         
         switch Shared.selectedServices {

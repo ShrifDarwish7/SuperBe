@@ -12,6 +12,7 @@ import DropDown
 class ProfileVC: UIViewController {
     
     @IBOutlet weak var menuContainer: UIView!
+    @IBOutlet weak var menuContainerAr: UIView!
     @IBOutlet weak var profileTab: ViewCorners!
     @IBOutlet weak var dashboardTab: ViewCorners!
     @IBOutlet weak var addressesTableView: UITableView!
@@ -35,13 +36,15 @@ class ProfileVC: UIViewController {
     let menu: DropDown = {
         let menu = DropDown()
         menu.dataSource = [
-            "My account",
-            "My promocodes",
-            "Logout"
+            "My account".localized,
+            "My promocodes".localized,
+            "Langauge".localized,
+            "Logout".localized
         ]
         let icons: [String] = [
             "profile_icon",
             "promo",
+            "global",
             "logout_icon"
         ]
         menu.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
@@ -56,6 +59,9 @@ class ProfileVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissBtmSheetNotify), name: NSNotification.Name("DISMISS_BOTTOM_SHEET"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(paymentDidFinish(sender:)), name: NSNotification.Name("FINISH_PAYMENT"), object: nil)
+        
         name.text = APIServices.shared.user?.name ?? ""
         phone.text = APIServices.shared.user?.phone ?? ""
         profileImg.kf.indicatorType = .activity
@@ -64,6 +70,19 @@ class ProfileVC: UIViewController {
         acitvityIndicator.startAnimating()
         presenter = MainPresenter(self)
         presenter?.getAddresses()
+    }
+    
+    @objc func paymentDidFinish(sender: NSNotification){
+        
+        guard let userInfo = sender.userInfo as? [String: String] else { return }
+        if let success = userInfo["success"],
+           let transactionId = userInfo["transactionId"],
+           success == "1"{
+            self.presenter?.addToWallet((Shared.transaction?.amount)!)
+        }else{
+            showToast("Transaction failed, please make sure you entered correct card information and the card is valid")
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -76,7 +95,7 @@ class ProfileVC: UIViewController {
         viewPan.delaysTouchesEnded = false
         self.draggableView.addGestureRecognizer(viewPan)
         
-        menu.anchorView = menuContainer
+        menu.anchorView = "lang".localized == "en" ? menuContainer : menuContainerAr
         dashboardTab.layer.cornerRadius = dashboardTab.frame.height/2
         dashboardTab.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         dashboardTab.alpha = 0.5
@@ -95,6 +114,11 @@ class ProfileVC: UIViewController {
                     
                 }
             case 2:
+                if let _ = Bundle.main.bundleIdentifier,
+                    let url = URL(string: "\(UIApplication.openSettingsURLString)") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            case 3:
                 APIServices.shared.isLogged = false
                 Router.toMainNav(self)
             default:
@@ -143,6 +167,10 @@ class ProfileVC: UIViewController {
     }
     
 
+    @objc func dismissBtmSheetNotify(){
+        dismissBottomSheet(self)
+    }
+    
     @IBAction func showMenu(_ sender: Any) {
         menu.show()
     }

@@ -37,6 +37,9 @@ protocol MainViewDelegate {
     func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?)
     func didCompleteWithFavourites()
     func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?)
+    func didCompletePlaceSuperService(_ error: String?)
+  //  func didCompleteWithServices(_ data: [LastOrder]?)
+    func didCompleteAddToWallet(_ msg: String,_ status: Int)
 }
 
 extension MainViewDelegate{
@@ -66,6 +69,9 @@ extension MainViewDelegate{
     func didCompleteWithFavourites(){}
     func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?){}
     func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?){}
+    func didCompletePlaceSuperService(_ error: String?){}
+   // func didCompleteWithServices(_ data: [LastOrder]?){}
+    func didCompleteAddToWallet(_ msg: String,_ status: Int){}
 }
 
 class MainPresenter{
@@ -76,8 +82,50 @@ class MainPresenter{
         self.delegate = delegate
     }
     
+    func placeSuperService(_ prms: [String: Any],_ images: [String: UIImage]?,_ voice: Data?){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.placeSuperService(prms, images, voice)) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    self.delegate?.didCompletePlaceSuperService(nil)
+                }else{
+                    self.delegate?.didCompletePlaceSuperService(json["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompletePlaceSuperService(Shared.errorMsg)
+            }
+        }
+    }
+    
+    func addToWallet(_ amount: Double){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.addToWallet(["value": amount])) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                self.delegate?.didCompleteAddToWallet(json["message"].stringValue, json["status"].intValue)
+            }
+        }
+    }
+    
     func getPoints(){
         APIServices.shared.call(.points) { (data) in
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: PointsResponse.self),
+               let pointsData = dataModel.data{
+                self.delegate?.didCompleteWithPoints(pointsData, nil)
+            }else{
+                self.delegate?.didCompleteWithPoints(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func getWalletPoints(){
+        APIServices.shared.call(.wallet) { (data) in
             if let data = data,
                let dataModel = data.getDecodedObject(from: PointsResponse.self),
                let pointsData = dataModel.data{
@@ -125,7 +173,21 @@ class MainPresenter{
             print("getMyOrders",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: LastOrdersResponse.self){
-                self.delegate?.didCompleteWithMyOrders(dataModel.data)
+                self.delegate?.didCompleteWithMyOrders(dataModel.data?.filter({ $0.branch != nil }))
+            }else{
+                self.delegate?.didCompleteWithMyOrders(nil)
+            }
+        }
+    }
+    
+    func getMyServices(){
+        let prms = ["filter": "user_id=\(APIServices.shared.user?.id ?? 0)"]
+       // let prms = ["filter": "user_id=1"]
+        APIServices.shared.call(.getMyOrders(prms)) { (data) in
+            print("getMyServices",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: LastOrdersResponse.self){
+                self.delegate?.didCompleteWithMyOrders(dataModel.data?.filter({ return $0.branch == nil }))
             }else{
                 self.delegate?.didCompleteWithMyOrders(nil)
             }
@@ -134,9 +196,6 @@ class MainPresenter{
     
     func placeOrder(_ order: Order){
         self.delegate?.showProgress()
-        let data = try! JSONEncoder.init().encode(order)
-        print("order prms",JSON(data))
-        print(APIServices.shared.user?.token)
         APIServices.shared.call(.placeOrder(order)) { (data) in
             self.delegate?.dismissProgress()
             if let data = data{
@@ -250,7 +309,7 @@ class MainPresenter{
             }
         }
     }
-    
+
     func getGeocode(_ parms: [String:String]){
         delegate?.showProgress()
         APIServices.shared.call(.getGeocode(parms)) { [self] (data) in

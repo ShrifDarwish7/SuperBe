@@ -1,0 +1,390 @@
+
+/* Class = "UILabel"; text = "Phone number (optional)"; ObjectID = "0A4-Bo-ZnG"; */
+"0A4-Bo-ZnG.text" = "رقم الهاتف (إختياري)";
+
+/* Class = "UILabel"; text = "Open"; ObjectID = "0fj-r3-2Ox"; */
+"0fj-r3-2Ox.text" = "مفتوح";
+
+/* Class = "UILabel"; text = "https://twitter.com/SuperBekala"; ObjectID = "1JZ-Su-zvD"; */
+"1JZ-Su-zvD.text" = "https://twitter.com/SuperBekala";
+
+/* Class = "UILabel"; text = "Please zoom in more to find your exact delivery location"; ObjectID = "27H-fy-tRI"; */
+"27H-fy-tRI.text" = "الرجاء التكبير أكثر للعثور على موقع التسليم الخاص بك بالضبط";
+
+/* Class = "UILabel"; text = "Featured vendors"; ObjectID = "3TE-EB-u2U"; */
+"3TE-EB-u2U.text" = "متاجر مميزة";
+
+/* Class = "UILabel"; text = "Filter"; ObjectID = "3VK-sn-deu"; */
+"3VK-sn-deu.text" = "فلتر";
+
+/* Class = "UILabel"; text = "Maximum delivery fees"; ObjectID = "3dR-yQ-kS6"; */
+"3dR-yQ-kS6.text" = "رسوم التوصيل القصوى";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "4xJ-t5-Yre"; */
+"4xJ-t5-Yre.text" = "الإجمالي";
+
+/* Class = "UILabel"; text = "https://www.facebook.com/SuperBekala"; ObjectID = "5Nz-jI-zt9"; */
+"5Nz-jI-zt9.text" = "https://www.facebook.com/SuperBekala";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "68C-SE-jas"; */
+"68C-SE-jas.normalTitle" = "حفظ";
+
+/* Class = "UILabel"; text = "text"; ObjectID = "6i3-5I-Ud5"; */
+"6i3-5I-Ud5.text" = "نص";
+
+/* Class = "UILabel"; text = "30 min"; ObjectID = "6ix-ip-T7y"; */
+"6ix-ip-T7y.text" = "٣٠ دقيقة";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "7Ig-ce-9ht"; */
+"7Ig-ce-9ht.text" = "الحالة";
+
+/* Class = "UILabel"; text = "We will be pleased if you contact\nwith us on"; ObjectID = "7V7-xm-etH"; */
+"7V7-xm-etH.text" = "سنكون سعداء إذا تواصلت معنا على";
+
+/* Class = "UILabel"; text = "012066672019"; ObjectID = "7nB-ck-Gsm"; */
+"7nB-ck-Gsm.text" = "012066672019";
+
+/* Class = "UILabel"; text = "Search"; ObjectID = "8GF-Zp-Isa"; */
+"8GF-Zp-Isa.text" = "بحث";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "8Mi-Fy-RhM"; */
+"8Mi-Fy-RhM.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "https://twitter.com/SuperBekala"; ObjectID = "8Pc-pd-RxN"; */
+"8Pc-pd-RxN.text" = "https://twitter.com/SuperBekala";
+
+/* Class = "UILabel"; text = "Flat"; ObjectID = "8bb-8g-rSy"; */
+"8bb-8g-rSy.text" = "الشقة";
+
+/* Class = "UILabel"; text = "McDonald's"; ObjectID = "8i2-sH-Kl7"; */
+"8i2-sH-Kl7.text" = "McDonald's";
+
+/* Class = "UILabel"; text = "Shopping"; ObjectID = "9iZ-vv-OuM"; */
+"9iZ-vv-OuM.text" = "تسوق";
+
+/* Class = "UILabel"; text = "Call us "; ObjectID = "A4g-CP-GPS"; */
+"A4g-CP-GPS.text" = "اتصل بنا";
+
+/* Class = "UILabel"; text = "District"; ObjectID = "Aod-7D-EUA"; */
+"Aod-7D-EUA.text" = "المنطقة";
+
+/* Class = "UILabel"; text = "Mailbox"; ObjectID = "BLO-v3-Sfl"; */
+"BLO-v3-Sfl.text" = "Mailbox";
+
+/* Class = "UILabel"; text = "250 EGP"; ObjectID = "CAB-DQ-Mu0"; */
+"CAB-DQ-Mu0.text" = "250 EGP";
+
+/* Class = "UIButton"; normalTitle = "Confirm Pin"; ObjectID = "Ce0-vg-BkO"; */
+"Ce0-vg-BkO.normalTitle" = "تآكيد العنوان";
+
+/* Class = "UILabel"; text = "Contact us"; ObjectID = "CmM-ka-cri"; */
+"CmM-ka-cri.text" = "تواصل معنا";
+
+/* Class = "UILabel"; text = "Lorem Ipsum is simply dummy text of the \nprinting and typesetting industry. Lorem Ipsum \nhas been the industry's"; ObjectID = "Dtf-6C-7ln"; */
+"Dtf-6C-7ln.text" = "Lorem Ipsum is simply dummy text of the \nprinting and typesetting industry. Lorem Ipsum \nhas been the industry's";
+
+/* Class = "UILabel"; text = "Cart"; ObjectID = "E0n-Ie-Vtb"; */
+"E0n-Ie-Vtb.text" = "سلة المشتريات";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FCQ-sb-hxj"; */
+"FCQ-sb-hxj.text" = "Label";
+
+/* Class = "UILabel"; text = "We will be pleased if you contact\nwith us on"; ObjectID = "FDC-RH-ktQ"; */
+"FDC-RH-ktQ.text" = "سنكون سعداء إذا تواصلت معنا على";
+
+/* Class = "UILabel"; text = "camera"; ObjectID = "FdJ-LC-grd"; */
+"FdJ-LC-grd.text" = "الكاميرا";
+
+/* Class = "UILabel"; text = "Building no."; ObjectID = "Fvd-uM-Q5Z"; */
+"Fvd-uM-Q5Z.text" = "رقم المبني";
+
+/* Class = "UILabel"; text = "Call us"; ObjectID = "FwF-UB-VRi"; */
+"FwF-UB-VRi.text" = "اتصل بنا";
+
+/* Class = "UILabel"; text = "100 EGP"; ObjectID = "G0R-tW-GnI"; */
+"G0R-tW-GnI.text" = "100 EGP";
+
+/* Class = "UILabel"; text = "Support Coupons"; ObjectID = "G5X-cC-W9r"; */
+"G5X-cC-W9r.text" = "يدعم الكوبونات";
+
+/* Class = "UIButton"; normalTitle = "Detect my location on map"; ObjectID = "G5q-35-6fV"; */
+"G5q-35-6fV.normalTitle" = "حدد موقعي علي الخريطة";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "GPL-3T-SCA"; */
+"GPL-3T-SCA.text" = "العنوان";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "Gc4-2C-oRy"; */
+"Gc4-2C-oRy.text" = "تويتر";
+
+/* Class = "UILabel"; text = "Close"; ObjectID = "Gzj-uZ-awI"; */
+"Gzj-uZ-awI.text" = "مغلق";
+
+/* Class = "UILabel"; text = "+2012066672019"; ObjectID = "Hf4-dX-S3z"; */
+"Hf4-dX-S3z.text" = "+2012066672019";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "J6p-q5-6xN"; */
+"J6p-q5-6xN.text" = "العنوان";
+
+/* Class = "UILabel"; text = "Phones"; ObjectID = "Jt7-4x-g6m"; */
+"Jt7-4x-g6m.text" = "ارقام الهاتف";
+
+/* Class = "UIButton"; normalTitle = "See all locations"; ObjectID = "LKO-Ot-yXk"; */
+"LKO-Ot-yXk.normalTitle" = "كشف كل الموقع";
+
+/* Class = "UILabel"; text = "Delivery"; ObjectID = "MTz-8n-4cQ"; */
+"MTz-8n-4cQ.text" = "توصيل";
+
+/* Class = "UILabel"; text = "Instgram"; ObjectID = "MgD-rx-hxR"; */
+"MgD-rx-hxR.text" = "انستجرام";
+
+/* Class = "UILabel"; text = "Yes"; ObjectID = "MhT-l8-J8b"; */
+"MhT-l8-J8b.text" = "نعم";
+
+/* Class = "UILabel"; text = "Working hours"; ObjectID = "MnO-h0-NCT"; */
+"MnO-h0-NCT.text" = "ساعات العمل";
+
+/* Class = "UILabel"; text = "Maximum delivery time"; ObjectID = "Nd6-86-2HA"; */
+"Nd6-86-2HA.text" = "وقت التوصيل الأقصى";
+
+/* Class = "UIButton"; normalTitle = "Refine"; ObjectID = "Nh4-rX-V9W"; */
+"Nh4-rX-V9W.normalTitle" = "تحسين";
+
+/* Class = "UILabel"; text = "https://instgram.com/SuperBekala"; ObjectID = "O5w-23-C4p"; */
+"O5w-23-C4p.text" = "https://instgram.com/SuperBekala";
+
+/* Class = "UIButton"; normalTitle = "Checkout"; ObjectID = "O9n-GA-jbT"; */
+"O9n-GA-jbT.normalTitle" = "إكمال الطلب";
+
+/* Class = "UILabel"; text = "Facebook"; ObjectID = "OS3-Dr-zhX"; */
+"OS3-Dr-zhX.text" = "فيسبوك";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "PTJ-oK-r4o"; */
+"PTJ-oK-r4o.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "0 EGP"; ObjectID = "PYS-kI-XZ5"; */
+"PYS-kI-XZ5.text" = "0 EGP";
+
+/* Class = "UILabel"; text = "Cities"; ObjectID = "Phd-3t-nob"; */
+"Phd-3t-nob.text" = "المدن";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QAN-oB-CKd"; */
+"QAN-oB-CKd.text" = "Label";
+
+/* Class = "UILabel"; text = "voice"; ObjectID = "QE5-xE-mKV"; */
+"QE5-xE-mKV.text" = "صوت";
+
+/* Class = "UILabel"; text = "Write order"; ObjectID = "SLb-hS-70O"; */
+"SLb-hS-70O.text" = "كتابة طلب";
+
+/* Class = "UILabel"; text = "WhatsApp "; ObjectID = "Seb-4E-tGh"; */
+"Seb-4E-tGh.text" = " واتس اب ";
+
+/* Class = "UILabel"; text = "Mailbox"; ObjectID = "T0t-jY-QRd"; */
+"T0t-jY-QRd.text" = "Mailbox";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "TrE-eq-Bs0"; */
+"TrE-eq-Bs0.text" = "العنوان";
+
+/* Class = "UITextField"; placeholder = "Address Title"; ObjectID = "UHe-T3-M8P"; */
+"UHe-T3-M8P.placeholder" = "اسم العنوان";
+
+/* Class = "UILabel"; text = "New vendors"; ObjectID = "VBw-tq-eLO"; */
+"VBw-tq-eLO.text" = "متاجر جديدة";
+
+/* Class = "UILabel"; text = "If we have your location, we can do a better job to find what you want and deliver it"; ObjectID = "VMd-sl-DPC"; */
+"VMd-sl-DPC.text" = "إذا كان لدينا موقعك ، فيمكننا القيام بعمل أفضل للعثور على ما تريد وتقديمه";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "VWK-2N-yDn"; */
+"VWK-2N-yDn.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "WhatsApp "; ObjectID = "WSH-S7-Si2"; */
+"WSH-S7-Si2.text" = "واتس اب ";
+
+/* Class = "UILabel"; text = "Call us "; ObjectID = "XZU-ZV-Odt"; */
+"XZU-ZV-Odt.text" = "اتصل بنا";
+
+/* Class = "UILabel"; text = "Delivery areas"; ObjectID = "Xrr-JW-zvx"; */
+"Xrr-JW-zvx.text" = "مناطق التوصيل";
+
+/* Class = "UILabel"; text = "Open now"; ObjectID = "Xu7-gy-VMC"; */
+"Xu7-gy-VMC.text" = "مفتوح الآن";
+
+/* Class = "UILabel"; text = "Favourite"; ObjectID = "ZHo-IP-1LG"; */
+"ZHo-IP-1LG.text" = "مفضلة";
+
+/* Class = "UILabel"; text = "150 EGP"; ObjectID = "ZmG-Pn-49I"; */
+"ZmG-Pn-49I.text" = "150 EGP";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "a2k-Zl-7Tj"; */
+"a2k-Zl-7Tj.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "info@Superbekala.com"; ObjectID = "a5i-0l-ffB"; */
+"a5i-0l-ffB.text" = "info@Superbekala.com";
+
+/* Class = "UIButton"; normalTitle = "Add items"; ObjectID = "aSg-tN-k3T"; */
+"aSg-tN-k3T.normalTitle" = "إضافة منتجات";
+
+/* Class = "UILabel"; text = "Add to cart"; ObjectID = "azY-gh-wtJ"; */
+"azY-gh-wtJ.text" = "إضافة إلي سلة المشتريات";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "b1b-Ob-tcb"; */
+"b1b-Ob-tcb.text" = "ملاحظات";
+
+/* Class = "UILabel"; text = "Hotdog crunchy pizza"; ObjectID = "bwB-vI-p3G"; */
+"bwB-vI-p3G.text" = "Hotdog crunchy pizza";
+
+/* Class = "UILabel"; text = "No"; ObjectID = "c3S-RG-yEp"; */
+"c3S-RG-yEp.text" = "لا";
+
+/* Class = "UILabel"; text = "10 LE"; ObjectID = "cfi-i4-gQ8"; */
+"cfi-i4-gQ8.text" = "10 LE";
+
+/* Class = "UILabel"; text = "0 min"; ObjectID = "cpL-Kh-QOj"; */
+"cpL-Kh-QOj.text" = "0 min";
+
+/* Class = "UILabel"; text = "20 EGP"; ObjectID = "dE9-EB-VtH"; */
+"dE9-EB-VtH.text" = "20 EGP";
+
+/* Class = "UILabel"; text = "No results found!"; ObjectID = "dGM-w3-glc"; */
+"dGM-w3-glc.text" = "لا يوجد نتائج";
+
+/* Class = "UILabel"; text = "https://www.facebook.com/SuperBekala"; ObjectID = "dXu-b1-xhf"; */
+"dXu-b1-xhf.text" = "https://www.facebook.com/SuperBekala";
+
+/* Class = "UILabel"; text = "Popular"; ObjectID = "dbM-vv-RrV"; */
+"dbM-vv-RrV.text" = "شائعة";
+
+/* Class = "UILabel"; text = "All"; ObjectID = "dkh-Ag-xXh"; */
+"dkh-Ag-xXh.text" = "معلومات";
+
+/* Class = "UILabel"; text = "Share your location"; ObjectID = "eYT-pV-DxG"; */
+"eYT-pV-DxG.text" = "مشاركة العنوان";
+
+/* Class = "UILabel"; text = "Rates"; ObjectID = "eiv-Zi-8Ym"; */
+"eiv-Zi-8Ym.text" = "تقيمات";
+
+/* Class = "UILabel"; text = "Street & land mark for place"; ObjectID = "emK-Hr-6uO"; */
+"emK-Hr-6uO.text" = "علامة الشارع والأرض للمكان";
+
+/* Class = "UILabel"; text = "Image order"; ObjectID = "fbK-vn-9av"; */
+"fbK-vn-9av.text" = "طلب صورة";
+
+/* Class = "UILabel"; text = "Quantity"; ObjectID = "frE-T7-Ve3"; */
+"frE-T7-Ve3.text" = "الكمية";
+
+/* Class = "UILabel"; text = "+2012066672019"; ObjectID = "fuz-14-Bg4"; */
+"fuz-14-Bg4.text" = "+2012066672019";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "g6j-Fa-kYQ"; */
+"g6j-Fa-kYQ.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "Regions"; ObjectID = "h08-0f-2fI"; */
+"h08-0f-2fI.text" = "المناطق";
+
+/* Class = "UIButton"; normalTitle = "Change location"; ObjectID = "h2Q-g8-BsA"; */
+"h2Q-g8-BsA.normalTitle" = "تغير عنوان التوصيل";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "hLq-eA-fwh"; */
+"hLq-eA-fwh.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "Instgram"; ObjectID = "hU9-MK-aCK"; */
+"hU9-MK-aCK.text" = "انستجرام";
+
+/* Class = "UILabel"; text = "On hold"; ObjectID = "iQI-pE-5jc"; */
+"iQI-pE-5jc.text" = "معلق";
+
+/* Class = "UILabel"; text = "https://instgram.com/SuperBekala"; ObjectID = "iZd-cO-vdF"; */
+"iZd-cO-vdF.text" = "https://instgram.com/SuperBekala";
+
+/* Class = "UILabel"; text = "Payment options"; ObjectID = "ibH-8m-9oK"; */
+"ibH-8m-9oK.text" = "طرق الدفع";
+
+/* Class = "UILabel"; text = "10 LE"; ObjectID = "id3-Hs-KUf"; */
+"id3-Hs-KUf.text" = "10 LE";
+
+/* Class = "UILabel"; text = "Voice order"; ObjectID = "iqR-dW-kmq"; */
+"iqR-dW-kmq.text" = "طلب صوت";
+
+/* Class = "UILabel"; text = "Vendors"; ObjectID = "jGb-Oz-asv"; */
+"jGb-Oz-asv.text" = "متاجر";
+
+/* Class = "UILabel"; text = "Search"; ObjectID = "jHC-Sh-Yeb"; */
+"jHC-Sh-Yeb.text" = "بحث";
+
+/* Class = "UILabel"; text = "Will open soon !"; ObjectID = "jLz-fy-83n"; */
+"jLz-fy-83n.text" = "Will open soon !";
+
+/* Class = "UILabel"; text = "Floor"; ObjectID = "kpI-Lg-vt7"; */
+"kpI-Lg-vt7.text" = "الطابق";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "lBX-iY-u4b"; */
+"lBX-iY-u4b.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "Support VISA"; ObjectID = "lb5-62-Hhf"; */
+"lb5-62-Hhf.text" = "يدعم فيزا";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "ljp-Ru-FZo"; */
+"ljp-Ru-FZo.text" = "تويتر";
+
+/* Class = "UILabel"; text = "Saturday : 8:00:00 - 5:00:00"; ObjectID = "lvD-zI-l1z"; */
+"lvD-zI-l1z.text" = "Saturday : 8:00:00 - 5:00:00";
+
+/* Class = "UILabel"; text = "Shooping"; ObjectID = "m61-iS-7Sm"; */
+"m61-iS-7Sm.text" = "تسوق";
+
+/* Class = "UILabel"; text = "info@Superbekala.com"; ObjectID = "nvB-tM-HG6"; */
+"nvB-tM-HG6.text" = "info@Superbekala.com";
+
+/* Class = "UILabel"; text = "Yes"; ObjectID = "o3Q-H1-MCJ"; */
+"o3Q-H1-MCJ.text" = "نعم";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "oMg-Op-uPc"; */
+"oMg-Op-uPc.text" = "فلاتر";
+
+/* Class = "UILabel"; text = "Hotdog crunchy\npizza"; ObjectID = "pQZ-Bh-tbx"; */
+"pQZ-Bh-tbx.text" = "Hotdog crunchy\npizza";
+
+/* Class = "UILabel"; text = "Orders"; ObjectID = "pY6-xw-sjM"; */
+"pY6-xw-sjM.text" = "طلباتي";
+
+/* Class = "UILabel"; text = "Facebook"; ObjectID = "qC1-KY-b1R"; */
+"qC1-KY-b1R.text" = "فيسبوك";
+
+/* Class = "UILabel"; text = "Offers"; ObjectID = "rY1-E5-kss"; */
+"rY1-E5-kss.text" = "عروض";
+
+/* Class = "UIButton"; normalTitle = "Show Result"; ObjectID = "sKe-Ur-Gk2"; */
+"sKe-Ur-Gk2.normalTitle" = "إظهار النتائج";
+
+/* Class = "UILabel"; text = "1000 EGP"; ObjectID = "tsp-o6-SOb"; */
+"tsp-o6-SOb.text" = "1000 EGP";
+
+/* Class = "UILabel"; text = "Additional Notes (optional)"; ObjectID = "txu-hE-jc7"; */
+"txu-hE-jc7.text" = "ملاحظات إضافية (إختياري)";
+
+/* Class = "UILabel"; text = "Ordinary vendors"; ObjectID = "u5U-G2-YXx"; */
+"u5U-G2-YXx.text" = "متاجر";
+
+/* Class = "UILabel"; text = "Open now"; ObjectID = "uX8-j2-sNw"; */
+"uX8-j2-sNw.text" = "مفتوح الآن";
+
+/* Class = "UILabel"; text = "Fast Order"; ObjectID = "vXt-KA-4Re"; */
+"vXt-KA-4Re.text" = "طلب سريع";
+
+/* Class = "UILabel"; text = "No"; ObjectID = "wAI-SW-7df"; */
+"wAI-SW-7df.text" = "لا";
+
+/* Class = "UILabel"; text = "Contact us"; ObjectID = "wLc-79-HwZ"; */
+"wLc-79-HwZ.text" = "تواصل معنا";
+
+/* Class = "UILabel"; text = "City"; ObjectID = "x5e-ZI-z7T"; */
+"x5e-ZI-z7T.text" = "المدينة";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "xxj-zb-d1X"; */
+"xxj-zb-d1X.text" = "1";
+
+/* Class = "UILabel"; text = "Offers"; ObjectID = "yez-Jk-fRc"; */
+"yez-Jk-fRc.text" = "عروض";
+
+/* Class = "UILabel"; text = "012066672019"; ObjectID = "zpg-zP-MGE"; */
+"zpg-zP-MGE.text" = "012066672019";

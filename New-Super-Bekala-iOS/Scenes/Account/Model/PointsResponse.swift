@@ -22,7 +22,7 @@ struct PointsData: Codable {
 
 // MARK: - Transaction
 struct PointTransaction: Codable {
-    let id, value, orderID, userID: Int
+    let id, value, orderID, userID: Int?
     let createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {

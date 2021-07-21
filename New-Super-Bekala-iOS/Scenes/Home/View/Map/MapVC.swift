@@ -62,16 +62,6 @@ class MapVC: UIViewController {
             mapView.camera = camera!
         }
         
-        locationLbl.addTapGesture { (_) in
-            self.autocompleteVC = GMSAutocompleteViewController()
-            self.autocompleteVC!.delegate = self
-            self.autocompleteVC?.modalPresentationStyle = .formSheet
-            self.autocompleteVC?.tintColor = UIColor.white
-            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            
-            self.present(self.autocompleteVC!, animated: true, completion: nil)
-        }
-        
         if let path = path{
             let polyline = GMSPolyline(path: path)
             polyline.strokeColor = UIColor(named: "Main")!
@@ -123,6 +113,15 @@ class MapVC: UIViewController {
         presenter?.addAddress(parameters)
     }
     
+    @IBAction func searchAction(_ sender: Any) {
+        self.autocompleteVC = GMSAutocompleteViewController()
+        self.autocompleteVC!.delegate = self
+        self.autocompleteVC?.modalPresentationStyle = .formSheet
+        self.autocompleteVC?.tintColor = UIColor.white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        self.present(self.autocompleteVC!, animated: true, completion: nil)
+    }
     
     @IBAction func refine(_ sender: Any) {
         UIView.animate(withDuration: 0.25) {

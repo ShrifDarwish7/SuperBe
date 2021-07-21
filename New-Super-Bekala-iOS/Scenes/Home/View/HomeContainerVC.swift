@@ -53,7 +53,12 @@ class HomeContainerVC: UIViewController {
         orderMethodsView.transform = CGAffineTransform(scaleX: 0, y: 0)
         addView.layer.cornerRadius = 10
         coverViewCnst.constant = self.view.frame.width - (self.view.frame.width*0.43)
-        coverView.roundCorners([.layerMaxXMinYCorner,.layerMaxXMaxYCorner], radius: self.coverView.frame.height/2)
+        if "lang".localized == "en"{
+            coverView.roundCorners([.layerMaxXMinYCorner,.layerMaxXMaxYCorner], radius: self.coverView.frame.height/2)
+        }else{
+            coverView.roundCorners([.layerMinXMinYCorner,.layerMinXMaxYCorner], radius: self.coverView.frame.height/2)
+        }
+        
         
         self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
         
@@ -238,27 +243,27 @@ class HomeContainerVC: UIViewController {
             shoopingTab.isHidden = false
             self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
             shoopingTabBtn.setImage(UIImage(named: "shooping-select"), for: .normal)
-            tabTitle.text = "Shooping"
+            tabTitle.text = "Shooping".localized
             
         case 1:
             
             offersTab.isHidden = false
             self.replaceView(containerView: containerView, identifier: "OffersVC", storyboard: .home)
             offersTabBtn.setImage(UIImage(named: "offers-select"), for: .normal)
-            tabTitle.text = "Offers"
+            tabTitle.text = "Offers".localized
             
         case 2:
             
             ordersTab.isHidden = false
             ordersTabBtn.setImage(UIImage(named: "last-orders-select"), for: .normal)
-            tabTitle.text = "Last orders"
+            tabTitle.text = "Last Orders".localized
             self.replaceView(containerView: containerView, identifier: "LastOrderVC", storyboard: .orders)
             
         case 3:
             
             favouriteTab.isHidden = false
             favouriteTabBtn.setImage(UIImage(named: "favourites-select"), for: .normal)
-            tabTitle.text = "Favourites"
+            tabTitle.text = "Favourite".localized
             self.replaceView(containerView: containerView, identifier: "FavouritesVC", storyboard: .profile)
             
         default:

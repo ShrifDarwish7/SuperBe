@@ -113,6 +113,7 @@ extension PaymentVC: PayDelegate{
     func didCompletePerformPay(_ success: Bool, _ transactionId: String?) {
         
         SVProgressHUD.dismiss()
+        self.parent?.dismiss(animated: true, completion: nil)
         
         if success{
             guard let transactionId = transactionId else { return }

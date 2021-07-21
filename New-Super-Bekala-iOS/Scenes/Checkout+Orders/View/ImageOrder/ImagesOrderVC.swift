@@ -15,13 +15,16 @@ class ImagesOrderVC: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var emptyLbl: UILabel!
     @IBOutlet weak var addBtn: ViewCorners!
+    @IBOutlet weak var actionLbl: UILabel!
     
     var selectedImages = [UIImage]()
     var branch: Branch?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if branch == nil{
+            actionLbl.text = "Checkout"
+        }
     }
     
     @IBAction func back(_ sender: Any) {
@@ -83,15 +86,19 @@ class ImagesOrderVC: UIViewController {
     
     @IBAction func addToCart(_ sender: UIButton) {
         guard !selectedImages.isEmpty else { return }
-        var product = Product()
-        product.photos = selectedImages
-        product.branch = branch
-        CartServices.shared.addToCart(product) { (completed) in
-            if completed{
-                self.navigationController?.popViewController(animated: true)
+        if let _ = branch{
+            var product = Product()
+            product.photos = selectedImages
+            product.branch = branch
+            CartServices.shared.addToCart(product) { (completed) in
+                if completed{
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
-        } 
-
+        }else{
+            Shared.superService?.images = selectedImages
+            Router.toSuperServicesCheckout(self, Shared.superService)
+        }
     }
     
     

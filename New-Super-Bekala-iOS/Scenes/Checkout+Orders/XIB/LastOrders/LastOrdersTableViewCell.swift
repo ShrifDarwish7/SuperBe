@@ -17,12 +17,24 @@ class LastOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var orderDate: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var statusContainer: ViewCorners!
+    @IBOutlet weak var branchImgView: ViewCorners!
     
     func loadFrom(_ order: LastOrder){
+        
         logo.kf.indicatorType = .activity
-        logo.kf.setImage(with: URL(string: Shared.storageBase + (order.branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
+        logo.kf.setImage(with: URL(string: Shared.storageBase + (order.branch?.logo ?? "")), placeholder: nil, options: [], completionHandler: nil)
         branchName.text = order.branch?.name
         orderDate.text = order.createdAt
         status.text = order.status
+        
+        if order.branch == nil{
+            branchImgView.isHidden = true
+            orderDate.isHidden = true
+            branchName.text = order.createdAt
+        }else{
+            branchImgView.isHidden = false
+            orderDate.isHidden = false
+        }
     }
+    
 }

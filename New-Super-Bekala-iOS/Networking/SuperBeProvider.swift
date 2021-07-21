@@ -19,7 +19,7 @@ enum SuperBe{
     case getBranchProducts(_ prms: [String: String],_ id: Int)
     case getBranchBy(_ id: Int)
     case getAddresses
-    case postAddress(_ prms: [String: String])
+    case postAddress(_ prms: [String: Any])
     case updateAddress(_ id: Int,_ prms: [String: String])
     case deleteAddress(_ id: Int)
     case getProductByID(_ branchId: Int,_ productId: Int,_ prms: [String: String])
@@ -29,10 +29,13 @@ enum SuperBe{
     case points
     case slider(_ prms: [String: String])
     case favourite
-    case addToFavourite(_ prms: [String: String])
+    case addToFavourite(_ prms: [String: Any])
     case removeFromFavourtie(_ id: Int)
     case updateOrder(_ id: Int,_ bodyData: [String: String])
     //case getOrderBy(_ id: Int)
+    case placeSuperService(_ prms: [String: Any],_ images: [String: UIImage]?,_ voice: Data?)
+    case wallet
+    case addToWallet(_ prms: [String: Any])
 }
 
 extension SuperBe: TargetType{
@@ -78,6 +81,10 @@ extension SuperBe: TargetType{
             return "favourites/\(id)"
         case .updateOrder(let id, _):
             return "orders/\(id)"
+        case .placeSuperService(_,_,_):
+            return "orders/super_services"
+        case .wallet, .addToWallet(_):
+            return "wallet"
         }
     }
     
@@ -86,7 +93,9 @@ extension SuperBe: TargetType{
         case .login,
              .postAddress(_),
              .placeOrder(_),
-             .addToFavourite(_):
+             .addToFavourite(_),
+             .placeSuperService(_,_,_),
+             .addToWallet(_):
             return .post
         case .updateAddress(_, _),
              .updateOrder(_, _):
@@ -117,8 +126,26 @@ extension SuperBe: TargetType{
              .slider(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
-             .addToFavourite(let prms):
+             .addToFavourite(let prms),
+             .addToWallet(let prms):
             var multipartFormData = [MultipartFormData]()
+            for (key,value) in prms{
+                let formData = MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key)
+                multipartFormData.append(formData)
+            }
+            return .uploadMultipart(multipartFormData)
+        case .placeSuperService(let prms, let images, let voice):
+            var multipartFormData = [MultipartFormData]()
+            if let images = images{
+                for (key,value) in images{
+                    let imageData = value.jpegData(compressionQuality: 0.2)
+                    let formData: Moya.MultipartFormData = Moya.MultipartFormData(provider: .data(imageData!), name: key, fileName: "\(key).jpg", mimeType: "image/jpeg")
+                    multipartFormData.append(formData)
+                }
+            }else if let voice = voice{
+                let formData: Moya.MultipartFormData = Moya.MultipartFormData(provider: .data(voice), name: "files[0]", fileName: "file.m4a", mimeType: "audio/m4a")
+                multipartFormData.append(formData)
+            }
             for (key,value) in prms{
                 let formData = MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key)
                 multipartFormData.append(formData)

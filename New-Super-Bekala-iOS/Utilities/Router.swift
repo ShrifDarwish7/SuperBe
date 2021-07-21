@@ -106,7 +106,8 @@ class Router {
     static func toOrder(_ sender: UIViewController, _ order: LastOrder){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "OrderVC") as! OrderVC
         vc.order = order
-        sender.navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
     }
     
     static func toImagesOrder(_ sender: UIViewController,_ branch: Branch?){
@@ -166,6 +167,31 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
+    static func toSuperServicesCheckout(_ sender: UIViewController,_ service: SuperService?){
+        let vc = self.instantiate(appStoryboard: .services, identifier: "ServicesCheckoutVC") as! ServicesCheckoutVC
+        vc.superService = service
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
+    }
     
+    static func toSuperServicesSummary(_ sender: UIViewController,_ service: SuperService?){
+        let vc = self.instantiate(appStoryboard: .services, identifier: "ServicesCheckoutVC") as! ServicesCheckoutVC
+        vc.superService = service
+        vc.serviceType = .summary
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
+    }
     
+    static func toChooser(_ sender: UIViewController,_ list: [String]?){
+        let vc = self.instantiate(appStoryboard: .home, identifier: "ChooserVC") as! ChooserVC
+        vc.list = list
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toPayContainer(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .orders, identifier: "PayContainerVC") as! PayContainerVC
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
+    }
 }

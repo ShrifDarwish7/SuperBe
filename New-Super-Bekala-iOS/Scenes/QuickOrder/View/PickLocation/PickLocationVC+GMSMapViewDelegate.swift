@@ -39,7 +39,7 @@ extension PickLocationVC: GMSMapViewDelegate{
                 "language": "lang".localized,
                 "latlng": "\(coordinates.latitude),\(coordinates.longitude)"
             ]
-            presenter?.getGeocode(parameters)
+          //  presenter?.getGeocode(parameters)
         }
     }
     

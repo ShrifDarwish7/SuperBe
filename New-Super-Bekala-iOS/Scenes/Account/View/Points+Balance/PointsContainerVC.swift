@@ -20,7 +20,6 @@ class PointsContainerVC: UIViewController {
 
         tabs.append(Tab(name: "Balance", selected: true))
         tabs.append(Tab(name: "Points", selected: false))
-        tabs.append(Tab(name: "Card benefits", selected: false))
         
         self.replaceView(containerView: containerView, identifier: "BalanceVC", storyboard: .profile)
         

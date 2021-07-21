@@ -12,12 +12,15 @@ class TextOrderVC: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var addBtn: ViewCorners!
+    @IBOutlet weak var actionLbl: UILabel!
         
     var branch: Branch?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if branch == nil{
+            actionLbl.text = "Checkout"
+        }
     }
 
     @IBAction func back(_ sender: Any) {
@@ -26,14 +29,20 @@ class TextOrderVC: UIViewController {
     
     @IBAction func addToCartAction(_ sender: Any) {
         guard !textView.text.isEmpty else { return }
-        var product = Product()
-        product.text = textView.text
-        product.branch = branch
-        CartServices.shared.addToCart(product) { (completed) in
-            if completed{
-                self.navigationController?.popViewController(animated: true)
+        if let _ = branch{
+            var product = Product()
+            product.text = textView.text
+            product.branch = branch
+            CartServices.shared.addToCart(product) { (completed) in
+                if completed{
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
+        }else{
+            Shared.superService?.text = textView.text
+            Router.toSuperServicesCheckout(self, Shared.superService)
         }
+        
     }
     
 }

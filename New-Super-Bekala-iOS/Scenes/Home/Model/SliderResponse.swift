@@ -17,11 +17,14 @@ struct SliderResponse: Codable {
 
 struct Slider: Codable {
     let id: Int
-    let name, image: Localized
+    let name: String?
+    let image: Localized?
     let slidableType: SliderType
     let slidableID: Int
     let actionURL: String?
     let cityID, regionID: Int
+    let branch: Branch?
+    let product: Product?
 
     enum CodingKeys: String, CodingKey {
         case id, name, image
@@ -30,6 +33,8 @@ struct Slider: Codable {
         case actionURL = "action_url"
         case cityID = "city_id"
         case regionID = "region_id"
+        case branch = "slidable_branch"
+        case product = "slidable_branch_product"
     }
 }
 

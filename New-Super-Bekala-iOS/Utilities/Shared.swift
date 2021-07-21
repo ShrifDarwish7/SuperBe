@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import UIKit
+import MapKit
 
 class Shared{
     
@@ -80,19 +81,43 @@ extension String{
         }
         return nil
     }
+    
+    var fileExtension: String? {
+        
+        get{
+            let url = self.suffix(6)
+            guard url.firstIndex(of: ".") != nil else{ return nil }
+            let ext = url[url.firstIndex(of: ".")!...]
+            return String(ext).lowercased()
+        }
+        
+    }
 }
 
 
 extension UIViewController{
     func replaceView(containerView: UIView, identifier: String, storyboard: AppStoryboard) {
         containerView.subviews.forEach({ $0.removeFromSuperview() })
-        let vc =
-       // self.storyboard!.instantiateViewController(withIdentifier: identifier)
-        Router.instantiate(appStoryboard: storyboard, identifier: identifier)
+        let vc = Router.instantiate(appStoryboard: storyboard, identifier: identifier)
         vc.view.frame = containerView.bounds;
         containerView.addSubview(vc.view)
         self.addChild(vc)
         vc.didMove(toParent: self)
+    }
+    
+    func openInMaps(coordinates: String){
+        let latitude: CLLocationDegrees = Double((coordinates.split(separator: ",")[0]))!
+        let longitude: CLLocationDegrees = Double((coordinates.split(separator: ",")[1]))!
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.openInMaps(launchOptions: options)
     }
 }
 

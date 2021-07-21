@@ -52,6 +52,8 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var selectedAddressTF: UITextField!
+    @IBOutlet weak var walletBtn: UIButton!
+    @IBOutlet weak var walletStack: UIStackView!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -85,6 +87,7 @@ class CheckoutVC: UIViewController {
         cashOnDeliveryStack.alpha = branch?.cashOnDelivery == 1 ? 1 : 0.3
         creditOnDeliveryStack.alpha = branch?.creditOnDelivery == 1 ? 1 : 0.3
         creditStack.alpha = branch?.onlinePayment == 1 ? 1 : 0.3
+        walletStack.alpha = branch?.acceptWalletPayment == 1 ? 1 : 0.3
         promoViewContainer.isHidden = branch?.acceptCoupons == 1 ? false : true
                 
         CartServices.shared.getCartItems(itemId: "-1", branch: branch!.id) { (items) in
@@ -192,16 +195,25 @@ class CheckoutVC: UIViewController {
             cashOnDeliveryBtn.setImage(UIImage(named: "radio_selected"), for: .normal)
             creditOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
             creditBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            walletBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
         case 1:
             guard branch?.creditOnDelivery == 1 else { return }
             creditOnDeliveryBtn.setImage(UIImage(named: "radio_selected"), for: .normal)
             cashOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
             creditBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            walletBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
         case 2:
             guard branch?.onlinePayment == 1 else { return }
             creditBtn.setImage(UIImage(named: "radio_selected"), for: .normal)
             cashOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
             creditOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            walletBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+        case 3:
+            guard branch?.acceptWalletPayment == 1 else { return }
+            creditBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            cashOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            creditOnDeliveryBtn.setImage(UIImage(named: "radio_unselected"), for: .normal)
+            walletBtn.setImage(UIImage(named: "radio_selected"), for: .normal)
         default:
             break
         }
@@ -363,33 +375,32 @@ class CheckoutVC: UIViewController {
         }
         
         if selectedReceiveOption == 0{
-            guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first!) else {
+            guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first) else {
                 showToast("Please add address")
                 return
             }
-        }
-        
-        if let deliveryRegions = branch?.deliveryRegions{
-            let path = GMSMutablePath()
-            deliveryRegions.forEach { region in
-                region.coordinates.forEach { coord in
-                    path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+            if let deliveryRegions = branch?.deliveryRegions{
+                let path = GMSMutablePath()
+                deliveryRegions.forEach { region in
+                    region.coordinates.forEach { coord in
+                        path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+                    }
                 }
-            }
-            
-            let bounds = GMSCoordinateBounds(path: path)
-            guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!), bounds.contains(CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)) else{
                 
-                let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds", preferredStyle: .alert)
-                let addAction = UIAlertAction(title: "Add Address", style: .default) { _ in
-                    Router.toAddAddress(self, path)
+                let bounds = GMSCoordinateBounds(path: path)
+                guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!), bounds.contains(CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)) else{
+                    
+                    let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds", preferredStyle: .alert)
+                    let addAction = UIAlertAction(title: "Add Address", style: .default) { _ in
+                        Router.toAddAddress(self, path)
+                    }
+                    let cencel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alert.addAction(addAction)
+                    alert.addAction(cencel)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                    
                 }
-                let cencel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alert.addAction(addAction)
-                alert.addAction(cencel)
-                self.present(alert, animated: true, completion: nil)
-                return
-                
             }
         }
         

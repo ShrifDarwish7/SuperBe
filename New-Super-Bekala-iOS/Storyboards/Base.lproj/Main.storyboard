@@ -469,7 +469,7 @@ more ...</string>
                                                             <constraint firstAttribute="width" constant="60" id="cEM-JF-XlB"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telephone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaX-3t-sSN">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaX-3t-sSN">
                                                         <rect key="frame" x="75" y="16" width="159" height="33"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -923,7 +923,7 @@ more ...</string>
         <image name="up 3" width="612" height="567"/>
         <image name="up 4" width="640" height="566"/>
         <namedColor name="Buttons-Red">
-            <color red="0.78799998760223389" green="0.18400000035762787" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68199998140335083" green="0.11800000071525574" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dark-Blue">
             <color red="0.16099999845027924" green="0.21199999749660492" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -932,7 +932,7 @@ more ...</string>
             <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Main">
-            <color red="0.95300000905990601" green="0.28999999165534973" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68199998140335083" green="0.11800000071525574" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

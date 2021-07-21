@@ -1,0 +1,210 @@
+
+/* Class = "UIButton"; normalTitle = "Validate"; ObjectID = "0wE-4t-Z13"; */
+"0wE-4t-Z13.normalTitle" = "تفعيل";
+
+/* Class = "UILabel"; text = "Add to cart"; ObjectID = "1DX-RZ-HfW"; */
+"1DX-RZ-HfW.text" = "إضافة إلي سلة المشتريات";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "1Dn-cR-cFW"; */
+"1Dn-cR-cFW.text" = "خصم";
+
+/* Class = "UILabel"; text = "40 EGP"; ObjectID = "1t0-Ia-Fca"; */
+"1t0-Ia-Fca.text" = "40 EGP";
+
+/* Class = "UILabel"; text = "Delivered at"; ObjectID = "3HM-Kb-d9P"; */
+"3HM-Kb-d9P.text" = "التوصيل إلي";
+
+/* Class = "UILabel"; text = "Orders"; ObjectID = "456-qF-6GF"; */
+"456-qF-6GF.text" = "طلباتي";
+
+/* Class = "UILabel"; text = "Cancel Order"; ObjectID = "4bS-vG-cnd"; */
+"4bS-vG-cnd.text" = "إلغاء الطلب";
+
+/* Class = "UILabel"; text = "New address"; ObjectID = "5SG-HH-5zW"; */
+"5SG-HH-5zW.text" = "عنوان جديد";
+
+/* Class = "UILabel"; text = "Add to cart"; ObjectID = "5jc-ZV-1e6"; */
+"5jc-ZV-1e6.text" = "إضافة إلي سلة المشتريات";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "6OC-G6-hZn"; */
+"6OC-G6-hZn.text" = "ملاحظات";
+
+/* Class = "UILabel"; text = "McDonald's"; ObjectID = "6eq-6d-uMF"; */
+"6eq-6d-uMF.text" = "McDonald's";
+
+/* Class = "UILabel"; text = "on delivery"; ObjectID = "7CP-lU-s9Q"; */
+"7CP-lU-s9Q.text" = "في الطريق إليك";
+
+/* Class = "UILabel"; text = "1000 EGP"; ObjectID = "7if-98-eqy"; */
+"7if-98-eqy.text" = "1000 EGP";
+
+/* Class = "UITextField"; text = "01282866383"; ObjectID = "88g-GP-jUG"; */
+"88g-GP-jUG.text" = "01282866383";
+
+/* Class = "UILabel"; text = "Wallet"; ObjectID = "9Pm-t0-zzr"; */
+"9Pm-t0-zzr.text" = "محفظة";
+
+/* Class = "UILabel"; text = "Shipping"; ObjectID = "9gY-2V-Eyq"; */
+"9gY-2V-Eyq.text" = "توصيل";
+
+/* Class = "UILabel"; text = "340 EGP"; ObjectID = "9ng-lu-BDF"; */
+"9ng-lu-BDF.text" = "340 EGP";
+
+/* Class = "UIButton"; normalTitle = "Pay"; ObjectID = "9wq-kS-b8C"; */
+"9wq-kS-b8C.normalTitle" = "دفع";
+
+/* Class = "UITextField"; placeholder = "amount"; ObjectID = "ADj-77-LkZ"; */
+"ADj-77-LkZ.placeholder" = "الكمية";
+
+/* Class = "UIButton"; normalTitle = "Know reason"; ObjectID = "AQR-Is-u1R"; */
+"AQR-Is-u1R.normalTitle" = "تبليغ السبب";
+
+/* Class = "UITextField"; text = "Shekkoooo"; ObjectID = "FP7-0e-ak3"; */
+"FP7-0e-ak3.text" = "Shekkoooo";
+
+/* Class = "UILabel"; text = "Debit/Credit card"; ObjectID = "FUL-VG-fXd"; */
+"FUL-VG-fXd.text" = "بطاقة الخصم / الائتمان";
+
+/* Class = "UILabel"; text = "Phone number"; ObjectID = "GfA-B6-Pxh"; */
+"GfA-B6-Pxh.text" = "رقم الهاتف";
+
+/* Class = "UILabel"; text = "Text order"; ObjectID = "J18-Ek-PSG"; */
+"J18-Ek-PSG.text" = "طلب نصي";
+
+/* Class = "UILabel"; text = "McDonald's"; ObjectID = "JDx-hU-9dn"; */
+"JDx-hU-9dn.text" = "McDonald's";
+
+/* Class = "UILabel"; text = "Wallet"; ObjectID = "JtO-rs-Ujp"; */
+"JtO-rs-Ujp.text" = "محفظة";
+
+/* Class = "UILabel"; text = "pending"; ObjectID = "K6y-oQ-hva"; */
+"K6y-oQ-hva.text" = "تحت العمل";
+
+/* Class = "UILabel"; text = "Canceled"; ObjectID = "Kgq-I3-1HE"; */
+"Kgq-I3-1HE.text" = "ملغي";
+
+/* Class = "UITextField"; placeholder = "Expiry date"; ObjectID = "Ksx-ER-G2H"; */
+"Ksx-ER-G2H.placeholder" = "تاريخ الانتهاء";
+
+/* Class = "UITextField"; text = "08/25"; ObjectID = "Ksx-ER-G2H"; */
+"Ksx-ER-G2H.text" = "08/25";
+
+/* Class = "UILabel"; text = "No image uploaded!"; ObjectID = "Ovg-2K-ZCG"; */
+"Ovg-2K-ZCG.text" = "لم يتم تحميل أي صورة!";
+
+/* Class = "UILabel"; text = "40 EGP"; ObjectID = "PH4-8J-e0J"; */
+"PH4-8J-e0J.text" = "40 EGP";
+
+/* Class = "UILabel"; text = "completed"; ObjectID = "QdL-Gg-tZn"; */
+"QdL-Gg-tZn.text" = "مكتمل";
+
+/* Class = "UILabel"; text = "Receive"; ObjectID = "Qdq-fu-3BX"; */
+"Qdq-fu-3BX.text" = "الإستلام";
+
+/* Class = "UITextField"; placeholder = "Type your promo code here"; ObjectID = "SAz-o2-oFf"; */
+"SAz-o2-oFf.placeholder" = "اكتب كود الخصم الخاص بك هنا";
+
+/* Class = "UILabel"; text = "Place Order"; ObjectID = "V8v-zb-SPd"; */
+"V8v-zb-SPd.text" = "تنفيذ الطلب";
+
+/* Class = "UILabel"; text = "No results found"; ObjectID = "Ver-AC-snC"; */
+"Ver-AC-snC.text" = "لم يتم العثور على نتائج";
+
+/* Class = "UILabel"; text = "Card on delivery"; ObjectID = "XCA-2t-L0F"; */
+"XCA-2t-L0F.text" = "البطاقة عند الإستلام";
+
+/* Class = "UILabel"; text = "Cash"; ObjectID = "YqY-Do-kD9"; */
+"YqY-Do-kD9.text" = "نقدي";
+
+/* Class = "UILabel"; text = "Cash on delivery"; ObjectID = "ZM7-vE-IGW"; */
+"ZM7-vE-IGW.text" = "نقدي عند الإستلام";
+
+/* Class = "UILabel"; text = "#582018"; ObjectID = "aDM-J2-Ud5"; */
+"aDM-J2-Ud5.text" = "#582018";
+
+/* Class = "UILabel"; text = "You have no orders in your account"; ObjectID = "aZa-ID-TdQ"; */
+"aZa-ID-TdQ.text" = "ليس لديك طلبات في حسابك";
+
+/* Class = "UILabel"; text = "Voice order"; ObjectID = "agF-ac-hc0"; */
+"agF-ac-hc0.text" = "طلب صوت";
+
+/* Class = "UILabel"; text = "Delivery order"; ObjectID = "bD8-nH-E0u"; */
+"bD8-nH-E0u.text" = "توصيل الطلب";
+
+/* Class = "UILabel"; text = "Enter card details"; ObjectID = "bWV-hL-EkI"; */
+"bWV-hL-EkI.text" = "ادخل بيانات البطاقة";
+
+/* Class = "UILabel"; text = "processing"; ObjectID = "bss-Td-V29"; */
+"bss-Td-V29.text" = "يتم المعالجة";
+
+/* Class = "UILabel"; text = "23 july Portsaid,Egypt"; ObjectID = "c3h-4u-b6m"; */
+"c3h-4u-b6m.text" = "23 july Portsaid,Egypt";
+
+/* Class = "UILabel"; text = "Services"; ObjectID = "cWH-2N-2O6"; */
+"cWH-2N-2O6.text" = "خدماتي";
+
+/* Class = "UILabel"; text = "1000 EGP"; ObjectID = "dOA-5P-l7h"; */
+"dOA-5P-l7h.text" = "1000 EGP";
+
+/* Class = "UITextField"; placeholder = "Security code"; ObjectID = "dma-BI-5tE"; */
+"dma-BI-5tE.placeholder" = "رمز الحماية";
+
+/* Class = "UITextField"; text = "840"; ObjectID = "dma-BI-5tE"; */
+"dma-BI-5tE.text" = "840";
+
+/* Class = "UILabel"; text = "Tax"; ObjectID = "ee3-gj-A2Y"; */
+"ee3-gj-A2Y.text" = "ضريبة";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "eno-sg-5CP"; */
+"eno-sg-5CP.text" = "الاسم";
+
+/* Class = "UITextField"; placeholder = "Card number"; ObjectID = "ep6-nC-szb"; */
+"ep6-nC-szb.placeholder" = "رقم البطاقة";
+
+/* Class = "UITextField"; text = "4988134196157791"; ObjectID = "ep6-nC-szb"; */
+"ep6-nC-szb.text" = "4988134196157791";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "fwN-Ry-z9R"; */
+"fwN-Ry-z9R.text" = "00:00";
+
+/* Class = "UILabel"; text = "20/10/2020 14:20"; ObjectID = "hyu-0c-c5P"; */
+"hyu-0c-c5P.text" = "20/10/2020 14:20";
+
+/* Class = "UILabel"; text = "Image order"; ObjectID = "jVb-5y-b8V"; */
+"jVb-5y-b8V.text" = "طلب صورة";
+
+/* Class = "UILabel"; text = "Checkout"; ObjectID = "k8I-fx-a1N"; */
+"k8I-fx-a1N.text" = "إكمال الطلب";
+
+/* Class = "UILabel"; text = "Promo code"; ObjectID = "kW0-C8-CMv"; */
+"kW0-C8-CMv.text" = "كود خصم";
+
+/* Class = "UIButton"; normalTitle = "Rate us"; ObjectID = "lW1-os-WhT"; */
+"lW1-os-WhT.normalTitle" = "تقيم";
+
+/* Class = "UITextField"; placeholder = "Card holder name"; ObjectID = "lpb-cK-kak"; */
+"lpb-cK-kak.placeholder" = "إسم صاحب البطاقة";
+
+/* Class = "UITextField"; text = "sherif mohamed elsayed"; ObjectID = "lpb-cK-kak"; */
+"lpb-cK-kak.text" = "sherif mohamed elsayed";
+
+/* Class = "UILabel"; text = "Receive from vendor"; ObjectID = "m8B-CT-aMW"; */
+"m8B-CT-aMW.text" = "إستلام من المتجر";
+
+/* Class = "UILabel"; text = "super50"; ObjectID = "mqH-9s-S4z"; */
+"mqH-9s-S4z.text" = "super50";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "mxf-zW-kC5"; */
+"mxf-zW-kC5.text" = "00:00";
+
+/* Class = "UILabel"; text = "Payment"; ObjectID = "p8v-bc-HYZ"; */
+"p8v-bc-HYZ.text" = "الدفع";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "qVr-wy-VeM"; */
+"qVr-wy-VeM.text" = "00:00";
+
+/* Class = "UILabel"; text = "Add to cart"; ObjectID = "uoy-ke-cFQ"; */
+"uoy-ke-cFQ.text" = "إضافة إلي سلة المشتريات";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "yz5-tr-0C7"; */
+"yz5-tr-0C7.text" = "العنوان";

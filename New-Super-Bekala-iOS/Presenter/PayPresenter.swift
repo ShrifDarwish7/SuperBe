@@ -50,7 +50,9 @@ class PayPresenter{
         
         let payload = TransactionPayload(
             apiOperation: nil,
-            order: TransactionOrder(id: nil, amount: String((Shared.transaction?.amount)!), currency: Shared.transaction?.currency),
+            order: TransactionOrder(id: nil,
+                                    amount: String((Shared.transaction?.amount)!),
+                                    currency: Shared.transaction?.currency),
             session: nil,
             authentication: nil,
             customer: nil,

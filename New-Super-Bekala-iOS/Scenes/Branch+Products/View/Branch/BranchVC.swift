@@ -53,11 +53,18 @@ class BranchVC: UIViewController {
         presenter = MainPresenter(self)
         initUI()
         presenter?.getBranchCats(prms: [:], id: branch!.id)
+        NotificationCenter.default.addObserver(self, selector: #selector(didChooseCategory(sender:)), name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchCartItems()
+    }
+    
+    @objc func didChooseCategory(sender: NSNotification){
+        guard let userInfo = sender.userInfo as? [String: Any] else { return}
+        self.selectCategory(index: userInfo["index"] as! Int)
     }
     
     func fetchCartItems(){
@@ -194,7 +201,29 @@ class BranchVC: UIViewController {
         
     }
     
+    @IBAction func toChooser(_ sender: Any) {
+        guard let categories = self.categories else { return }
+        var list = [String]()
+        categories.forEach { category in
+            list.append(("lang".localized == "en" ? category.name?.en : category.name?.ar)!)
+        }
+        Router.toChooser(self, list)
+    }
     
+    func selectCategory(index: Int){
+        print(index)
+        for i in 0...self.categories!.count-1 { self.categories![i].selected = false }
+        self.categories![index].selected = true
+        self.selectedCat = self.categories![index]
+        self.filtersCollectionView.reloadData()
+        self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: "lang".localized == "en" ? .left : .right , animated: true)
+        isLoading = true
+        productsCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        productsCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        loadProductsCollection()
+        prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
+        presenter?.getBranchProduct(id: branch!.id, prms: prms)
+    }
     
 
 }

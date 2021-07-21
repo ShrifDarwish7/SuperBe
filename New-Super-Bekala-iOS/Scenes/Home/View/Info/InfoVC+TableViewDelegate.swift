@@ -26,20 +26,17 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
+        cell.selectionStyle = .none
         switch tableView {
         case phonesTableView:
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
             cell.textLabel?.text = branch?.phones![indexPath.row]
-            cell.selectionStyle = .none
-            return cell
         case deliveryAreasTableView:
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
             cell.textLabel?.text = branch?.deliveryRegions![indexPath.row].name
-            cell.selectionStyle = .none
-            return cell
         default:
-            return UITableViewCell()
+            break
         }
+        return cell
     }
     
 }

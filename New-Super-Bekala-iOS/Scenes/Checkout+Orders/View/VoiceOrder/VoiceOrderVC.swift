@@ -228,20 +228,19 @@ class VoiceOrderVC: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func addToCart(_ sender: Any) {
         guard recorderState != .recording, recorderState != .initial else { return }
+        guard let voiceData = try? Data(contentsOf: Recorder.getURL()) else { return }
         if let _ = branch{
-            do{
-                let voiceData = try Data(contentsOf: Recorder.getURL())
-                var product = Product()
-                product.voice = voiceData
-                product.branch = branch
-                CartServices.shared.addToCart(product) { (completed) in
-                    if completed{
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                } 
-            }catch{}
+            var product = Product()
+            product.voice = voiceData
+            product.branch = branch
+            CartServices.shared.addToCart(product) { (completed) in
+                if completed{
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }else{
-            
+            Shared.superService?.voice = voiceData
+            Router.toSuperServicesCheckout(self, Shared.superService)
         }
     }
     

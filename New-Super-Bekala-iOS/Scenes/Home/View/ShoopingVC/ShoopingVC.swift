@@ -33,7 +33,14 @@ class ShoopingVC: UIViewController {
         
         presenter = MainPresenter(self)
         presenter?.getFavourites()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didChooseCategory(sender:)), name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil)
 
+    }
+    
+    @objc func didChooseCategory(sender: NSNotification){
+        guard let userInfo = sender.userInfo as? [String: Any] else { return}
+        self.selectCategory(index: userInfo["index"] as! Int)
     }
     
     func showSkeletonView(){
@@ -64,5 +71,29 @@ class ShoopingVC: UIViewController {
     @IBAction func toAllFeatured(_ sender: Any) {
         Router.toViewAllFeatured(self, self.featuredBranches!)
     }
+    
+    @IBAction func toChooser(_ sender: Any) {
+        guard let categories = self.categories else { return }
+        var list = [String]()
+        categories.forEach { category in
+            list.append(("lang".localized == "en" ? category.name?.en : category.name?.ar)!)
+        }
+        Router.toChooser(self, list)
+    }
+    
+    func selectCategory(index: Int){
+        for i in 0...self.categories!.count-1{
+            self.categories![i].selected = false
+        }
+        self.categories![index].selected = true
+        self.selectedCategory = self.categories![index]
+        self.filtersCollectionView.reloadData()
+        self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
+        self.featuredLoading = true
+        self.ordinaryLoading = true
+        self.showSkeletonView()
+        self.updateBranches()
+    }
+    
     
 }

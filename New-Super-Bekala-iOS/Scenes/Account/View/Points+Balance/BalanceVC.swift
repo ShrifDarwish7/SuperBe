@@ -25,9 +25,15 @@ class BalanceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = MainPresenter(self)
-        presenter?.getPoints()
+        presenter?.getWalletPoints()
     }
-
+    
+    
+    @IBAction func addBalance(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("DISMISS_BOTTOM_SHEET"), object: nil, userInfo: nil)
+        Router.toPayContainer(self)
+    }
+    
 }
 
 extension BalanceVC: UITableViewDelegate, UITableViewDataSource{
@@ -57,7 +63,14 @@ extension BalanceVC: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TransactionsTableViewCell.identifier, for: indexPath) as! TransactionsTableViewCell
-        cell.points.text = "\(self.transactions![indexPath.section].trans[indexPath.row].value)"
+        let value = self.transactions![indexPath.section].trans[indexPath.row].value
+        cell.points.text = "\(value ?? 0)"
+        
+        if value! < 0{
+            cell.containerView.backgroundColor = #colorLiteral(red: 0.9880966544, green: 0.4059396982, blue: 0.4844449759, alpha: 1)
+            cell.statusIcon.transform = CGAffineTransform(rotationAngle: .pi)
+        }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

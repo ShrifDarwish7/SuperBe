@@ -198,16 +198,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
         switch collectionView {
         case filtersCollectionView:
             
-            for i in 0...self.categories!.count-1 { self.categories![i].selected = false }
-            self.categories![indexPath.row].selected = true
-            self.selectedCat = self.categories![indexPath.row]
-            self.filtersCollectionView.reloadData()
-            self.filtersCollectionView.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
-            isLoading = true
-            productsCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-            loadProductsCollection()
-            prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
-            presenter?.getBranchProduct(id: branch!.id, prms: prms)
+            self.selectCategory(index: indexPath.row)
             
         case productsCollectionView:
             

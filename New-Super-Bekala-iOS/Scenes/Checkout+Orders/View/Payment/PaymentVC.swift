@@ -15,6 +15,8 @@ class PaymentVC: UIViewController {
     @IBOutlet weak var cardNumberTF: UITextField!
     @IBOutlet weak var expiryTF: UITextField!
     @IBOutlet weak var cvvTF: UITextField!
+    @IBOutlet weak var amountTF: UITextField!
+    @IBOutlet weak var amountStack: UIStackView!
     
     var payPresenter: PayPresenter?
     var redirectURL: String?
@@ -22,6 +24,12 @@ class PaymentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(didFinishthreeDSecure), name: NSNotification.Name("DID_FINISH_3DS"), object: nil)
+        
+        if Shared.transaction?.amount == nil{
+            amountStack.isHidden = false
+        }else{
+            amountStack.isHidden = true
+        }
         
     }
     
@@ -71,6 +79,17 @@ class PaymentVC: UIViewController {
     }
 
     @IBAction func makePayment(_ sender: Any) {
+        
+        if Shared.transaction?.amount == nil{
+            guard !amountTF.text!.isEmpty else{
+                showToast("Enter amount")
+                return
+            }
+            Shared.transaction = Transaction()
+            Shared.transaction?.amount = Double(amountTF.text!)!
+            Shared.transaction?.currency = "EGP"
+        }
+        
         payPresenter = PayPresenter(delegate: self)
         payPresenter?.createSession()
         SVProgressHUD.show()

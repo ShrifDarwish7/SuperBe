@@ -21,12 +21,17 @@ struct LastOrder: Codable {
     let status: String?
     let linesTotal, shippingTotal, taxesTotal, discountTotal: Double?
     let orderTotal: Double?
-    let customerNote, paymentMethod: String?
+    let customerNote: String?
+    let paymentMethod: Int?
     let userID, addressID, branchID, beingEdited: Int?
     let createdAt, updatedAt: String?
     let branch: LastOrderBranch?
     let lineItems: [LastOrderLineItem]?
     let address: Address?
+    let files: [String]?
+    let coupons: [String]?
+    let paidFromWallet: Double?
+    let originCoords, destinationCoords, originAddress, destinationAddress: String?
 
     enum CodingKeys: String, CodingKey {
         case id, status
@@ -43,9 +48,14 @@ struct LastOrder: Codable {
         case beingEdited = "being_edited"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case branch
+        case branch, coupons
         case lineItems = "line_items"
-        case address
+        case address, files
+        case paidFromWallet = "paid_from_wallet"
+        case originCoords = "origin_coordinates"
+        case destinationCoords = "destination_coordinates"
+        case originAddress = "origin_address"
+        case destinationAddress = "destination_address"
     }
 }
 

@@ -1,0 +1,135 @@
+
+/* Class = "UILabel"; text = "or"; ObjectID = "0eP-0F-gff"; */
+"0eP-0F-gff.text" = "او";
+
+/* Class = "UILabel"; text = "My balance is "; ObjectID = "1Bj-vd-XZx"; */
+"1Bj-vd-XZx.text" = " رصيدي ";
+
+/* Class = "UILabel"; text = "Change 5000 points to"; ObjectID = "1lA-Mf-7ye"; */
+"1lA-Mf-7ye.text" = "إستبدال ٥٠٠٠ نقطة إلي";
+
+/* Class = "UILabel"; text = "100 EGP"; ObjectID = "2an-2m-gEN"; */
+"2an-2m-gEN.text" = "100 EGP";
+
+/* Class = "UILabel"; text = "Items be rated"; ObjectID = "4x4-P4-B0I"; */
+"4x4-P4-B0I.text" = "منتجات مقيمة";
+
+/* Class = "UILabel"; text = "1500 EGP"; ObjectID = "5kb-1U-kfY"; */
+"5kb-1U-kfY.text" = "1500 EGP";
+
+/* Class = "UILabel"; text = "34"; ObjectID = "77H-Bx-pwb"; */
+"77H-Bx-pwb.text" = "34";
+
+/* Class = "UILabel"; text = "20 EGP"; ObjectID = "7Sk-hu-PEe"; */
+"7Sk-hu-PEe.text" = "20 EGP";
+
+/* Class = "UILabel"; text = "50 EGP"; ObjectID = "9XT-EL-BoA"; */
+"9XT-EL-BoA.text" = "50 EGP";
+
+/* Class = "UILabel"; text = "100 EGP"; ObjectID = "AzU-qW-5Su"; */
+"AzU-qW-5Su.text" = "100 EGP";
+
+/* Class = "UILabel"; text = "Total of your orders"; ObjectID = "Ee0-TV-NxD"; */
+"Ee0-TV-NxD.text" = "عدد الطلبات";
+
+/* Class = "UILabel"; text = "Change 2500 points to"; ObjectID = "Gv4-aS-MnZ"; */
+"Gv4-aS-MnZ.text" = "إستبدال ٢٥٠٠ نقطة إلي";
+
+/* Class = "UILabel"; text = "Pending"; ObjectID = "HWC-ik-9NL"; */
+"HWC-ik-9NL.text" = "تحت العمل";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "IDJ-gX-wpN"; */
+"IDJ-gX-wpN.text" = "او";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "JIQ-Hd-849"; */
+"JIQ-Hd-849.text" = "العنواين";
+
+/* Class = "UILabel"; text = "Products"; ObjectID = "Ktn-U0-bt6"; */
+"Ktn-U0-bt6.text" = "منتجات";
+
+/* Class = "UILabel"; text = "3000 Points"; ObjectID = "LTo-N9-FxJ"; */
+"LTo-N9-FxJ.text" = "3000 Points";
+
+/* Class = "UITextField"; text = "Shekkoooo"; ObjectID = "PDK-Pb-LUd"; */
+"PDK-Pb-LUd.text" = "Shekkoooo";
+
+/* Class = "UILabel"; text = "20 EGP"; ObjectID = "Shl-Ax-xc7"; */
+"Shl-Ax-xc7.text" = "20 EGP";
+
+/* Class = "UILabel"; text = "20"; ObjectID = "TT4-SA-Spn"; */
+"TT4-SA-Spn.text" = "20";
+
+/* Class = "UILabel"; text = "My orders"; ObjectID = "U7a-h7-pui"; */
+"U7a-h7-pui.text" = "طلباتي";
+
+/* Class = "UILabel"; text = "You have no favourites in your account"; ObjectID = "Vde-J9-Uyi"; */
+"Vde-J9-Uyi.text" = "ليس لديك مفضلات في حسابك";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "YMX-DK-Iev"; */
+"YMX-DK-Iev.text" = "100";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "ZOT-Uj-Kgb"; */
+"ZOT-Uj-Kgb.text" = "100";
+
+/* Class = "UILabel"; text = "Personal details"; ObjectID = "aNl-Tu-hd7"; */
+"aNl-Tu-hd7.text" = "تفاصيل شخصية";
+
+/* Class = "UITextField"; text = "01282866383"; ObjectID = "aQd-Xa-EpU"; */
+"aQd-Xa-EpU.text" = "01282866383";
+
+/* Class = "UILabel"; text = "8"; ObjectID = "cZX-9b-k4b"; */
+"cZX-9b-k4b.text" = "8";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "fI7-DQ-78R"; */
+"fI7-DQ-78R.text" = "او";
+
+/* Class = "UILabel"; text = "Phone number"; ObjectID = "fd5-fp-Yes"; */
+"fd5-fp-Yes.text" = "رقم الهاتف";
+
+/* Class = "UIButton"; normalTitle = "See all locations"; ObjectID = "h13-ml-1fT"; */
+"h13-ml-1fT.normalTitle" = "كشف كل المواقع";
+
+/* Class = "UILabel"; text = "Completed"; ObjectID = "mfC-TE-bYm"; */
+"mfC-TE-bYm.text" = "مكتمل";
+
+/* Class = "UILabel"; text = "50 EGP"; ObjectID = "pH0-7F-OPr"; */
+"pH0-7F-OPr.text" = "50 EGP";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "qTl-PR-r9I"; */
+"qTl-PR-r9I.text" = "الاسم";
+
+/* Class = "UILabel"; text = "No results found"; ObjectID = "qZx-ds-k6O"; */
+"qZx-ds-k6O.text" = "لم يتم العثور على نتائج";
+
+/* Class = "UILabel"; text = "Dashboard"; ObjectID = "qqd-HU-sgE"; */
+"qqd-HU-sgE.text" = "لوحة التحكم";
+
+/* Class = "UILabel"; text = "New address"; ObjectID = "rMT-gR-htw"; */
+"rMT-gR-htw.text" = "عنوان جديد";
+
+/* Class = "UILabel"; text = "0 EGP"; ObjectID = "sPW-bz-s1F"; */
+"sPW-bz-s1F.text" = "0 EGP";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "uTg-uB-dLK"; */
+"uTg-uB-dLK.text" = "100";
+
+/* Class = "UILabel"; text = "Change 1000 points to"; ObjectID = "vWY-c9-HgD"; */
+"vWY-c9-HgD.text" = "إستبدال ١٠٠٠ نقطة إلي";
+
+/* Class = "UILabel"; text = "Vendors"; ObjectID = "vzZ-Nh-jRw"; */
+"vzZ-Nh-jRw.text" = "متاجر";
+
+/* Class = "UIButton"; normalTitle = "Detect my location on map"; ObjectID = "wXq-pl-pzw"; */
+"wXq-pl-pzw.normalTitle" = "كشف موقعي على الخريطة";
+
+/* Class = "UILabel"; text = "No of active carts"; ObjectID = "waB-f2-9dv"; */
+"waB-f2-9dv.text" = "No of active carts";
+
+/* Class = "UILabel"; text = "Choose your location"; ObjectID = "woD-3X-RbS"; */
+"woD-3X-RbS.text" = "إختار عنوانك";
+
+/* Class = "UILabel"; text = "Canceled"; ObjectID = "xVO-Wk-H48"; */
+"xVO-Wk-H48.text" = "ملغي";
+
+/* Class = "UILabel"; text = "Vendors be rated"; ObjectID = "y5p-Ko-UUA"; */
+"y5p-Ko-UUA.text" = "Vendors be rated";

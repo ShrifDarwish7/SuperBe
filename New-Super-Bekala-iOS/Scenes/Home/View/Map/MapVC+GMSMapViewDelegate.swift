@@ -53,7 +53,7 @@ extension MapVC: GMSMapViewDelegate{
                 "language": "lang".localized,
                 "latlng": "\(Shared.userLat ?? 0.0),\(Shared.userLng ?? 0.0)"
             ]
-            presenter?.getGeocode(parameters)
+            //presenter?.getGeocode(parameters)
             
         }
     }

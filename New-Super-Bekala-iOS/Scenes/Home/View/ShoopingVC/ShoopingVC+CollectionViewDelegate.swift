@@ -101,17 +101,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         switch collectionView {
         case filtersCollectionView:
 
-            for i in 0...self.categories!.count-1{
-                self.categories![i].selected = false
-            }
-            self.categories![indexPath.row].selected = true
-            self.selectedCategory = self.categories![indexPath.row]
-            self.filtersCollectionView.reloadData()
-            self.filtersCollectionView.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
-            self.featuredLoading = true
-            self.ordinaryLoading = true
-            self.showSkeletonView()
-            self.updateBranches()
+            selectCategory(index: indexPath.row)
 
         case featuredVendorsCollection:
 

@@ -30,6 +30,9 @@ class InfoVC: UIViewController {
     @IBOutlet weak var branchStatusIcon: UIImageView!
     @IBOutlet weak var branchStatusLbl: UILabel!
     @IBOutlet weak var deliveryHours: UILabel!
+    @IBOutlet weak var onlinePayStack: UIStackView!
+    @IBOutlet weak var branchName: UILabel!
+    @IBOutlet weak var bio: UILabel!
     
     var branch: Branch?
 
@@ -47,17 +50,22 @@ class InfoVC: UIViewController {
     
     func loadUI(){
         
+        branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
+        bio.text = "lang".localized == "en" ? branch?.bio?.en : branch?.bio?.ar
+        
+        onlinePayStack.isHidden = branch?.onlinePayment == 1 ? false : true
+        
         if branch?.isOpen == 1{
-            branchStatusLbl.text = "Open now"
+            branchStatusLbl.text = "Open now".localized
             branchStatusIcon.image = UIImage(named: "open_now")
         }else{
-            branchStatusLbl.text = "Close now"
+            branchStatusLbl.text = "Close now".localized
             branchStatusIcon.image = UIImage(named: "close_now")
         }
         
         deliveryHours.text = (branch?.deliveryStartTime ?? "") + " - " + (branch?.deliveryEndTime ?? "")
         
-        let camera = GMSCameraPosition(latitude: Double((branch?.coordinates?.split(separator: ",")[0])!)!, longitude: Double((branch?.coordinates?.split(separator: ",")[1])!)!, zoom: 19)
+        let camera = GMSCameraPosition(latitude: Double((branch?.coordinates?.split(separator: ",")[0])!) ?? 0.0, longitude: Double((branch?.coordinates?.split(separator: ",")[1])!) ?? 0.0, zoom: 19)
         mapView.camera = camera
         address.text = branch?.street
         
@@ -70,25 +78,25 @@ class InfoVC: UIViewController {
             workingDaysStack.isHidden = false
             
             let temp1 = (branch?.customOpenCloseTimes?.openingTimeSaturday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeSaturday ?? "")
-            day1.text = "Saturday: " + temp1
+            day1.text = "Saturday: ".localized + temp1
             
             let temp2 = (branch?.customOpenCloseTimes?.openingTimeSunday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeSunday ?? "")
-            day2.text = "Sunday: " + temp2
+            day2.text = "Sunday: ".localized + temp2
                 
             let temp3 = (branch?.customOpenCloseTimes?.openingTimeMonday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeMonday ?? "")
-            day3.text = "Monday: " + temp3
+            day3.text = "Monday: ".localized + temp3
             
             let temp4 = (branch?.customOpenCloseTimes?.openingTimeTuesday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeTuesday ?? "")
-            day4.text = "Tuesday: " + temp4
+            day4.text = "Tuesday: ".localized + temp4
             
             let temp5 = (branch?.customOpenCloseTimes?.openingTimeWednesday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeWednesday ?? "")
-            day5.text = "Wednesday: " + temp5
+            day5.text = "Wednesday: ".localized + temp5
             
             let temp6 = (branch?.customOpenCloseTimes?.openingTimeThursday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeThursday ?? "")
-            day6.text = "Thursday: " + temp6
+            day6.text = "Thursday: ".localized + temp6
                 
             let temp7 = (branch?.customOpenCloseTimes?.openingTimeFriday ?? "") + " - " + (branch?.customOpenCloseTimes?.closingTimeFriday ?? "")
-            day7.text = "Friday: " + temp7
+            day7.text = "Friday: ".localized + temp7
         }
         
         phonesTableView.delegate = self

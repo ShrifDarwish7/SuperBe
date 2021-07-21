@@ -35,4 +35,11 @@ extension ProfileVC: MainViewDelegate{
             self.presenter?.getAddresses()
         }
     }
+    
+    func didCompleteAddToWallet(_ msg: String, _ status: Int) {
+        showToast(msg)
+        if status == 1{
+            Shared.transaction = nil
+        }
+    }
 }
