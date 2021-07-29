@@ -21,10 +21,13 @@ class OrdinaryVendorTableViewCell: UITableViewCell {
     @IBOutlet weak var minimumOrder: UILabel!
     @IBOutlet weak var deliveryFees: UILabel!
     @IBOutlet weak var favouriteBtn: UIButton!
+    @IBOutlet weak var reviewsCount: UILabel!
     
     func loadFrom(data: Branch){
         vendorPhoto.layer.cornerRadius = vendorPhoto.frame.height/2
         vendorPhoto.layer.borderWidth = 2.5
+        
+        self.reviewsCount.text = "(\(data.reviewCount ?? 0))"
         
         if data.isOpen == 0{
             vendorPhoto.layer.borderColor = UIColor(named: "busyColor")?.cgColor
@@ -47,7 +50,7 @@ class OrdinaryVendorTableViewCell: UITableViewCell {
         vendorPhoto.kf.indicatorType = .activity
         vendorPhoto.kf.setImage(with:URL(string: Shared.storageBase + (data.logo ?? ""))!, placeholder: nil, options: [], completionHandler: nil)
         vendorName.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
-//        vendorRate.rating = data.rating ?? 0.0
+        vendorRate.rating = Double(data.rating ?? "0.0")!
         deliveryTime.text = "\(data.deliveryDuration ?? 0) MIN"
         deliveryTime.text = "\(data.minOrder ?? 0) EGP"
         deliveryFees.text = "\(data.deliveryFees ?? 0) EGP"

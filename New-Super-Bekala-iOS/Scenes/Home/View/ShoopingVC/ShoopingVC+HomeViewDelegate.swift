@@ -12,7 +12,6 @@ import SkeletonView
 extension ShoopingVC: MainViewDelegate{
     
     func updateBranches(){
-        self.filtersCollectionView.hideSkeleton()
         self.parameters.updateValue("\(self.selectedCategory?.id ?? 0)", forKey: "category_id")
         
         self.presenter?.getFeaturedBranches(parameters)
@@ -31,6 +30,7 @@ extension ShoopingVC: MainViewDelegate{
         }else if Shared.isCoords{
             parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
         }
+        parameters.updateValue("all", forKey: "lang")
         print("cats prms",parameters)
         self.presenter?.getCategories(parameters)
     }
@@ -38,19 +38,23 @@ extension ShoopingVC: MainViewDelegate{
     func didCompleteWithCategories(_ data: [Category]?) {
         if let _ = data{
             self.categories = data
-            self.categories?[0].selected = true
-            self.selectedCategory = self.categories?[0]
+            if "lang".localized == "en"{
+                self.categories?[0].selected = true
+                self.selectedCategory = self.categories?[0]
+            }else{
+                self.categories![self.categories!.count-1].selected = true
+                self.selectedCategory = self.categories?[self.categories!.count-1]
+            }
             self.loadFiltersCollection()
-            self.filtersCollectionView.hideSkeleton()
-            self.view.stopSkeletonAnimation()
             updateBranches()
         }
     }
     
-    func didCompleteWithBranches(_ data: [Branch]?) {
+    func didCompleteWithBranches(_ data: [Branch]?,_ meta: Meta?) {
         ordinaryVendorsTAbleView.hideSkeleton()
         if let data = data,
            !data.isEmpty{
+            print("here last branch",data.reversed().last)
             self.branches = data.reversed()
             self.ordinaryLoading = false
             self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)

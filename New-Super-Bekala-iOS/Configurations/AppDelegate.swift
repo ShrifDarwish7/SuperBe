@@ -16,16 +16,24 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import CoreData
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let reachability = try! Reachability()
     static var standard: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch { }
+        
         
         GMSServices.provideAPIKey("AIzaSyCyAPJ2M7dyEAyC33zqVCyXlWlWRszYH4U")
         GMSPlacesClient.provideAPIKey("AIzaSyCyAPJ2M7dyEAyC33zqVCyXlWlWRszYH4U")
@@ -44,8 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-                
+          
         return true
+    }
+    
+    @objc func reachabilityChanged(note: Notification){
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .unavailable:
+            Router.toNoConnection(self.window?.rootViewController)
+        default:
+            break
+        }
     }
     
     @available(iOS 9.0, *)

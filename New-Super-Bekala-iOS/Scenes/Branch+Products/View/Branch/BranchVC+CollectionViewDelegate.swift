@@ -77,14 +77,40 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                 cell.productImage.layer.cornerRadius = 25
                 cell.loadFrom(data: self.products![indexPath.row])
                 
-                let inCartItems = self.cartItems?.filter({ return $0.cart_id == String(self.products![indexPath.row].id!) })
-                if inCartItems!.isEmpty{
-                    cell.inCartView.isHidden = true
-                    cell.addToCartBtn.isHidden = false
+                if self.products![indexPath.row].inStock == 1{
+                    let inCartItems = self.cartItems?.filter({ return $0.cart_id == String(self.products![indexPath.row].id!) })
+                    if inCartItems!.isEmpty{
+                        cell.inCartView.isHidden = true
+                        cell.addToCartBtn.isHidden = false
+                    }else{
+                        cell.inCartView.isHidden = false
+                        cell.addToCartBtn.isHidden = true
+                        cell.quantity.text = "\(inCartItems?.first?.quantity ?? 1)"
+                    }
+                    cell.increaseBtn.onTap { [self] in
+                        guard Int(cell.quantity.text!)! > 0 else{
+                            return
+                        }
+                        var newQty: Int = Int(cell.quantity.text!)!
+                        newQty += 1
+                        cell.quantity.text = "\(newQty)"
+                        CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
+                        fetchCartItems()
+                    }
+                    
+                    cell.decreaseBtn.onTap { [self] in
+                        guard Int(cell.quantity.text!)! > 1 else{
+                            return
+                        }
+                        var newQty: Int = Int(cell.quantity.text!)!
+                        newQty -= 1
+                        cell.quantity.text = "\(newQty)"
+                        CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
+                        fetchCartItems()
+                    }
                 }else{
-                    cell.inCartView.isHidden = false
                     cell.addToCartBtn.isHidden = true
-                    cell.quantity.text = "\(inCartItems?.first?.quantity ?? 1)"
+                    cell.inCartView.isHidden = true
                 }
                 
                 cell.addToCartBtn.onTap {
@@ -103,31 +129,8 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
                     CartServices.shared.addToCart(self.products![indexPath.row]) { (completed) in
                         if completed{
                             self.fetchCartItems()
-                           // self.showToast("Product added successfully to your cart")
                         }
                     }
-                }
-                
-                cell.increaseBtn.onTap { [self] in
-                    guard Int(cell.quantity.text!)! > 0 else{
-                        return
-                    }
-                    var newQty: Int = Int(cell.quantity.text!)!
-                    newQty += 1
-                    cell.quantity.text = "\(newQty)"
-                    CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
-                    fetchCartItems()
-                }
-                
-                cell.decreaseBtn.onTap { [self] in
-                    guard Int(cell.quantity.text!)! > 1 else{
-                        return
-                    }
-                    var newQty: Int = Int(cell.quantity.text!)!
-                    newQty -= 1
-                    cell.quantity.text = "\(newQty)"
-                    CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
-                    fetchCartItems()
                 }
                 
                 return cell
@@ -202,6 +205,7 @@ extension BranchVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource, 
             
         case productsCollectionView:
             
+            guard self.products![indexPath.row].inStock == 1 else { return }
             self.products![indexPath.row].branch = self.branch
             Router.toProduct(self, self.products![indexPath.row])
             

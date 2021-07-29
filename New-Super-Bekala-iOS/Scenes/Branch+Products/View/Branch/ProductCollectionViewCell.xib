@@ -125,17 +125,41 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awK-zN-bj9" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="269" height="303"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Out Of Stock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMK-9g-i9T" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="67.5" y="138" width="134.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="KMK-9g-i9T" firstAttribute="centerX" secondItem="awK-zN-bj9" secondAttribute="centerX" id="pnt-nJ-r9y"/>
+                                    <constraint firstItem="KMK-9g-i9T" firstAttribute="centerY" secondItem="awK-zN-bj9" secondAttribute="centerY" id="xrO-PV-0bw"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="awK-zN-bj9" firstAttribute="leading" secondItem="vPk-fu-9rE" secondAttribute="leading" id="0JP-lq-fRj"/>
                             <constraint firstItem="AXV-Tb-uaP" firstAttribute="centerY" secondItem="vPk-fu-9rE" secondAttribute="centerY" constant="20" id="9Hh-Lq-D92"/>
                             <constraint firstItem="9po-4Y-jg8" firstAttribute="leading" secondItem="vPk-fu-9rE" secondAttribute="leading" constant="10" id="9bS-Ko-KK6"/>
                             <constraint firstItem="AXV-Tb-uaP" firstAttribute="top" secondItem="Lgt-C5-JTy" secondAttribute="bottom" id="Ar6-tH-zLo"/>
+                            <constraint firstAttribute="trailing" secondItem="awK-zN-bj9" secondAttribute="trailing" id="EHN-wf-DuK"/>
                             <constraint firstItem="Lgt-C5-JTy" firstAttribute="leading" secondItem="vPk-fu-9rE" secondAttribute="leading" constant="5" id="Ncb-q6-2aj"/>
                             <constraint firstItem="dMd-71-i29" firstAttribute="leading" secondItem="vPk-fu-9rE" secondAttribute="leading" constant="5" id="RUv-Jb-QGg"/>
                             <constraint firstAttribute="trailing" secondItem="AXV-Tb-uaP" secondAttribute="trailing" constant="5" id="UVE-Ys-y49"/>
                             <constraint firstAttribute="bottom" secondItem="dMd-71-i29" secondAttribute="bottom" constant="5" id="WEV-OA-FEj"/>
                             <constraint firstItem="Lgt-C5-JTy" firstAttribute="top" secondItem="vPk-fu-9rE" secondAttribute="top" constant="5" id="WZn-gU-bxF"/>
+                            <constraint firstAttribute="bottom" secondItem="awK-zN-bj9" secondAttribute="bottom" id="Yob-2c-Evk"/>
                             <constraint firstItem="AXV-Tb-uaP" firstAttribute="leading" secondItem="vPk-fu-9rE" secondAttribute="leading" constant="5" id="ZQU-ya-uvB"/>
                             <constraint firstAttribute="trailing" secondItem="9po-4Y-jg8" secondAttribute="trailing" constant="10" id="Zzh-Zw-4wo"/>
                             <constraint firstAttribute="trailing" secondItem="dMd-71-i29" secondAttribute="trailing" constant="5" id="aaD-1K-6XF"/>
@@ -143,6 +167,7 @@
                             <constraint firstItem="dMd-71-i29" firstAttribute="top" secondItem="AXV-Tb-uaP" secondAttribute="bottom" id="l4S-6n-UjJ"/>
                             <constraint firstAttribute="trailing" secondItem="Lgt-C5-JTy" secondAttribute="trailing" constant="5" id="muO-HF-btf"/>
                             <constraint firstItem="9po-4Y-jg8" firstAttribute="top" secondItem="AXV-Tb-uaP" secondAttribute="bottom" constant="10" id="qAT-Ea-GzJ"/>
+                            <constraint firstItem="awK-zN-bj9" firstAttribute="top" secondItem="vPk-fu-9rE" secondAttribute="top" id="xyb-sd-YSJ"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
@@ -303,6 +328,7 @@
                 <outlet property="inCartView" destination="StZ-SX-9gT" id="iqZ-u3-ms7"/>
                 <outlet property="increaseBtn" destination="grP-Un-pn7" id="sN0-j3-dcE"/>
                 <outlet property="name" destination="3mt-bH-shG" id="5JC-iM-X56"/>
+                <outlet property="outOfStockView" destination="awK-zN-bj9" id="8W6-hd-Mh8"/>
                 <outlet property="price" destination="z5m-jm-8li" id="cpR-H7-emr"/>
                 <outlet property="productImage" destination="Lgt-C5-JTy" id="5bd-ba-U7X"/>
                 <outlet property="quantity" destination="VFx-iN-oS2" id="El9-Ig-LZZ"/>

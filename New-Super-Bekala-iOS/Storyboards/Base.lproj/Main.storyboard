@@ -828,6 +828,118 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="2757.971014492754" y="158.70535714285714"/>
         </scene>
+        <!--No ConnectionVC-->
+        <scene sceneID="uWM-jp-uJv">
+            <objects>
+                <viewController storyboardIdentifier="NoConnectionVC" id="gdX-Vq-yVV" customClass="NoConnectionVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RMx-Xe-k7P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3m-7i-NPJ" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="57" y="323" width="300" height="250"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-wi-fi-disconnected-100" translatesAutoresizingMaskIntoConstraints="NO" id="uU1-pR-bQ8">
+                                        <rect key="frame" x="125" y="15" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="sNX-V8-bgP"/>
+                                            <constraint firstAttribute="height" constant="50" id="x7u-k3-Qdh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fhl-Cb-qAf">
+                                        <rect key="frame" x="15" y="85" width="270" height="72.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awa-tc-6vj" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="24"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="failed to connect to super be servers, please check your network connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3k-bd-HqS" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="34" width="270" height="38.5"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="64R-QR-z94">
+                                        <rect key="frame" x="15" y="195" width="270" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvL-n6-VFE" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                <state key="normal" title="Exit">
+                                                    <color key="titleColor" name="Dark-Red"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="exitAction:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="KCW-JB-0aM"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZ3-N8-Ztv" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="140" y="0.0" width="130" height="40"/>
+                                                <color key="backgroundColor" name="Main"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                <state key="normal" title="Retry">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="retryActiion:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="cQl-wD-gsp"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="uvL-n6-VFE" secondAttribute="bottom" id="Qcf-QY-ow5"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZDQ-Bu-Z3A"/>
+                                            <constraint firstItem="hZ3-N8-Ztv" firstAttribute="top" secondItem="64R-QR-z94" secondAttribute="top" id="lEx-0O-NIT"/>
+                                            <constraint firstAttribute="bottom" secondItem="hZ3-N8-Ztv" secondAttribute="bottom" id="uEr-Bi-O4m"/>
+                                            <constraint firstItem="uvL-n6-VFE" firstAttribute="top" secondItem="64R-QR-z94" secondAttribute="top" id="xMo-uZ-YNP"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="fhl-Cb-qAf" firstAttribute="leading" secondItem="z3m-7i-NPJ" secondAttribute="leading" constant="15" id="5yt-xY-o6g"/>
+                                    <constraint firstItem="uU1-pR-bQ8" firstAttribute="centerX" secondItem="z3m-7i-NPJ" secondAttribute="centerX" id="H8S-ZT-3PR"/>
+                                    <constraint firstAttribute="trailing" secondItem="64R-QR-z94" secondAttribute="trailing" constant="15" id="Jno-MK-iYL"/>
+                                    <constraint firstAttribute="width" constant="300" id="Obw-fg-Yxq"/>
+                                    <constraint firstItem="fhl-Cb-qAf" firstAttribute="top" secondItem="uU1-pR-bQ8" secondAttribute="bottom" constant="20" id="OtV-r3-Gh1"/>
+                                    <constraint firstAttribute="trailing" secondItem="fhl-Cb-qAf" secondAttribute="trailing" constant="15" id="TnP-3h-Y7A"/>
+                                    <constraint firstItem="uU1-pR-bQ8" firstAttribute="top" secondItem="z3m-7i-NPJ" secondAttribute="top" constant="15" id="iAP-2K-2If"/>
+                                    <constraint firstAttribute="bottom" secondItem="64R-QR-z94" secondAttribute="bottom" constant="15" id="j1s-4x-b3k"/>
+                                    <constraint firstItem="64R-QR-z94" firstAttribute="leading" secondItem="z3m-7i-NPJ" secondAttribute="leading" constant="15" id="kws-9J-Hvi"/>
+                                    <constraint firstAttribute="height" constant="250" id="q2M-7H-Khz"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bmw-aE-lUB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z3m-7i-NPJ" firstAttribute="centerX" secondItem="RMx-Xe-k7P" secondAttribute="centerX" id="W4h-Fh-zgF"/>
+                            <constraint firstItem="z3m-7i-NPJ" firstAttribute="centerY" secondItem="RMx-Xe-k7P" secondAttribute="centerY" id="rlU-H7-i8P"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KHd-cr-ldR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3552" y="159"/>
+        </scene>
         <!--SplashVC-->
         <scene sceneID="dVi-VR-6so">
             <objects>
@@ -897,7 +1009,151 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="1102.8985507246377" y="158.70535714285714"/>
         </scene>
+        <!--Order PlacedVC-->
+        <scene sceneID="udA-J4-uKn">
+            <objects>
+                <viewController storyboardIdentifier="OrderPlacedVC" id="zsv-lw-jMT" customClass="OrderPlacedVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VPQ-2a-NjG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-at-rg8" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="57" y="323" width="300" height="250"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="vze-gj-Okl">
+                                        <rect key="frame" x="125" y="15" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FNc-c4-qkN"/>
+                                            <constraint firstAttribute="width" constant="50" id="QWT-Yc-db6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-67-wci">
+                                        <rect key="frame" x="15" y="85" width="270" height="72.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great !!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oez-ZR-Sm2" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="24"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order placed successfully, we hope you enjoy it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-me-pbN" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="34" width="270" height="38.5"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yEb-zD-uib">
+                                        <rect key="frame" x="15" y="195" width="270" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz9-n9-d0s" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                <state key="normal" title="Cancel Order">
+                                                    <color key="titleColor" name="Dark-Red"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelOrder:" destination="zsv-lw-jMT" eventType="touchUpInside" id="N58-q7-TNE"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-cm-xMN" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="140" y="0.0" width="130" height="40"/>
+                                                <color key="backgroundColor" name="Main"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                <state key="normal" title="Home">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="homeAction:" destination="zsv-lw-jMT" eventType="touchUpInside" id="hMo-zb-kwV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="yz9-n9-d0s" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="3iS-mU-CmP"/>
+                                            <constraint firstItem="Jf1-cm-xMN" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="Fwh-2A-bY7"/>
+                                            <constraint firstAttribute="bottom" secondItem="yz9-n9-d0s" secondAttribute="bottom" id="Sng-pG-uyU"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jf1-cm-xMN" secondAttribute="bottom" id="aS9-Rg-zsN"/>
+                                            <constraint firstAttribute="height" constant="40" id="f57-al-Fbx"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="yEb-zD-uib" secondAttribute="trailing" constant="15" id="2So-H8-Oba"/>
+                                    <constraint firstItem="vze-gj-Okl" firstAttribute="top" secondItem="Eex-at-rg8" secondAttribute="top" constant="15" id="B1Z-le-dkM"/>
+                                    <constraint firstAttribute="bottom" secondItem="yEb-zD-uib" secondAttribute="bottom" constant="15" id="INb-2c-OyZ"/>
+                                    <constraint firstAttribute="height" constant="250" id="TXt-1a-thX"/>
+                                    <constraint firstAttribute="width" constant="300" id="Trx-ed-DVy"/>
+                                    <constraint firstItem="fDM-67-wci" firstAttribute="leading" secondItem="Eex-at-rg8" secondAttribute="leading" constant="15" id="abE-RV-QNs"/>
+                                    <constraint firstItem="vze-gj-Okl" firstAttribute="centerX" secondItem="Eex-at-rg8" secondAttribute="centerX" id="bxx-sg-S6X"/>
+                                    <constraint firstItem="yEb-zD-uib" firstAttribute="leading" secondItem="Eex-at-rg8" secondAttribute="leading" constant="15" id="gek-SK-oWF"/>
+                                    <constraint firstAttribute="trailing" secondItem="fDM-67-wci" secondAttribute="trailing" constant="15" id="uA7-pO-XSD"/>
+                                    <constraint firstItem="fDM-67-wci" firstAttribute="top" secondItem="vze-gj-Okl" secondAttribute="bottom" constant="20" id="zBE-6P-aYJ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W0i-tB-Aas"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Eex-at-rg8" firstAttribute="centerX" secondItem="VPQ-2a-NjG" secondAttribute="centerX" id="3rf-47-ODE"/>
+                            <constraint firstItem="Eex-at-rg8" firstAttribute="centerY" secondItem="VPQ-2a-NjG" secondAttribute="centerY" id="JhB-5D-rEs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wud-op-ZFb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="07e-HU-NhB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5698.5507246376819" y="158.70535714285714"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PkS-oZ-Wic">
+            <objects>
+                <navigationController storyboardIdentifier="OrderPlacedNav" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="IC3-b9-N0v" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="H0A-O4-FlO">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zsv-lw-jMT" kind="relationship" relationship="rootViewController" id="fbu-ax-HdX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ObW-Im-lMJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4786.9565217391309" y="158.70535714285714"/>
+        </scene>
     </scenes>
+    <designables>
+        <designable name="Jf1-cm-xMN">
+            <size key="intrinsicContentSize" width="46" height="33"/>
+        </designable>
+        <designable name="hZ3-N8-Ztv">
+            <size key="intrinsicContentSize" width="42" height="33"/>
+        </designable>
+        <designable name="uvL-n6-VFE">
+            <size key="intrinsicContentSize" width="30" height="33"/>
+        </designable>
+        <designable name="yz9-n9-d0s">
+            <size key="intrinsicContentSize" width="100" height="33"/>
+        </designable>
+    </designables>
     <resources>
         <image name="255px-Flag_of_Egypt" width="24" height="16"/>
         <image name="aboutUsImg1" width="199" height="199"/>
@@ -908,6 +1164,7 @@ more ...</string>
         <image name="down 4" width="615" height="594"/>
         <image name="fb" width="57" height="57"/>
         <image name="google" width="57" height="57"/>
+        <image name="icons8-wi-fi-disconnected-100" width="100" height="100"/>
         <image name="loginPath 59" width="375" height="255"/>
         <image name="logo" width="118" height="118"/>
         <image name="logo-shadow" width="387" height="387"/>
@@ -918,6 +1175,7 @@ more ...</string>
         <image name="rightLines" width="54" height="32"/>
         <image name="rightLines_" width="54" height="32"/>
         <image name="sbLoader2" width="301" height="127"/>
+        <image name="tick" width="512" height="512"/>
         <image name="up 1" width="649" height="682"/>
         <image name="up 2" width="636" height="641"/>
         <image name="up 3" width="612" height="567"/>
@@ -927,6 +1185,9 @@ more ...</string>
         </namedColor>
         <namedColor name="Dark-Blue">
             <color red="0.16099999845027924" green="0.21199999749660492" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Dark-Red">
+            <color red="0.66699999570846558" green="0.063000001013278961" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gold">
             <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

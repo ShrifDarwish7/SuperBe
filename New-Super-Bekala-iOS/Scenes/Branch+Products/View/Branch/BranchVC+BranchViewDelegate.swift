@@ -14,8 +14,13 @@ extension BranchVC: MainViewDelegate{
         if let data = data{
             self.categories = data
             guard !self.categories!.isEmpty else { return }
-            self.categories?[0].selected = true
-            self.selectedCat = data.first
+            if "lang".localized == "en"{
+                self.categories?[0].selected = true
+                self.selectedCat = self.categories?[0]
+            }else{
+                self.categories![self.categories!.count-1].selected = true
+                self.selectedCat = self.categories?[self.categories!.count-1]
+            }
             self.loadFiltersCollection()
             prms.updateValue("branch_category_id=\(self.selectedCat?.id ?? 0)", forKey: "filter")
             prms.updateValue("variations.options", forKey: "with")

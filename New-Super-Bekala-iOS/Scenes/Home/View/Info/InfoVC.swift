@@ -51,7 +51,7 @@ class InfoVC: UIViewController {
     func loadUI(){
         
         branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
-        bio.text = "lang".localized == "en" ? branch?.bio?.en : branch?.bio?.ar
+//        bio.text = "lang".localized == "en" ? branch?.bio?.en : branch?.bio?.ar
         
         onlinePayStack.isHidden = branch?.onlinePayment == 1 ? false : true
         

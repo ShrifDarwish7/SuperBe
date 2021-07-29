@@ -66,15 +66,18 @@ class ProductVC: UIViewController {
         
         if let salePrice = product?.salePrice,
            salePrice > 0{
-            salePriceView.isHidden = false
-            self.salePrice.text = "\(salePrice) EGP"
+            self.salePriceView.isHidden = false
+            self.salePrice.text = "\(self.product?.price ?? 0) EGP"
+            self.product?.price = salePrice
         }else{
-            salePriceView.isHidden = true
+            self.salePriceView.isHidden = true
         }
 
         productImagesCollectionView.delegate = self
         productImagesCollectionView.dataSource = self
         productImagesCollectionView.reloadData()
+        
+        pageControl.isHidden = (product?.images?.count ?? 0) > 1 ? false : true
         
         pageControl.numberOfPages = product?.images?.count ?? 0
         pageControl.onChange { (page) in
@@ -156,6 +159,7 @@ class ProductVC: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
+            notesTV.becomeFirstResponder()
         case 1:
             self.notesHeight.constant = 0
             sender.tag = 0
@@ -163,6 +167,7 @@ class ProductVC: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
+            self.view.endEditing(true)
         default:
             break
         }
@@ -229,12 +234,12 @@ class ProductVC: UIViewController {
                 
                 let selectedOtps = variation.options?.filter({ return $0.selected == true })
                 
-                if variation.isRequired == 1, variation.isAddition != 1{
+                if variation.isAddition == 0{
                     
                     guard !(selectedOtps?.isEmpty)! else { continue }
                     total += (selectedOtps?.first?.price)!
                     
-                }else if variation.isRequired != 1{
+                }else{
                     
                     selectedOtps!.forEach({ (option) in
                         total += option.price!

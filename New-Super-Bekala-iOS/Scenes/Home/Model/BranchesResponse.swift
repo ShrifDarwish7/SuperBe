@@ -11,13 +11,14 @@ import Foundation
 // MARK: - BranchesResponse
 struct BranchesResponse: Codable {
     let status: Int?
-    let data: [Branch]
+    var data: [Branch]
     let message: String?
+    let meta: Meta?
 }
 
 struct Branch: Codable {
     let id: Int
-    let bio: Localized?
+     let bio: Localized?
     let name: Localized?
     let phones, emails, fax: [String?]?
     let website: String?
@@ -28,12 +29,13 @@ struct Branch: Codable {
     let images: [String]?
     let acceptWalletPayment, fastDelivery, vendorDelivery, receiveFromShop, supportDelivery, creditOnDelivery: Int?
     let coordinates: String?
+    let deliveryFees, minOrder: Double?
     let quickOrder, quickVoice, receiveCalls, cashOnDelivery: Int?
     let onlinePayment, acceptCoupons, acceptChats, isFeatured: Int?
-    let hasOnsaleProducts, hasFeaturedProducts, minOrder: Int?
-    let deliveryFees, isOpen, isBusy, isOnhold: Int?
+    let hasOnsaleProducts, hasFeaturedProducts: Int?
+    let isOpen, isBusy, isOnhold: Int?
     let closedMessage, openingTime, closingTime, deliveryStartTime: String?
-   // let rating: Double?
+    let rating: String?
     let deliveryEndTime: String?
     let deliveryAreas: [String]?
     let deliveryDuration: Int?
@@ -53,6 +55,7 @@ struct Branch: Codable {
     let vendorID, userID, regionID: Int?
    // let user: BranchUser?
     var isFavourite: Int?
+    var reviewsCount: Int?
     var products: [Product]?
     //let openCloseTimes: String?
     var favouriteId: Int?
@@ -61,7 +64,7 @@ struct Branch: Codable {
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, bio, phones, emails, fax, website, name
+        case id, phones, emails, fax, website, name, bio
         case isNewBranch = "is_new_branch"
         case postalCode = "postal_code"
         case street, landmark
@@ -69,6 +72,7 @@ struct Branch: Codable {
         case floorNumber = "floor_number"
         case flatNumber = "flat_number"
         case logo, images
+        case reviewsCount = "reviews_count"
         case acceptWalletPayment = "accept_wallet_payment"
         case fastDelivery = "fast_delivery"
         case vendorDelivery = "vendor_delivery"
@@ -84,7 +88,7 @@ struct Branch: Codable {
         case isFeatured = "is_featured"
         case hasOnsaleProducts = "has_onsale_products"
         case hasFeaturedProducts = "has_featured_products"
-       // case rating
+        case rating
         case minOrder = "min_order"
         case deliveryFees = "delivery_fees"
         case isOpen = "is_open"
@@ -174,5 +178,17 @@ struct BranchUser: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, name, email
+    }
+}
+
+// MARK: - Meta
+struct Meta: Codable {
+    let totalRecords, totalPages, currentPage, perPage: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case totalRecords = "total_records"
+        case totalPages = "total_pages"
+        case currentPage = "current_page"
+        case perPage = "per_page"
     }
 }

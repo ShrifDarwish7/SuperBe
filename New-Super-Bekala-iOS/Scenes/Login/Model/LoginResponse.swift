@@ -18,13 +18,19 @@ struct LoginResponse: Codable {
 
 // MARK: - DataClass
 struct User: Codable {
-    let id: Int
-    let name, email: String
+    let id: Int?
+    let name, email: String?
     let phone: String?
-    let token: String
+    let token: String?
     let birthdate: String?
-    let avatar: String
-    let uid: String
+    let avatar: String?
+    let uid: String?
     let gender: String?
+    let isBlocked: Int?
+    
+    enum CodingKeys: String, CodingKey{
+        case id, name, email, phone, token, birthdate, avatar, uid, gender
+        case isBlocked = "is_blocked"
+    }
     //let orders, wallet, points, addresses: [String]?
 }

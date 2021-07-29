@@ -16,6 +16,7 @@ enum AppStoryboard: String {
     case orders = "Orders"
     case profile = "Profile"
     case services = "Services"
+    case other = "Other"
 }
 
 class Router {
@@ -32,6 +33,7 @@ class Router {
     }
     
     static func toHome(_ sender: UIViewController){
+        // guard !(sender.navigationController?.topViewController?.isKind(of: HomeContainerVC.self))! else { return }
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "HomeContainerVC") as! HomeContainerVC
         sender.navigationController?.pushViewController(vc, animated: true)
@@ -58,12 +60,14 @@ class Router {
     }
     
     static func toAboutUs(_ sender: UIViewController){
+        guard !(sender.navigationController?.topViewController?.isKind(of: AboutUsViewController.self))! else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AboutUsViewController") as! AboutUsViewController
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
     static func toAskLocation(_ sender: UIViewController){
+        guard !(sender.navigationController?.topViewController?.isKind(of: AskLocationVC.self))! else { return }
         let vc = self.instantiate(appStoryboard: .home, identifier: "AskLocationVC") as! AskLocationVC
         sender.navigationController?.pushViewController(vc, animated: true)
     }
@@ -193,5 +197,39 @@ class Router {
         let vc = self.instantiate(appStoryboard: .orders, identifier: "PayContainerVC") as! PayContainerVC
         vc.modalPresentationStyle = .overCurrentContext
         sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toChangeLocation(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .profile, identifier: "ChangeLocationNav") as! UINavigationController
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toNoConnection(_ sender: UIViewController?){
+        let vc = Router.instantiate(appStoryboard: .main, identifier: "NoConnectionVC") as! NoConnectionVC
+        vc.modalPresentationStyle = .overCurrentContext
+        sender?.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toRateBranch(_ sender: UIViewController,_ branch: Branch){
+        let vc = self.instantiate(appStoryboard: .other, identifier: "RateBranchVC") as! RateBranchVC
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.branch = branch
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toRateOrder(_ sender: UIViewController,_ branchId: Int,_ orderId: Int){
+        let vc = self.instantiate(appStoryboard: .other, identifier: "RateOrderVC") as! RateOrderVC
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.branchId = branchId
+        vc.orderId = orderId
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toOrderPlaced(_ sender: UIViewController,_ id: Int){
+        let nav = Router.instantiate(appStoryboard: .main, identifier: "OrderPlacedNav") as! UINavigationController
+        nav.modalPresentationStyle = .overCurrentContext
+        (nav.viewControllers.first as! OrderPlacedVC).orderID = id
+        sender.present(nav, animated: false, completion: nil)
     }
 }

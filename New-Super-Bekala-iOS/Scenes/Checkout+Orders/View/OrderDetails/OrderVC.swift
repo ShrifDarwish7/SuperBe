@@ -47,6 +47,7 @@ class OrderVC: UIViewController {
     @IBOutlet weak var discountStack: UIStackView!
     @IBOutlet weak var taxStack: UIStackView!
     @IBOutlet weak var walletStack: UIStackView!
+    @IBOutlet weak var statusBtn: UIButton!
     
     var order: LastOrder?
     var presenter: MainPresenter?
@@ -60,7 +61,7 @@ class OrderVC: UIViewController {
         reasonBtn.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         completedLbl.transform = CGAffineTransform(rotationAngle: -(.pi/2))
         rateBtn.transform = CGAffineTransform(rotationAngle: -(.pi/2))
-        
+                
         orderId.text = "#\(order?.id ?? 000000)"
         
         if let address = order?.address{
@@ -168,6 +169,11 @@ class OrderVC: UIViewController {
        // hideStatusView()
     }
     
+    @IBAction func rateAction(_ sender: Any) {
+        Router.toRateOrder(self, (self.order?.branch?.id)!, (self.order?.id)!)
+    }
+    
+    
     @IBAction func openAddressInMaps(_ sender: Any) {
         guard let address = self.order?.address else { return }
         self.openInMaps(coordinates: address.coordinates ?? "0.0")
@@ -225,12 +231,14 @@ class OrderVC: UIViewController {
         UIView.animate(withDuration: 0.2) {
             self.statusViewWidth.constant = 85
             self.view.layoutIfNeeded()
+            self.statusBtn.tag = 1
         }
     }
 
     func hideStatusView(){
         UIView.animate(withDuration: 0.2) {
             self.statusViewWidth.constant = 0
+            self.statusBtn.tag = 0
             self.view.layoutIfNeeded()
         }
     }

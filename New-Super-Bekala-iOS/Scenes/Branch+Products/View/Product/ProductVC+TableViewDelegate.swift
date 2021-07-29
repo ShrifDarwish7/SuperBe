@@ -79,16 +79,18 @@ extension ProductVC: UITableViewDelegate, UITableViewDataSource{
             let cell = cell.optionsTableView.dequeueReusableCell(withIdentifier: OptionsTableViewCell.identifier, for: optionIndex) as! OptionsTableViewCell
             cell.optionName.text = "lang".localized == "en" ? option?.name?.en : option?.name?.ar
             cell.priceStack.isHidden = option?.price == 0 ? true : false
-            cell.price.text = "\(option?.price ?? 0) EGP"
             cell.container.alpha = option?.inStock == 1 ? 1.0 : 0.3
             
             if let salePrice = option?.salePrice,
                salePrice != 0{
-                cell.salePrice.text = "\(salePrice) EGP"
+                cell.salePrice.text = "\(option?.price ?? 0.0) EGP"
                 cell.salePriceView.isHidden = false
+                product?.variations?[indexPath.row].options![optionIndex.row].price = salePrice
             }else{
                 cell.salePriceView.isHidden = true
             }
+            
+            cell.price.text = "\(product?.variations?[indexPath.row].options![optionIndex.row].price ?? 0) EGP"
             
             if product?.variations?[indexPath.row].isAddition == 1 {
                 cell.radionImg.image = option?.selected == true ? UIImage(named: "checked") : UIImage(named: "unchecked")

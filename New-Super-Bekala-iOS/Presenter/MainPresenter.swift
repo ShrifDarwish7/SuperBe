@@ -18,7 +18,7 @@ protocol MainViewDelegate {
     func didCompleteWithGoogleAddress(_ data: GoogleMapAddress?)
     func didCompleteWithCities(_ cities: [City]?)
     func didCompleteWithCategories(_ data: [Category]?)
-    func didCompleteWithBranches(_ data: [Branch]?)
+    func didCompleteWithBranches(_ data: [Branch]?,_ meta: Meta?)
     func didCompleteWithFeaturedBranches(_ data: [Branch]?)
     func didCompleteWithBranchCats(_ data: [BranchCategory]?)
     func didCompleteWithBranchProducts(_ data: [Product]?)
@@ -27,7 +27,7 @@ protocol MainViewDelegate {
     func didCompleteAddAddress(_ error: String?)
     func didCompleteUpdateAddress(_ error: String?)
     func didCompleteDeleteAddress(_ error: String?)
-    func didCompletePlaceOrder(_ error: String?)
+    func didCompletePlaceOrder(_ error: String?,_ id: Int)
     func didCompleteWithMyOrders(_ data: [LastOrder]?)
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?)
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
@@ -37,9 +37,11 @@ protocol MainViewDelegate {
     func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?)
     func didCompleteWithFavourites()
     func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?)
-    func didCompletePlaceSuperService(_ error: String?)
+    func didCompletePlaceSuperService(_ error: String?,_ id: Int)
   //  func didCompleteWithServices(_ data: [LastOrder]?)
     func didCompleteAddToWallet(_ msg: String,_ status: Int)
+    func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?)
+    func didCompleteRate(_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -50,7 +52,7 @@ extension MainViewDelegate{
     func didCompleteWithGoogleAddress(_ data: GoogleMapAddress?){}
     func didCompleteWithCities(_ cities: [City]?){}
     func didCompleteWithCategories(_ data: [Category]?){}
-    func didCompleteWithBranches(_ data: [Branch]?){}
+    func didCompleteWithBranches(_ data: [Branch]?,_ meta: Meta?){}
     func didCompleteWithFeaturedBranches(_ data: [Branch]?){}
     func didCompleteWithBranchCats(_ data: [BranchCategory]?){}
     func didCompleteWithBranchProducts(_ data: [Product]?){}
@@ -59,7 +61,7 @@ extension MainViewDelegate{
     func didCompleteAddAddress(_ error: String?){}
     func didCompleteUpdateAddress(_ error: String?){}
     func didCompleteDeleteAddress(_ error: String?){}
-    func didCompletePlaceOrder(_ error: String?){}
+    func didCompletePlaceOrder(_ error: String?,_ id: Int){}
     func didCompleteWithMyOrders(_ data: [LastOrder]?){}
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?){}
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
@@ -69,9 +71,11 @@ extension MainViewDelegate{
     func didCompleteWithFavourites(){}
     func didCompleteRemoveFromFavourites(_ error: String?,_ index: Int?,_ isFeatured: Bool?){}
     func didCompleteUpdateOrder(_ data: LastOrder?,_ error: String?){}
-    func didCompletePlaceSuperService(_ error: String?){}
+    func didCompletePlaceSuperService(_ error: String?,_ id: Int){}
    // func didCompleteWithServices(_ data: [LastOrder]?){}
     func didCompleteAddToWallet(_ msg: String,_ status: Int){}
+    func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?){}
+    func didCompleteRate(_ error: String?){}
 }
 
 class MainPresenter{
@@ -82,6 +86,47 @@ class MainPresenter{
         self.delegate = delegate
     }
     
+    func postRate(_ prms: [String: Any]){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.rate(prms)) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    self.delegate?.didCompleteRate(nil)
+                }else{
+                    self.delegate?.didCompleteRate(json["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompleteRate(Shared.errorMsg)
+            }
+        }
+    }
+    
+    func getBranchRates(_ id: Int){
+        APIServices.shared.call(.getBranchRating(id)) { data in
+            print(JSON(data))
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    if let ratings = try? json["data"]["ratings"].rawData(),
+                       var ratingsDataModel = ratings.getDecodedObject(from: [Rating].self),
+                       !ratingsDataModel.isEmpty{
+                        for i in 0...ratingsDataModel.count-1{
+                            ratingsDataModel[i].createdAt = ratingsDataModel[i].createdAt?.getTimeAgo()
+                        }
+                        self.delegate?.didCompleteWithBranchRates(ratingsDataModel, nil)
+                    }else{
+                        self.delegate?.didCompleteWithBranchRates([], nil)
+                    }
+                }else{
+                    self.delegate?.didCompleteWithBranchRates(nil, json["message"].stringValue)
+                }
+            }
+        }
+    }
+    
     func placeSuperService(_ prms: [String: Any],_ images: [String: UIImage]?,_ voice: Data?){
         self.delegate?.showProgress()
         APIServices.shared.call(.placeSuperService(prms, images, voice)) { data in
@@ -90,12 +135,12 @@ class MainPresenter{
             if let data = data,
                let json = try? JSON(data: data){
                 if json["status"].intValue == 1{
-                    self.delegate?.didCompletePlaceSuperService(nil)
+                    self.delegate?.didCompletePlaceSuperService(nil, json["data"]["id"].intValue)
                 }else{
-                    self.delegate?.didCompletePlaceSuperService(json["message"].stringValue)
+                    self.delegate?.didCompletePlaceSuperService(json["message"].stringValue, 0)
                 }
             }else{
-                self.delegate?.didCompletePlaceSuperService(Shared.errorMsg)
+                self.delegate?.didCompletePlaceSuperService(Shared.errorMsg, 0)
             }
         }
     }
@@ -202,12 +247,12 @@ class MainPresenter{
                 let json = JSON(data)
                 print("place order response",json)
                 if json["status"].intValue == 0{
-                    self.delegate?.didCompletePlaceOrder(json["message"].stringValue)
+                    self.delegate?.didCompletePlaceOrder(json["message"].stringValue, 0)
                 }else{
-                    self.delegate?.didCompletePlaceOrder(nil)
+                    self.delegate?.didCompletePlaceOrder(nil, json["data"]["id"].intValue)
                 }
             }else{
-                self.delegate?.didCompletePlaceOrder(Shared.errorMsg)
+                self.delegate?.didCompletePlaceOrder(Shared.errorMsg, 0)
             }
         }
     }
@@ -355,12 +400,19 @@ class MainPresenter{
     
     func getBranches(_ prms: [String:String]){
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            print(JSON(data))
+            print("getBranches",JSON(data))
             if let data = data,
-               let dataModel = data.getDecodedObject(from: BranchesResponse.self){
-                delegate?.didCompleteWithBranches(dataModel.data)
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self){
+                for i in 0...dataModel.data.count-1{
+                    if let favBranches = Shared.favBranches,
+                       !favBranches.isEmpty,
+                       !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{
+                        dataModel.data[i].isFavourite = 1
+                    }
+                }
+                delegate?.didCompleteWithBranches(dataModel.data, dataModel.meta)
             }else{
-                delegate?.didCompleteWithBranches(nil)
+                delegate?.didCompleteWithBranches(nil, nil)
             }
         }
     }
@@ -369,7 +421,7 @@ class MainPresenter{
         var prms = prms
         prms.updateValue("is_featured=1", forKey: "filter")
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            print("is_featured branches", JSON(data))
+            //print("is_featured branches", JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: BranchesResponse.self){
                 delegate?.didCompleteWithFeaturedBranches(dataModel.data)
@@ -381,7 +433,7 @@ class MainPresenter{
     
     func getSlider(_ prms: [String: String]){
         APIServices.shared.call(.slider(prms)) { [self] data in
-            print("getSlider",JSON(data))
+            //print("getSlider",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: SliderResponse.self){
                 delegate?.didCompleteWithSlider(dataModel.data, nil)

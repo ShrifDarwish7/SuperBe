@@ -17,12 +17,12 @@ class ProductSearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var branchImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var rate: CosmosView!
-    @IBOutlet weak var price: UILabel!
     @IBOutlet weak var addToCart: UIButton!
     @IBOutlet weak var increaseBtn: UIButton!
     @IBOutlet weak var decreaseBtn: UIButton!
     @IBOutlet weak var quantity: UILabel!
     @IBOutlet weak var inCartView: UIView!
+    @IBOutlet weak var stockView: ViewCorners!
     
     
     func loadFrom(_ product: Product){
@@ -34,12 +34,21 @@ class ProductSearchResultTableViewCell: UITableViewCell {
         
         branchImage.kf.setImage(with: URL(string: Shared.storageBase + (product.branch?.logo ?? "")))
         name.text = "lang".localized == "en" ? product.name?.en : product.name?.ar
-        price.text = "\(product.price ?? 0.0) EGP"
-        if let vars = product.variations,
-           vars.isEmpty{
-            price.isHidden = true
+       // price.text = "\(product.price ?? 0.0) EGP"
+       // price.isHidden = product.price == 0 ? true : false
+//        if let vars = product.variations,
+//           vars.isEmpty{
+//            price.isHidden = true
+//        }else{
+//            price.isHidden = false
+//        }
+        
+        if product.inStock == 1{
+            stockView.isHidden = true
+            addToCart.isHidden = false
         }else{
-            price.isHidden = false
+            stockView.isHidden = false
+            addToCart.isHidden = true
         }
     }
     

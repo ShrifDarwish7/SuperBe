@@ -56,11 +56,13 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         case specialOffersCollection:
             
             if sliderIsLoading{
+                let nib = UINib(nibName: ProductSkeletonCollectionViewCell.identifier, bundle: nil)
+                specialOffersCollection.register(nib, forCellWithReuseIdentifier: ProductSkeletonCollectionViewCell.identifier)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductSkeletonCollectionViewCell.identifier, for: indexPath) as! ProductSkeletonCollectionViewCell
                 return cell
             }else{
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SpecialOffersCollectionViewCell.identifier, for: indexPath) as! SpecialOffersCollectionViewCell
-                let urlStr = "lang".localized == "en" ? self.slider![indexPath.row].image?.en : self.slider![indexPath.row].image?.ar
+                let urlStr = self.slider![indexPath.row].image//"lang".localized == "en" ? self.slider![indexPath.row].image?.en : self.slider![indexPath.row].image?.ar
                 cell.image.kf.indicatorType = .activity
                 cell.image.kf.setImage(with: URL(string: Shared.storageBase + urlStr!), placeholder: nil, options: [], completionHandler: nil)
                 return cell
@@ -97,7 +99,22 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             self.updateBranches()
         case specialOffersCollection:
             if let branch = self.slider![indexPath.row].branch{
-                Router.toBranch(self, branch)
+                if branch.isOpen == 1{
+                    Router.toBranch(self, branch)
+                }else if branch.isOnhold == 1{
+                    let msg = "lang".localized == "en" ? "\(branch.name?.en ?? "") is on hold at the moment" : "\(branch.name?.ar ?? "") معلق حاليا"
+                    showAlert(title: "", message: msg)
+                }else if branch.isOpen == 0{
+                    let msg = "lang".localized == "en" ? "\(branch.name?.en ?? "") is closed now" : "\(branch.name?.ar ?? "") مغلق حاليا "
+                    let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+                    let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+                        Router.toBranch(self, branch)
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                    alert.addAction(continueAction)
+                    alert.addAction(cancelAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
             }else if let product = self.slider![indexPath.row].product{
                 Router.toProduct(self, product)
             }

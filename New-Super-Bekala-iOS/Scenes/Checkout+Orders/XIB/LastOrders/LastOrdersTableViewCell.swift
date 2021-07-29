@@ -18,6 +18,9 @@ class LastOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var statusContainer: ViewCorners!
     @IBOutlet weak var branchImgView: ViewCorners!
+    @IBOutlet weak var orderId: UILabel!
+    @IBOutlet weak var rateBtn: UIButton!
+    @IBOutlet weak var rateView: UIView!
     
     func loadFrom(_ order: LastOrder){
         
@@ -26,6 +29,8 @@ class LastOrdersTableViewCell: UITableViewCell {
         branchName.text = order.branch?.name
         orderDate.text = order.createdAt
         status.text = order.status
+        orderId.text = "#\(order.id!)"
+        rateView.alpha = order.status == "completed" ? 1.0 : 0.3
         
         if order.branch == nil{
             branchImgView.isHidden = true

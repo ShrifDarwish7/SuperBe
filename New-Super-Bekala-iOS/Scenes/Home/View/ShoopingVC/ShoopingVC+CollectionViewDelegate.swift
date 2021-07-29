@@ -17,6 +17,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         filtersCollectionView.register(nib, forCellWithReuseIdentifier: FilterCollectionViewCell.identifier)
         filtersCollectionView.delegate = self
         filtersCollectionView.dataSource = self
+        filtersCollectionView.semanticContentAttribute = .unspecified
         if let flowLayout = filtersCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         }
@@ -79,11 +80,11 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             }else{
                 
                 let cell = self.featuredVendorsCollection.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.identifier, for: indexPath) as! FeaturedCollectionViewCell
-                if let favBranches = Shared.favBranches,
-                   !favBranches.isEmpty,
-                   !favBranches.filter({ return $0.id == self.featuredBranches![indexPath.row].id}).isEmpty{
-                    self.featuredBranches![indexPath.row].isFavourite = 1
-                }
+//                if let favBranches = Shared.favBranches,
+//                   !favBranches.isEmpty,
+//                   !favBranches.filter({ return $0.id == self.featuredBranches![indexPath.row].id}).isEmpty{
+//                    self.featuredBranches![indexPath.row].isFavourite = 1
+//                }
                 cell.loadFrom(data: self.featuredBranches![indexPath.row])
                 cell.favouriteBtn.tag = indexPath.row
                 cell.favouriteBtn.addTarget(self, action: #selector(addToFavourite(sender:)), for: .touchUpInside)
@@ -105,7 +106,22 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
 
         case featuredVendorsCollection:
 
-            Router.toBranch(self, self.featuredBranches![indexPath.row])
+            if self.featuredBranches![indexPath.row].isOpen == 1{
+                Router.toBranch(self, self.featuredBranches![indexPath.row])
+            }else if self.featuredBranches![indexPath.row].isOnhold == 1{
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
+                showAlert(title: "", message: msg)
+            }else if self.featuredBranches![indexPath.row].isOpen == 0{
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is closed now" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مغلق حاليا "
+                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+                    Router.toBranch(self, self.featuredBranches![indexPath.row])
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                alert.addAction(continueAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            }
 
         default:
             break
@@ -117,7 +133,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case featuredVendorsCollection:
-            return CGSize(width: 180, height: 250)
+            return CGSize(width: 180, height: 260)
         case filtersCollectionView:
             let font = UIFont(name: "Lato-Bold", size: 16)
             let fontAttributes = [NSAttributedString.Key.font: font]

@@ -19,28 +19,12 @@ struct CategoriesResponse: Codable {
 struct Category: Codable {
     let id: Int?
     let regionsCount: Int?
-   // let categoryLanguage: [CategoryLanguage]?
-    let name, description, logo: Localized?
+    let name, description: Localized?
     
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, logo, name, description
+        case id, name, description
         case regionsCount = "regions_count"
-       // case categoryLanguage = "category_language"
     }
 }
-
-//// MARK: - CategoryLanguage
-//struct CategoryLanguage: Codable {
-//    let id: Int?
-//    let name, categoryLanguageDescription, language: String?
-//    let categoryID: Int?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id, name
-//        case categoryLanguageDescription = "description"
-//        case language
-//        case categoryID = "category_id"
-//    }
-//}

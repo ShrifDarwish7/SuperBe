@@ -37,11 +37,11 @@ extension CheckoutVC: MainViewDelegate{
         }
     }
     
-    func didCompletePlaceOrder(_ error: String?) {
+    func didCompletePlaceOrder(_ error: String?,_ id: Int) {
         if let error = error{
             showToast(error)
         }else{
-            showToast("Your order placed successfully")
+            Router.toOrderPlaced(self, id)
         }
     }
 }

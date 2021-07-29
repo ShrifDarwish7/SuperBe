@@ -52,20 +52,17 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBD-J1-sxP" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                        <rect key="frame" x="29" y="46.5" width="40" height="40"/>
+                        <rect key="frame" x="25" y="42.5" width="40" height="40"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yiw-45-Va5">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yiw-45-Va5">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="yiw-45-Va5" secondAttribute="bottom" id="HIQ-A4-Dvs"/>
-                            <constraint firstAttribute="width" constant="40" id="LK5-vy-nq4"/>
-                            <constraint firstAttribute="trailing" secondItem="yiw-45-Va5" secondAttribute="trailing" id="T6S-aL-64m"/>
-                            <constraint firstItem="yiw-45-Va5" firstAttribute="top" secondItem="FBD-J1-sxP" secondAttribute="top" id="eGF-aZ-zcu"/>
-                            <constraint firstAttribute="height" constant="40" id="fVk-hF-Wkr"/>
-                            <constraint firstItem="yiw-45-Va5" firstAttribute="leading" secondItem="FBD-J1-sxP" secondAttribute="leading" id="qVk-rJ-NP9"/>
+                            <constraint firstAttribute="height" constant="40" id="ADW-Xu-dUC"/>
+                            <constraint firstAttribute="width" constant="40" id="ZNz-Mw-1OA"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
@@ -78,52 +75,37 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zet-bt-4qJ">
-                        <rect key="frame" x="84" y="23" width="96" height="49.5"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McDonald's" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0X-5u-Z4l">
-                                <rect key="frame" x="0.0" y="0.0" width="96" height="14.5"/>
-                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyw-ag-NfC" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="0.0" y="19.5" width="96" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="WxC-kb-7SC"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
-                                        <real key="value" value="-1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="textSize">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="F0X-5u-Z4l" firstAttribute="leading" secondItem="zet-bt-4qJ" secondAttribute="leading" id="Hkg-tx-sty"/>
-                            <constraint firstAttribute="trailing" secondItem="F0X-5u-Z4l" secondAttribute="trailing" id="bs6-hc-qse"/>
-                        </constraints>
-                    </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0O-x5-j0b">
-                        <rect key="frame" x="185" y="37.5" width="102" height="20.5"/>
-                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="17"/>
-                        <color key="textColor" name="Gold"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McDonald's" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0X-5u-Z4l">
+                        <rect key="frame" x="75" y="26.5" width="80" height="18"/>
+                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyw-ag-NfC" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="72" y="49.5" width="96" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="OFL-zC-0Ba"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                <real key="value" value="-1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                <integer key="value" value="0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textSize">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wD0-kL-7qf">
                         <rect key="frame" x="307" y="22.5" width="50" height="50"/>
                         <constraints>
@@ -252,19 +234,44 @@
                             <constraint firstItem="W4Q-OP-KZe" firstAttribute="centerX" secondItem="v9w-iT-qUv" secondAttribute="centerX" id="ZVc-af-PNt"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nO4-o1-aOV" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="12.5" width="372" height="70"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Out Of Stock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEx-ct-u3q" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="128" y="23" width="116.5" height="24"/>
+                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lEx-ct-u3q" firstAttribute="centerX" secondItem="nO4-o1-aOV" secondAttribute="centerX" id="Aj1-ZN-vjp"/>
+                            <constraint firstItem="lEx-ct-u3q" firstAttribute="centerY" secondItem="nO4-o1-aOV" secondAttribute="centerY" id="FvB-mb-HvC"/>
+                            <constraint firstAttribute="height" constant="70" id="l2y-7p-78M"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="wD0-kL-7qf" secondAttribute="trailing" constant="15" id="08f-iO-6HC"/>
+                    <constraint firstItem="F0X-5u-Z4l" firstAttribute="leading" secondItem="Mpq-Fx-bW8" secondAttribute="trailing" constant="10" id="3MN-bq-5rM"/>
                     <constraint firstItem="wD0-kL-7qf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3cy-J1-4kK"/>
-                    <constraint firstItem="zet-bt-4qJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Bez-m7-Xo0"/>
-                    <constraint firstItem="zet-bt-4qJ" firstAttribute="leading" secondItem="FBD-J1-sxP" secondAttribute="trailing" constant="15" id="Jgk-HB-3a7"/>
+                    <constraint firstItem="FBD-J1-sxP" firstAttribute="centerY" secondItem="Mpq-Fx-bW8" secondAttribute="centerY" constant="15" id="Mms-gp-1qZ"/>
                     <constraint firstItem="Mpq-Fx-bW8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Pr4-wb-rez"/>
                     <constraint firstItem="Mpq-Fx-bW8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Sov-xK-eCF"/>
-                    <constraint firstItem="FBD-J1-sxP" firstAttribute="centerY" secondItem="Mpq-Fx-bW8" secondAttribute="centerY" multiplier="1.4" id="dvn-Cg-l6z"/>
-                    <constraint firstItem="Z0O-x5-j0b" firstAttribute="leading" secondItem="zet-bt-4qJ" secondAttribute="trailing" constant="5" id="lbP-zR-uo9"/>
-                    <constraint firstItem="FBD-J1-sxP" firstAttribute="centerX" secondItem="Mpq-Fx-bW8" secondAttribute="centerX" multiplier="1.4" id="nQQ-h4-E65"/>
-                    <constraint firstItem="v9w-iT-qUv" firstAttribute="leading" secondItem="Z0O-x5-j0b" secondAttribute="trailing" id="ryA-rB-n7l"/>
-                    <constraint firstItem="Z0O-x5-j0b" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tER-EC-OwI"/>
+                    <constraint firstItem="nO4-o1-aOV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Uus-KP-ZtP"/>
+                    <constraint firstItem="F0X-5u-Z4l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-12" id="VbA-cF-Cmi"/>
+                    <constraint firstItem="jyw-ag-NfC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="12" id="Wl8-p5-wMy"/>
+                    <constraint firstItem="nO4-o1-aOV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="doG-61-ZZ8"/>
+                    <constraint firstItem="FBD-J1-sxP" firstAttribute="centerX" secondItem="Mpq-Fx-bW8" secondAttribute="centerX" constant="10" id="e5t-g7-VEr"/>
+                    <constraint firstItem="jyw-ag-NfC" firstAttribute="leading" secondItem="Mpq-Fx-bW8" secondAttribute="trailing" constant="7" id="kgJ-4e-Psw"/>
+                    <constraint firstAttribute="trailing" secondItem="nO4-o1-aOV" secondAttribute="trailing" id="uSl-aX-gng"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -280,10 +287,10 @@
                 <outlet property="inCartView" destination="v9w-iT-qUv" id="A4z-Vf-xsK"/>
                 <outlet property="increaseBtn" destination="Yb8-u4-Qr0" id="R0Y-Sg-7sB"/>
                 <outlet property="name" destination="F0X-5u-Z4l" id="3c0-Xq-t8t"/>
-                <outlet property="price" destination="Z0O-x5-j0b" id="PxZ-fO-piS"/>
                 <outlet property="productImage" destination="8gt-A6-6wE" id="haM-Ws-YP5"/>
                 <outlet property="quantity" destination="OB3-EO-F2W" id="8kb-R5-EHI"/>
                 <outlet property="rate" destination="jyw-ag-NfC" id="BkZ-mI-ZUL"/>
+                <outlet property="stockView" destination="nO4-o1-aOV" id="ava-Rl-AI6"/>
             </connections>
             <point key="canvasLocation" x="72.463768115942031" y="90.736607142857139"/>
         </tableViewCell>
@@ -299,9 +306,6 @@
         <image name="add_to_cart" width="63" height="64.5"/>
         <namedColor name="Dark-Red">
             <color red="0.66699999570846558" green="0.063000001013278961" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Gold">
-            <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Light-Green">
             <color red="0.31799998879432678" green="0.80000001192092896" blue="0.039000000804662704" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

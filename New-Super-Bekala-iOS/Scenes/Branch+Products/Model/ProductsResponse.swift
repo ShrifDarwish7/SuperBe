@@ -91,8 +91,8 @@ struct Option: Codable{
     
     var id: Int?
     var name: Localized?
-    var branchVariationID, inStock, salePrice: Int?
-    var price: Double?
+    var branchVariationID, inStock: Int?
+    var price, salePrice: Double?
     var selected: Bool = false
     //var checked: Bool = false
 

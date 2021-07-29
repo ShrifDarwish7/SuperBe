@@ -15,9 +15,11 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
         if isLoading{
             let nib = UINib(nibName: OnSaleSkeletonTableViewCell.identifier, bundle: nil)
             offersTableView.register(nib, forCellReuseIdentifier: OnSaleSkeletonTableViewCell.identifier)
+            offersTableView.isScrollEnabled = false
         }else{
             let nib = UINib(nibName: OffersTableViewCell.identifier, bundle: nil)
             offersTableView.register(nib, forCellReuseIdentifier: OffersTableViewCell.identifier)
+            offersTableView.isScrollEnabled = true
         }
         offersTableView.delegate = self
         offersTableView.dataSource = self
@@ -25,7 +27,11 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return branches?.count ?? 5
+        if isLoading{
+            return 3
+        }else{
+            return branches.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,22 +40,22 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: OffersTableViewCell.identifier, for: indexPath) as! OffersTableViewCell
-            //cell.branchName.text = "lang".localized == "en" ? self.branches![indexPath.row].branchLanguage?.first?.name : self.branches![indexPath.row].branchLanguage?[1].name
-            cell.branchName.text = "\(self.branches![indexPath.row].id)"
+            cell.branchName.text = "lang".localized == "en" ? self.branches[indexPath.row].name?.en : self.branches[indexPath.row].name?.ar
             
-//            cell.branchRate.rating = self.branches![indexPath.row].rating ?? 2.0
+            cell.branchRate.rating = Double(self.branches[indexPath.row].rating ?? "0.0")!
             cell.vendorImage.kf.indicatorType = .activity
-            cell.vendorImage.kf.setImage(with: URL(string: Shared.storageBase + self.branches![indexPath.row].logo!), placeholder: nil, options: [], completionHandler: nil)
+            cell.vendorImage.kf.setImage(with: URL(string: Shared.storageBase + self.branches[indexPath.row].logo!), placeholder: nil, options: [], completionHandler: nil)
             
             cell.onsaleCollectionView.numberOfItemsInSection { (_) -> Int in
-                return self.branches![indexPath.row].products!.count
+                return self.branches[indexPath.row].products!.count
             }.cellForItemAt { (productIndexRow) -> UICollectionViewCell in
+                
                 let nib = UINib(nibName: OnSaleCollectionViewCell.identifier, bundle: nil)
                 cell.onsaleCollectionView.register(nib, forCellWithReuseIdentifier: OnSaleCollectionViewCell.identifier)
                 let cell = cell.onsaleCollectionView.dequeueReusableCell(withReuseIdentifier: OnSaleCollectionViewCell.identifier, for: indexPath) as! OnSaleCollectionViewCell
-                cell.loadUI(data: self.branches![indexPath.row].products![productIndexRow.row])
+                cell.loadUI(data: self.branches[indexPath.row].products![productIndexRow.row])
                 
-                let inCartItems = self.cartItems?.filter({ return $0.cart_id == String(self.branches![indexPath.row].products![productIndexRow.row].id!) })
+                let inCartItems = self.cartItems?.filter({ return $0.cart_id == String(self.branches[indexPath.row].products![productIndexRow.row].id!) })
                 if inCartItems!.isEmpty{
                     cell.inCartView.isHidden = true
                     cell.addToCartBtn.isHidden = false
@@ -61,23 +67,22 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
                 
                 cell.addToCartBtn.onTap {
                     let contentOffset = self.offersTableView.contentOffset
-                    guard self.branches![indexPath.row].products![indexPath.row].variations == nil || (self.branches![indexPath.row].products![indexPath.row].variations?.isEmpty == true) else {
-                        Router.toProduct(self, self.branches![indexPath.row].products![productIndexRow.row])
+                    guard self.branches[indexPath.row].products![indexPath.row].variations == nil || (self.branches[indexPath.row].products![indexPath.row].variations?.isEmpty == true) else {
+                        Router.toProduct(self, self.branches[indexPath.row].products![productIndexRow.row])
                         return
                     }
-                    
+
                     cell.inCartView.isHidden = false
                     cell.addToCartBtn.isHidden = true
-                    
-                    self.branches![indexPath.row].products![productIndexRow.row].quantity = 1
-                    self.branches![indexPath.row].products![productIndexRow.row].notes = ""
-                    self.branches![indexPath.row].products![productIndexRow.row].branch = self.branches![indexPath.row]
-                    
-                    CartServices.shared.addToCart(self.branches![indexPath.row].products![productIndexRow.row]) { (completed) in
+
+                    self.branches[indexPath.row].products![productIndexRow.row].quantity = 1
+                    self.branches[indexPath.row].products![productIndexRow.row].notes = ""
+                    self.branches[indexPath.row].products![productIndexRow.row].branch = self.branches[indexPath.row]
+
+                    CartServices.shared.addToCart(self.branches[indexPath.row].products![productIndexRow.row]) { (completed) in
                         if completed{
                             CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
                                 self.cartItems = items
-                               // self.offersTableView.reloadData()
                             }
                         }
                     }
@@ -95,7 +100,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
                     cell.quantity.text = "\(newQty)"
                     CartServices.shared.updateQuantity(newValue: newQty, id: (inCartItems!.first!.cart_id)!, nil)
                 }
-                
+
                 cell.decreaseBtn.onTap {
                     guard Int(cell.quantity.text!)! > 1 else{
                         return
@@ -110,7 +115,7 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
             }.sizeForItemAt { (_) -> CGSize in
                 return CGSize(width: 180, height: 220)
             }.didSelectItemAt { (productIndex) in
-                Router.toProduct(self, self.branches![indexPath.row].products![productIndex.row])
+                Router.toProduct(self, self.branches[indexPath.row].products![productIndex.row])
             }
             self.viewWillLayoutSubviews()
             return cell
@@ -119,6 +124,11 @@ extension OffersVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.view.layoutIfNeeded()
+        self.viewWillLayoutSubviews()
     }
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {

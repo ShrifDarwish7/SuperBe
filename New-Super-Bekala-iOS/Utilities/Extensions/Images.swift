@@ -1,9 +1,9 @@
 //
-//  CustomImages.swift
-//  Tujjar
+//  Images.swift
+//  New-Super-Bekala-iOS
 //
-//  Created by Sherif Darwish on 6/7/20.
-//  Copyright © 2020 Sherif Darwish. All rights reserved.
+//  Created by Sherif Darwish on 28/07/2021.
+//  Copyright © 2021 Super Bekala. All rights reserved.
 //
 
 import Foundation
@@ -37,5 +37,4 @@ extension UIImageView{
         self.layer.cornerRadius = 35
         
     }
-    
 }

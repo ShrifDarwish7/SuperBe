@@ -17,6 +17,7 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductImageCollectionViewCell.identifier, for: indexPath) as! ProductImageCollectionViewCell
         cell.productImg.kf.indicatorType = .activity
         cell.productImg.kf.setImage(with: URL(string: Shared.storageBase + (self.product?.images![indexPath.row])!))
+        cell.loadImageGestures()
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

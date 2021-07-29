@@ -18,7 +18,7 @@ struct SliderResponse: Codable {
 struct Slider: Codable {
     let id: Int
     let name: String?
-    let image: Localized?
+    let image: String?
     let slidableType: SliderType
     let slidableID: Int
     let actionURL: String?

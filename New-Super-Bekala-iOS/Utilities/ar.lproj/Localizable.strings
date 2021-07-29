@@ -14,3 +14,14 @@
 "Offers" = "عروض";
 "Last Orders" = "طلباتي";
 "Favourite" = "مفضلة";
+"failed to connect to super be servers, please check your network connection" = "فشل في الاتصال بخوادم سوبر بي ، يرجى التحقق من اتصال الشبكة الخاص بك";
+"No Internet Connection" = "لا يوجد اتصال بالإنترنت";
+"Retry" = "إعادة المحاولة";
+"Exit" = "خروج";
+"Great !!" = "رائع !!";
+"Your order placed successfully, we hope you enjoy it" = "تم تقديم طلبك بنجاح ، نأمل أن تستمتع به";
+"Home" = "الرئيسية";
+"Cancel Order" = "إلغاء الطلب";
+"Ok" = "تم";
+"Contiue" = "متابعة";
+"Cancel" = "إلغاء";

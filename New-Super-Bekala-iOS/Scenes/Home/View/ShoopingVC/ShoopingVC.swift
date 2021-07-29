@@ -27,7 +27,7 @@ class ShoopingVC: UIViewController {
     var ordinaryLoading = true
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         
         showSkeletonView()
         
@@ -44,27 +44,22 @@ class ShoopingVC: UIViewController {
     }
     
     func showSkeletonView(){
-        ordinaryVendorsTAbleView.hideSkeleton()
-        featuredVendorsCollection.hideSkeleton()
                 
-        loadFiltersCollection()
+        featuredVendorsCollection.hideSkeleton()
         loadFeaturedCollection(identifier: SkeletonLoadingCollectionViewCell.identifier)
-        loadOrdinaryTable(identifier: OrdinaryVendorsSkeletonTableViewCell.identifier)
-        
-        filtersCollectionView.isSkeletonable = true
-        featuredVendorsCollection.isSkeletonable = true
-        ordinaryVendorsTAbleView.isSkeletonable = true
-        
-        filtersCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-
         featuredVendorsCollection.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-       
-        ordinaryVendorsTAbleView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.05) { [self] in
+            ordinaryVendorsTAbleView.hideSkeleton()
+            loadOrdinaryTable(identifier: OrdinaryVendorsSkeletonTableViewCell.identifier)
+            ordinaryVendorsTAbleView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+        }
+        
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        tableViewHeight.constant = ordinaryVendorsTAbleView.contentSize.height + 125
+        tableViewHeight.constant = ordinaryVendorsTAbleView.contentSize.height
         self.view.layoutIfNeeded()
     }
 
@@ -87,7 +82,7 @@ class ShoopingVC: UIViewController {
         }
         self.categories![index].selected = true
         self.selectedCategory = self.categories![index]
-        self.filtersCollectionView.reloadData()
+        self.loadFiltersCollection()
         self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
         self.featuredLoading = true
         self.ordinaryLoading = true

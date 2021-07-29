@@ -8,8 +8,6 @@
 
 import Foundation
 import CoreLocation
-import UIKit
-import MapKit
 
 class Shared{
     
@@ -21,6 +19,7 @@ class Shared{
     static var headers = [
         "Authorization": "Bearer " + (APIServices.shared.user?.token ?? ""),
         "Accept": "application/json",
+        //"lang": "lang".localized
     ]
     static var isRegion: Bool{
         set { UserDefaults.init().setValue(newValue, forKey: "is_region") }
@@ -56,74 +55,3 @@ enum SelectedServices{
     case text
 }
 
-extension String{
-    var localized: String{
-        return NSLocalizedString(self, comment: "")
-    }
-    public var arToEnDigits : String? {
-        var str = self
-        let map = ["٠": "0",
-                   "١": "1",
-                   "٢": "2",
-                   "٣": "3",
-                   "٤": "4",
-                   "٥": "5",
-                   "٦": "6",
-                   "٧": "7",
-                   "٨": "8",
-                   "٩": "9"]
-        map.forEach { str = str.replacingOccurrences(of: $0, with: $1) }
-        return str
-    }
-    public func firstIndex(char: Character) -> Int? {
-        if let idx = self.firstIndex(of: char) {
-            return self.distance(from: self.startIndex, to: idx)
-        }
-        return nil
-    }
-    
-    var fileExtension: String? {
-        
-        get{
-            let url = self.suffix(6)
-            guard url.firstIndex(of: ".") != nil else{ return nil }
-            let ext = url[url.firstIndex(of: ".")!...]
-            return String(ext).lowercased()
-        }
-        
-    }
-}
-
-
-extension UIViewController{
-    func replaceView(containerView: UIView, identifier: String, storyboard: AppStoryboard) {
-        containerView.subviews.forEach({ $0.removeFromSuperview() })
-        let vc = Router.instantiate(appStoryboard: storyboard, identifier: identifier)
-        vc.view.frame = containerView.bounds;
-        containerView.addSubview(vc.view)
-        self.addChild(vc)
-        vc.didMove(toParent: self)
-    }
-    
-    func openInMaps(coordinates: String){
-        let latitude: CLLocationDegrees = Double((coordinates.split(separator: ",")[0]))!
-        let longitude: CLLocationDegrees = Double((coordinates.split(separator: ",")[1]))!
-        let regionDistance:CLLocationDistance = 10000
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
-        let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-        ]
-        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.openInMaps(launchOptions: options)
-    }
-}
-
-extension Double {
-    func roundToDecimal(_ fractionDigits: Int) -> Double {
-        let multiplier = pow(10, Double(fractionDigits))
-        return Darwin.round(self * multiplier) / multiplier
-    }
-}

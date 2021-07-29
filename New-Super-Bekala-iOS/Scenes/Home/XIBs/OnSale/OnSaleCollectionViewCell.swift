@@ -23,16 +23,27 @@ class OnSaleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var currentPrice: UILabel!
     @IBOutlet weak var previousPrice: UILabel!
     @IBOutlet weak var addToCartBtn: UIButton!
+    @IBOutlet weak var lineView: UIView!
     
     func loadUI(data: Product){
         self.containerView.layer.cornerRadius = 25
-        self.productImage.layer.cornerRadius = 25
+        self.productImage.roundCorners([.layerMinXMinYCorner,.layerMaxXMinYCorner], radius: 25)
         self.shadowView.roundCorners([.layerMinXMaxYCorner,.layerMaxXMaxYCorner], radius: 25)
-        name.text = "\(data.id!)"
+        name.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
         previousPrice.text = "\(data.price ?? 0) EGP"
         currentPrice.text = "\(data.salePrice ?? 0) EGP"
         productImage.kf.indicatorType = .activity
         productImage.kf.setImage(with: URL(string: Shared.storageBase + (data.images?.first ?? "") ), placeholder: nil, options: [], completionHandler: nil)
+        
+        if data.salePrice == nil || data.salePrice == 0.0{
+            currentPrice.isHidden = true
+            lineView.isHidden = true
+        }
+        
+        if data.price == nil || data.price == 0.0{
+            previousPrice.isHidden = true
+        }
+        
     }
     
 }

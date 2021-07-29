@@ -28,7 +28,6 @@ class BranchVC: UIViewController {
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var bgLogo: UIImageView!
-    @IBOutlet weak var branchStatus: UILabel!
     @IBOutlet weak var branchName: UILabel!
     @IBOutlet weak var rateView: CosmosView!
     @IBOutlet weak var duration: UILabel!
@@ -36,6 +35,7 @@ class BranchVC: UIViewController {
     @IBOutlet weak var fees: UILabel!
     @IBOutlet weak var cartFlage: ViewCorners!
     @IBOutlet weak var replacableView: UIView!
+    @IBOutlet weak var reviewsCount: UILabel!
     
     var bottomSheetPanStartingTopConstant : CGFloat = 30.0
     var categories: [BranchCategory]?
@@ -81,6 +81,10 @@ class BranchVC: UIViewController {
     }
     
     func initUI(){
+        
+        reviewsCount.isHidden = (branch?.reviewCount ?? 0) > 0 ? false : true
+        reviewsCount.text = "(\(branch?.reviewCount ?? 0))"
+        
         fastOrderContainer.alpha = 0.5
         fastOrderXPosition.constant = self.view.frame.width/4
         fastOrderContainer.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -94,7 +98,7 @@ class BranchVC: UIViewController {
         productsCollectionView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
 
         fastOrderContainer.isHidden = branch?.quickOrder == 1 ? true : false
-//        rateView.rating = branch?.rating ?? 1.0
+        rateView.rating = Double(branch?.rating ?? "0.0")!
         branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
         
         logo.kf.indicatorType = .activity
@@ -191,7 +195,11 @@ class BranchVC: UIViewController {
         case 2:
             self.offersLbl.isHidden = false
         case 3:
+            replacableView.isHidden = false
             self.ratesLbl.isHidden = false
+            self.replaceView(containerView: replacableView, identifier: "RatingsVC", storyboard: .other)
+            NotificationCenter.default.post(name: NSNotification.Name("SEND_BRANCH"), object: nil, userInfo: ["branch": self.branch!])
+            
         default:
             break
         }

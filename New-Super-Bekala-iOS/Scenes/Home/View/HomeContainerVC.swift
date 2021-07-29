@@ -46,7 +46,7 @@ class HomeContainerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileImage.kf.setImage(with: URL(string: Shared.storageBase + APIServices.shared.user!.avatar))
+        profileImage.kf.setImage(with: URL(string: Shared.storageBase + APIServices.shared.user!.avatar!))
         
         NotificationCenter.default.addObserver(self, selector: #selector(didChooseAddress), name: NSNotification.Name("DID_CHOOSE_ADDRESS"), object: nil)
         
@@ -59,11 +59,8 @@ class HomeContainerVC: UIViewController {
             coverView.roundCorners([.layerMinXMinYCorner,.layerMinXMaxYCorner], radius: self.coverView.frame.height/2)
         }
         
-        
         self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
-        
-        self.dismissChangeLocationSheet()
-        
+                
         profileImage.addTapGesture { (_) in
             Router.toProfile(self)
         }
@@ -103,36 +100,11 @@ class HomeContainerVC: UIViewController {
     
     
     @objc func didChooseAddress(){
-        self.dismissChangeLocationSheet()
         self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
     }
     
     @IBAction func changeLocation(_ sender: Any) {
-        self.showChangeLocationSheet()
-    }
-    
-    @IBAction func dismissSheet(_ sender: Any) {
-        self.dismissChangeLocationSheet()
-    }
-    
-    func showChangeLocationSheet(){
-        self.replaceView(containerView: self.addressesContainer, identifier: "ChangeLocationVC", storyboard: .profile)
-        changeLocationBlockView.isHidden = false
-        locationSheetTopCnst.constant = 350
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
-            self.view.layoutIfNeeded()
-        } completion: { _ in
-            
-        }
-    }
-    
-    func dismissChangeLocationSheet(){
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: []) {
-            self.locationSheetTopCnst.constant = self.view.frame.height
-            self.view.layoutIfNeeded()
-        } completion: { _ in
-            self.changeLocationBlockView.isHidden = true
-        }
+        Router.toChangeLocation(self)
     }
     
     @IBAction func addOrderAction(_ sender: UIButton) {

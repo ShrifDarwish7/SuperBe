@@ -37,12 +37,16 @@ extension LastOrderVC: UITableViewDelegate, UITableViewDataSource{
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: LastOrdersTableViewCell.identifier, for: indexPath) as! LastOrdersTableViewCell
             cell.loadFrom(self.lastOrders![indexPath.row])
+            cell.rateBtn.onTap {
+                guard self.lastOrders![indexPath.row].status == "completed" else { return }
+                Router.toRateOrder(self, (self.lastOrders![indexPath.row].branch?.id)!, self.lastOrders![indexPath.row].id!)
+            }
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 115
+        return 120
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -56,7 +60,7 @@ extension LastOrderVC: UITableViewDelegate, UITableViewDataSource{
             let order = self.lastOrders![indexPath.row]
             let service = SuperService()
             service.orderId = order.id
-            service.status == order.status
+            service.status = order.status
             service.pickupCoords = order.originCoords
             service.pickupLandmark = order.originAddress
             service.dropOffCoords = order.destinationCoords

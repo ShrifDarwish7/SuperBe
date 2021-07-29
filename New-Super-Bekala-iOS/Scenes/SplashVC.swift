@@ -7,22 +7,35 @@
 //
 
 import UIKit
+import Reachability
 
 class SplashVC: UIViewController {
 
+    let reachability = try! Reachability()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if APIServices.shared.isLogged {
-            if Shared.userSelectLocation{
-                Router.toHome(self)
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NSNotification.Name("RELOAD"), object: nil)
+        
+        if ConnectionManager.shared.hasConnectivity(){
+            if APIServices.shared.isLogged {
+                if Shared.userSelectLocation{
+                    Router.toHome(self)
+                }else{
+                    Router.toAskLocation(self)
+                }
             }else{
-                Router.toAskLocation(self)
+                Router.toAboutUs(self)
             }
         }else{
-            Router.toAboutUs(self)
+            Router.toNoConnection(self)
         }
-        
+    }
+    
+    @objc func reload(){
+        guard (self.navigationController?.topViewController?.isKind(of: SplashVC.self))! else { return }
+        self.viewDidLoad()
     }
 
 }

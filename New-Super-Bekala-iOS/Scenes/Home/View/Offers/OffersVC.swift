@@ -17,19 +17,17 @@ class OffersVC: UIViewController {
     @IBOutlet weak var offersTableView: UITableView!
     @IBOutlet weak var specialOffersView: UIView!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var presenter: MainPresenter?
     var cartItems: [CartItem]?
+    var page = 1
     var parameters: [String:String] = [:]
     var selectedCategory: Category?
-    var branches: [Branch]?{
-        didSet{
-            self.isLoading = false
-            self.offersTableView.hideSkeleton()
-            self.loadTbl()
-        }
-    }
+    var meta: Meta?
+    var branches = [Branch]()
     var isLoading = true
+    var isPaginting = false
     var sliderIsLoading = true
     var slider: [Slider]?{
         didSet{
@@ -54,18 +52,20 @@ class OffersVC: UIViewController {
         
         presenter = MainPresenter(self)
         
-        if Shared.isRegion{
-            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
-            if Shared.selectedArea.subregionID != 0{
-                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
-            }
-        }else if Shared.isCoords{
-            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
-        }
+//        if Shared.isRegion{
+//            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
+//            if Shared.selectedArea.subregionID != 0{
+//                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
+//            }
+//        }else if Shared.isCoords{
+//            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
+//        }
+        
+        presenter?.getSlider(["region_id": "1", "lang": "all"])
+        parameters.updateValue("1", forKey: "offers_only")
+        parameters.updateValue("all", forKey: "lang")
         self.presenter?.getCategories(parameters)
         showSkeletonView()
-        
-        presenter?.getSlider(["region_id": "1"])
         
         let nib = UINib(nibName: ProductSkeletonCollectionViewCell.identifier, bundle: nil)
         specialOffersCollection.register(nib, forCellWithReuseIdentifier: ProductSkeletonCollectionViewCell.identifier)
@@ -83,30 +83,16 @@ class OffersVC: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        self.tableHeight.constant = offersTableView.contentSize.height + 20
-        self.offersTableView.isScrollEnabled = false
-        self.view.layoutIfNeeded()
-    }
-   
-    override func viewDidLayoutSubviews() {
-        super.updateViewConstraints()
-        self.tableHeight.constant = offersTableView.contentSize.height + 20
-        self.offersTableView.isScrollEnabled = false
+        self.tableHeight.constant = offersTableView.contentSize.height
         self.view.layoutIfNeeded()
     }
     
     func showSkeletonView(){
-        
         offersTableView.hideSkeleton()
-        
         isLoading = true
-        
         loadTbl()
-        
         offersTableView.isSkeletonable = true
-        
         offersTableView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        
     }
     
     func performAutoSliding(){
@@ -119,4 +105,25 @@ class OffersVC: UIViewController {
     }
     
 
+}
+
+extension OffersVC: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView === self.scrollView{
+            if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+                guard !self.branches.isEmpty else { return }
+                guard page <= (self.meta?.totalPages)!, !isPaginting else {
+                    print("end of paginating ", page)
+                   // offersTableView.tableFooterView?.isHidden = true
+                    return
+                }
+                self.offersTableView.tableFooterView?.isHidden = false
+                DispatchQueue.global(qos: .background).async {
+                    self.isPaginting = true
+                    self.updateBranches()
+                }
+            }
+        }
+
+    }
 }

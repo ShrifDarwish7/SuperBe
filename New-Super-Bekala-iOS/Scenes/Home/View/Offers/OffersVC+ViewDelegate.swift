@@ -7,29 +7,55 @@
 //
 
 import Foundation
+import UIKit
 
 extension OffersVC: MainViewDelegate{
     func updateBranches(){
-        self.parameters.updateValue("\(self.selectedCategory?.id ?? 0)", forKey: "category_id")
+        //self.parameters.updateValue("\(self.selectedCategory?.id ?? 0)", forKey: "category_id")
         self.parameters.updateValue("branchProducts.variations.options", forKey: "with")
-        self.parameters.updateValue("1", forKey: "offersOnly")
+        self.parameters.updateValue("\(page)", forKey: "page")
+        self.parameters.updateValue("5", forKey: "per_page")
+        self.parameters.updateValue("1", forKey: "offers_only")
+        print("offers prms",parameters)
         self.presenter?.getBranches(parameters)
     }
     func didCompleteWithCategories(_ data: [Category]?) {
         if let _ = data{
             self.categories = data
-            self.categories?[0].selected = true
-            self.selectedCategory = self.categories?[0]
+            if "lang".localized == "en"{
+                self.categories?[0].selected = true
+                self.selectedCategory = self.categories?[0]
+            }else{
+                self.categories![self.categories!.count-1].selected = true
+                self.selectedCategory = self.categories?[self.categories!.count-1]
+            }
             self.loadFiltersCollection()
             self.view.stopSkeletonAnimation()
             updateBranches()
         }
     }
-    func didCompleteWithBranches(_ data: [Branch]?) {
+    func didCompleteWithBranches(_ data: [Branch]?,_ meta: Meta?) {
         offersTableView.hideSkeleton()
         if let data = data,
-           !data.isEmpty{
-            self.branches = data.filter({ return !$0.products!.isEmpty })
+           !data.isEmpty,
+           let meta = meta{
+            DispatchQueue.main.async { [self] in
+                self.meta = meta
+                data.filter({ return !$0.products!.isEmpty }).forEach { branch in
+                    self.branches.append(branch)
+                }
+                page += 1
+                self.isLoading = false
+                self.offersTableView.hideSkeleton()
+                let contentOffset = scrollView.contentOffset
+                self.loadTbl()
+                offersTableView.setContentOffset(contentOffset, animated: false)
+                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+                activityIndicator.startAnimating()
+                offersTableView.tableFooterView = activityIndicator
+                offersTableView.tableFooterView?.isHidden = false
+                isPaginting = false
+            }
         }
     }
     func didCompleteWithSlider(_ data: [Slider]?, _ error: String?) {

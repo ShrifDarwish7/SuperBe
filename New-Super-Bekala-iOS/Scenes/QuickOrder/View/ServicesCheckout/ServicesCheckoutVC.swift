@@ -212,11 +212,11 @@ class ServicesCheckoutVC: UIViewController {
 }
 
 extension ServicesCheckoutVC: MainViewDelegate{
-    func didCompletePlaceSuperService(_ error: String?) {
+    func didCompletePlaceSuperService(_ error: String?,_ id: Int) {
         if let error = error{
             showToast(error)
         }else{
-            showToast("Order submited successfully")
+            Router.toOrderPlaced(self, id)
         }
     }
     func didCompleteUpdateOrder(_ data: LastOrder?, _ error: String?) {

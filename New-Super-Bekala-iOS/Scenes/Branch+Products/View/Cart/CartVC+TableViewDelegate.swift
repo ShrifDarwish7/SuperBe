@@ -83,6 +83,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                 cell.quantity.text = "\(newQty)"
                 CartServices.shared.updateQuantity(newValue: newQty, id: self.items![indexPath.row].cart_id!, nil)
                 productsTableView.reloadData()
+                updateBill()
             }
             cell.decreaseBtn.onTap { [self] in
                 guard Int(cell.quantity.text!)! > 1 else{
@@ -93,6 +94,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                 cell.quantity.text = "\(newQty)"
                 CartServices.shared.updateQuantity(newValue: newQty, id: (self.items![indexPath.row].cart_id)!, nil)
                 productsTableView.reloadData()
+                updateBill()
             }
             cell.price.text = "\(items![indexPath.row].price * Double(cell.quantity.text!)!) EGP"
             cell.productImage.kf.indicatorType = .activity

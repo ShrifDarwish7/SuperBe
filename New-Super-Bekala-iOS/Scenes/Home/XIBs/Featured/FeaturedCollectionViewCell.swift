@@ -21,6 +21,7 @@ class FeaturedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var minimumOrder: UILabel!
     @IBOutlet weak var deliveryFees: UILabel!
     @IBOutlet weak var favouriteBtn: UIButton!
+    @IBOutlet weak var reviewsCount: UILabel!
     
     func loadUI(){
         
@@ -32,10 +33,13 @@ class FeaturedCollectionViewCell: UICollectionViewCell {
     
     func loadFrom(data: Branch){
         loadUI()
+        
+        reviewsCount.text = "(\(data.reviewCount ?? 0))"
+        
         vendorPhoto.kf.indicatorType = .activity
         vendorPhoto.kf.setImage(with: URL(string: Shared.storageBase + data.logo! ), placeholder: nil, options: [], completionHandler: nil)
         vendorName.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
-//        vendorRate.rating = data.rating ?? 0.0
+        vendorRate.rating = Double(data.rating ?? "0.0")!
         deliveryTime.text = "\(data.deliveryDuration ?? 0) MIN"
         minimumOrder.text = "\(data.minOrder ?? 0) EGP"
         deliveryFees.text = "\(data.deliveryFees ?? 0) EGP"

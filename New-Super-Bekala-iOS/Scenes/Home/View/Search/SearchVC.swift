@@ -18,6 +18,7 @@ class SearchVC: UIViewController{
     @IBOutlet weak var menuIcon: UIImageView!
     @IBOutlet weak var notFoundStack: UIStackView!
     @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var menuContainerAr: UIView!
     
     var context: Context = .vendors
     var isLoading = false
@@ -65,8 +66,8 @@ class SearchVC: UIViewController{
             self.resultTableView.isHidden = false
             self.notFoundStack.isHidden = true
             self.isLoading = false
-            self.loadFromNib()
             self.resultTableView.hideSkeleton()
+            self.loadFromNib()
         }
     }
     var products: [Product]?{
@@ -74,13 +75,15 @@ class SearchVC: UIViewController{
             self.resultTableView.isHidden = false
             self.notFoundStack.isHidden = true
             self.isLoading = false
-            self.loadFromNib()
             self.resultTableView.hideSkeleton()
+            self.loadFromNib()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        queryTF.becomeFirstResponder()
         
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveQuery(sender:)), name: NSNotification.Name("QUERY"), object: nil)
         
@@ -95,7 +98,7 @@ class SearchVC: UIViewController{
             guard let cell = cell as? DDCell else { return }
             cell.icon.image = UIImage(named: self.icons[index])
         }
-        menu.anchorView = menuContainer
+        menu.anchorView = "lang".localized == "en" ? menuContainer : menuContainerAr
         menu.selectRow(0)
         loadSelectedOption()
         

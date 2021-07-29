@@ -54,6 +54,7 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var selectedAddressTF: UITextField!
     @IBOutlet weak var walletBtn: UIButton!
     @IBOutlet weak var walletStack: UIStackView!
+    @IBOutlet weak var shippingLbl: UILabel!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -75,7 +76,7 @@ class CheckoutVC: UIViewController {
         branchLogo.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
         branchLogo1.kf.setImage(with: URL(string: Shared.storageBase + (branch?.logo)!), placeholder: nil, options: [], completionHandler: nil)
         
-//        branchRate.rating = branch?.rating ?? 3.0
+        branchRate.rating = Double(branch?.rating ?? "0.0")!
         username.text = APIServices.shared.user?.name
         phoneNumber.text = APIServices.shared.user?.phone ?? ""
         
@@ -306,6 +307,7 @@ class CheckoutVC: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 sender.transform = CGAffineTransform(rotationAngle: .pi*2)
             }
+            self.notesTV.becomeFirstResponder()
         case 1:
             self.notesHeight.constant = 0
             sender.tag = 0
@@ -313,6 +315,7 @@ class CheckoutVC: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 sender.transform = CGAffineTransform(rotationAngle: .pi)
             }
+            self.view.endEditing(true)
         default:
             break
         }
@@ -323,6 +326,7 @@ class CheckoutVC: UIViewController {
     }
     
     func showPaySheet(){
+        
         Shared.transaction = Transaction()
         Shared.transaction?.amount = 0.5
         Shared.transaction?.currency = "EGP"
@@ -334,6 +338,7 @@ class CheckoutVC: UIViewController {
         } completion: { (_) in
             
         }
+        
     }
     
     func dismissPaySheet(){
@@ -358,6 +363,11 @@ class CheckoutVC: UIViewController {
     }
     
     @IBAction func placeOrderAction(_ sender: Any) {
+        
+        guard branch?.isOpen == 1 else {
+            showAlert(title: "", message: "lang".localized == "en" ?  "Sorry, we can`t procced your order because \(branch!.name!.en ?? "") maybe closed or busy right now, please try reorder when the vendor is available" : "عذرًا ، لا يمكننا متابعة طلبك لأنه \(branch!.name!.ar ?? "") ربما يكون مغلقًا أو مشغولاً الآن ، يرجى محاولة إعادة الطلب عندما يكون المتجر متاحًا")
+            return
+        }
         
         if selectedPayment == 2{
             showPaySheet()
@@ -425,7 +435,7 @@ class CheckoutVC: UIViewController {
         
         let order = Order(deliveryMethod: selectedReceiveOption,
                           paymentMethod: selectedPayment,
-                          addressID: ((addresses?.filter({ return $0.selected == 1 }))?.first?.id)!,
+                          addressID: (addresses?.filter({ return $0.selected == 1 }))?.first?.id ?? 0,
                           customerNote: notesTV.text!,
                           couponID: ["30off"],
                           branchID: branch!.id,

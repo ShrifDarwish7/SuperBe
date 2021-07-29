@@ -19,6 +19,7 @@ class CartVC: UIViewController {
     var branches: [CartBranch]?
     var selectedBranch: CartBranch?
     var presenter: MainPresenter?
+    var linesTotal = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,11 +71,11 @@ class CartVC: UIViewController {
     }
     
     func updateBill(){
-        var total = 0.0
+        self.linesTotal = 0
         self.items?.forEach({ item in
-            total += (item.price * Double(item.quantity))
+            linesTotal += (item.price * Double(item.quantity))
         })
-        self.total.text = "\(total) EGP"
+        self.total.text = "\(self.linesTotal) EGP"
     }
     
     @IBAction func back(_ sender: Any) {

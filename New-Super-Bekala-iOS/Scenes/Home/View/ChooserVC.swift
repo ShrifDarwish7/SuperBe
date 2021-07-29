@@ -17,7 +17,7 @@ class ChooserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.4) {
-            self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3)
+            self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
         }
         optionsTableView.reloadData()
     }
@@ -44,6 +44,8 @@ extension ChooserVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.backgroundColor = .clear
         self.dismiss(animated: true, completion: nil)
-        NotificationCenter.default.post(name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil, userInfo: ["index": indexPath.row])
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+            NotificationCenter.default.post(name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil, userInfo: ["index": indexPath.row])
+        }
     }
 }

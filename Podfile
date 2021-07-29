@@ -31,6 +31,7 @@ target 'New-Super-Bekala-iOS' do
   pod 'BSImagePicker'
   pod 'Kingfisher'
   pod 'DropDown'
+  pod 'ReachabilitySwift'
 
   target 'New-Super-Bekala-iOSTests' do
     inherit! :search_paths

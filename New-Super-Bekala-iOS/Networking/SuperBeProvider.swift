@@ -36,6 +36,8 @@ enum SuperBe{
     case placeSuperService(_ prms: [String: Any],_ images: [String: UIImage]?,_ voice: Data?)
     case wallet
     case addToWallet(_ prms: [String: Any])
+    case getBranchRating(_ id: Int)
+    case rate(_ prms: [String: Any])
 }
 
 extension SuperBe: TargetType{
@@ -85,6 +87,10 @@ extension SuperBe: TargetType{
             return "orders/super_services"
         case .wallet, .addToWallet(_):
             return "wallet"
+        case .getBranchRating(let id):
+            return "branches/\(id)?with=ratings.user"
+        case .rate:
+            return "rating"
         }
     }
     
@@ -95,7 +101,8 @@ extension SuperBe: TargetType{
              .placeOrder(_),
              .addToFavourite(_),
              .placeSuperService(_,_,_),
-             .addToWallet(_):
+             .addToWallet(_),
+             .rate(_):
             return .post
         case .updateAddress(_, _),
              .updateOrder(_, _):
@@ -127,7 +134,8 @@ extension SuperBe: TargetType{
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),
-             .addToWallet(let prms):
+             .addToWallet(let prms),
+             .rate(let prms):
             var multipartFormData = [MultipartFormData]()
             for (key,value) in prms{
                 let formData = MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key)
