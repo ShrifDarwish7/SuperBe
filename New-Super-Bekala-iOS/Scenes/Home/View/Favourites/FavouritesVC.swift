@@ -22,9 +22,16 @@ class FavouritesVC: UIViewController {
     var presenter: MainPresenter?
     var query: FavouriteQuery = .branch
     var cartItems: [CartItem]?
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        favouritesTableView.refreshControl = refreshControl
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToTop), name: NSNotification.Name("SCROLL_TO_TOP"), object: nil)
         
         presenter = MainPresenter(self)
         presenter?.getFavourites()
@@ -38,6 +45,15 @@ class FavouritesVC: UIViewController {
         CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
             self.cartItems = items
         }
+    }
+    
+    @objc func refresh(){
+        refreshControl.endRefreshing()
+        self.reload(self)
+    }
+    
+    @objc func scrollToTop(){
+        self.favouritesTableView.setContentOffset(.zero, animated: true)
     }
     
     func showSkeleton(){
@@ -108,6 +124,7 @@ class FavouritesVC: UIViewController {
     @IBAction func reload(_ sender: Any) {
         self.emptyView.isHidden = true
         self.favouritesTableView.isHidden = false
+        self.isLoading = true
         self.viewDidLoad()
     }
     

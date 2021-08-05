@@ -14,6 +14,7 @@ target 'New-Super-Bekala-iOS' do
   pod 'Closures'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
   pod 'SwiftyGif'
   pod 'SVProgressHUD'
   pod 'FlagPhoneNumber'
@@ -32,6 +33,9 @@ target 'New-Super-Bekala-iOS' do
   pod 'Kingfisher'
   pod 'DropDown'
   pod 'ReachabilitySwift'
+  pod 'PusherSwift', '~> 9.0'
+  pod 'MaterialComponents/ProgressView'
+  pod 'lottie-ios'
 
   target 'New-Super-Bekala-iOSTests' do
     inherit! :search_paths

@@ -55,6 +55,11 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var walletBtn: UIButton!
     @IBOutlet weak var walletStack: UIStackView!
     @IBOutlet weak var shippingLbl: UILabel!
+    @IBOutlet weak var couponsTF: UITextField!
+    @IBOutlet weak var validateBtn: RoundedButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var verifiedCoupon: UIImageView!
+    @IBOutlet weak var shippingCostActivity: UIActivityIndicatorView!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -64,6 +69,8 @@ class CheckoutVC: UIViewController {
     var presenter: MainPresenter?
     var addresses: [Address]?
     var items: [CartItem]?
+    var lineItems = [LineItem]()
+    var coupons: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,13 +98,24 @@ class CheckoutVC: UIViewController {
         walletStack.alpha = branch?.acceptWalletPayment == 1 ? 1 : 0.3
         promoViewContainer.isHidden = branch?.acceptCoupons == 1 ? false : true
                 
-        CartServices.shared.getCartItems(itemId: "-1", branch: branch!.id) { (items) in
+        CartServices.shared.getCartItems(itemId: "-1", branch: branch!.id) { [self] (items) in
             if let items = items{
-                self.items = items
+                
                 for item in items{
-                    let variations = item.variations?.getDecodedObject(from: [Variation].self)
-                    print("here vars", variations)
-                    print("here vars count", variations?.count)
+                    guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
+                    var variations = [LineItemVariation]()
+                    for variation in itemVariations{
+                        variations.append(
+                            LineItemVariation(
+                                id: variation.id,
+                                options: variation.options!.map({ $0.id! })))
+                    }
+                    
+                    lineItems.append(
+                        LineItem(variations: variations,
+                                 lineNotes: item.notes,
+                                 quantity: Int(item.quantity),
+                                 branchProductID: Int(item.product_id)))
                 }
             }
         }
@@ -121,7 +139,7 @@ class CheckoutVC: UIViewController {
            success == "1"{
             showToast("Transaction success")
         }else{
-            showToast("Transaction failed, please make sure you entered correct card information and the card is valid")
+            showToast("Transaction failed, please make sure you entered correct card information and the card is valid".localized)
         }
     }
     
@@ -344,7 +362,7 @@ class CheckoutVC: UIViewController {
     func dismissPaySheet(){
         
         self.view.endEditing(true)
-        let alert = UIAlertController(title: "Cancel Payment", message: "cancelling payment session will clear off your card details", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Cancel Payment".localized, message: "cancelling payment session will clear off your card details".localized, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
             self.blockView.isHidden = true
             self.bottomSheetTopCnst.constant = self.view.frame.height
@@ -362,6 +380,39 @@ class CheckoutVC: UIViewController {
         dismissPaySheet()
     }
     
+    
+    @IBAction func validateCouponsTFdidChange(_ sender: UITextField) {
+        
+        activityIndicator.stopAnimating()
+        validateBtn.isHidden = false
+        verifiedCoupon.isHidden = true
+        
+        guard !couponsTF.text!.isEmpty else {
+            validateBtn.alpha = 0.5
+            validateBtn.isEnabled = false
+            return
+        }
+        validateBtn.alpha = 1
+        validateBtn.isEnabled = true
+    }
+    
+    @IBAction func validateCouponsAction(_ sender: Any) {
+    
+        let validatable: ValidatableCoupon?
+        coupons = self.couponsTF.text?.split(separator: ",").map({String($0).replacingOccurrences(of: " ", with: "")})
+        
+        validatable = ValidatableCoupon(coupons: coupons!, branchId: branch!.id, lineItems: lineItems)
+        
+        print(validatable)
+        activityIndicator.startAnimating()
+        validateBtn.isHidden = true
+        verifiedCoupon.isHidden = true
+        view.endEditing(true)
+        
+        presenter?.validateCoupons(validatable!)
+    }
+    
+    
     @IBAction func placeOrderAction(_ sender: Any) {
         
         guard branch?.isOpen == 1 else {
@@ -375,18 +426,18 @@ class CheckoutVC: UIViewController {
         }
         
         guard let selectedPayment = selectedPayment else {
-            showToast("Please choose payment method")
+            showToast("Please choose payment method".localized)
             return
         }
         
         guard let selectedReceiveOption = selectedReceiveOption else{
-            showToast("Please choose receive option")
+            showToast("Please choose receive option".localized)
             return
         }
         
         if selectedReceiveOption == 0{
             guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first) else {
-                showToast("Please add address")
+                showToast("Please add address".localized)
                 return
             }
             if let deliveryRegions = branch?.deliveryRegions{
@@ -400,11 +451,11 @@ class CheckoutVC: UIViewController {
                 let bounds = GMSCoordinateBounds(path: path)
                 guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!), bounds.contains(CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)) else{
                     
-                    let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds", preferredStyle: .alert)
-                    let addAction = UIAlertAction(title: "Add Address", style: .default) { _ in
+                    let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds".localized, preferredStyle: .alert)
+                    let addAction = UIAlertAction(title: "Add New Address".localized, style: .default) { _ in
                         Router.toAddAddress(self, path)
                     }
-                    let cencel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    let cencel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
                     alert.addAction(addAction)
                     alert.addAction(cencel)
                     self.present(alert, animated: true, completion: nil)
@@ -414,30 +465,11 @@ class CheckoutVC: UIViewController {
             }
         }
         
-        var lineItems = [LineItem]()
-        
-        for item in self.items!{
-            guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
-            var variations = [LineItemVariation]()
-            for variation in itemVariations{
-                variations.append(
-                    LineItemVariation(
-                        id: variation.id,
-                        options: variation.options!.map({ $0.id! })))
-            }
-            
-            lineItems.append(
-                LineItem(variations: variations,
-                         lineNotes: item.notes,
-                         quantity: Int(item.quantity),
-                         branchProductID: Int(item.product_id)))
-        }
-        
         let order = Order(deliveryMethod: selectedReceiveOption,
                           paymentMethod: selectedPayment,
                           addressID: (addresses?.filter({ return $0.selected == 1 }))?.first?.id ?? 0,
                           customerNote: notesTV.text!,
-                          couponID: ["30off"],
+                          couponID: coupons ?? [],
                           branchID: branch!.id,
                           lineItems: lineItems)
         

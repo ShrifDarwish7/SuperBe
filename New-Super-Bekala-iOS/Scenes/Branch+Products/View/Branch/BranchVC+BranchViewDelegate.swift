@@ -13,6 +13,7 @@ extension BranchVC: MainViewDelegate{
         self.filtersCollectionView.hideSkeleton()
         if let data = data{
             self.categories = data
+            self.categoriesBtn.isHidden = false
             guard !self.categories!.isEmpty else { return }
             if "lang".localized == "en"{
                 self.categories?[0].selected = true

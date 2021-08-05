@@ -15,6 +15,7 @@ class Shared{
     static var userLat: CLLocationDegrees?
     static var userLng: CLLocationDegrees?
     static let errorMsg = "An error occuered, please try again later".localized
+    static var isChatting: Bool = false
     static let storageBase = "https://dev4.superbekala.com/storage/"
     static var headers = [
         "Authorization": "Bearer " + (APIServices.shared.user?.token ?? ""),
@@ -47,6 +48,7 @@ class Shared{
     static var superService: SuperService?
     static var favBranches: [Branch]?
     static var favProducts: [Product]?
+    static var currentConversationId: Int?
 }
 
 enum SelectedServices{

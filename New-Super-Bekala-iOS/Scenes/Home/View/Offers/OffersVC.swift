@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OffersVC: UIViewController {
+class OffersVC: UIViewController, ChooserDelegate {
 
     @IBOutlet weak var specialOffersCollection: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -18,6 +18,7 @@ class OffersVC: UIViewController {
     @IBOutlet weak var specialOffersView: UIView!
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var categoriesBtn: UIButton!
     
     var presenter: MainPresenter?
     var cartItems: [CartItem]?
@@ -29,6 +30,7 @@ class OffersVC: UIViewController {
     var isLoading = true
     var isPaginting = false
     var sliderIsLoading = true
+    var refreshControl: UIRefreshControl!
     var slider: [Slider]?{
         didSet{
             pageControl.isHidden = false
@@ -50,7 +52,14 @@ class OffersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
+        
         presenter = MainPresenter(self)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToTop), name: NSNotification.Name("SCROLL_TO_TOP"), object: nil)
+
         
 //        if Shared.isRegion{
 //            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
@@ -73,12 +82,36 @@ class OffersVC: UIViewController {
         specialOffersCollection.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
     }
     
+    @objc func refresh(){
+        refreshControl.endRefreshing()
+        isLoading = true
+        isPaginting = false
+        sliderIsLoading = true
+        self.viewDidLoad()
+    }
+    
+    @objc func scrollToTop(){
+        self.scrollView.setContentOffset(.zero, animated: true)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
             self.cartItems = items
         }
+    }
+    
+    func onChoose(_ index: Int) {
+        self.selectCategory(index: index)
+    }
+    
+    @IBAction func toChooser(_ sender: Any) {
+        guard let categories = self.categories else { return }
+        var list = [String]()
+        categories.forEach { category in
+            list.append(("lang".localized == "en" ? category.name?.en : category.name?.ar)!)
+        }
+        Router.toChooser(self, list)
     }
     
     override func viewWillLayoutSubviews() {
@@ -102,6 +135,19 @@ class OffersVC: UIViewController {
             specialOffersCollection.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
             index += 1
         })
+    }
+    
+    func selectCategory(index: Int){
+        for i in 0...self.categories!.count-1{
+            self.categories![i].selected = false
+        }
+        self.categories![index].selected = true
+        self.selectedCategory = self.categories![index]
+        self.loadFiltersCollection()
+        self.filtersCollection.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
+        self.isLoading = true
+        self.showSkeletonView()
+        self.updateBranches()
     }
     
 

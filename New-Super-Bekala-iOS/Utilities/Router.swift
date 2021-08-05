@@ -190,6 +190,7 @@ class Router {
         let vc = self.instantiate(appStoryboard: .home, identifier: "ChooserVC") as! ChooserVC
         vc.list = list
         vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = sender as? ChooserDelegate
         sender.present(vc, animated: true, completion: nil)
     }
     
@@ -209,6 +210,12 @@ class Router {
         let vc = Router.instantiate(appStoryboard: .main, identifier: "NoConnectionVC") as! NoConnectionVC
         vc.modalPresentationStyle = .overCurrentContext
         sender?.present(vc, animated: true, completion: nil)
+    }
+    
+    static func toChat(_ sender: UIViewController){
+        let vc = Router.instantiate(appStoryboard: .other, identifier: "ChatVC") as! ChatVC
+        vc.modalPresentationStyle = .fullScreen
+        sender.present(vc, animated: true, completion: nil)
     }
     
     static func toRateBranch(_ sender: UIViewController,_ branch: Branch){

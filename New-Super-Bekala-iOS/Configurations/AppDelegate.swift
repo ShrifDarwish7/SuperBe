@@ -17,12 +17,16 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import CoreData
 import Reachability
+import PusherSwift
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let reachability = try! Reachability()
+    static var pusher: Pusher!
+    static var channel: PusherChannel!
     static var standard: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -52,6 +56,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
           
         return true
     }
@@ -111,6 +132,55 @@ extension AppDelegate: GIDSignInDelegate{
         
         NotificationCenter.default.post(name: NSNotification.Name("GoogleCredential"), object: nil, userInfo: ["GoogleCredential": credential])
         
+    }
+    
+    
+}
+
+extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate{
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+//    func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                willPresent notification: UNNotification,
+//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        completionHandler([.alert, .sound, .badge])
+//
+//    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let actionIdentifier = response.actionIdentifier
+        
+        switch actionIdentifier {
+        case UNNotificationDismissActionIdentifier: // Notification was dismissed by user
+            // Do something
+            completionHandler()
+        case UNNotificationDefaultActionIdentifier: // App was opened from notification
+            // Do something
+            
+            let userInfo = response.notification.request.content.userInfo
+            print("userInfo",userInfo)
+            
+            let navController = self.window?.rootViewController as! UINavigationController
+            NotificationCenter.default.post(name: NSNotification.Name("ReceivedOrderFromFCM"), object: nil, userInfo: userInfo)
+            
+            completionHandler()
+        default:
+            completionHandler()
+        }
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+                        
+        let navController = self.window?.rootViewController as! UINavigationController
+        NotificationCenter.default.post(name: NSNotification.Name("ReceivedOrderFromFCM"), object: nil, userInfo: userInfo)
+        
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("fcmTokenHere",fcmToken)
+        UserDefaults.init().set(fcmToken, forKey: "FCM_Token")
     }
     
     

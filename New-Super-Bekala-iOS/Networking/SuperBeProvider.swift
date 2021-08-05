@@ -38,6 +38,11 @@ enum SuperBe{
     case addToWallet(_ prms: [String: Any])
     case getBranchRating(_ id: Int)
     case rate(_ prms: [String: Any])
+    case validateCoupons(_ encodable: ValidatableCoupon)
+    case getShippingCost(_ prms: [String: String])
+    case startConversation
+    case sendMessage(_ id: Int,_ prms: [String: String])
+    case getConversation(_ id: Int)
 }
 
 extension SuperBe: TargetType{
@@ -91,6 +96,16 @@ extension SuperBe: TargetType{
             return "branches/\(id)?with=ratings.user"
         case .rate:
             return "rating"
+        case .validateCoupons(_):
+            return "coupons/validate_coupons"
+        case .getShippingCost(_):
+            return "orders/shipping_details"
+        case .startConversation:
+            return "chats/conversations"
+        case .sendMessage(let id,_):
+            return "chats/conversations/\(id)/messages"
+        case .getConversation(let id):
+            return "chats/conversations/\(id)"
         }
     }
     
@@ -102,7 +117,10 @@ extension SuperBe: TargetType{
              .addToFavourite(_),
              .placeSuperService(_,_,_),
              .addToWallet(_),
-             .rate(_):
+             .rate(_),
+             .validateCoupons(_),
+             .startConversation,
+             .sendMessage(_, _):
             return .post
         case .updateAddress(_, _),
              .updateOrder(_, _):
@@ -130,7 +148,8 @@ extension SuperBe: TargetType{
              .getProductByID(_, _, let prms),
              .getMyOrders(let prms),
              .search(let prms),
-             .slider(let prms):
+             .slider(let prms),
+             .getShippingCost(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),
@@ -159,9 +178,12 @@ extension SuperBe: TargetType{
                 multipartFormData.append(formData)
             }
             return .uploadMultipart(multipartFormData)
-        case .updateOrder(_, let prms):
+        case .updateOrder(_, let prms),
+             .sendMessage(_, let prms):
             return .requestParameters(parameters: prms, encoding: JSONEncoding.default)
         case .placeOrder(let encodable):
+            return .requestJSONEncodable(encodable)
+        case .validateCoupons(let encodable):
             return .requestJSONEncodable(encodable)
         default:
             return .requestPlain

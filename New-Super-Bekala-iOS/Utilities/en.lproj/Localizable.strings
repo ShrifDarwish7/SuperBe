@@ -25,3 +25,14 @@
 "Ok" = "Ok";
 "Contiue" = "Contiue";
 "Cancel" = "Cancel";
+"Your address is out of vendor delivery area bounds" = "Your address is out of vendor delivery area bounds";
+"Add New Address" = "Add New Address";
+"Please choose payment method" = "Please choose payment method";
+"Please choose receive option" = "Please choose receive option";
+"Cancel Payment" = "Cancel Payment";
+"cancelling payment session will clear off your card details" = "cancelling payment session will clear off your card details";
+"Transaction failed, please make sure you entered correct card information and the card is valid" = "Transaction failed, please make sure you entered correct card information and the card is valid";
+"Customer Support" = "Customer Support";
+"If you exit the chat we will clear the current session messages, are you sure you want to exit ?" = "If you exit the chat we will clear the current session messages, are you sure you want to exit ?";
+"Continue" = "Continue";
+"EGP" = "EGP";

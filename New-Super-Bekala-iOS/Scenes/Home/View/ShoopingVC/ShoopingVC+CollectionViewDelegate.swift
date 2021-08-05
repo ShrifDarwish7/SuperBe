@@ -111,8 +111,8 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             }else if self.featuredBranches![indexPath.row].isOnhold == 1{
                 let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
                 showAlert(title: "", message: msg)
-            }else if self.featuredBranches![indexPath.row].isOpen == 0{
-                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is closed now" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مغلق حاليا "
+            }else if self.featuredBranches![indexPath.row].isOpen == 0 || self.featuredBranches![indexPath.row].isBusy == 1{
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
                 let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
                 let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
                     Router.toBranch(self, self.featuredBranches![indexPath.row])

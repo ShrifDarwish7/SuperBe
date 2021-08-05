@@ -88,16 +88,11 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         switch collectionView {
         case filtersCollection:
-            for i in 0...self.categories!.count-1{
-                self.categories![i].selected = false
-            }
-            self.categories![indexPath.row].selected = true
-            self.selectedCategory = self.categories![indexPath.row]
-            self.filtersCollection.reloadData()
-            self.filtersCollection.scrollToItem(at: IndexPath(row: indexPath.row, section: 0), at: .centeredHorizontally, animated: true)
-            self.showSkeletonView()
-            self.updateBranches()
+            
+            self.selectCategory(index: indexPath.row)
+            
         case specialOffersCollection:
+            
             if let branch = self.slider![indexPath.row].branch{
                 if branch.isOpen == 1{
                     Router.toBranch(self, branch)
@@ -118,6 +113,7 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             }else if let product = self.slider![indexPath.row].product{
                 Router.toProduct(self, product)
             }
+            
         default:
             break
         }

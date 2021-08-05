@@ -22,6 +22,7 @@ extension OffersVC: MainViewDelegate{
     func didCompleteWithCategories(_ data: [Category]?) {
         if let _ = data{
             self.categories = data
+            self.categoriesBtn.isHidden = false
             if "lang".localized == "en"{
                 self.categories?[0].selected = true
                 self.selectedCategory = self.categories?[0]

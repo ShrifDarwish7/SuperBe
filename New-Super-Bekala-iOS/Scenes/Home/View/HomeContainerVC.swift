@@ -42,6 +42,7 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var profileImage: CircluarImage!
     
     var cartItems: [CartItem]?
+    var selectedTab = Tabs.shooping
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,11 @@ class HomeContainerVC: UIViewController {
                 cartFlage.isHidden = true
             }
         }
+    }
+    
+    @IBAction func toChat(_ sender: Any) {
+        let presenter = MainPresenter(self)
+        presenter.startConversation()
     }
     
     @IBAction func toQuickOrder(_ sender: UIButton) {
@@ -213,30 +219,60 @@ class HomeContainerVC: UIViewController {
         case 0:
             
             shoopingTab.isHidden = false
-            self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
             shoopingTabBtn.setImage(UIImage(named: "shooping-select"), for: .normal)
+            
+            guard selectedTab != .shooping else {
+                NotificationCenter.default.post(name: NSNotification.Name("SCROLL_TO_TOP"), object: nil, userInfo: nil)
+                return
+            }
+            
+            self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+            
             tabTitle.text = "Shooping".localized
+            selectedTab = .shooping
             
         case 1:
             
             offersTab.isHidden = false
-            self.replaceView(containerView: containerView, identifier: "OffersVC", storyboard: .home)
             offersTabBtn.setImage(UIImage(named: "offers-select"), for: .normal)
+            
+            guard selectedTab != .offers else {
+                NotificationCenter.default.post(name: NSNotification.Name("SCROLL_TO_TOP"), object: nil, userInfo: nil)
+                return
+            }
+            
+            self.replaceView(containerView: containerView, identifier: "OffersVC", storyboard: .home)
+            
             tabTitle.text = "Offers".localized
+            selectedTab = .offers
             
         case 2:
             
             ordersTab.isHidden = false
             ordersTabBtn.setImage(UIImage(named: "last-orders-select"), for: .normal)
+            
+            guard selectedTab != .orders else {
+                NotificationCenter.default.post(name: NSNotification.Name("SCROLL_TO_TOP"), object: nil, userInfo: nil)
+                return
+            }
+            
             tabTitle.text = "Last Orders".localized
             self.replaceView(containerView: containerView, identifier: "LastOrderVC", storyboard: .orders)
+            selectedTab = .orders
             
         case 3:
             
             favouriteTab.isHidden = false
             favouriteTabBtn.setImage(UIImage(named: "favourites-select"), for: .normal)
+            
+            guard selectedTab != .favourite else {
+                NotificationCenter.default.post(name: NSNotification.Name("SCROLL_TO_TOP"), object: nil, userInfo: nil)
+                return
+            }
+            
             tabTitle.text = "Favourite".localized
             self.replaceView(containerView: containerView, identifier: "FavouritesVC", storyboard: .profile)
+            selectedTab = .favourite
             
         default:
             break
@@ -280,7 +316,21 @@ class HomeContainerVC: UIViewController {
     @IBAction func toSearch(_ sender: Any) {
         Router.toSearch(self)
     }
-    
-    
-    
+        
+}
+
+enum Tabs{
+    case shooping
+    case offers
+    case orders
+    case favourite
+}
+
+extension HomeContainerVC: MainViewDelegate{
+    func didCompleteStartConversation(_ Id: Int?) {
+        if let id = Id{
+            Shared.currentConversationId = id
+            Router.toChat(self)
+        }
+    }
 }

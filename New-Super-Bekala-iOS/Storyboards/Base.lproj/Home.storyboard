@@ -300,14 +300,13 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Zav-VX-bVE">
-                                                <rect key="frame" x="153.5" y="10" width="200" height="50"/>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zav-VX-bVE">
+                                                <rect key="frame" x="153.5" y="20" width="150" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isl-Kx-vix">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="CCv-Ar-DSp"/>
-                                                            <constraint firstAttribute="height" constant="50" id="Prc-Nn-Yn1"/>
+                                                            <constraint firstAttribute="width" constant="30" id="1Mh-Xc-OJ3"/>
                                                         </constraints>
                                                         <state key="normal" image="share_us_icon"/>
                                                         <connections>
@@ -315,32 +314,23 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYf-uS-sjK">
-                                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="Qev-AY-99u"/>
-                                                            <constraint firstAttribute="height" constant="50" id="m8C-dG-dIr"/>
-                                                        </constraints>
-                                                        <state key="normal" image="points_promocode_rules_icon"/>
+                                                        <rect key="frame" x="40" y="0.0" width="30" height="30"/>
+                                                        <state key="normal" image="customer-service"/>
+                                                        <connections>
+                                                            <action selector="toChat:" destination="aPf-Ku-lZ5" eventType="touchUpInside" id="pOv-DI-bb7"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZn-8r-EY0">
-                                                        <rect key="frame" x="100" y="0.0" width="50" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="MSV-uE-3Ds"/>
-                                                            <constraint firstAttribute="height" constant="50" id="am5-zG-C8b"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="80" y="0.0" width="30" height="30"/>
                                                         <state key="normal" image="contact_us_icon"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBs-wa-3z0">
-                                                        <rect key="frame" x="150" y="0.0" width="50" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="0YP-Tc-ffN"/>
-                                                            <constraint firstAttribute="width" constant="50" id="yLA-Sh-pPn"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="120" y="0.0" width="30" height="30"/>
                                                         <state key="normal" image="lucky_icon"/>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="3IK-cU-OeD"/>
+                                                    <constraint firstAttribute="height" constant="30" id="Slb-zE-EeT"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -642,6 +632,14 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANL-iK-9zs" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Lak-n3-kWI"/>
+                                    <constraint firstAttribute="height" constant="160" id="cld-Go-3tN"/>
+                                </constraints>
                             </view>
                             <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdc-yi-bfA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -1007,6 +1005,7 @@ with us on</string>
                             <constraint firstItem="r1N-MN-rqf" firstAttribute="trailing" secondItem="0em-ni-awY" secondAttribute="trailing" id="Nbq-1N-1rB"/>
                             <constraint firstItem="I4q-xq-cN4" firstAttribute="top" secondItem="0z5-Oc-emk" secondAttribute="bottom" id="OBS-op-ebZ"/>
                             <constraint firstItem="26g-g8-LpS" firstAttribute="centerY" secondItem="mnq-6S-93F" secondAttribute="centerY" id="UVI-xO-rRt"/>
+                            <constraint firstItem="r1N-MN-rqf" firstAttribute="trailing" secondItem="ANL-iK-9zs" secondAttribute="trailing" constant="10" id="UoO-em-POd"/>
                             <constraint firstItem="r1N-MN-rqf" firstAttribute="trailing" secondItem="0z5-Oc-emk" secondAttribute="trailing" id="W4K-4v-1vu"/>
                             <constraint firstItem="zdc-yi-bfA" firstAttribute="leading" secondItem="r1N-MN-rqf" secondAttribute="leading" id="Wxt-4K-tdL"/>
                             <constraint firstItem="I4q-xq-cN4" firstAttribute="leading" secondItem="r1N-MN-rqf" secondAttribute="leading" id="YGL-4H-EXy"/>
@@ -1016,6 +1015,7 @@ with us on</string>
                             <constraint firstItem="r1N-MN-rqf" firstAttribute="bottom" secondItem="I4q-xq-cN4" secondAttribute="bottom" id="fe3-OX-Zna"/>
                             <constraint firstItem="r1N-MN-rqf" firstAttribute="trailing" secondItem="26g-g8-LpS" secondAttribute="trailing" constant="15" id="gbb-wG-XVa"/>
                             <constraint firstItem="5fA-B0-gTj" firstAttribute="centerY" secondItem="0em-ni-awY" secondAttribute="centerY" id="hJ2-t7-skg"/>
+                            <constraint firstItem="ANL-iK-9zs" firstAttribute="centerY" secondItem="R2I-hf-hyp" secondAttribute="centerY" id="hQ9-hn-J98"/>
                             <constraint firstAttribute="trailing" secondItem="5fA-B0-gTj" secondAttribute="trailing" constant="10" id="hvU-df-8Kr"/>
                             <constraint firstItem="Ag7-25-lHR" firstAttribute="width" secondItem="R2I-hf-hyp" secondAttribute="width" id="jSU-ff-kDd"/>
                             <constraint firstItem="ziW-WR-wGA" firstAttribute="leading" secondItem="r1N-MN-rqf" secondAttribute="leading" id="kBE-jt-YLT"/>
@@ -3032,7 +3032,7 @@ with us on</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAl-hB-lUV">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC0-UP-8K9">
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oC0-UP-8K9">
                                                                 <rect key="frame" x="7.5" y="12.5" width="25" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="25" id="4fE-Rp-WFM"/>
@@ -3041,6 +3041,7 @@ with us on</string>
                                                                 <state key="normal" image="menu-2"/>
                                                                 <connections>
                                                                     <action selector="toChooser:" destination="gjq-ZI-3nM" eventType="touchUpInside" id="YxE-l6-yBU"/>
+                                                                    <action selector="toChooser:" destination="8xo-jr-tWx" eventType="touchUpInside" id="qGV-zH-22O"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -3122,6 +3123,7 @@ with us on</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoriesBtn" destination="oC0-UP-8K9" id="Q9b-hD-Mxh"/>
                         <outlet property="filtersCollection" destination="ppi-tt-ImA" id="6Qi-J9-suz"/>
                         <outlet property="offersTableView" destination="wC0-la-OqT" id="JcX-SC-8ce"/>
                         <outlet property="pageControl" destination="5PN-FV-t2o" id="tJN-ef-GGu"/>
@@ -3155,6 +3157,12 @@ with us on</string>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9b-nX-Y5G">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                                <connections>
+                                    <action selector="dismissProduct:" destination="oBb-wB-WfQ" eventType="touchUpInside" id="Ect-dK-7az"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXh-LB-k9T" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="157" y="116" width="100" height="100"/>
                                 <subviews>
@@ -3731,7 +3739,7 @@ with us on</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPO-VL-iPF">
                                         <rect key="frame" x="5" y="15" width="40" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXW-3w-JgM">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXW-3w-JgM">
                                                 <rect key="frame" x="7.5" y="12.5" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Fva-va-3k9"/>
@@ -3879,6 +3887,8 @@ with us on</string>
                             <constraint firstItem="FRC-Kk-0zz" firstAttribute="trailing" secondItem="HtS-uE-Nl9" secondAttribute="trailing" id="8Re-9i-xsU"/>
                             <constraint firstItem="iFa-XO-LM6" firstAttribute="top" secondItem="FRC-Kk-0zz" secondAttribute="top" id="8SR-4x-u1O"/>
                             <constraint firstItem="rmv-Ed-4us" firstAttribute="centerY" secondItem="XsU-rN-ynS" secondAttribute="centerY" id="AMf-dY-Pue"/>
+                            <constraint firstItem="N9b-nX-Y5G" firstAttribute="centerX" secondItem="rmv-Ed-4us" secondAttribute="centerX" id="CXK-et-cmS"/>
+                            <constraint firstItem="N9b-nX-Y5G" firstAttribute="centerY" secondItem="rmv-Ed-4us" secondAttribute="centerY" id="DKe-nj-RhQ"/>
                             <constraint firstAttribute="trailing" secondItem="hOc-3P-hVH" secondAttribute="trailing" constant="5" id="DLt-1t-TLV"/>
                             <constraint firstItem="U0z-yf-cr2" firstAttribute="bottom" secondItem="rmv-Ed-4us" secondAttribute="bottom" id="MPW-te-rJM"/>
                             <constraint firstItem="rmv-Ed-4us" firstAttribute="height" secondItem="XsU-rN-ynS" secondAttribute="height" id="O98-hK-7wC"/>
@@ -3888,7 +3898,9 @@ with us on</string>
                             <constraint firstItem="hOc-3P-hVH" firstAttribute="leading" secondItem="JVg-Jx-HOs" secondAttribute="leading" constant="5" id="RuL-rD-RWp"/>
                             <constraint firstItem="HtS-uE-Nl9" firstAttribute="leading" secondItem="FRC-Kk-0zz" secondAttribute="leading" id="Wzt-cS-Pah"/>
                             <constraint firstItem="XsU-rN-ynS" firstAttribute="top" secondItem="JVg-Jx-HOs" secondAttribute="top" id="XUi-1R-Y11"/>
+                            <constraint firstItem="N9b-nX-Y5G" firstAttribute="height" secondItem="rmv-Ed-4us" secondAttribute="height" id="Xx4-iD-VOY"/>
                             <constraint firstItem="eKB-N0-i3J" firstAttribute="centerX" secondItem="JVg-Jx-HOs" secondAttribute="centerX" id="cQ5-kv-bfn"/>
+                            <constraint firstItem="N9b-nX-Y5G" firstAttribute="width" secondItem="rmv-Ed-4us" secondAttribute="width" id="cbo-Rk-hab"/>
                             <constraint firstItem="XsU-rN-ynS" firstAttribute="height" secondItem="JVg-Jx-HOs" secondAttribute="height" multiplier="0.5" id="eBW-XN-Mcn"/>
                             <constraint firstItem="eKB-N0-i3J" firstAttribute="top" secondItem="qP0-nX-xW4" secondAttribute="bottom" constant="15" id="fIi-tb-3Q3"/>
                             <constraint firstAttribute="bottom" secondItem="HtS-uE-Nl9" secondAttribute="bottom" id="i1T-yj-iIY"/>
@@ -3909,6 +3921,7 @@ with us on</string>
                         <outlet property="branchLogoContainer" destination="uXh-LB-k9T" id="QU8-aK-Tea"/>
                         <outlet property="branchName" destination="8i2-sH-Kl7" id="QNo-dq-Mqc"/>
                         <outlet property="cartFlage" destination="pMy-6a-BOJ" id="gtm-Nx-cex"/>
+                        <outlet property="categoriesBtn" destination="oXW-3w-JgM" id="0Dr-wX-0Wo"/>
                         <outlet property="duration" destination="6ix-ip-T7y" id="Wga-vd-OPe"/>
                         <outlet property="fastOrderContainer" destination="qP0-nX-xW4" id="O7s-Th-HSq"/>
                         <outlet property="fastOrderOptionsView" destination="hOc-3P-hVH" id="ppC-3p-jHY"/>
@@ -4476,7 +4489,7 @@ has been the industry's</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEh-qf-LJG">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiF-uQ-Vna">
+                                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiF-uQ-Vna">
                                                                         <rect key="frame" x="7.5" y="17.5" width="25" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="H7m-sc-l1Z"/>
@@ -4686,9 +4699,11 @@ has been the industry's</string>
                     </view>
                     <connections>
                         <outlet property="allFeaturedBtn" destination="7A7-lu-5uy" id="J6V-qs-uEn"/>
+                        <outlet property="categoriesBtn" destination="DiF-uQ-Vna" id="hPP-KP-jJD"/>
                         <outlet property="featuredVendorsCollection" destination="PcY-pA-FZU" id="Fru-pj-7W0"/>
                         <outlet property="filtersCollectionView" destination="U5G-Re-Gb9" id="9eb-t8-rA5"/>
                         <outlet property="ordinaryVendorsTAbleView" destination="ZNt-9D-jCS" id="riw-pG-jER"/>
+                        <outlet property="scroller" destination="d60-UT-T8Q" id="3Pg-uQ-JWL"/>
                         <outlet property="tableViewHeight" destination="Sf4-sV-czK" id="rgG-fc-Xm8"/>
                     </connections>
                 </viewController>
@@ -5571,6 +5586,7 @@ with us on</string>
         <image name="cart_icon" width="47" height="47"/>
         <image name="close" width="512" height="512"/>
         <image name="contact_us_icon" width="49" height="49"/>
+        <image name="customer-service" width="512" height="512"/>
         <image name="decreas_quantity" width="34" height="37.5"/>
         <image name="delivery-man" width="512" height="512"/>
         <image name="delivery-truck" width="55" height="55"/>
@@ -5614,12 +5630,11 @@ with us on</string>
         <image name="open-now" width="512" height="512"/>
         <image name="phone" width="57" height="57"/>
         <image name="phone-call" width="512" height="512"/>
-        <image name="points_promocode_rules_icon" width="49" height="49"/>
         <image name="precision" width="512" height="512"/>
         <image name="search" width="50" height="50"/>
         <image name="search_icon" width="52" height="52"/>
         <image name="search_icon_gray" width="42" height="42"/>
-        <image name="share_us_icon" width="48" height="46"/>
+        <image name="share_us_icon" width="512" height="512"/>
         <image name="shooping-select" width="35" height="35"/>
         <image name="star" width="512" height="512"/>
         <image name="stopwatch" width="512" height="512"/>

@@ -9,7 +9,7 @@
 import UIKit
 import Cosmos
 
-class BranchVC: UIViewController {
+class BranchVC: UIViewController, ChooserDelegate {
 
     @IBOutlet weak var fastOrderContainer: ViewCorners!
     @IBOutlet weak var branchLogoContainer: ViewCorners!
@@ -36,6 +36,7 @@ class BranchVC: UIViewController {
     @IBOutlet weak var cartFlage: ViewCorners!
     @IBOutlet weak var replacableView: UIView!
     @IBOutlet weak var reviewsCount: UILabel!
+    @IBOutlet weak var categoriesBtn: UIButton!
     
     var bottomSheetPanStartingTopConstant : CGFloat = 30.0
     var categories: [BranchCategory]?
@@ -53,7 +54,6 @@ class BranchVC: UIViewController {
         presenter = MainPresenter(self)
         initUI()
         presenter?.getBranchCats(prms: [:], id: branch!.id)
-        NotificationCenter.default.addObserver(self, selector: #selector(didChooseCategory(sender:)), name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil)
 
     }
     
@@ -62,9 +62,8 @@ class BranchVC: UIViewController {
         fetchCartItems()
     }
     
-    @objc func didChooseCategory(sender: NSNotification){
-        guard let userInfo = sender.userInfo as? [String: Any] else { return}
-        self.selectCategory(index: userInfo["index"] as! Int)
+    func onChoose(_ index: Int) {
+        self.selectCategory(index: index)
     }
     
     func fetchCartItems(){
@@ -114,6 +113,13 @@ class BranchVC: UIViewController {
         Router.toImagesOrder(self, branch!)
     }
     
+    @IBAction func dismissProduct(_ sender: Any) {
+        self.productsViewHeight.constant = self.view.frame.height * 0.5
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     @IBAction func toVoiceOrder(_ sender: Any) {
         Router.toVoiceOrder(self, branch!)
     }
@@ -125,6 +131,7 @@ class BranchVC: UIViewController {
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func toCart(_ sender: Any) {
         CartServices.shared.getCartItems(itemId: "-1", branch: self.branch!.id) { [self] (items) in
             if let items = items,

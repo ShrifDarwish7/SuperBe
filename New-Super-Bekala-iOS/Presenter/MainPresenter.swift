@@ -42,6 +42,11 @@ protocol MainViewDelegate {
     func didCompleteAddToWallet(_ msg: String,_ status: Int)
     func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?)
     func didCompleteRate(_ error: String?)
+    func didCompleteValidateCoupons(_ status: Int,_ message: String?)
+    func didCompleteWithShippingDetails(_ data: ShippingDetails?)
+    func didCompleteStartConversation(_ Id: Int?)
+    func didCompleteSendMessage(_ sent: Bool,_ id: Int)
+    func didCompleteWithConversation(_ data: Conversation?,_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -76,6 +81,11 @@ extension MainViewDelegate{
     func didCompleteAddToWallet(_ msg: String,_ status: Int){}
     func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?){}
     func didCompleteRate(_ error: String?){}
+    func didCompleteValidateCoupons(_ status: Int,_ message: String?){}
+    func didCompleteWithShippingDetails(_ data: ShippingDetails?){}
+    func didCompleteStartConversation(_ Id: Int?){}
+    func didCompleteSendMessage(_ sent: Bool,_ id: Int){}
+    func didCompleteWithConversation(_ data: Conversation?,_ error: String?){}
 }
 
 class MainPresenter{
@@ -84,6 +94,73 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func getConversation(_ id: Int){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.getConversation(id)) { data in
+            self.delegate?.dismissProgress()
+            if let data = data{
+                if let dataModel = data.getDecodedObject(from: ConversationResponse.self){
+                    self.delegate?.didCompleteWithConversation(dataModel.data, nil)
+                }else{
+                    self.delegate?.didCompleteWithConversation(nil, JSON(data)["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompleteWithConversation(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func sendMessage(_ message: String,_ id: Int,_ incrementalId: Int){
+        APIServices.shared.call(.sendMessage(id, ["message": message])) { data in
+            print(JSON(data))
+            if let data = data,
+               let json = try? JSON(data: data),
+               json["status"].intValue == 1{
+                self.delegate?.didCompleteSendMessage(true, incrementalId)
+            }else{
+                self.delegate?.didCompleteSendMessage(false, incrementalId)
+            }
+        }
+    }
+    
+    func startConversation(){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.startConversation) { data in
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data),
+               json["status"].intValue == 1{
+                self.delegate?.didCompleteStartConversation(json["data"]["id"].intValue)
+            }else{
+                self.delegate?.didCompleteStartConversation(nil)
+            }
+        }
+    }
+    
+    func getShippingDetails(_ branchId: Int){
+        APIServices.shared.call(.getShippingCost(["branch_id": "\(branchId)"])) { data in
+            print("getShippingDetails",JSON(data))
+            if let data = data,
+               let dataModel = data.getDecodedObject(from: ShippingDetailsResponse.self){
+                self.delegate?.didCompleteWithShippingDetails(dataModel.data)
+            }else{
+                self.delegate?.didCompleteWithShippingDetails(nil)
+            }
+        }
+    }
+    
+    func validateCoupons(_ validatable: ValidatableCoupon){
+        APIServices.shared.call(.validateCoupons(validatable)) { data in
+            print("validateCoupons", JSON(data))
+            if let data = data,
+               let json = try? JSON(data: data){
+                self.delegate?.didCompleteValidateCoupons(json["status"].intValue, json["message"].stringValue)
+            }else{
+                self.delegate?.didCompleteValidateCoupons(0, Shared.errorMsg)
+            }
+        }
     }
     
     func postRate(_ prms: [String: Any]){

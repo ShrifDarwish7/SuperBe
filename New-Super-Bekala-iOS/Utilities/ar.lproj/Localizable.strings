@@ -25,3 +25,14 @@
 "Ok" = "تم";
 "Contiue" = "متابعة";
 "Cancel" = "إلغاء";
+"Your address is out of vendor delivery area bounds" = "عنوانك خارج حدود منطقة توصيل المتجر";
+"Add New Address" = "إضافة عنوان جديد";
+"Please choose payment method" = "الرجاء اختيار طريقة الدفع";
+"Please choose receive option" = "الرجاء اختيار طريقة الاستلام";
+"Cancel Payment" = "الغاء الدفع";
+"cancelling payment session will clear off your card details" = "سيؤدي إلغاء الدفع إلى مسح تفاصيل بطاقتك";
+"Transaction failed, please make sure you entered correct card information and the card is valid" = "فشلت المعاملة ، يرجى التأكد من إدخال معلومات البطاقة الصحيحة وأن البطاقة صالحة";
+"Customer Support" = "خدمة العملاء";
+"If you exit the chat we will clear the current session messages, are you sure you want to exit ?" = "إذا قمت بالخروج سنقوم بمسح رسائل المحادثة الحالية ، هل أنت متأكد أنك تريد الخروج؟";
+"Continue" = "متابعة";
+"EGP" = "جنيه";

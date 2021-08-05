@@ -20,10 +20,14 @@ class LastOrderVC: UIViewController {
     var isLoading = true
     var presenter: MainPresenter?
     var selectedOrders = true
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToTop), name: NSNotification.Name("SCROLL_TO_TOP"), object: nil)
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        lastOrdersTableView.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +43,15 @@ class LastOrderVC: UIViewController {
             selectServices()
             presenter?.getMyServices()
         }
+    }
+    
+    @objc func refresh(){
+        refreshControl.endRefreshing()
+        self.reload(self)
+    }
+    
+    @objc func scrollToTop(){
+        self.lastOrdersTableView.setContentOffset(.zero, animated: true)
     }
     
     func showSkeleton(){

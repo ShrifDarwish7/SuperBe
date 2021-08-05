@@ -9,13 +9,15 @@
 import UIKit
 import SkeletonView
 
-class ShoopingVC: UIViewController {
+class ShoopingVC: UIViewController, ChooserDelegate {
 
     @IBOutlet weak var featuredVendorsCollection: UICollectionView!
     @IBOutlet weak var ordinaryVendorsTAbleView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     @IBOutlet weak var allFeaturedBtn: UIButton!
+    @IBOutlet weak var scroller: UIScrollView!
+    @IBOutlet weak var categoriesBtn: UIButton!
     
     var presenter: MainPresenter?
     var categories: [Category]?
@@ -25,22 +27,37 @@ class ShoopingVC: UIViewController {
     var parameters: [String:String] = [:]
     var featuredLoading = true
     var ordinaryLoading = true
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        scroller.refreshControl = refreshControl
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToTop), name: NSNotification.Name("SCROLL_TO_TOP"), object: nil)
         
         showSkeletonView()
         
         presenter = MainPresenter(self)
         presenter?.getFavourites()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didChooseCategory(sender:)), name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil)
-
     }
     
-    @objc func didChooseCategory(sender: NSNotification){
-        guard let userInfo = sender.userInfo as? [String: Any] else { return}
-        self.selectCategory(index: userInfo["index"] as! Int)
+    @objc func refresh(){
+        refreshControl.endRefreshing()
+        featuredLoading = true
+        ordinaryLoading = true
+        self.viewDidLoad()
+    }
+    
+    @objc func scrollToTop(){
+        self.scroller.setContentOffset(.zero, animated: true)
+    }
+    
+    func onChoose(_ index: Int) {
+        self.selectCategory(index: index)
     }
     
     func showSkeletonView(){
@@ -77,13 +94,13 @@ class ShoopingVC: UIViewController {
     }
     
     func selectCategory(index: Int){
+        self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
         for i in 0...self.categories!.count-1{
             self.categories![i].selected = false
         }
         self.categories![index].selected = true
         self.selectedCategory = self.categories![index]
         self.loadFiltersCollection()
-        self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
         self.featuredLoading = true
         self.ordinaryLoading = true
         self.showSkeletonView()

@@ -33,10 +33,12 @@ extension ShoopingVC: MainViewDelegate{
         parameters.updateValue("all", forKey: "lang")
         print("cats prms",parameters)
         self.presenter?.getCategories(parameters)
+        
     }
     
     func didCompleteWithCategories(_ data: [Category]?) {
         if let _ = data{
+            self.categoriesBtn.isHidden = false
             self.categories = data
             if "lang".localized == "en"{
                 self.categories?[0].selected = true
@@ -72,7 +74,6 @@ extension ShoopingVC: MainViewDelegate{
             self.featuredVendorsCollection.isHidden = false
             self.featuredBranches = data.reversed()
             self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
-            
         }
     }
     
@@ -87,9 +88,9 @@ extension ShoopingVC: MainViewDelegate{
                 featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
             }else{
                 self.branches![index!].isFavourite = 1
-                let contentOffset = ordinaryVendorsTAbleView.contentOffset
+                let contentOffset = scroller.contentOffset
                 self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
-                ordinaryVendorsTAbleView.setContentOffset(contentOffset, animated: true)
+                scroller.setContentOffset(contentOffset, animated: true)
             }
         }
     }
@@ -105,9 +106,9 @@ extension ShoopingVC: MainViewDelegate{
                 featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
             }else{
                 self.branches![index!].isFavourite = 0
-                let contentOffset = ordinaryVendorsTAbleView.contentOffset
+                let contentOffset = scroller.contentOffset
                 self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
-                ordinaryVendorsTAbleView.setContentOffset(contentOffset, animated: true)
+                scroller.setContentOffset(contentOffset, animated: true)
             }
         }
     }

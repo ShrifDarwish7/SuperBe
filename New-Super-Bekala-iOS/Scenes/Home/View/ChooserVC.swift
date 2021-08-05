@@ -13,6 +13,7 @@ class ChooserVC: UIViewController {
     @IBOutlet weak var optionsTableView: UITableView!
     
     var list: [String]?
+    var delegate: ChooserDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +45,10 @@ extension ChooserVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.backgroundColor = .clear
         self.dismiss(animated: true, completion: nil)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-            NotificationCenter.default.post(name: NSNotification.Name("DID_CHOOSE_OPTION"), object: nil, userInfo: ["index": indexPath.row])
-        }
+        delegate?.onChoose(indexPath.row)
     }
+}
+
+protocol ChooserDelegate {
+    func onChoose(_ index: Int)
 }

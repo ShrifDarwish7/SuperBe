@@ -33,6 +33,10 @@ PODS:
   - Firebase/Database (6.25.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 6.2.1)
+  - Firebase/Messaging (6.25.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.4.1)
+  - FirebaseAnalyticsInterop (1.5.0)
   - FirebaseAuth (6.5.3):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.6)
@@ -56,6 +60,25 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - leveldb-library (~> 1.22)
+  - FirebaseInstallations (1.3.0):
+    - FirebaseCore (~> 6.6)
+    - GoogleUtilities/Environment (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.6)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (4.3.4):
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstallations (~> 1.0)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+  - FirebaseMessaging (4.4.1):
+    - FirebaseAnalyticsInterop (~> 1.5)
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstanceID (~> 4.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Reachability (~> 6.5)
+    - GoogleUtilities/UserDefaults (~> 6.5)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - FlagPhoneNumber (0.8.0):
     - FlagPhoneNumber/libPhoneNumberiOS (= 0.8.0)
   - FlagPhoneNumber/libPhoneNumberiOS (0.8.0)
@@ -89,6 +112,8 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.6.0)"
   - GoogleUtilities/Reachability (6.6.0):
     - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.6.0):
+    - GoogleUtilities/Logger
   - GTMAppAuth (1.1.0):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher (~> 1.4)
@@ -100,6 +125,14 @@ PODS:
   - IQKeyboardManagerSwift (6.5.5)
   - Kingfisher (6.0.1)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.9)
+  - MaterialComponents/Palettes (124.2.0)
+  - MaterialComponents/private/Math (124.2.0)
+  - MaterialComponents/ProgressView (124.2.0):
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Math
+    - MDFInternationalization
+  - MDFInternationalization (2.0.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -109,13 +142,19 @@ PODS:
     - nanopb/encode (= 1.30905.0)
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
+  - NWWebSocket (0.5.2)
   - PromisesObjC (1.2.8)
+  - Protobuf (3.14.0)
+  - PusherSwift (9.1.1):
+    - NWWebSocket (~> 0.5.1)
+    - TweetNacl (~> 1.0.0)
   - ReachabilitySwift (5.0.0)
   - SkeletonView (1.11.0)
   - SVProgressHUD (2.2.5)
   - SwiftyGif (5.3.0)
   - SwiftyJSON (5.0.0)
   - Toast-Swift (5.0.1)
+  - TweetNacl (1.0.2)
   - UITextField-Navigation (4.2)
 
 DEPENDENCIES:
@@ -129,13 +168,17 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Database
+  - Firebase/Messaging
   - FlagPhoneNumber
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - Kingfisher
+  - lottie-ios
+  - MaterialComponents/ProgressView
   - Moya
+  - PusherSwift (~> 9.0)
   - ReachabilitySwift
   - SkeletonView
   - SVProgressHUD
@@ -157,12 +200,16 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
+    - FirebaseAnalyticsInterop
     - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseDatabase
+    - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - FlagPhoneNumber
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -175,15 +222,22 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
+    - lottie-ios
+    - MaterialComponents
+    - MDFInternationalization
     - Moya
     - nanopb
+    - NWWebSocket
     - PromisesObjC
+    - Protobuf
+    - PusherSwift
     - ReachabilitySwift
     - SkeletonView
     - SVProgressHUD
     - SwiftyGif
     - SwiftyJSON
     - Toast-Swift
+    - TweetNacl
     - UITextField-Navigation
 
 SPEC CHECKSUMS:
@@ -198,12 +252,16 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: 5719b4f965f76643241a1bb8244483ff6117db39
+  FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
   FirebaseAuth: 7047aec89c0b17ecd924a550c853f0c27ac6015e
   FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
   FirebaseCore: 6023faeada5afa95a349fccafb40900e32e9ac42
   FirebaseCoreDiagnostics: 4a773a47bd83bbd5a9b1ccf1ce7caa8b2d535e67
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseDatabase: 4e99c0c475d1ee0aa64ae2b53c93f80b7b60d7d9
+  FirebaseInstallations: 6f5f680e65dc374397a483c32d1799ba822a395b
+  FirebaseInstanceID: cef67c4967c7cecb56ea65d8acbb4834825c587b
+  FirebaseMessaging: 29543feb343b09546ab3aa04d008ee8595b43c44
   FlagPhoneNumber: 3712455b95f66cb0f2016fef7d9e34cddf8c7f9a
   GoogleDataTransport: ad884314b81cdb808fb1d23787b367ff8da4e28a
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
@@ -216,17 +274,24 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  NWWebSocket: 21f0c73639815da3272862c912275b26102aa80c
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
+  PusherSwift: fdf2ca6692234f49a630de5c69b3cdd70b7733ba
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SkeletonView: cc84ce90a804dd0dd7198dd802833411c8a64eaf
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
   UITextField-Navigation: 25c2614b41096ade830fe015961dd2dbc4e108cb
 
-PODFILE CHECKSUM: 800e1a6277e2769352e5af7197b5b7743ef690fa
+PODFILE CHECKSUM: 505b98eaf42402e874e9afd97ffb914347cd930d
 
 COCOAPODS: 1.10.0
