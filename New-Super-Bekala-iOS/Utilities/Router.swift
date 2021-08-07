@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import GoogleMaps
+import MapKit
 
 enum AppStoryboard: String {
     case main = "Main"
@@ -45,10 +45,11 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toAddAddress(_ sender: UIViewController,_ path: GMSPath?){
+    static func toAddAddress(_ sender: UIViewController,_ path: MKPolyline?,_ polygon: MKPolygon?){
         let vc = self.instantiate(appStoryboard: .home, identifier: "MapVC") as! MapVC
         Shared.mapState = .addAddress
         vc.path = path
+        vc.polygone = polygon
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -237,6 +238,6 @@ class Router {
         let nav = Router.instantiate(appStoryboard: .main, identifier: "OrderPlacedNav") as! UINavigationController
         nav.modalPresentationStyle = .overCurrentContext
         (nav.viewControllers.first as! OrderPlacedVC).orderID = id
-        sender.present(nav, animated: false, completion: nil)
+        sender.present(nav, animated: true, completion: nil)
     }
 }

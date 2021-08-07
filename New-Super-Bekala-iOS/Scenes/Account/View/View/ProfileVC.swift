@@ -202,7 +202,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func toAddAddress(_ sender: Any) {
-        Router.toAddAddress(self, nil)
+        Router.toAddAddress(self, nil, nil)
     }
     
     @IBAction func showAddresses(_ sender: UIButton) {

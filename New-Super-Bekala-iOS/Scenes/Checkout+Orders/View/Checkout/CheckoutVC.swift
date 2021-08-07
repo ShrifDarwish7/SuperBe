@@ -10,7 +10,7 @@ import UIKit
 import Cosmos
 import SwiftyJSON
 import SVProgressHUD
-import GoogleMaps
+import MapKit
 
 class CheckoutVC: UIViewController {
 
@@ -60,6 +60,11 @@ class CheckoutVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var verifiedCoupon: UIImageView!
     @IBOutlet weak var shippingCostActivity: UIActivityIndicatorView!
+    @IBOutlet weak var nameStack: UIStackView!
+    @IBOutlet weak var phoneStack: UIStackView!
+    @IBOutlet weak var receiveView: UIView!
+    @IBOutlet weak var paymentView: UIView!
+    @IBOutlet weak var scroller: UIScrollView!
     
     let minHeaderViewHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 135
     let maxHeaderViewHeight: CGFloat = 250
@@ -172,13 +177,15 @@ class CheckoutVC: UIViewController {
     
     @IBAction func toAddAddress(_ sender: Any) {
         if let deliveryRegions = branch?.deliveryRegions{
-            let path = GMSMutablePath()
+            var pathCoords: [CLLocationCoordinate2D] = []
             deliveryRegions.forEach { region in
                 region.coordinates.forEach { coord in
-                    path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+                    pathCoords.append(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
                 }
             }
-            Router.toAddAddress(self, path)
+            Router.toAddAddress(self, MKPolyline(coordinates: pathCoords, count: pathCoords.count), MKPolygon(coordinates: pathCoords, count: pathCoords.count))
+        }else{
+            Router.toAddAddress(self, nil, nil)
         }
     }
     
@@ -425,43 +432,65 @@ class CheckoutVC: UIViewController {
             return
         }
         
-        guard let selectedPayment = selectedPayment else {
-            showToast("Please choose payment method".localized)
+        guard !username.text!.isEmpty else {
+            nameStack.shake()
+            scroller.setContentOffset(nameStack.frame.origin, animated: true)
+            return
+        }
+        
+        guard !phoneNumber.text!.isEmpty else {
+            phoneStack.shake()
+            scroller.setContentOffset(phoneStack.frame.origin, animated: true)
             return
         }
         
         guard let selectedReceiveOption = selectedReceiveOption else{
-            showToast("Please choose receive option".localized)
+            receiveView.shake()
+            scroller.setContentOffset(receiveView.frame.origin, animated: true)
+            return
+        }
+        
+        guard let selectedPayment = selectedPayment else {
+            paymentView.shake()
+            scroller.setContentOffset(paymentView.frame.origin, animated: true)
             return
         }
         
         if selectedReceiveOption == 0{
             guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first) else {
-                showToast("Please add address".localized)
+                addressStack.shake()
+                scroller.setContentOffset(addressStack.frame.origin, animated: true)
                 return
             }
             if let deliveryRegions = branch?.deliveryRegions{
-                let path = GMSMutablePath()
+                var polygonCoords: [CLLocationCoordinate2D] = []
                 deliveryRegions.forEach { region in
                     region.coordinates.forEach { coord in
-                        path.add(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
+                        polygonCoords.append(CLLocationCoordinate2DMake(Double(coord.split(separator: ",")[0])!, Double(coord.split(separator: ",")[1])!))
                     }
                 }
                 
-                let bounds = GMSCoordinateBounds(path: path)
-                guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!), bounds.contains(CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)) else{
-                    
+                let polygon = MKPolygon(coordinates: polygonCoords, count: polygonCoords.count)
+                let polygonRenderer = MKPolygonRenderer(polygon: polygon)
+                
+                guard let selectedAddress = (self.addresses?.filter({ return $0.selected == 1 }).first!) else { return }
+                let coordinate = CLLocationCoordinate2D(latitude: Double(selectedAddress.coordinates!.split(separator: ",")[0])!, longitude: Double(selectedAddress.coordinates!.split(separator: ",")[1])!)
+                let mapPoint: MKMapPoint = MKMapPoint(coordinate)
+                let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
+                
+                if !polygonRenderer.path.contains(polygonViewPoint) {
+                    print("Your location was inside your polygon.")
                     let alert = UIAlertController(title: "", message: "Your address is out of vendor delivery area bounds".localized, preferredStyle: .alert)
                     let addAction = UIAlertAction(title: "Add New Address".localized, style: .default) { _ in
-                        Router.toAddAddress(self, path)
+                        Router.toAddAddress(self, MKPolyline(coordinates: polygonCoords, count: polygonCoords.count), polygon)
                     }
                     let cencel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
                     alert.addAction(addAction)
                     alert.addAction(cencel)
                     self.present(alert, animated: true, completion: nil)
                     return
-                    
                 }
+                
             }
         }
         
@@ -473,7 +502,7 @@ class CheckoutVC: UIViewController {
                           branchID: branch!.id,
                           lineItems: lineItems)
         
-        self.presenter?.placeOrder(order)
+       // self.presenter?.placeOrder(order)
         
     }
     

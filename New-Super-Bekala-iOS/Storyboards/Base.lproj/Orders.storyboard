@@ -172,7 +172,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Shekkoooo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FP7-0e-ak3">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Shekkoooo" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FP7-0e-ak3">
                                                                 <rect key="frame" x="0.0" y="33" width="384" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="gRP-B5-9rl"/>
@@ -207,7 +207,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="01282866383" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="88g-GP-jUG">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="01282866383" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="88g-GP-jUG">
                                                                 <rect key="frame" x="0.0" y="33" width="384" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="oXB-4c-77c"/>
@@ -1103,7 +1103,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Buttons-Red"/>
+                                                        <color key="backgroundColor" name="Main"/>
                                                         <constraints>
                                                             <constraint firstItem="V8v-zb-SPd" firstAttribute="centerX" secondItem="Wtm-x7-C7X" secondAttribute="centerX" id="0n4-rg-Dgy"/>
                                                             <constraint firstAttribute="bottom" secondItem="8xa-8g-0Fd" secondAttribute="bottom" id="1mY-OK-oVb"/>
@@ -1251,13 +1251,16 @@
                         <outlet property="creditStack" destination="NlZ-ii-bkw" id="3oJ-q2-pBe"/>
                         <outlet property="deliveryBtn" destination="8cX-R4-DqC" id="wSs-Pc-EKE"/>
                         <outlet property="expandAddressImg" destination="mIY-pN-uLQ" id="UNy-wu-SeF"/>
+                        <outlet property="nameStack" destination="iyf-Ti-lG6" id="hWW-CV-rjt"/>
                         <outlet property="notesHeight" destination="16d-tk-3Ud" id="XIU-lm-5oJ"/>
                         <outlet property="notesTV" destination="TN1-Zo-O1K" id="z8y-st-gLz"/>
                         <outlet property="notesView" destination="Vgw-qH-BNH" id="A4h-x5-xey"/>
                         <outlet property="paymentContainerView" destination="T02-Gr-H1m" id="BkD-dv-zwa"/>
                         <outlet property="paymentOptionView" destination="vIS-ms-eZo" id="afw-DU-6kW"/>
+                        <outlet property="paymentView" destination="Nhg-J0-OAY" id="tSe-KD-I4m"/>
                         <outlet property="paymentViewHeight" destination="dSH-7c-4or" id="TeY-aa-wzS"/>
                         <outlet property="phoneNumber" destination="88g-GP-jUG" id="KBY-fq-K9j"/>
+                        <outlet property="phoneStack" destination="pFq-Mr-obm" id="l5G-Eq-I2R"/>
                         <outlet property="promoView" destination="0Sb-Fa-NaM" id="1t0-0E-meM"/>
                         <outlet property="promoViewContainer" destination="aoi-Y2-IMA" id="1ZQ-Xa-MOl"/>
                         <outlet property="promoViewHeight" destination="4GJ-n6-YHr" id="bI1-TB-5IK"/>
@@ -1265,7 +1268,9 @@
                         <outlet property="receiveFromShopBtn" destination="jaK-Hg-BCo" id="Z3q-3a-wCk"/>
                         <outlet property="receiveFromShopStack" destination="YtH-e2-p4g" id="xK0-Sy-V8U"/>
                         <outlet property="receiveOptionView" destination="K3j-WY-Qte" id="8DF-FY-dRd"/>
+                        <outlet property="receiveView" destination="MV2-XI-fk5" id="JvS-wB-VYb"/>
                         <outlet property="receiveViewHeight" destination="6vI-Ic-M2q" id="mOb-ou-uyJ"/>
+                        <outlet property="scroller" destination="zwc-Rb-LkR" id="Wkn-FA-xfT"/>
                         <outlet property="selectedAddressLbl" destination="AaY-W4-fJR" id="DgZ-oB-PZ5"/>
                         <outlet property="selectedAddressTF" destination="unc-Xr-2qz" id="fBX-9f-qd3"/>
                         <outlet property="shippingCostActivity" destination="Uqe-Cd-c5A" id="KyM-74-xvn"/>
@@ -1944,8 +1949,8 @@
                                                         <rect key="frame" x="0.0" y="291" width="309" height="55"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bS-vG-cnd">
-                                                                <rect key="frame" x="92.5" y="15.5" width="124.5" height="24.5"/>
-                                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
+                                                                <rect key="frame" x="95" y="16" width="119" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -2212,22 +2217,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter card details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWV-hL-EkI">
-                                <rect key="frame" x="15" y="59" width="364" height="29.5"/>
+                                <rect key="frame" x="15" y="59" width="364" height="30"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eE5-hP-i9h">
-                                <rect key="frame" x="15" y="103.5" width="364" height="286"/>
+                                <rect key="frame" x="15" y="104" width="364" height="287.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kTz-LF-6jN">
-                                        <rect key="frame" x="0.0" y="0.0" width="364" height="206"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="207.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ffB-bI-r2s">
-                                                <rect key="frame" x="0.0" y="0.0" width="364" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="35.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sherif mohamed elsayed" placeholder="Card holder name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lpb-cK-kak">
-                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sherif mohamed elsayed" placeholder="Card holder name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lpb-cK-kak">
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
@@ -2235,7 +2240,7 @@
                                                         </connections>
                                                     </textField>
                                                     <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-UJ-iVa">
-                                                        <rect key="frame" x="0.0" y="34" width="364" height="1"/>
+                                                        <rect key="frame" x="0.0" y="34.5" width="364" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="Q2I-cx-SNC"/>
@@ -2248,10 +2253,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="POz-ol-jKc">
-                                                <rect key="frame" x="0.0" y="55" width="364" height="35"/>
+                                                <rect key="frame" x="0.0" y="55.5" width="364" height="35.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ep6-nC-szb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card number" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ep6-nC-szb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
@@ -2260,7 +2265,7 @@
                                                         </connections>
                                                     </textField>
                                                     <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFP-BE-12s">
-                                                        <rect key="frame" x="0.0" y="34" width="364" height="1"/>
+                                                        <rect key="frame" x="0.0" y="34.5" width="364" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="ZHa-qZ-0ev"/>
@@ -2273,12 +2278,12 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="DIl-ib-N7x">
-                                                <rect key="frame" x="0.0" y="110" width="364" height="41"/>
+                                                <rect key="frame" x="0.0" y="111" width="364" height="41"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u62-9t-IID">
                                                         <rect key="frame" x="0.0" y="0.0" width="172" height="41"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expiry date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ksx-ER-G2H">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expiry date" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ksx-ER-G2H">
                                                                 <rect key="frame" x="0.0" y="0.0" width="172" height="30"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -2308,7 +2313,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NLo-Iy-Ltx">
                                                                 <rect key="frame" x="0.0" y="0.0" width="172" height="30"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Security code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dma-BI-5tE">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Security code" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dma-BI-5tE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
                                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -2347,10 +2352,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jey-66-o84">
-                                                <rect key="frame" x="0.0" y="171" width="364" height="35"/>
+                                                <rect key="frame" x="0.0" y="172" width="364" height="35.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ADj-77-LkZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="amount" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ADj-77-LkZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="24.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
@@ -2358,7 +2363,7 @@
                                                         </connections>
                                                     </textField>
                                                     <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXp-Uz-nrW">
-                                                        <rect key="frame" x="0.0" y="34" width="364" height="1"/>
+                                                        <rect key="frame" x="0.0" y="34.5" width="364" height="1"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="bv1-mh-WoW"/>
@@ -2373,18 +2378,18 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-kS-b8C" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="236" width="364" height="50"/>
+                                        <rect key="frame" x="0.0" y="237.5" width="364" height="50"/>
                                         <color key="backgroundColor" name="Main"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ykZ-S9-D0L"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Cairo-SemiBold" family="Cairo" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="19"/>
                                         <state key="normal" title="Pay">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
+                                                <real key="value" value="7"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -2572,7 +2577,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2726,7 +2731,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2839,7 +2844,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2984,7 +2989,7 @@
             <size key="intrinsicContentSize" width="42" height="26"/>
         </designable>
         <designable name="9wq-kS-b8C">
-            <size key="intrinsicContentSize" width="31" height="33"/>
+            <size key="intrinsicContentSize" width="32" height="35"/>
         </designable>
         <designable name="AQR-Is-u1R">
             <size key="intrinsicContentSize" width="89" height="30"/>
@@ -3003,9 +3008,6 @@
         </designable>
         <designable name="eBm-0h-QJv">
             <size key="intrinsicContentSize" width="56" height="51"/>
-        </designable>
-        <designable name="fHF-9M-2Of">
-            <size key="intrinsicContentSize" width="108" height="20"/>
         </designable>
         <designable name="lW1-os-WhT">
             <size key="intrinsicContentSize" width="52" height="30"/>

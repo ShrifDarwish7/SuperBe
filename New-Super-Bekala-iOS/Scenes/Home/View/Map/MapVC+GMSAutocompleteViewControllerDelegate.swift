@@ -17,8 +17,8 @@ extension MapVC: GMSAutocompleteViewControllerDelegate{
         Shared.userLat = place.coordinate.latitude
         Shared.userLng = place.coordinate.longitude
         
-        camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude , longitude: place.coordinate.longitude , zoom: 19)
-        mapView.camera = camera!
+       // camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude , longitude: place.coordinate.longitude , zoom: 19)
+     //   mapView.camera = camera!
         addressContainer.isHidden = false
         dismissHintZoom()
         locationLbl.text = place.formattedAddress ?? ""

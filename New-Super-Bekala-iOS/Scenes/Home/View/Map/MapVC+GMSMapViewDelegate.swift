@@ -31,17 +31,17 @@ extension MapVC: GMSMapViewDelegate{
         Shared.userLat = coordinates.latitude
         Shared.userLng = coordinates.longitude
         
-        if let path = path{
-            let bounds = GMSCoordinateBounds(path: path)
-            guard bounds.contains(CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)) else{
-                markerImageView.alpha = 0.5
-                hintZoom.text = "Sorry, this vendor doesn`t deliver to this area".localized
-                showHintZoom()
-                return
-            }
-        }
+//        if let path = path{
+//            let bounds = GMSCoordinateBounds(path: path)
+//            guard bounds.contains(CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)) else{
+//                markerImageView.alpha = 0.5
+//                hintZoom.text = "Sorry, this vendor doesn`t deliver to this area".localized
+//                showHintZoom()
+//                return
+//            }
+//        }
         
-        hintZoom.text = "Please zoom in more to find your exact delivery location".localized
+        
         
         if mapView.camera.zoom <= 15{
             showHintZoom()

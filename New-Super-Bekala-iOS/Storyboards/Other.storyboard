@@ -169,7 +169,7 @@ experience with us</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZ0-OK-fxY" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                         <rect key="frame" x="15" y="113.5" width="384" height="60"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pzr-89-6FU" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzr-89-6FU" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="82" y="10" width="220" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1243,32 +1243,17 @@ experience with us</string>
         <designable name="5kY-qQ-nnR">
             <size key="intrinsicContentSize" width="52" height="52"/>
         </designable>
-        <designable name="6zM-Z9-3Aj">
-            <size key="intrinsicContentSize" width="125" height="25"/>
-        </designable>
         <designable name="Gft-Ex-wCc">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="Mh8-GB-Et0">
             <size key="intrinsicContentSize" width="42" height="36"/>
         </designable>
-        <designable name="Pzr-89-6FU">
-            <size key="intrinsicContentSize" width="220" height="40"/>
-        </designable>
         <designable name="SW7-kE-oku">
             <size key="intrinsicContentSize" width="42" height="36"/>
         </designable>
-        <designable name="X0g-xC-o4j">
-            <size key="intrinsicContentSize" width="125" height="25"/>
-        </designable>
-        <designable name="Ykh-uE-nh5">
-            <size key="intrinsicContentSize" width="125" height="25"/>
-        </designable>
         <designable name="lX6-vK-WDF">
             <size key="intrinsicContentSize" width="52" height="52"/>
-        </designable>
-        <designable name="nmi-qs-9ja">
-            <size key="intrinsicContentSize" width="125" height="25"/>
         </designable>
     </designables>
     <resources>
@@ -1291,10 +1276,10 @@ experience with us</string>
             <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="LightGray">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Main">
-            <color red="0.68235294117647061" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.68199998140335083" green="0.11800000071525574" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="White2">
             <color red="0.98400002717971802" green="0.98400002717971802" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

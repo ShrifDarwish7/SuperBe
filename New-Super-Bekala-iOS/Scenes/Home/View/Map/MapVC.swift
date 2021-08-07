@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import GoogleMaps
 import GooglePlaces
 import Closures
+import MapKit
 
 class MapVC: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressContainer: ViewCorners!
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var hintZoomView: UIView!
@@ -33,43 +32,53 @@ class MapVC: UIViewController {
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var notesTF: UITextField!
     @IBOutlet weak var hintZoom: UILabel!
+    @IBOutlet weak var mapKitView: MKMapView!
+    @IBOutlet weak var scroller: UIScrollView!
     
     let locationManager = CLLocationManager()
-    var camera: GMSCameraPosition?
-    var autocompleteVC: GMSAutocompleteViewController?
     var presenter: MainPresenter?
-    var path: GMSPath?
+    var path: MKPolyline?
+    var polygone: MKPolygon?
+    var inRegion = true
+    var previousLocation: CLLocation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapKitView.delegate = self
+        
+        mapKitView.layoutMargins.bottom = 60
+        
         addressTitleStack.isHidden = Shared.mapState == .addAddress ? false : true
         
-        mapView.delegate = self
-        requestLocationPermission()
         hintZoomView.transform = CGAffineTransform(scaleX: 0, y: 0)
         showHintZoom()
         
         presenter = MainPresenter(self)
         
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedAlways , .authorizedWhenInUse:
-            print("")
-        default:
-            Shared.userLat = 30.0444
-            Shared.userLng = 31.2357
-            camera = GMSCameraPosition.camera(withLatitude: Shared.userLat ?? 0 , longitude: Shared.userLng ?? 0, zoom: 10)
-            mapView.camera = camera!
-        }
-        
         if let path = path{
-            let polyline = GMSPolyline(path: path)
-            polyline.strokeColor = UIColor(named: "Main")!
-            polyline.strokeWidth = 3
-            polyline.geodesic = true
-            polyline.map = self.mapView
+            mapKitView.addOverlay(path, level: MKOverlayLevel.aboveRoads)
         }
         
+        switch CLLocationManager.authorizationStatus() {
+        case .denied, .notDetermined, .restricted:
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357), latitudinalMeters: 200, longitudinalMeters: 200)
+            mapKitView.setRegion(region, animated: true)
+        default:
+            self.getUserLocation()
+        }
+        
+        previousLocation = self.getCenterLocation(for: mapKitView)
+        
+    }
+    
+    func getUserLocation(){
+        LocationManager.shared.getUserLocation { [weak self] location in
+            guard let self = self else { return }
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 200, longitudinalMeters: 200)
+            self.mapKitView.setRegion(region, animated: true)
+        }
+
     }
     
     @IBAction func confirmAction(_ sender: Any) {
@@ -81,6 +90,7 @@ class MapVC: UIViewController {
             Shared.userSelectLocation = true
             Router.toHome(self)
         case .addAddress:
+            guard self.inRegion else { return }
             UIView.animate(withDuration: 0.25) {
                 self.addAddressBlockView.isHidden = false
                 self.detectBtn.isHidden = true
@@ -94,6 +104,7 @@ class MapVC: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         guard !self.addressTitleTF.text!.isEmpty, !self.cityTF.text!.isEmpty, !self.districtTF.text!.isEmpty, !self.streetTF.text!.isEmpty, !self.buildingTF.text!.isEmpty, !self.floorTF.text!.isEmpty, !self.flatTF.text!.isEmpty else {
+            self.addressTitleTF.shake()
             showToast("Please fill out all required fields")
             return
         }
@@ -114,13 +125,13 @@ class MapVC: UIViewController {
     }
     
     @IBAction func searchAction(_ sender: Any) {
-        self.autocompleteVC = GMSAutocompleteViewController()
-        self.autocompleteVC!.delegate = self
-        self.autocompleteVC?.modalPresentationStyle = .formSheet
-        self.autocompleteVC?.tintColor = UIColor.white
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        self.present(self.autocompleteVC!, animated: true, completion: nil)
+//        self.autocompleteVC = GMSAutocompleteViewController()
+//        self.autocompleteVC!.delegate = self
+//        self.autocompleteVC?.modalPresentationStyle = .formSheet
+//        self.autocompleteVC?.tintColor = UIColor.white
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        self.present(self.autocompleteVC!, animated: true, completion: nil)
     }
     
     @IBAction func refine(_ sender: Any) {
@@ -142,7 +153,7 @@ class MapVC: UIViewController {
     @IBAction func getMyLocation(_ sender: Any) {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedAlways , .authorizedWhenInUse:
-            requestLocationPermission()
+            self.getUserLocation()
         default:
             askLocationView.isHidden = false
         }
@@ -164,9 +175,71 @@ class MapVC: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    func getCenterLocation(for mapView: MKMapView) -> CLLocation{
+        let lat = mapView.centerCoordinate.latitude
+        let lng = mapView.centerCoordinate.longitude
+        return CLLocation(latitude: lat, longitude: lng)
+    }
+    
 }
 
 enum MapState{
     case addAddress
     case fetchLocation
+}
+
+extension MapVC: MKMapViewDelegate{
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = self.getCenterLocation(for: mapView)
+                
+        let zoomWidth = mapView.visibleMapRect.size.width
+            let zoomFactor = Int(log2(zoomWidth)) - 9
+        
+        if zoomFactor > 1{
+            self.showHintZoom()
+        }else{
+            self.dismissHintZoom()
+            
+            if let polygon = self.polygone{
+                let polygonRenderer = MKPolygonRenderer(polygon: polygon)
+                let mapPoint: MKMapPoint = MKMapPoint(CLLocationCoordinate2D(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude))
+                let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
+                if !polygonRenderer.path.contains(polygonViewPoint){
+                    markerImageView.alpha = 0.5
+                    self.inRegion = false
+                    return
+                }else{
+                    self.inRegion = true
+                    markerImageView.alpha = 1
+                }
+            }
+            
+            guard let previousLocation = self.previousLocation else { return }
+            guard center.distance(from: previousLocation) > 100 else { return }
+            self.previousLocation = center
+            
+            CLGeocoder().reverseGeocodeLocation(center) { [weak self] placemarks, error in
+                guard let self = self else { return }
+                if let error = error{
+                    print(error)
+                    return
+                }
+                guard let placemark = placemarks?.first else { return }
+                DispatchQueue.main.async {
+                    self.locationLbl.text = "\(placemark.administrativeArea ?? "") \(placemark.subAdministrativeArea ?? "") \(placemark.name ?? "")"
+                }
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor(named: "Main")
+            renderer.lineWidth = 3
+            return renderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
 }
