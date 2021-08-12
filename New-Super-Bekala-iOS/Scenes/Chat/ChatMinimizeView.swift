@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class ChatMinimizeView: UIView {
+class ChatMinimizeView: UIView, MainViewDelegate {
     
     @IBOutlet weak var chatMinimize: UIView!
     @IBOutlet weak var closeBtn: UIButton!
-    @IBOutlet weak var iconView: UIView!
     @IBOutlet weak var chatLbl: UILabel!
+    @IBOutlet weak var adminAvatar: CircluarImage!
     
     let nibName = "ChatMinimizeView"
     var contentView:UIView?
@@ -39,33 +39,18 @@ class ChatMinimizeView: UIView {
         
         self.addTapGesture { (_) in
             Router.toChat(self.parentContainerViewController()!)
-//            if !UserDefaults.init().bool(forKey: "isLogged"){
-//                Alert.show(self.parentContainerViewController()!, message: "Firstly ... you must login")
-//            }else{
-//
-//                switch Shared.chatType {
-//                case .admin:
-//                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-//                    let vc = storyboard.instantiateViewController(withIdentifier: "ContactUsVC") as! ContactUsViewController
-//                    vc.chatType = .admin
-//                    self.parentContainerViewController()?.navigationController?.pushViewController(vc, animated: true)
-//                default:
-//                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-//                    let vc = storyboard.instantiateViewController(withIdentifier: "ContactUsVC") as! ContactUsViewController
-//                    vc.receivedOrderId = Shared.chatOrderId!
-//                    vc.chatType = .delivery
-//                    self.parentContainerViewController()?.navigationController?.pushViewController(vc, animated: true)
-//                }
-//
-//
-//            }
         }
         
-        closeBtn.layer.cornerRadius = closeBtn.frame.height/2
+        chatLbl.text = Shared.currentConversationAdminName
+        adminAvatar.kf.setImage(with: URL(string: Shared.currentConversationAdminAvatar ?? ""), placeholder: UIImage(named: "user"))
+        
         chatMinimize.layer.cornerRadius = 10
-        iconView.layer.cornerRadius = iconView.frame.height/2
-        self.layer.cornerRadius = 10
-        chatLbl.text = "Chat".localized
+        layer.cornerRadius = 10
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 15
+        layer.shadowOffset = CGSize.zero
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.masksToBounds = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleIfChatting), name: NSNotification.Name("is_chatting"), object: nil)
         
@@ -94,16 +79,25 @@ class ChatMinimizeView: UIView {
     
     @IBAction func close(_ sender: Any) {
         let alert = UIAlertController(title: "", message: "If you exit the chat we will clear the current session messages, are you sure you want to exit ?".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue".localized, style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Exit".localized, style: .default, handler: { (_) in
-            Shared.isChatting = false
-            self.isHidden = true
-            NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
+        alert.addAction(UIAlertAction(title: "Continue".localized, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Exit".localized, style: .cancel, handler: { (_) in
+            let presenter = MainPresenter(self)
+            presenter.lockConversation()
         }))
         self.parentContainerViewController()!.present(alert, animated: true, completion: nil)
     }
     
+    func didCompleteLockConversation(_ error: String?) {
+        Shared.isChatting = false
+        self.isHidden = true
+        NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
+    }
+    
     @objc func handleIfChatting(){
+        
+        chatLbl.text = Shared.currentConversationAdminName
+        adminAvatar.kf.setImage(with: URL(string: Shared.currentConversationAdminAvatar ?? ""), placeholder: UIImage(named: "user"))
+        
         if Shared.isChatting{
             self.isHidden = false
         }else{

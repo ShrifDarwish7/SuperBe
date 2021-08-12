@@ -94,6 +94,7 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
                 subregionEn: "",
                 subregionAr: ""
             )
+            Shared.deliveringToTitle = "lang".localized == "en" ? Shared.selectedArea.regionsNameEn : Shared.selectedArea.regionNameAr
             Router.toHome(self)
         }
         

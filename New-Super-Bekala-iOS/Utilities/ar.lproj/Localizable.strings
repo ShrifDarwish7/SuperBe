@@ -37,3 +37,13 @@
 "Continue" = "متابعة";
 "EGP" = "جنيه";
 "Please zoom in more to find your exact location" = "الرجاء التكبير أكثر للعثور على موقعك الدقيق";
+"Delivering to" = "التوصيل الي";
+"Cash" = "كاش";
+"Card on delivery" = "بطاقة عند الاستلام";
+"Online payment" = "دفع إلكتروني";
+"Wallet" = "محفظة";
+"Cash & Wallet" = "كاش مع محفظة";
+"We`ll be with you as soon as an agent is available, please don`t leave" = "سنكون معك بمجرد توفر مُمثل لنا ، من فضلك لا تغادر";
+"Agent ended the session" = "أنهى المُمثل المحادثة";
+"TAP TO REOPEN" = "اضغط لإعادة الفتح";
+"Please first close your current conversation session to start new one" = "يرجى أولاً إغلاق المحادثة الحالية لبدء محادثة جديدة";

@@ -42,6 +42,7 @@ extension ChangeLocationVC: UITableViewDelegate, UITableViewDataSource{
         Shared.isCoords = true
         Shared.isRegion = false
         Shared.selectedCoords = self.addresses![indexPath.row].coordinates!
+        Shared.deliveringToTitle = self.addresses![indexPath.row].title
         self.presenter?.updateAddress(self.addresses![indexPath.row].id, ["selected": "1"])
     }
 }

@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
 import SVProgressHUD
 import SwiftyJSON
 
 class ShareLocationVC: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var addressesTableView: UITableView!
     @IBOutlet weak var addressesCnst: NSLayoutConstraint!
@@ -75,28 +75,31 @@ class ShareLocationVC: UIViewController {
     }
     
     func updateMapView(){
-        mapView.clear()
-        self.dismissAdddressesAlert()
-        guard let pickupLocation = pickupLocation else { return }
-        let pickupMarker = GMSMarker(position:
-                                        CLLocationCoordinate2D(
-                                            latitude: Double(pickupLocation.split(separator: ",").first!)!,
-                                            longitude: Double(pickupLocation.split(separator: ",")[1])!))
-        pickupMarker.icon = Images.imageWithImage(image: UIImage(named: "delivery-bike")!, scaledToSize: CGSize(width: 30, height: 30))
-        let pickupCamera = GMSCameraPosition(latitude: Double(pickupLocation.split(separator: ",").first!)!, longitude: Double(pickupLocation.split(separator: ",")[1])!, zoom: 15)
-        self.mapView.camera = pickupCamera
-        pickupMarker.map = mapView
-        
-        guard let dropOffLocation = dropOffLocation else { return }
-        let dropOffMarker = GMSMarker(position:
-                                        CLLocationCoordinate2D(
-                                            latitude: Double(dropOffLocation.split(separator: ",").first!)!,
-                                            longitude: Double(dropOffLocation.split(separator: ",")[1])!))
-        dropOffMarker.icon = Images.imageWithImage(image: UIImage(named: "flag-2")!, scaledToSize: CGSize(width: 30, height: 30))
-        
-        let dropOffCamera = GMSCameraPosition(latitude: Double(dropOffLocation.split(separator: ",").first!)!, longitude: Double(dropOffLocation.split(separator: ",")[1])!, zoom: 15)
-        self.mapView.camera = dropOffCamera
-        dropOffMarker.map = mapView
+//        mapView.clear()
+//        self.dismissAdddressesAlert()
+//        guard let pickupLocation = pickupLocation else { return }
+//
+//
+//
+//        let pickupMarker = GMSMarker(position:
+//                                        CLLocationCoordinate2D(
+//                                            latitude: Double(pickupLocation.split(separator: ",").first!)!,
+//                                            longitude: Double(pickupLocation.split(separator: ",")[1])!))
+//        pickupMarker.icon = Images.imageWithImage(image: UIImage(named: "delivery-bike")!, scaledToSize: CGSize(width: 30, height: 30))
+//        let pickupCamera = GMSCameraPosition(latitude: Double(pickupLocation.split(separator: ",").first!)!, longitude: Double(pickupLocation.split(separator: ",")[1])!, zoom: 15)
+//        self.mapView.camera = pickupCamera
+//        pickupMarker.map = mapView
+//        
+//        guard let dropOffLocation = dropOffLocation else { return }
+//        let dropOffMarker = GMSMarker(position:
+//                                        CLLocationCoordinate2D(
+//                                            latitude: Double(dropOffLocation.split(separator: ",").first!)!,
+//                                            longitude: Double(dropOffLocation.split(separator: ",")[1])!))
+//        dropOffMarker.icon = Images.imageWithImage(image: UIImage(named: "flag-2")!, scaledToSize: CGSize(width: 30, height: 30))
+//
+//        let dropOffCamera = GMSCameraPosition(latitude: Double(dropOffLocation.split(separator: ",").first!)!, longitude: Double(dropOffLocation.split(separator: ",")[1])!, zoom: 15)
+//        self.mapView.camera = dropOffCamera
+//        dropOffMarker.map = mapView
         
         continueBtnView.isHidden = false
         

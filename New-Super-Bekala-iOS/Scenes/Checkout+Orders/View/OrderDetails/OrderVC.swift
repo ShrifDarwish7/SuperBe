@@ -48,6 +48,9 @@ class OrderVC: UIViewController {
     @IBOutlet weak var taxStack: UIStackView!
     @IBOutlet weak var walletStack: UIStackView!
     @IBOutlet weak var statusBtn: UIButton!
+    @IBOutlet weak var captainView: ViewCorners!
+    @IBOutlet weak var captainAvatar: CircluarImage!
+    @IBOutlet weak var captainName: UILabel!
     
     var order: LastOrder?
     var presenter: MainPresenter?
@@ -70,7 +73,7 @@ class OrderVC: UIViewController {
             address.text = "Receive from vendor".localized
         }
         
-        deliveryStack.isHidden = order?.shippingTotal == 0 ? true : false
+        //deliveryStack.isHidden = order?.shippingTotal == 0 ? true : false
         discountStack.isHidden = order?.discountTotal == 0 ? true : false
         taxStack.isHidden = order?.taxesTotal == 0 ? true : false
         walletStack.isHidden = order?.paidFromWallet == 0 ? true : false
@@ -122,6 +125,15 @@ class OrderVC: UIViewController {
             paymentMethod.text = "Cash & Wallet".localized
         default : break
         }
+                
+        if let captain = order?.captain,
+           let captainUser = captain.user{
+            captainView.isHidden = false
+            captainAvatar.kf.setImage(with: URL(string: Shared.storageBase + captainUser.avatar!))
+            captainName.text = captainUser.name
+        }else{
+            captainView.isHidden = true
+        }
         
         switch order?.status {
         case "processing":
@@ -167,6 +179,11 @@ class OrderVC: UIViewController {
         productsTableViewHeight.constant = productsTableView.contentSize.height
         self.view.layoutIfNeeded()
        // hideStatusView()
+    }
+    
+    @IBAction func callCaptain(_ sender: Any) {
+        guard let phone = order?.captain?.user?.phone else { return }
+        Shared.call(phoneNumber: phone)
     }
     
     @IBAction func rateAction(_ sender: Any) {

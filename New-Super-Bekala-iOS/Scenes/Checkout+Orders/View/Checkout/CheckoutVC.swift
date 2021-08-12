@@ -502,7 +502,7 @@ class CheckoutVC: UIViewController {
                           branchID: branch!.id,
                           lineItems: lineItems)
         
-       // self.presenter?.placeOrder(order)
+        self.presenter?.placeOrder(order)
         
     }
     

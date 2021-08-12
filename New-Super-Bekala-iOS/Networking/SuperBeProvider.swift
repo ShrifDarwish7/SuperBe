@@ -43,6 +43,8 @@ enum SuperBe{
     case startConversation
     case sendMessage(_ id: Int,_ prms: [String: String])
     case getConversation(_ id: Int)
+    case reopenConversation(_ id: Int)
+    case lockConversation(_ id: Int)
 }
 
 extension SuperBe: TargetType{
@@ -106,6 +108,10 @@ extension SuperBe: TargetType{
             return "chats/conversations/\(id)/messages"
         case .getConversation(let id):
             return "chats/conversations/\(id)"
+        case .reopenConversation(let id):
+            return "chats/conversations/\(id)/reopen"
+        case .lockConversation(let id):
+            return "chats/conversations/\(id)/lock"
         }
     }
     
@@ -120,7 +126,9 @@ extension SuperBe: TargetType{
              .rate(_),
              .validateCoupons(_),
              .startConversation,
-             .sendMessage(_, _):
+             .sendMessage(_, _),
+             .reopenConversation(_),
+             .lockConversation(_):
             return .post
         case .updateAddress(_, _),
              .updateOrder(_, _):

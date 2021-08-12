@@ -11,6 +11,7 @@ import PusherSwift
 import Lottie
 import MaterialComponents
 import SVProgressHUD
+import SwiftyJSON
 
 class ChatVC: UIViewController, UITextViewDelegate {
 
@@ -22,6 +23,10 @@ class ChatVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var messageBottomCnst: NSLayoutConstraint!
     @IBOutlet weak var messageTV: UITextView!
     @IBOutlet weak var sendBtnWidthCnst: NSLayoutConstraint!
+    @IBOutlet weak var minimizeBtn: UIButton!
+    @IBOutlet weak var lockView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var reopenBtn: LocalizedBtn!
     
     var animationView: AnimationView?
     var conversationId: Int?
@@ -34,15 +39,49 @@ class ChatVC: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        let options = PusherClientOptions(
+            authMethod: AuthMethod.authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
+            host: .cluster("eu")
+        )
+            
+        AppDelegate.pusher = Pusher(key: "3291250172ef81e382a7", options: options)
+        AppDelegate.pusher.connection.delegate = self
+        AppDelegate.pusher.delegate = self
+        AppDelegate.pusher.connect()
+        
+        AppDelegate.channel = AppDelegate.pusher.subscribe("private-conversations.\(Shared.currentConversationId ?? 0)")
+        
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\JoinConversation") { (data: Any?) -> Void in
+            if let data = try? JSON(data!)["conversation"].rawData(),
+               let conversation = data.getDecodedObject(from: Conversation.self){
+                self.didCompleteWithConversation(conversation, nil)
+                self.waitingAgentView.isHidden = true
+                self.animationView?.stop()
+            }
+            AppDelegate.channel.unbindAll(forEventName: "App\\Events\\JoinConversation")
+        }
+        
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\MessageSent") { (data: Any?) -> Void in
+            guard JSON(data!)["message"]["sender_id"].intValue != APIServices.shared.user?.id else { return }
+            self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            self.appendAndUpdateTable(msgModel: Message(
+                                        body: JSON(data!)["message"]["body"].stringValue,
+                                        senderID: 0, createdAt: self.dateFormatter.string(from: Date())))
+        }
+        
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\LockConversation") { (data: Any?) -> Void in
+            if let data = try? JSON(data!)["conversation"].rawData(),
+               let conversation = data.getDecodedObject(from: Conversation.self){
+                self.activityIndicator.stopAnimating()
+                self.reopenBtn.isHidden = false
+                self.didCompleteWithConversation(conversation, nil)
+            }
+        }
         
         presenter = MainPresenter(self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-                
-        let options = PusherClientOptions(
-            authMethod: AuthMethod.authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
-            autoReconnect: true, host: .cluster("eu")
-        )
         
         chatTableView.addTapGesture { (_) in
             self.view.endEditing(true)
@@ -51,22 +90,17 @@ class ChatVC: UIViewController, UITextViewDelegate {
         sendBtnWidthCnst.constant = 0
         view.layoutIfNeeded()
         
-        AppDelegate.pusher = Pusher(key: "3291250172ef81e382a7", options: options)
-        AppDelegate.pusher.connection.delegate = self
-        AppDelegate.pusher.delegate = self
-        AppDelegate.pusher.connect()
-        
         if Shared.isChatting{
             waitingAgentView.isHidden = true
             SVProgressHUD.show()
             presenter?.getConversation(Shared.currentConversationId!)
+            minimizeBtn.isHidden = false
         }else{
+            minimizeBtn.isHidden = true
             waitingAgentView.isHidden = false
             loadLottie()
-            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
-                self.agentDidJoinConversation()
-            }
-        }        
+        }
+        
         
     }
     
@@ -119,6 +153,13 @@ class ChatVC: UIViewController, UITextViewDelegate {
         }
     }
     
+    @IBAction func reopen(_ sender: Any) {
+        activityIndicator.startAnimating()
+        reopenBtn.isHidden = true
+        presenter?.reopenConversation()
+    }
+    
+    
     @IBAction func sendMessageAction(_ sender: Any) {
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -147,20 +188,11 @@ class ChatVC: UIViewController, UITextViewDelegate {
         self.messageTV.text = ""
     }
     
-    
-    func agentDidJoinConversation(){
-        waitingAgentView.isHidden = true
-        animationView?.stop()
-        presenter?.getConversation(Shared.currentConversationId!)
-    }
-    
     @IBAction func backAction(_ sender: Any) {
         let alert = UIAlertController(title: "", message: "If you exit the chat we will clear the current session messages, are you sure you want to exit ?".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue".localized, style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Exit".localized, style: .default, handler: { (_) in
-            Shared.isChatting = false
-            NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
-            self.dismiss(animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Continue".localized, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Exit".localized, style: .cancel, handler: { (_) in
+            self.presenter?.lockConversation()
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -170,44 +202,6 @@ class ChatVC: UIViewController, UITextViewDelegate {
         NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         self.dismiss(animated: false, completion: nil)
 
-    }
-}
-
-extension ChatVC: UITableViewDelegate, UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messages.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let messageDate = dateFormatter.date(from: self.messages[indexPath.row].createdAt!)
-        dateFormatter.dateFormat = "h:mm a"//"MMM d, h:mm a"
-        
-        if self.messages[indexPath.row].senderID == APIServices.shared.user?.id{
-            let cell = tableView.dequeueReusableCell(withIdentifier: SentTextMessageCell.identifier, for: indexPath) as! SentTextMessageCell
-            cell.message.text = self.messages[indexPath.row].body
-            cell.timeStamp.text = dateFormatter.string(from: messageDate!)
-            cell.userImage.kf.setImage(with: URL(string: Shared.storageBase + (userOne?.avatar ?? "")))
-            cell.messageStatusImage.isHidden = false
-            if self.messages[indexPath.row].delivered {
-                cell.messageStatusImage.image = UIImage(named: "message_sent")
-            }else{
-                cell.messageStatusImage.image = UIImage(named: "message_loading")
-            }
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReceivedTextMessageCell.identifier, for: indexPath) as! ReceivedTextMessageCell
-            cell.message.text = self.messages[indexPath.row].body
-            cell.timeStamp.text = dateFormatter.string(from: messageDate!)
-            cell.userImage.kf.setImage(with: URL(string: Shared.storageBase + (userTwo?.avatar ?? "")))
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }
 
@@ -232,13 +226,11 @@ extension ChatVC: PusherDelegate{
 
 class AuthRequestBuilder: AuthRequestBuilderProtocol {
     func requestFor(socketID: String, channelName: String) -> URLRequest? {
-        var request = URLRequest(url: URL(string: "https://khdamat.app/broadcasting/auth")!)
+        var request = URLRequest(url: URL(string: "https://dev4.superbekala.com/broadcasting/auth")!)
         request.httpMethod = "POST"
         request.httpBody = "socket_id=\(socketID)&channel_name=\(channelName)".data(using: String.Encoding.utf8)
         request.setValue("Bearer " + (APIServices.shared.user?.token ?? ""), forHTTPHeaderField: "Authorization")
-      //  request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        //request.setValue("*", forHTTPHeaderField: "Access-Control-Allow-Origin")
         return request
     }
 }
@@ -248,36 +240,3 @@ struct DebugConsoleMessage: Codable {
     let message: String
 }
 
-extension ChatVC: MainViewDelegate{
-    func didCompleteWithConversation(_ data: Conversation?, _ error: String?) {
-        SVProgressHUD.dismiss()
-        if let data = data{
-            userOne = data.userOne
-            userTwo = data.userTwo
-            if data.messages.isEmpty{
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let msgEn = "Hi, \(userOne?.name ?? ""). Thanks for contacting Super Be. This is \(userTwo?.name ?? ""), I hope you`re having a good day, How may I help you?"
-                let msgAr = "أهلا \(userOne?.name ?? "") ، " + " شكرا لتواصلك مع سوبر بي ، معاك " + (userTwo?.name ?? "") + " ، اقدر اساعدك ازاي؟"
-                messages.append(
-                    Message(body: "lang".localized == "en" ? msgEn : msgAr,
-                            senderID: 0,
-                            createdAt: dateFormatter.string(from: Date())))
-            }
-            data.messages.forEach { message in self.messages.append(message) }
-            messages = messages.reversed()
-            agentName.text = data.userTwo?.name
-            chatTableView.delegate = self
-            chatTableView.dataSource = self
-            chatTableView.reloadData()
-        }else{
-            showToast(error!)
-        }
-    }
-    
-    func didCompleteSendMessage(_ sent: Bool, _ id: Int) {
-        if sent{
-            messages[messages.firstIndex{ $0.incrementalId == id }!].delivered = true
-            chatTableView.reloadData()
-        }
-    }
-}

@@ -32,6 +32,7 @@ struct LastOrder: Codable {
     let coupons: [String]?
     let paidFromWallet: Double?
     let originCoords, destinationCoords, originAddress, destinationAddress: String?
+    let captain: Captain?
 
     enum CodingKeys: String, CodingKey {
         case id, status
@@ -50,7 +51,7 @@ struct LastOrder: Codable {
         case updatedAt = "updated_at"
         case branch, coupons
         case lineItems = "line_items"
-        case address, files
+        case address, files, captain
         case paidFromWallet = "paid_from_wallet"
         case originCoords = "origin_coordinates"
         case destinationCoords = "destination_coordinates"
@@ -97,4 +98,22 @@ struct LastOrderLineItem: Codable {
     }
 }
 
+struct Captain: Codable {
+    let id: Int?
+    let isWorking, isBusy: Int?
+    let vehicleType: String?
+    let captainSignature, captainSignatureTime: String?
+    let userID: Int?
+    let user: User?
 
+    enum CodingKeys: String, CodingKey {
+        case id
+        case isWorking = "is_working"
+        case isBusy = "is_busy"
+        case vehicleType = "vehicle_type"
+        case captainSignature = "captain_signature"
+        case captainSignatureTime = "captain_signature_time"
+        case userID = "user_id"
+        case user
+    }
+}

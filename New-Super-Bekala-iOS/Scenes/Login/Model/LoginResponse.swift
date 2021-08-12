@@ -32,5 +32,4 @@ struct User: Codable {
         case id, name, email, phone, token, birthdate, avatar, uid, gender
         case isBlocked = "is_blocked"
     }
-    //let orders, wallet, points, addresses: [String]?
 }

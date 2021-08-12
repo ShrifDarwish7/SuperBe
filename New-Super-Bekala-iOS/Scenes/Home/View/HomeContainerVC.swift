@@ -40,6 +40,7 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var locationSheetTopCnst: NSLayoutConstraint!
     @IBOutlet weak var addressesContainer: UIView!
     @IBOutlet weak var profileImage: CircluarImage!
+    @IBOutlet weak var deliveryLocationTitle: UILabel!
     
     var cartItems: [CartItem]?
     var selectedTab = Tabs.shooping
@@ -74,6 +75,7 @@ class HomeContainerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        deliveryLocationTitle.text = Shared.deliveringToTitle
         CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
             self.cartItems = items
             if let items = items,
@@ -86,6 +88,10 @@ class HomeContainerVC: UIViewController {
     }
     
     @IBAction func toChat(_ sender: Any) {
+        guard Shared.isChatting == false else {
+            showAlert(title: "", message: "Please first close your current conversation session to start new one".localized)
+            return
+        }
         let presenter = MainPresenter(self)
         presenter.startConversation()
     }
@@ -104,8 +110,8 @@ class HomeContainerVC: UIViewController {
         Router.toShareLocation(self)
     }
     
-    
     @objc func didChooseAddress(){
+        deliveryLocationTitle.text = Shared.deliveringToTitle
         self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
     }
     

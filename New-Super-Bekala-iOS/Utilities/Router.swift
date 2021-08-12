@@ -133,8 +133,9 @@ class Router {
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     
-    static func toSearch(_ sender: UIViewController){
+    static func toSearch(_ sender: UIViewController,_ branchId: Int? = nil){
         let vc = self.instantiate(appStoryboard: .home, identifier: "SearchVC") as! SearchVC
+        vc.branchId = branchId
         sender.navigationController?.pushViewController(vc, animated: true)
     }
     

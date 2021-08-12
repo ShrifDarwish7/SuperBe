@@ -23,7 +23,7 @@ struct Conversation: Codable {
     let orderID, deletedAt: String?
     let createdAt, updatedAt: String?
     let userOne, userTwo: User?
-    let messages: [Message]
+    let messages: [Message]?
 
     enum CodingKeys: String, CodingKey {
         case id, title, status

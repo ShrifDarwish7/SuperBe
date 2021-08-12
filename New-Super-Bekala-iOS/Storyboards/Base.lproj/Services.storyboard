@@ -534,7 +534,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aKI-an-ccf">
-                                <rect key="frame" x="15" y="59" width="124" height="35"/>
+                                <rect key="frame" x="15" y="59" width="129" height="35"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9OT-ao-aS0">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -560,7 +560,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO4-BS-jS2">
-                                        <rect key="frame" x="45" y="0.0" width="79" height="30"/>
+                                        <rect key="frame" x="45" y="0.0" width="84" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -693,7 +693,7 @@
                                                                 <rect key="frame" x="35.5" y="0.0" width="318.5" height="35.5"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="landmark / building / floor (optional)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LZV-2e-eUL">
-                                                                        <rect key="frame" x="10" y="7.5" width="298.5" height="21"/>
+                                                                        <rect key="frame" x="10" y="7.5" width="298.5" height="20.5"/>
                                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -822,7 +822,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lrB-yX-gYM">
-                                <rect key="frame" x="15" y="59" width="182.5" height="35"/>
+                                <rect key="frame" x="15" y="59" width="183.5" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-cM-GwJ">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -836,7 +836,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6c-hB-pMN">
-                                        <rect key="frame" x="45" y="0.0" width="137.5" height="35"/>
+                                        <rect key="frame" x="45" y="0.0" width="138.5" height="35"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="32"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -847,10 +847,10 @@
                                 <rect key="frame" x="10" y="109" width="394" height="738"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZy-fK-eho">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="1100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="1099.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mKs-jN-CaM">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="1100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="1099.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-kh-NA2" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="394" height="422"/>
@@ -1077,13 +1077,13 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNN-It-3T6">
-                                                        <rect key="frame" x="0.0" y="926" width="394" height="24"/>
+                                                        <rect key="frame" x="0.0" y="926" width="394" height="23.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wu9-N7-xtV" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="960" width="394" height="150"/>
+                                                        <rect key="frame" x="0.0" y="959.5" width="394" height="150"/>
                                                         <subviews>
                                                             <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="cBB-7J-qO4">
                                                                 <rect key="frame" x="8" y="15" width="378" height="31"/>
@@ -1136,7 +1136,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwk-C2-juj" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="960" width="394" height="116"/>
+                                                        <rect key="frame" x="0.0" y="959.5" width="394" height="116"/>
                                                         <subviews>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Yf-jI-B0x">
                                                                 <rect key="frame" x="10" y="10" width="374" height="96"/>
@@ -1170,7 +1170,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAq-36-do2" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="960" width="394" height="20"/>
+                                                        <rect key="frame" x="0.0" y="959.5" width="394" height="20"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYE-uL-E98">
                                                                 <rect key="frame" x="10" y="10" width="374" height="0.0"/>
@@ -1193,7 +1193,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uur-VJ-fWM" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="970" width="394" height="55"/>
+                                                        <rect key="frame" x="0.0" y="969.5" width="394" height="55"/>
                                                         <color key="backgroundColor" name="Main"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="55" id="f4y-AE-xtn"/>
@@ -1213,7 +1213,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkr-it-AwS" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="1045" width="394" height="55"/>
+                                                        <rect key="frame" x="0.0" y="1044.5" width="394" height="55"/>
                                                         <color key="backgroundColor" name="Main"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="55" id="m5i-wU-rb4"/>
@@ -1308,10 +1308,10 @@
     </scenes>
     <designables>
         <designable name="bkr-it-AwS">
-            <size key="intrinsicContentSize" width="109" height="35"/>
+            <size key="intrinsicContentSize" width="110" height="35"/>
         </designable>
         <designable name="iQ5-CK-hr8">
-            <size key="intrinsicContentSize" width="95" height="34"/>
+            <size key="intrinsicContentSize" width="94" height="33"/>
         </designable>
         <designable name="uur-VJ-fWM">
             <size key="intrinsicContentSize" width="61" height="35"/>

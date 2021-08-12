@@ -120,6 +120,10 @@ class BranchVC: UIViewController, ChooserDelegate {
         }
     }
     
+    @IBAction func toSearchAction(_ sender: Any) {
+        Router.toSearch(self, branch?.id)
+    }
+    
     @IBAction func toVoiceOrder(_ sender: Any) {
         Router.toVoiceOrder(self, branch!)
     }

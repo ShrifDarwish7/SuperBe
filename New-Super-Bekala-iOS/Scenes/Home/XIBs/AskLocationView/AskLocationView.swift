@@ -48,8 +48,6 @@ class AskLocationView: UIView{
         askLocationAlertView.layer.cornerRadius = 10
         goSettingBtn.layer.cornerRadius = 10
         cancelBtn.layer.cornerRadius = 10
-        cancelBtn.layer.borderWidth = 1
-        cancelBtn.layer.borderColor = UIColor(named: "Main")?.cgColor
     }
     
     func loadViewFromNib() -> UIView? {

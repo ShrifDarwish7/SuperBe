@@ -47,6 +47,8 @@ protocol MainViewDelegate {
     func didCompleteStartConversation(_ Id: Int?)
     func didCompleteSendMessage(_ sent: Bool,_ id: Int)
     func didCompleteWithConversation(_ data: Conversation?,_ error: String?)
+    func didCompleteReopenConversation(_ error: String?)
+    func didCompleteLockConversation(_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -86,6 +88,8 @@ extension MainViewDelegate{
     func didCompleteStartConversation(_ Id: Int?){}
     func didCompleteSendMessage(_ sent: Bool,_ id: Int){}
     func didCompleteWithConversation(_ data: Conversation?,_ error: String?){}
+    func didCompleteReopenConversation(_ error: String?){}
+    func didCompleteLockConversation(_ error: String?){}
 }
 
 class MainPresenter{
@@ -108,6 +112,34 @@ class MainPresenter{
                 }
             }else{
                 self.delegate?.didCompleteWithConversation(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func reopenConversation(){
+        APIServices.shared.call(.reopenConversation(Shared.currentConversationId!)) { data in
+            print(JSON(data))
+            if let data = data,
+               let json = try? JSON(data: data),
+               json["status"].intValue == 1{
+                self.delegate?.didCompleteReopenConversation(nil)
+            }else{
+                self.delegate?.didCompleteReopenConversation(JSON(data!)["message"].stringValue)
+            }
+        }
+    }
+    
+    func lockConversation(){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.lockConversation(Shared.currentConversationId!)) { data in
+            self.delegate?.dismissProgress()
+            print(JSON(data))
+            if let data = data,
+               let json = try? JSON(data: data),
+               json["status"].intValue == 1{
+                self.delegate?.didCompleteLockConversation(nil)
+            }else{
+                self.delegate?.didCompleteLockConversation(JSON(data!)["message"].stringValue)
             }
         }
     }
@@ -289,8 +321,10 @@ class MainPresenter{
     }
     
     func getMyOrders(){
-        let prms = ["filter": "user_id=\(APIServices.shared.user?.id ?? 0)"]
-       // let prms = ["filter": "user_id=1"]
+        let prms = [
+            "filter": "user_id=\(APIServices.shared.user?.id ?? 0)",
+            "with": "captain.user"
+        ]
         APIServices.shared.call(.getMyOrders(prms)) { (data) in
             print("getMyOrders",JSON(data))
             if let data = data,

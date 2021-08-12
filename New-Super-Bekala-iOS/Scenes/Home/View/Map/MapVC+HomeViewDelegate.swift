@@ -18,15 +18,6 @@ extension MapVC: MainViewDelegate{
         SVProgressHUD.dismiss()
     }
     
-    func didCompleteWithGoogleAddress(_ data: GoogleMapAddress?) {
-        if let _ = data{
-            self.locationLbl.text = data?.formattedAddress
-            self.cityTF.text = data?.city
-            self.districtTF.text = (data?.area2 ?? "") + " " + (data?.area3 ?? "")
-            self.streetTF.text = data?.streetNumber
-        }
-    }
-    
     func didCompleteAddAddress(_ error: String?) {
         if let error = error{
             showToast(error.localized)

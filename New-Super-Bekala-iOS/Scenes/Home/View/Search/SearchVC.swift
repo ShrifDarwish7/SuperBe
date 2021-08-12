@@ -19,11 +19,13 @@ class SearchVC: UIViewController{
     @IBOutlet weak var notFoundStack: UIStackView!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var menuContainerAr: UIView!
+    @IBOutlet weak var selectContextView: UIView!
     
     var context: Context = .vendors
     var isLoading = false
     var presenter: MainPresenter?
     var cartItems: [CartItem]?
+    var branchId: Int?
     let options = [
         "Vendors",
         "Products"
@@ -119,6 +121,11 @@ class SearchVC: UIViewController{
             self.cartItems = items
         }
         
+        if branchId != nil{
+            self.selectContextView.isHidden = true
+            self.context = .products
+        }
+        
     }
     
     @IBAction func showMenu(_ sender: Any) {
@@ -143,6 +150,9 @@ class SearchVC: UIViewController{
         var query: [String: String] = [
             "q": queryTF.text!
         ]
+        if let branchId = branchId{
+            query.updateValue("branch_id=\(branchId)", forKey: "filter")
+        }
         presenter?.searchWith(query: &query, self.context)
     }
     

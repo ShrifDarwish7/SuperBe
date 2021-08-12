@@ -45,6 +45,8 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dismissHintZoom()
+        
         mapKitView.delegate = self
         
         mapKitView.layoutMargins.bottom = 60
@@ -62,7 +64,8 @@ class MapVC: UIViewController {
         
         switch CLLocationManager.authorizationStatus() {
         case .denied, .notDetermined, .restricted:
-            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357), latitudinalMeters: 200, longitudinalMeters: 200)
+            self.showHintZoom()
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357), latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapKitView.setRegion(region, animated: true)
         default:
             self.getUserLocation()
@@ -86,7 +89,7 @@ class MapVC: UIViewController {
         case .fetchLocation:
             Shared.isCoords = true
             Shared.isRegion = false
-            Shared.selectedCoords = "\(Shared.userLat ?? 0.0),\(Shared.userLng ?? 0.0)"
+            Shared.selectedCoords = "\(mapKitView.centerCoordinate.latitude),\(mapKitView.centerCoordinate.longitude)"
             Shared.userSelectLocation = true
             Router.toHome(self)
         case .addAddress:
@@ -95,6 +98,7 @@ class MapVC: UIViewController {
                 self.addAddressBlockView.isHidden = false
                 self.detectBtn.isHidden = true
                 self.addAddressBlockView.alpha = 1
+                self.addressTitleTF.becomeFirstResponder()
             }
         default:
             break
@@ -103,14 +107,13 @@ class MapVC: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        guard !self.addressTitleTF.text!.isEmpty, !self.cityTF.text!.isEmpty, !self.districtTF.text!.isEmpty, !self.streetTF.text!.isEmpty, !self.buildingTF.text!.isEmpty, !self.floorTF.text!.isEmpty, !self.flatTF.text!.isEmpty else {
+        guard !self.addressTitleTF.text!.isEmpty else {
             self.addressTitleTF.shake()
-            showToast("Please fill out all required fields")
             return
         }
         let parameters: [String: String] = [
             "title": addressTitleTF.text!,
-            "coordinates": "\(Shared.userLat ?? 0.0),\(Shared.userLng ?? 0.0)",
+            "coordinates": "\(mapKitView.centerCoordinate.latitude),\(mapKitView.centerCoordinate.longitude)",
             "city": cityTF.text!,
             "dist": districtTF.text!,
             "landmark": streetTF.text!,
@@ -186,60 +189,4 @@ class MapVC: UIViewController {
 enum MapState{
     case addAddress
     case fetchLocation
-}
-
-extension MapVC: MKMapViewDelegate{
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        let center = self.getCenterLocation(for: mapView)
-                
-        let zoomWidth = mapView.visibleMapRect.size.width
-            let zoomFactor = Int(log2(zoomWidth)) - 9
-        
-        if zoomFactor > 1{
-            self.showHintZoom()
-        }else{
-            self.dismissHintZoom()
-            
-            if let polygon = self.polygone{
-                let polygonRenderer = MKPolygonRenderer(polygon: polygon)
-                let mapPoint: MKMapPoint = MKMapPoint(CLLocationCoordinate2D(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude))
-                let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
-                if !polygonRenderer.path.contains(polygonViewPoint){
-                    markerImageView.alpha = 0.5
-                    self.inRegion = false
-                    return
-                }else{
-                    self.inRegion = true
-                    markerImageView.alpha = 1
-                }
-            }
-            
-            guard let previousLocation = self.previousLocation else { return }
-            guard center.distance(from: previousLocation) > 100 else { return }
-            self.previousLocation = center
-            
-            CLGeocoder().reverseGeocodeLocation(center) { [weak self] placemarks, error in
-                guard let self = self else { return }
-                if let error = error{
-                    print(error)
-                    return
-                }
-                guard let placemark = placemarks?.first else { return }
-                DispatchQueue.main.async {
-                    self.locationLbl.text = "\(placemark.administrativeArea ?? "") \(placemark.subAdministrativeArea ?? "") \(placemark.name ?? "")"
-                }
-            }
-        }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is MKPolyline {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor(named: "Main")
-            renderer.lineWidth = 3
-            return renderer
-        }
-        return MKOverlayRenderer(overlay: overlay)
-    }
 }
