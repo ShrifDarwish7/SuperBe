@@ -119,9 +119,7 @@ class MainPresenter{
     func reopenConversation(){
         APIServices.shared.call(.reopenConversation(Shared.currentConversationId!)) { data in
             print(JSON(data))
-            if let data = data,
-               let json = try? JSON(data: data),
-               json["status"].intValue == 1{
+            if let _ = data{
                 self.delegate?.didCompleteReopenConversation(nil)
             }else{
                 self.delegate?.didCompleteReopenConversation(JSON(data!)["message"].stringValue)
@@ -134,9 +132,7 @@ class MainPresenter{
         APIServices.shared.call(.lockConversation(Shared.currentConversationId!)) { data in
             self.delegate?.dismissProgress()
             print(JSON(data))
-            if let data = data,
-               let json = try? JSON(data: data),
-               json["status"].intValue == 1{
+            if let _ = data{
                 self.delegate?.didCompleteLockConversation(nil)
             }else{
                 self.delegate?.didCompleteLockConversation(JSON(data!)["message"].stringValue)

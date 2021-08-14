@@ -22,14 +22,14 @@ extension ShoopingVC: MainViewDelegate{
     
     func didCompleteWithFavourites() {
         
-        if Shared.isRegion{
-            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
-            if Shared.selectedArea.subregionID != 0{
-                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
-            }
-        }else if Shared.isCoords{
-            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
-        }
+//        if Shared.isRegion{
+//            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
+//            if Shared.selectedArea.subregionID != 0{
+//                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
+//            }
+//        }else if Shared.isCoords{
+//            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
+//        }
         parameters.updateValue("all", forKey: "lang")
         print("cats prms",parameters)
         self.presenter?.getCategories(parameters)

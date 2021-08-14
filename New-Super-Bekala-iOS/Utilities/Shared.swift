@@ -8,7 +8,8 @@
 
 import Foundation
 import CoreLocation
-import PusherSwift
+import AVFoundation
+import UIKit
 
 class Shared{
     
@@ -46,6 +47,7 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
     }
+    static var unseenMessages: Int = 0
     static var mapState: MapState?
     static var transaction: Transaction?
     static var selectedServices: SelectedServices?
@@ -70,15 +72,23 @@ class Shared{
     }
     
     static func call(phoneNumber: String) {
-        
-        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
-            
+       if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
                 application.open(phoneCallURL, options: [:], completionHandler: nil)
             }
-            
         }
+    }
+    
+    static func play(_ sound: String,_ player: inout AVAudioPlayer?){
+        let msgNotifyURL = URL(fileURLWithPath: Bundle.main.path(forResource: sound, ofType: "mp3")!)
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            player = try AVAudioPlayer(contentsOf: msgNotifyURL)
+            guard let player = player else { return }
+            player.play()
+        } catch { }
     }
 }
 

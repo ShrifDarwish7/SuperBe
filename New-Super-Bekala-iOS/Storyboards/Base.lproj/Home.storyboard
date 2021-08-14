@@ -249,9 +249,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsB-9b-z1n">
                                         <rect key="frame" x="50" y="0.0" width="50" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdI-pR-oU7">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LdI-pR-oU7">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="cart_icon"/>
                                                 <connections>
                                                     <action selector="toCart:" destination="aPf-Ku-lZ5" eventType="touchUpInside" id="1xd-dM-Tcs"/>
@@ -275,7 +274,11 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="qph-BK-Ui7" firstAttribute="top" secondItem="zsB-9b-z1n" secondAttribute="top" constant="5" id="1j5-tc-sr1"/>
+                                            <constraint firstAttribute="trailing" secondItem="LdI-pR-oU7" secondAttribute="trailing" id="9XD-6i-uzX"/>
+                                            <constraint firstItem="LdI-pR-oU7" firstAttribute="top" secondItem="zsB-9b-z1n" secondAttribute="top" id="Duo-O1-hSK"/>
+                                            <constraint firstItem="LdI-pR-oU7" firstAttribute="leading" secondItem="zsB-9b-z1n" secondAttribute="leading" id="H5x-q3-Tup"/>
                                             <constraint firstAttribute="trailing" secondItem="qph-BK-Ui7" secondAttribute="trailing" constant="5" id="QKk-Kc-08I"/>
+                                            <constraint firstAttribute="bottom" secondItem="LdI-pR-oU7" secondAttribute="bottom" id="Ter-Ur-DsK"/>
                                             <constraint firstAttribute="height" constant="50" id="Tr3-oT-hzO"/>
                                             <constraint firstAttribute="width" constant="50" id="u3s-Tq-36G"/>
                                         </constraints>
@@ -287,6 +290,17 @@
                                             <constraint firstAttribute="width" constant="50" id="Uou-tp-FTP"/>
                                         </constraints>
                                         <state key="normal" image="notifications"/>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZS-DI-5M4">
+                                        <rect key="frame" x="100" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="IV4-Oa-c9d"/>
+                                            <constraint firstAttribute="height" constant="50" id="W1H-SL-kAO"/>
+                                        </constraints>
+                                        <state key="normal" image="admin-with-cogwheels"/>
+                                        <connections>
+                                            <action selector="toProfile:" destination="aPf-Ku-lZ5" eventType="touchUpInside" id="3Au-gH-zB5"/>
+                                        </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man" translatesAutoresizingMaskIntoConstraints="NO" id="mfh-SF-lkD" customClass="CircluarImage" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                         <rect key="frame" x="100" y="5" width="40" height="40"/>
@@ -360,7 +374,7 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plF-2g-o9Q">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plF-2g-o9Q">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="SJL-s3-xbe"/>
@@ -1302,6 +1316,14 @@ with us on</string>
                                     <constraint firstAttribute="width" constant="150" id="bvA-3w-Gl0"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJS-Bk-sjl" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="RYY-UP-hBQ"/>
+                                    <constraint firstAttribute="height" constant="160" id="zI6-OC-2NI"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-xh-ygw">
                                 <rect key="frame" x="229" y="195" width="150" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1314,9 +1336,11 @@ with us on</string>
                         <viewLayoutGuide key="safeArea" id="pWA-0r-5Dx"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pWA-0r-5Dx" firstAttribute="trailing" secondItem="jJS-Bk-sjl" secondAttribute="trailing" constant="10" id="1m1-EF-bO2"/>
                             <constraint firstItem="jyf-UV-3lX" firstAttribute="leading" secondItem="pWA-0r-5Dx" secondAttribute="leading" constant="35" id="CeB-bG-Ezf"/>
                             <constraint firstItem="pWA-0r-5Dx" firstAttribute="trailing" secondItem="ukl-6W-YJz" secondAttribute="trailing" constant="10" id="Ewd-eu-bD8"/>
                             <constraint firstItem="ukl-6W-YJz" firstAttribute="top" secondItem="trC-Zd-Tjq" secondAttribute="bottom" constant="50" id="L2l-Sr-nia"/>
+                            <constraint firstItem="jJS-Bk-sjl" firstAttribute="centerY" secondItem="KyW-Cl-CAh" secondAttribute="centerY" id="Q7B-uq-vTW"/>
                             <constraint firstItem="GLc-M3-xDF" firstAttribute="leading" secondItem="pWA-0r-5Dx" secondAttribute="leading" constant="20" id="QKK-Q2-7ut"/>
                             <constraint firstItem="jyf-UV-3lX" firstAttribute="centerY" secondItem="0ea-xh-ygw" secondAttribute="centerY" id="S5p-Qx-Inm"/>
                             <constraint firstItem="3GC-zk-r38" firstAttribute="centerY" secondItem="ukl-6W-YJz" secondAttribute="centerY" id="T3J-UX-kCZ"/>
@@ -2893,6 +2917,14 @@ with us on</string>
                                     <constraint firstAttribute="trailing" secondItem="f2y-qC-jVz" secondAttribute="trailing" id="jhJ-Fj-jhI"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6G-YQ-RHw" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="4Y8-Kh-hPS"/>
+                                    <constraint firstAttribute="height" constant="160" id="eu4-0j-sKb"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XV3-5O-9CE" customClass="AskLocationView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2912,6 +2944,7 @@ with us on</string>
                             <constraint firstItem="PfJ-WQ-XK8" firstAttribute="centerY" secondItem="LRc-51-TyI" secondAttribute="centerY" id="KUm-lE-p9g"/>
                             <constraint firstItem="t1j-mD-N1z" firstAttribute="trailing" secondItem="U0h-fl-tIr" secondAttribute="trailing" constant="15" id="Mva-V4-3pp"/>
                             <constraint firstItem="TuI-i1-fh1" firstAttribute="leading" secondItem="t1j-mD-N1z" secondAttribute="leading" constant="15" id="SHs-ti-EWR"/>
+                            <constraint firstItem="t1j-mD-N1z" firstAttribute="trailing" secondItem="P6G-YQ-RHw" secondAttribute="trailing" constant="10" id="UTc-3u-vUd"/>
                             <constraint firstItem="vND-4f-RO2" firstAttribute="leading" secondItem="t1j-mD-N1z" secondAttribute="leading" constant="20" id="VAT-JH-MRw"/>
                             <constraint firstItem="t1j-mD-N1z" firstAttribute="top" secondItem="PMw-9q-ZvK" secondAttribute="top" constant="-15" id="VjY-iQ-vJp"/>
                             <constraint firstAttribute="bottom" secondItem="FZv-CE-bdV" secondAttribute="bottom" id="Vmk-3A-omv"/>
@@ -2923,6 +2956,7 @@ with us on</string>
                             <constraint firstItem="TuI-i1-fh1" firstAttribute="top" secondItem="t1j-mD-N1z" secondAttribute="top" id="ep2-zu-LlD"/>
                             <constraint firstItem="t1j-mD-N1z" firstAttribute="trailing" secondItem="FZv-CE-bdV" secondAttribute="trailing" id="goa-5F-FE0"/>
                             <constraint firstItem="t1j-mD-N1z" firstAttribute="trailing" secondItem="Z8x-Nh-LYh" secondAttribute="trailing" id="h8H-s7-Qip"/>
+                            <constraint firstItem="P6G-YQ-RHw" firstAttribute="centerY" secondItem="LRc-51-TyI" secondAttribute="centerY" id="mPM-cO-WuA"/>
                             <constraint firstItem="Kbq-8I-VQe" firstAttribute="top" secondItem="vND-4f-RO2" secondAttribute="bottom" constant="20" id="nOS-8M-DuS"/>
                             <constraint firstItem="Ce0-vg-BkO" firstAttribute="top" secondItem="U0h-fl-tIr" secondAttribute="bottom" constant="25" id="nc6-dn-re0"/>
                             <constraint firstItem="FZv-CE-bdV" firstAttribute="leading" secondItem="t1j-mD-N1z" secondAttribute="leading" id="o91-yn-taN"/>
@@ -3845,6 +3879,14 @@ with us on</string>
                                     <action selector="back:" destination="oBb-wB-WfQ" eventType="touchUpInside" id="oVj-zJ-Mc8"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daB-H3-9rO" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="hzC-2V-6AD"/>
+                                    <constraint firstAttribute="width" constant="100" id="nvz-A9-vjh"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iFa-XO-LM6">
                                 <rect key="frame" x="287" y="44" width="112" height="51"/>
                                 <subviews>
@@ -3928,6 +3970,7 @@ with us on</string>
                             <constraint firstItem="eKB-N0-i3J" firstAttribute="centerX" secondItem="JVg-Jx-HOs" secondAttribute="centerX" id="cQ5-kv-bfn"/>
                             <constraint firstItem="N9b-nX-Y5G" firstAttribute="width" secondItem="rmv-Ed-4us" secondAttribute="width" id="cbo-Rk-hab"/>
                             <constraint firstItem="XsU-rN-ynS" firstAttribute="height" secondItem="JVg-Jx-HOs" secondAttribute="height" multiplier="0.5" id="eBW-XN-Mcn"/>
+                            <constraint firstItem="FRC-Kk-0zz" firstAttribute="trailing" secondItem="daB-H3-9rO" secondAttribute="trailing" constant="10" id="ejv-ZL-5op"/>
                             <constraint firstItem="eKB-N0-i3J" firstAttribute="top" secondItem="qP0-nX-xW4" secondAttribute="bottom" constant="15" id="fIi-tb-3Q3"/>
                             <constraint firstAttribute="bottom" secondItem="HtS-uE-Nl9" secondAttribute="bottom" id="i1T-yj-iIY"/>
                             <constraint firstItem="qP0-nX-xW4" firstAttribute="centerY" secondItem="JVg-Jx-HOs" secondAttribute="centerY" multiplier="0.37" id="i4B-N4-yFv"/>
@@ -3935,6 +3978,7 @@ with us on</string>
                             <constraint firstItem="YuR-yc-jzB" firstAttribute="leading" secondItem="FRC-Kk-0zz" secondAttribute="leading" constant="15" id="iV5-2U-BKo"/>
                             <constraint firstItem="U0z-yf-cr2" firstAttribute="leading" secondItem="FRC-Kk-0zz" secondAttribute="leading" constant="15" id="mab-Pp-fh4"/>
                             <constraint firstItem="XsU-rN-ynS" firstAttribute="leading" secondItem="FRC-Kk-0zz" secondAttribute="leading" id="oh1-re-ovB"/>
+                            <constraint firstItem="daB-H3-9rO" firstAttribute="centerY" secondItem="JVg-Jx-HOs" secondAttribute="centerY" id="rIJ-fC-DS6"/>
                             <constraint firstItem="FRC-Kk-0zz" firstAttribute="trailing" secondItem="XsU-rN-ynS" secondAttribute="trailing" id="tzd-b7-ZmY"/>
                             <constraint firstItem="rmv-Ed-4us" firstAttribute="width" secondItem="XsU-rN-ynS" secondAttribute="width" id="wMF-it-OcY"/>
                             <constraint firstItem="YuR-yc-jzB" firstAttribute="top" secondItem="FRC-Kk-0zz" secondAttribute="top" id="wg9-2j-h9H"/>
@@ -4432,6 +4476,14 @@ has been the industry's</string>
                                     <action selector="favourite:" destination="t3Z-4j-xLb" eventType="touchUpInside" id="ndD-Ci-SKy"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-ap-6hX" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5Ln-NP-OtK"/>
+                                    <constraint firstAttribute="height" constant="160" id="eho-A8-xJb"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEt-mY-Xxv">
                                 <rect key="frame" x="15" y="59" width="35" height="35"/>
                                 <constraints>
@@ -4460,7 +4512,9 @@ has been the industry's</string>
                             <constraint firstItem="USM-sR-5od" firstAttribute="trailing" secondItem="tFe-4L-liv" secondAttribute="trailing" id="dgT-Jo-TTI"/>
                             <constraint firstItem="USM-sR-5od" firstAttribute="trailing" secondItem="3Na-sx-gOT" secondAttribute="trailing" id="gj5-Uz-Dlz"/>
                             <constraint firstItem="5Kr-Cm-P8Y" firstAttribute="leading" secondItem="USM-sR-5od" secondAttribute="leading" id="jFw-DN-0Vq"/>
+                            <constraint firstItem="IWW-ap-6hX" firstAttribute="centerY" secondItem="PlO-r3-Csu" secondAttribute="centerY" id="se8-IF-V25"/>
                             <constraint firstItem="3Na-sx-gOT" firstAttribute="top" secondItem="PlO-r3-Csu" secondAttribute="top" id="t8y-0M-oX2"/>
+                            <constraint firstItem="USM-sR-5od" firstAttribute="trailing" secondItem="IWW-ap-6hX" secondAttribute="trailing" constant="10" id="y2e-96-RDN"/>
                         </constraints>
                     </view>
                     <connections>
@@ -4745,17 +4799,6 @@ has been the industry's</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCg-vq-DI2" customClass="LocalizedBtn" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                <rect key="frame" x="15" y="54" width="56" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="ETb-cR-Deb"/>
-                                    <constraint firstAttribute="width" constant="56" id="rQc-ej-GfB"/>
-                                </constraints>
-                                <state key="normal" image="back-white"/>
-                                <connections>
-                                    <action selector="backAction:" destination="oMn-wH-H18" eventType="touchUpInside" id="Abx-Lk-cwz"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YJ1-Zj-1ut">
                                 <rect key="frame" x="15" y="120" width="384" height="742"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4776,14 +4819,35 @@ has been the industry's</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCg-vq-DI2" customClass="LocalizedBtn" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="15" y="54" width="56" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="ETb-cR-Deb"/>
+                                    <constraint firstAttribute="width" constant="56" id="rQc-ej-GfB"/>
+                                </constraints>
+                                <state key="normal" image="back-white"/>
+                                <connections>
+                                    <action selector="backAction:" destination="oMn-wH-H18" eventType="touchUpInside" id="Abx-Lk-cwz"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvc-iA-gj0" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="DhO-XU-0YU"/>
+                                    <constraint firstAttribute="width" constant="100" id="eaP-gK-UqL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YCG-g7-mYL"/>
                         <color key="backgroundColor" name="Dark-Blue"/>
                         <constraints>
+                            <constraint firstItem="gvc-iA-gj0" firstAttribute="centerY" secondItem="kxv-zE-eGm" secondAttribute="centerY" id="0uw-lx-uCw"/>
                             <constraint firstItem="YCG-g7-mYL" firstAttribute="trailing" secondItem="YJ1-Zj-1ut" secondAttribute="trailing" constant="15" id="9FZ-2u-E0S"/>
                             <constraint firstItem="jCg-vq-DI2" firstAttribute="leading" secondItem="kxv-zE-eGm" secondAttribute="leading" constant="15" id="ILm-bc-DZL"/>
                             <constraint firstItem="YJ1-Zj-1ut" firstAttribute="top" secondItem="jCg-vq-DI2" secondAttribute="bottom" constant="15" id="Tod-pn-Y6u"/>
                             <constraint firstItem="YCG-g7-mYL" firstAttribute="bottom" secondItem="YJ1-Zj-1ut" secondAttribute="bottom" id="Vd1-Gh-WEy"/>
+                            <constraint firstItem="YCG-g7-mYL" firstAttribute="trailing" secondItem="gvc-iA-gj0" secondAttribute="trailing" constant="10" id="eUJ-2s-9XI"/>
                             <constraint firstItem="YJ1-Zj-1ut" firstAttribute="leading" secondItem="YCG-g7-mYL" secondAttribute="leading" constant="15" id="qEG-GE-Y4W"/>
                             <constraint firstItem="jCg-vq-DI2" firstAttribute="top" secondItem="YCG-g7-mYL" secondAttribute="top" constant="10" id="zGS-QB-CjO"/>
                         </constraints>
@@ -4928,6 +4992,10 @@ has been the industry's</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OvM-ny-nBq">
+                                <rect key="frame" x="10" y="209" width="394" height="477"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="El8-Lp-bCJ">
                                 <rect key="frame" x="10" y="129" width="394" height="65"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4951,10 +5019,14 @@ has been the industry's</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OvM-ny-nBq">
-                                <rect key="frame" x="10" y="209" width="394" height="477"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7F-Ji-mbw" customClass="ChatMinimizeView" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="304" y="368" width="100" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="jol-Qe-5zV"/>
+                                    <constraint firstAttribute="width" constant="100" id="oug-kO-Hgc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9xm-yk-Me9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4966,6 +5038,8 @@ has been the industry's</string>
                             <constraint firstItem="8b9-hs-F4c" firstAttribute="top" secondItem="OvM-ny-nBq" secondAttribute="bottom" constant="10" id="G6A-7S-7ul"/>
                             <constraint firstItem="9xm-yk-Me9" firstAttribute="trailing" secondItem="8b9-hs-F4c" secondAttribute="trailing" id="Hci-bV-CrZ"/>
                             <constraint firstItem="9xm-yk-Me9" firstAttribute="trailing" secondItem="El8-Lp-bCJ" secondAttribute="trailing" constant="10" id="Kn6-o4-QGK"/>
+                            <constraint firstItem="B7F-Ji-mbw" firstAttribute="centerY" secondItem="746-Ir-VEH" secondAttribute="centerY" id="Krd-Tq-Zty"/>
+                            <constraint firstItem="9xm-yk-Me9" firstAttribute="trailing" secondItem="B7F-Ji-mbw" secondAttribute="trailing" constant="10" id="L4S-q4-JDM"/>
                             <constraint firstItem="SQ5-ef-EpL" firstAttribute="leading" secondItem="9xm-yk-Me9" secondAttribute="leading" constant="20" id="cI1-kE-3rx"/>
                             <constraint firstItem="El8-Lp-bCJ" firstAttribute="top" secondItem="SQ5-ef-EpL" secondAttribute="bottom" constant="20" id="dgE-0S-Zkc"/>
                             <constraint firstItem="El8-Lp-bCJ" firstAttribute="leading" secondItem="9xm-yk-Me9" secondAttribute="leading" constant="10" id="hKn-3q-Koc"/>
@@ -5559,9 +5633,6 @@ with us on</string>
         <designable name="G5q-35-6fV">
             <size key="intrinsicContentSize" width="230" height="35"/>
         </designable>
-        <designable name="H8G-FD-GWA">
-            <size key="intrinsicContentSize" width="96" height="20"/>
-        </designable>
         <designable name="Nh4-rX-V9W">
             <size key="intrinsicContentSize" width="55" height="35"/>
         </designable>
@@ -5602,6 +5673,7 @@ with us on</string>
         <image name="Rectangle 152" width="375" height="5"/>
         <image name="SB_logo" width="2000" height="413"/>
         <image name="addIcon" width="34" height="35"/>
+        <image name="admin-with-cogwheels" width="512" height="512"/>
         <image name="arrow_up" width="23.5" height="23.5"/>
         <image name="back" width="39" height="39"/>
         <image name="back-white" width="56" height="51"/>

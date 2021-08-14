@@ -37,13 +37,15 @@ class ProfileVC: UIViewController {
         let menu = DropDown()
         menu.dataSource = [
             "My account".localized,
-            "My promocodes".localized,
+            //"My promocodes".localized,
+            "Contact us".localized,
             "Langauge".localized,
             "Logout".localized
         ]
         let icons: [String] = [
             "profile_icon",
-            "promo",
+            //"promo",
+            "contact",
             "global",
             "logout_icon"
         ]
@@ -113,6 +115,8 @@ class ProfileVC: UIViewController {
                 } completion: { (_) in
                     
                 }
+            case 1:
+                Router.toContactUs(self)
             case 2:
                 if let _ = Bundle.main.bundleIdentifier,
                     let url = URL(string: "\(UIApplication.openSettingsURLString)") {
@@ -125,6 +129,14 @@ class ProfileVC: UIViewController {
                 break
             }
         }
+    }
+    
+    @IBAction func shareAction(_ sender: Any) {
+        let textToShare = [ "Download Super Be from : http://onelink.to/super-be" ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [.airDrop, .postToFacebook, .postToTwitter, .mail, .message]
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     @objc func viewPanned(_ panRecognizer: UIPanGestureRecognizer){

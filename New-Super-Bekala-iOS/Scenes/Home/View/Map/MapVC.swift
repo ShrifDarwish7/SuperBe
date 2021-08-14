@@ -108,7 +108,7 @@ class MapVC: UIViewController {
     
     @IBAction func save(_ sender: Any) {
         guard !self.addressTitleTF.text!.isEmpty else {
-            self.addressTitleTF.shake()
+            self.addressTitleTF.shake(.error)
             return
         }
         let parameters: [String: String] = [

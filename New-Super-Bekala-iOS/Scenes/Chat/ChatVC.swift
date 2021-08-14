@@ -12,9 +12,10 @@ import Lottie
 import MaterialComponents
 import SVProgressHUD
 import SwiftyJSON
+import AVFoundation
 
 class ChatVC: UIViewController, UITextViewDelegate {
-
+    
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var agentName: LocalizedLabel!
     @IBOutlet weak var waitingAgentView: UIView!
@@ -27,6 +28,7 @@ class ChatVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var lockView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var reopenBtn: LocalizedBtn!
+    @IBOutlet weak var sendBtnView: ViewCorners!
     
     var animationView: AnimationView?
     var conversationId: Int?
@@ -36,15 +38,23 @@ class ChatVC: UIViewController, UITextViewDelegate {
     var messages = [Message]()
     let dateFormatter = DateFormatter()
     var incrementalId = 1
+    var player: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        Shared.unseenMessages = 0
+        
         let options = PusherClientOptions(
             authMethod: AuthMethod.authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
             host: .cluster("eu")
         )
-            
+        
+        if let _ = AppDelegate.pusher{
+            AppDelegate.pusher.unbindAll()
+            AppDelegate.channel.unbindAll()
+        }
+        
         AppDelegate.pusher = Pusher(key: "3291250172ef81e382a7", options: options)
         AppDelegate.pusher.connection.delegate = self
         AppDelegate.pusher.delegate = self
@@ -62,21 +72,31 @@ class ChatVC: UIViewController, UITextViewDelegate {
             AppDelegate.channel.unbindAll(forEventName: "App\\Events\\JoinConversation")
         }
         
-        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\MessageSent") { (data: Any?) -> Void in
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\MessageSent") { [self] (data: Any?) -> Void in
             guard JSON(data!)["message"]["sender_id"].intValue != APIServices.shared.user?.id else { return }
             self.dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             self.appendAndUpdateTable(msgModel: Message(
                                         body: JSON(data!)["message"]["body"].stringValue,
                                         senderID: 0, createdAt: self.dateFormatter.string(from: Date())))
+            Shared.play("message_notify_tone", &self.player)
+            Shared.unseenMessages += 1
+            NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         }
         
         let _ = AppDelegate.channel.bind(eventName: "App\\Events\\LockConversation") { (data: Any?) -> Void in
-            if let data = try? JSON(data!)["conversation"].rawData(),
-               let conversation = data.getDecodedObject(from: Conversation.self){
-                self.activityIndicator.stopAnimating()
-                self.reopenBtn.isHidden = false
-                self.didCompleteWithConversation(conversation, nil)
-            }
+            self.activityIndicator.stopAnimating()
+            self.reopenBtn.isHidden = false
+            Shared.play("conversation_locked", &self.player)
+            self.lockView.isHidden = false
+            Vibration.warning.vibrate()
+        }
+        
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\ReopenConversation") { (data: Any?) -> Void in
+            self.activityIndicator.stopAnimating()
+            self.reopenBtn.isHidden = false
+            Shared.play("conversation_locked", &self.player)
+            self.lockView.isHidden = true
+            Vibration.warning.vibrate()
         }
         
         presenter = MainPresenter(self)
@@ -86,10 +106,7 @@ class ChatVC: UIViewController, UITextViewDelegate {
         chatTableView.addTapGesture { (_) in
             self.view.endEditing(true)
         }
-        
-        sendBtnWidthCnst.constant = 0
-        view.layoutIfNeeded()
-        
+                
         if Shared.isChatting{
             waitingAgentView.isHidden = true
             SVProgressHUD.show()
@@ -124,10 +141,11 @@ class ChatVC: UIViewController, UITextViewDelegate {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let height = keyboardSize.height
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue) {
+            let keyboardRectangle = keyboardSize.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
             UIView.animate(withDuration: 0.5) {
-                self.messageBottomCnst.constant = height
+                self.messageBottomCnst.constant = keyboardHeight
                 self.view.layoutIfNeeded()
                 self.chatTableView.scrollToRow(at: IndexPath(row: self.messages.count-1, section: 0), at: .bottom, animated: true)
             }
@@ -135,15 +153,11 @@ class ChatVC: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        UIView.animate(withDuration: 0.2) { [self] in
-            guard !textView.text.isEmpty else{
-                sendBtnWidthCnst.constant = 0
-                self.view.layoutIfNeeded()
-                return
-            }
-            sendBtnWidthCnst.constant = 45
-            self.view.layoutIfNeeded()
+        guard !textView.text.isEmpty else{
+            sendBtnView.alpha = 0.5
+            return
         }
+        sendBtnView.alpha = 1
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -198,10 +212,12 @@ class ChatVC: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func minimizeAction(_ sender: Any) {
+        //AppDelegate.pusher = nil
+        Shared.unseenMessages = 0
         Shared.isChatting = true
         NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         self.dismiss(animated: false, completion: nil)
-
+        
     }
 }
 

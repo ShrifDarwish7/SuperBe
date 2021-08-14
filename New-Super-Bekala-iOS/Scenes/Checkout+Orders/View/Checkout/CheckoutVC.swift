@@ -433,32 +433,32 @@ class CheckoutVC: UIViewController {
         }
         
         guard !username.text!.isEmpty else {
-            nameStack.shake()
+            nameStack.shake(.error)
             scroller.setContentOffset(nameStack.frame.origin, animated: true)
             return
         }
         
         guard !phoneNumber.text!.isEmpty else {
-            phoneStack.shake()
+            phoneStack.shake(.error)
             scroller.setContentOffset(phoneStack.frame.origin, animated: true)
             return
         }
         
         guard let selectedReceiveOption = selectedReceiveOption else{
-            receiveView.shake()
+            receiveView.shake(.error)
             scroller.setContentOffset(receiveView.frame.origin, animated: true)
             return
         }
         
         guard let selectedPayment = selectedPayment else {
-            paymentView.shake()
+            paymentView.shake(.error)
             scroller.setContentOffset(paymentView.frame.origin, animated: true)
             return
         }
         
         if selectedReceiveOption == 0{
             guard let _ = (self.addresses?.filter({ return $0.selected == 1 }).first) else {
-                addressStack.shake()
+                addressStack.shake(.error)
                 scroller.setContentOffset(addressStack.frame.origin, animated: true)
                 return
             }

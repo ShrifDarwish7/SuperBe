@@ -196,6 +196,12 @@ class Router {
         sender.present(vc, animated: true, completion: nil)
     }
     
+    static func toContactUs(_ sender: UIViewController){
+        let vc = self.instantiate(appStoryboard: .other, identifier: "ContactUsVC") as! ContactUsVC
+        vc.modalPresentationStyle = .overCurrentContext
+        sender.present(vc, animated: false, completion: nil)
+    }
+    
     static func toPayContainer(_ sender: UIViewController){
         let vc = self.instantiate(appStoryboard: .orders, identifier: "PayContainerVC") as! PayContainerVC
         vc.modalPresentationStyle = .overCurrentContext

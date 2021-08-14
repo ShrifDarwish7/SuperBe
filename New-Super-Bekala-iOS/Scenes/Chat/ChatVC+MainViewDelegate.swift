@@ -39,6 +39,8 @@ extension ChatVC: MainViewDelegate{
             chatTableView.dataSource = self
             chatTableView.reloadData()
             
+            chatTableView.scrollToRow(at: IndexPath(row: self.messages.count-1, section: 0), at: .bottom, animated: true)
+            
             guard data.status != "locked" else {
                 lockView.isHidden = false
                 return
@@ -75,6 +77,7 @@ extension ChatVC: MainViewDelegate{
             showToast(error!)
             return
         }
+        Shared.unseenMessages = 0
         Shared.isChatting = false
         NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         self.dismiss(animated: true, completion: nil)

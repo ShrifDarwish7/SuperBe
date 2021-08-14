@@ -19,6 +19,8 @@
 		100BA1302653E855000ED66C /* ProfileVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100BA12F2653E855000ED66C /* ProfileVC+TableViewDelegate.swift */; };
 		100BA1362653EAF3000ED66C /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100BA1352653EAF3000ED66C /* DashboardVC.swift */; };
 		100DC3C426BADD2D0082AB60 /* ShippingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DC3C326BADD2D0082AB60 /* ShippingDetails.swift */; };
+		100E206526C58270007FF432 /* message_notify_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 100E206426C58270007FF432 /* message_notify_tone.mp3 */; };
+		100E206D26C58F19007FF432 /* conversation_locked.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 100E206C26C58F19007FF432 /* conversation_locked.mp3 */; };
 		1012A5E72692114000EF23C6 /* TransactionPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1012A5E62692114000EF23C6 /* TransactionPayload.swift */; };
 		1012A5E92692115C00EF23C6 /* CardPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1012A5E82692115C00EF23C6 /* CardPayload.swift */; };
 		1018F0E826BB452C0019EA83 /* wait_joining_chat.json in Resources */ = {isa = PBXBuildFile; fileRef = 1018F0E726BB452C0019EA83 /* wait_joining_chat.json */; };
@@ -140,6 +142,7 @@
 		109DC2CA26B52ECA00887263 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109DC2C926B52ECA00887263 /* ChatVC.swift */; };
 		109DC2CD26B5321400887263 /* ChatMinimizeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 109DC2CB26B5321400887263 /* ChatMinimizeView.xib */; };
 		109DC2CE26B5321400887263 /* ChatMinimizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109DC2CC26B5321400887263 /* ChatMinimizeView.swift */; };
+		109E085726C7503E0085FBBE /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E085626C7503E0085FBBE /* ContactUsVC.swift */; };
 		10A076D825F786BE000EE39F /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A076D725F786BE000EE39F /* LoginResponse.swift */; };
 		10A076DD25F78B18000EE39F /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A076DC25F78B18000EE39F /* SplashVC.swift */; };
 		10A5A292263598E600E7A773 /* ImagesOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A5A291263598E600E7A773 /* ImagesOrderVC.swift */; };
@@ -287,6 +290,8 @@
 		100BA12F2653E855000ED66C /* ProfileVC+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		100BA1352653EAF3000ED66C /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		100DC3C326BADD2D0082AB60 /* ShippingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingDetails.swift; sourceTree = "<group>"; };
+		100E206426C58270007FF432 /* message_notify_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = message_notify_tone.mp3; sourceTree = "<group>"; };
+		100E206C26C58F19007FF432 /* conversation_locked.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = conversation_locked.mp3; sourceTree = "<group>"; };
 		1012A5E526920F2800EF23C6 /* New-Super-Bekala-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "New-Super-Bekala-iOS.entitlements"; sourceTree = "<group>"; };
 		1012A5E62692114000EF23C6 /* TransactionPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPayload.swift; sourceTree = "<group>"; };
 		1012A5E82692115C00EF23C6 /* CardPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPayload.swift; sourceTree = "<group>"; };
@@ -409,6 +414,7 @@
 		109DC2C926B52ECA00887263 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		109DC2CB26B5321400887263 /* ChatMinimizeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMinimizeView.xib; sourceTree = "<group>"; };
 		109DC2CC26B5321400887263 /* ChatMinimizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMinimizeView.swift; sourceTree = "<group>"; };
+		109E085626C7503E0085FBBE /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		10A076D725F786BE000EE39F /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		10A076DC25F78B18000EE39F /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		10A5A291263598E600E7A773 /* ImagesOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesOrderVC.swift; sourceTree = "<group>"; };
@@ -598,6 +604,8 @@
 		1018F0E626BB44E40019EA83 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				100E206C26C58F19007FF432 /* conversation_locked.mp3 */,
+				100E206426C58270007FF432 /* message_notify_tone.mp3 */,
 				1018F0E726BB452C0019EA83 /* wait_joining_chat.json */,
 				1054DB362638449D0032D6FA /* Start_Recording_Ring.mp3 */,
 			);
@@ -1115,6 +1123,7 @@
 				1006E16A25FCDD3900D325F0 /* Cities */,
 				1006E1B325FCF00100D325F0 /* Regions */,
 				10FA85D426A24212005A59D8 /* ChooserVC.swift */,
+				109E085626C7503E0085FBBE /* ContactUsVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1756,8 +1765,10 @@
 				101CEB6625FCF3640014D96E /* RegionsTableViewCell.xib in Resources */,
 				10C64D7425C9570100FB01F8 /* GoogleService-Info.plist in Resources */,
 				88DDB5AE24E188C50003D1A7 /* OnSaleCollectionViewCell.xib in Resources */,
+				100E206D26C58F19007FF432 /* conversation_locked.mp3 in Resources */,
 				1054DB4426384DDE0032D6FA /* CartVoiceTableViewCell.xib in Resources */,
 				8823DDD724B9D89A009A83C5 /* Lato-BoldItalic.ttf in Resources */,
+				100E206526C58270007FF432 /* message_notify_tone.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2045,6 +2056,7 @@
 				10227B902688D20000626C74 /* ChangeLocationVC.swift in Sources */,
 				10813E98268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift in Sources */,
 				1006E17225FCDE4300D325F0 /* AskLocationVC+HomeViewDelegate.swift in Sources */,
+				109E085726C7503E0085FBBE /* ContactUsVC.swift in Sources */,
 				103A23C726483C7E00945EBC /* ProductSearchResultTableViewCell.swift in Sources */,
 				1018F0EA26BB551E0019EA83 /* ConversationResponse.swift in Sources */,
 				10227B942688D67F00626C74 /* ChangeLocationVC+ViewDelegate.swift in Sources */,

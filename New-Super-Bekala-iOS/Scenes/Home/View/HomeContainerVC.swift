@@ -87,6 +87,11 @@ class HomeContainerVC: UIViewController {
         }
     }
     
+    
+    @IBAction func toProfile(_ sender: Any) {
+        Router.toProfile(self)
+    }
+    
     @IBAction func toChat(_ sender: Any) {
         guard Shared.isChatting == false else {
             showAlert(title: "", message: "Please first close your current conversation session to start new one".localized)

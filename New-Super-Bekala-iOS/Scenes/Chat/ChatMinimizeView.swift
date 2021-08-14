@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
+import AVFoundation
 
 @IBDesignable
 class ChatMinimizeView: UIView, MainViewDelegate {
@@ -16,9 +18,10 @@ class ChatMinimizeView: UIView, MainViewDelegate {
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var chatLbl: UILabel!
     @IBOutlet weak var adminAvatar: CircluarImage!
+    @IBOutlet weak var unseenLbl: RoundedLabel!
     
     let nibName = "ChatMinimizeView"
-    var contentView:UIView?
+    var contentView: UIView?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,10 +44,8 @@ class ChatMinimizeView: UIView, MainViewDelegate {
             Router.toChat(self.parentContainerViewController()!)
         }
         
-        chatLbl.text = Shared.currentConversationAdminName
-        adminAvatar.kf.setImage(with: URL(string: Shared.currentConversationAdminAvatar ?? ""), placeholder: UIImage(named: "user"))
-        
         chatMinimize.layer.cornerRadius = 10
+        
         layer.cornerRadius = 10
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 15
@@ -54,11 +55,7 @@ class ChatMinimizeView: UIView, MainViewDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleIfChatting), name: NSNotification.Name("is_chatting"), object: nil)
         
-        if Shared.isChatting{
-            self.isHidden = false
-        }else{
-            self.isHidden = true
-        }
+        self.handleIfChatting()
         
     }
 
@@ -102,6 +99,17 @@ class ChatMinimizeView: UIView, MainViewDelegate {
             self.isHidden = false
         }else{
             self.isHidden = true
+        }
+        
+        if Shared.unseenMessages != 0 {
+            self.unseenLbl.isHidden = false
+            self.unseenLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.unseenLbl.layer.cornerRadius = self.unseenLbl.frame.height / 2
+            self.unseenLbl.shake()
+            self.unseenLbl.text = "\(Shared.unseenMessages)"
+        }else{
+            self.unseenLbl.isHidden = true
+            self.unseenLbl.transform = CGAffineTransform(scaleX: 0, y: 0)
         }
     }
     
