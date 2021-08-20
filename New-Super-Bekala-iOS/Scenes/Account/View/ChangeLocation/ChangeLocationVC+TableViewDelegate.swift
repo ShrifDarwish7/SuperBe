@@ -22,14 +22,16 @@ extension ChangeLocationVC: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AddressesTableViewCell.identifier, for: indexPath) as! AddressesTableViewCell
-        cell.name.text = self.addresses![indexPath.row].title
+        cell.loadFrom(self.addresses![indexPath.row])
         
         if self.addresses![indexPath.row].selected == 1{
             cell.selectedImg.isHidden = false
             cell.name.alpha = 1
+            cell.formattedAddress.alpha = 1
         }else{
             cell.selectedImg.isHidden = true
             cell.name.alpha = 0.3
+            cell.formattedAddress.alpha = 0.3
         }
         
         return cell

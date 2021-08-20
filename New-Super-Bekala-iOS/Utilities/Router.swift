@@ -156,7 +156,7 @@ class Router {
     
     static func toShareLocation(_ sender: UIViewController){
         let vc = self.instantiate(appStoryboard: .services, identifier: "ServicesNav") as! UINavigationController
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overCurrentContext
         sender.present(vc, animated: true, completion: nil)
         
     }
@@ -222,7 +222,7 @@ class Router {
     
     static func toChat(_ sender: UIViewController){
         let vc = Router.instantiate(appStoryboard: .other, identifier: "ChatVC") as! ChatVC
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overCurrentContext
         sender.present(vc, animated: true, completion: nil)
     }
     

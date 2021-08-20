@@ -14,4 +14,10 @@ class AddressesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var selectedImg: UIImageView!
+    @IBOutlet weak var formattedAddress: UILabel!
+    
+    func loadFrom(_ address: Address){
+        name.text = address.title
+        formattedAddress.text = "\(address.city ?? "") \(address.dist ?? "") \(address.landmark ?? "") \(address.building ?? "") \(address.floor ?? "") \(address.flat ?? "") \(address.phone ?? "")"
+    }
 }

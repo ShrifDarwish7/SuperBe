@@ -49,22 +49,23 @@ extension ShoopingVC: SkeletonTableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.branches![indexPath.row].isOpen == 1{
-            Router.toBranch(self, self.branches![indexPath.row])
-        }else if self.branches![indexPath.row].isOnhold == 1{
-            let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.branches![indexPath.row].name?.ar ?? "") معلق حاليا"
-            showAlert(title: "", message: msg)
-        }else if self.branches![indexPath.row].isOpen == 0 || self.branches![indexPath.row].isBusy == 1{
-            let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.branches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
-            let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
-            let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
-                Router.toBranch(self, self.branches![indexPath.row])
-            }
-            let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
-            alert.addAction(continueAction)
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true, completion: nil)
-        }
+        Router.toBranch(self, self.branches![indexPath.row])
+//        if self.branches![indexPath.row].isOpen == 1{
+//            Router.toBranch(self, self.branches![indexPath.row])
+//        }else if self.branches![indexPath.row].isOnhold == 1{
+//            let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.branches![indexPath.row].name?.ar ?? "") معلق حاليا"
+//            showAlert(title: "", message: msg)
+//        }else if self.branches![indexPath.row].isOpen == 0 || self.branches![indexPath.row].isBusy == 1{
+//            let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.branches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
+//            let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+//            let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+//                Router.toBranch(self, self.branches![indexPath.row])
+//            }
+//            let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+//            alert.addAction(continueAction)
+//            alert.addAction(cancelAction)
+//            self.present(alert, animated: true, completion: nil)
+//        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

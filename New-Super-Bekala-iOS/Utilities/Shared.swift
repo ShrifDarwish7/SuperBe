@@ -47,7 +47,10 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
     }
-    static var unseenMessages: Int = 0
+    static var unseenMessages: Int{
+        set { UserDefaults.init().setValue(newValue, forKey: "unseen_messages") }
+        get { return UserDefaults.init().integer(forKey: "unseen_messages") }
+    }
     static var mapState: MapState?
     static var transaction: Transaction?
     static var selectedServices: SelectedServices?

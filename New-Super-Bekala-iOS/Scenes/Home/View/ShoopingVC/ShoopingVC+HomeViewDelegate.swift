@@ -70,10 +70,13 @@ extension ShoopingVC: MainViewDelegate{
         featuredVendorsCollection.hideSkeleton()
         if let data = data,
            !data.isEmpty{
+            self.featuredStackContainer.isHidden = false
             self.featuredLoading = false
             self.featuredVendorsCollection.isHidden = false
             self.featuredBranches = data.reversed()
             self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+        }else{
+            self.featuredStackContainer.isHidden = true
         }
     }
     

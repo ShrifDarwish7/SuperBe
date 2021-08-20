@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Lato-Bold.ttf">
             <string>Lato-Bold</string>
+        </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -25,12 +28,30 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZw-YQ-AQO">
                         <rect key="frame" x="5" y="5" width="370" height="95"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqF-qJ-O9G">
-                                <rect key="frame" x="15" y="10" width="44" height="75"/>
-                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="1xh-xH-EXH">
+                                <rect key="frame" x="15" y="10" width="295" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqF-qJ-O9G">
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="22"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAP-JS-0Yc">
+                                        <rect key="frame" x="0.0" y="22" width="295" height="53"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nAP-JS-0Yc" secondAttribute="trailing" id="L4X-Wf-rWf"/>
+                                    <constraint firstAttribute="trailing" secondItem="aqF-qJ-O9G" secondAttribute="trailing" id="LN3-RJ-CjC"/>
+                                    <constraint firstItem="aqF-qJ-O9G" firstAttribute="top" secondItem="1xh-xH-EXH" secondAttribute="top" id="iHM-Ho-JLf"/>
+                                    <constraint firstAttribute="bottom" secondItem="nAP-JS-0Yc" secondAttribute="bottom" id="jwa-HE-ifL"/>
+                                    <constraint firstItem="nAP-JS-0Yc" firstAttribute="top" secondItem="aqF-qJ-O9G" secondAttribute="bottom" id="qlF-d5-ZTv"/>
+                                </constraints>
+                            </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="true" translatesAutoresizingMaskIntoConstraints="NO" id="TAp-qK-ZQW">
                                 <rect key="frame" x="325" y="32.5" width="30" height="30"/>
                                 <constraints>
@@ -41,12 +62,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="aqF-qJ-O9G" secondAttribute="bottom" constant="10" id="OT4-sa-x1L"/>
-                            <constraint firstItem="aqF-qJ-O9G" firstAttribute="top" secondItem="DZw-YQ-AQO" secondAttribute="top" constant="10" id="aUh-QU-ykN"/>
+                            <constraint firstItem="1xh-xH-EXH" firstAttribute="leading" secondItem="DZw-YQ-AQO" secondAttribute="leading" constant="15" id="0HT-xB-yuF"/>
+                            <constraint firstItem="TAp-qK-ZQW" firstAttribute="leading" secondItem="1xh-xH-EXH" secondAttribute="trailing" constant="15" id="6P8-nZ-eF1"/>
+                            <constraint firstAttribute="bottom" secondItem="1xh-xH-EXH" secondAttribute="bottom" constant="10" id="7Nt-fF-z5V"/>
                             <constraint firstItem="TAp-qK-ZQW" firstAttribute="centerY" secondItem="DZw-YQ-AQO" secondAttribute="centerY" id="cP8-9M-2s7"/>
-                            <constraint firstItem="aqF-qJ-O9G" firstAttribute="leading" secondItem="DZw-YQ-AQO" secondAttribute="leading" constant="15" id="jbm-dn-3tg"/>
+                            <constraint firstItem="1xh-xH-EXH" firstAttribute="top" secondItem="DZw-YQ-AQO" secondAttribute="top" constant="10" id="gQq-C3-nJ2"/>
+                            <constraint firstItem="1xh-xH-EXH" firstAttribute="centerY" secondItem="DZw-YQ-AQO" secondAttribute="centerY" id="kfA-tX-JHb"/>
                             <constraint firstAttribute="trailing" secondItem="TAp-qK-ZQW" secondAttribute="trailing" constant="15" id="s3I-go-NE6"/>
-                            <constraint firstItem="aqF-qJ-O9G" firstAttribute="centerY" secondItem="DZw-YQ-AQO" secondAttribute="centerY" id="xTg-Dv-a0q"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -60,6 +82,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="formattedAddress" destination="nAP-JS-0Yc" id="3sc-J9-P6p"/>
                 <outlet property="name" destination="aqF-qJ-O9G" id="o02-nH-xvq"/>
                 <outlet property="selectedImg" destination="TAp-qK-ZQW" id="s29-xK-eWP"/>
             </connections>

@@ -103,7 +103,6 @@ class ShareLocationVC: UIViewController {
         
         continueBtnView.isHidden = false
         
-        getDistance()
     }
     
     @IBAction func continueAction(_ sender: Any) {
@@ -129,28 +128,28 @@ class ShareLocationVC: UIViewController {
         }
     }
     
-    func getDistance(){
-        
-        SVProgressHUD.show()
-        
-        let parameters: [String:String] = [
-            "origins": pickupLocation!,
-            "destinations": dropOffLocation!,
-            "key": Shared.GMS_KEY,
-            "mode": "driving"
-        ]
-        
-        APIServices.shared.call(.getDistance(parameters)) { data in
-            SVProgressHUD.dismiss()
-            if let data = data,
-               let dataModel = data.getDecodedObject(from: GMSDistanceMatrixResponse.self){
-                DispatchQueue.main.async {
-                    self.distance.text = "\((Double((dataModel.rows.first?.elements.first?.distance.value)!) / 1000).roundToDecimal(2)) Km"
-                }
-            }
-        }
-        
-    }
+//    func getDistance(){
+//
+//        SVProgressHUD.show()
+//
+//        let parameters: [String:String] = [
+//            "origins": pickupLocation!,
+//            "destinations": dropOffLocation!,
+//            "key": Shared.GMS_KEY,
+//            "mode": "driving"
+//        ]
+//
+//        APIServices.shared.call(.getDistance(parameters)) { data in
+//            SVProgressHUD.dismiss()
+//            if let data = data,
+//               let dataModel = data.getDecodedObject(from: GMSDistanceMatrixResponse.self){
+//                DispatchQueue.main.async {
+//                    self.distance.text = "\((Double((dataModel.rows.first?.elements.first?.distance.value)!) / 1000).roundToDecimal(2)) Km"
+//                }
+//            }
+//        }
+//
+//    }
     
     
     func showAddressesAlert(){

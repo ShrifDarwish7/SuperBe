@@ -41,7 +41,8 @@ class ChatMinimizeView: UIView, MainViewDelegate {
         contentView = view
         
         self.addTapGesture { (_) in
-            Router.toChat(self.parentContainerViewController()!)
+            self.isHidden = true
+            Router.toChat((UIWindow.key!.rootViewController)!)
         }
         
         chatMinimize.layer.cornerRadius = 10
@@ -81,7 +82,7 @@ class ChatMinimizeView: UIView, MainViewDelegate {
             let presenter = MainPresenter(self)
             presenter.lockConversation()
         }))
-        self.parentContainerViewController()!.present(alert, animated: true, completion: nil)
+        (UIWindow.key!.rootViewController)!.present(alert, animated: true, completion: nil)
     }
     
     func didCompleteLockConversation(_ error: String?) {
@@ -105,7 +106,7 @@ class ChatMinimizeView: UIView, MainViewDelegate {
             self.unseenLbl.isHidden = false
             self.unseenLbl.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.unseenLbl.layer.cornerRadius = self.unseenLbl.frame.height / 2
-            self.unseenLbl.shake()
+            self.unseenLbl.shake(.medium)
             self.unseenLbl.text = "\(Shared.unseenMessages)"
         }else{
             self.unseenLbl.isHidden = true

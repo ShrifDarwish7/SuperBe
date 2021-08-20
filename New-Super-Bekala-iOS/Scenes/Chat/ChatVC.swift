@@ -79,6 +79,7 @@ class ChatVC: UIViewController, UITextViewDelegate {
                                         body: JSON(data!)["message"]["body"].stringValue,
                                         senderID: 0, createdAt: self.dateFormatter.string(from: Date())))
             Shared.play("message_notify_tone", &self.player)
+            guard !UIApplication.getTopViewController()!.isKind(of: ChatVC.self) else { return }
             Shared.unseenMessages += 1
             NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         }
@@ -117,7 +118,6 @@ class ChatVC: UIViewController, UITextViewDelegate {
             waitingAgentView.isHidden = false
             loadLottie()
         }
-        
         
     }
     
@@ -162,7 +162,7 @@ class ChatVC: UIViewController, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         UIView.animate(withDuration: 0.4) {
-            self.messageBottomCnst.constant = 0
+            self.messageBottomCnst.constant = 20
             self.view.layoutIfNeeded()
         }
     }
@@ -212,7 +212,6 @@ class ChatVC: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func minimizeAction(_ sender: Any) {
-        //AppDelegate.pusher = nil
         Shared.unseenMessages = 0
         Shared.isChatting = true
         NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)

@@ -68,7 +68,10 @@ extension BalanceVC: UITableViewDelegate, UITableViewDataSource{
         
         if value! < 0{
             cell.containerView.backgroundColor = #colorLiteral(red: 0.9880966544, green: 0.4059396982, blue: 0.4844449759, alpha: 1)
-            cell.statusIcon.transform = CGAffineTransform(rotationAngle: .pi)
+            cell.statusIcon.image = UIImage(named: "minus-1")
+        }else{
+            cell.containerView.backgroundColor = #colorLiteral(red: 0.6666666667, green: 0.8941176471, blue: 0.6470588235, alpha: 1)
+            cell.statusIcon.image = UIImage(named: "added")
         }
         
         return cell

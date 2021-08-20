@@ -19,7 +19,15 @@ import CoreData
 import Reachability
 import PusherSwift
 
-
+extension UIWindow {
+    static var key: UIWindow? {
+        if #available(iOS 13, *) {
+            return UIApplication.shared.windows.first { $0.isKeyWindow }
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -43,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyCyAPJ2M7dyEAyC33zqVCyXlWlWRszYH4U")
         
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(ChatVC.self)
         FirebaseApp.configure()
        // Auth.auth().canHandle(URL(string: "com.googleusercontent.apps.966110321537-bg6q76idnnvqf2fdvu9fstertat6mgq1")!)
         Auth.auth().canHandle(URL(string: "com.googleusercontent.apps.806574922305-8f0bnjog7kriohcipdf2ilu7jb4b7sch")!)

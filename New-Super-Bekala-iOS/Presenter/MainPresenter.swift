@@ -49,6 +49,7 @@ protocol MainViewDelegate {
     func didCompleteWithConversation(_ data: Conversation?,_ error: String?)
     func didCompleteReopenConversation(_ error: String?)
     func didCompleteLockConversation(_ error: String?)
+    func didCompleteExchangePointsToWallet(_ error: String?)
 }
 
 extension MainViewDelegate{
@@ -90,6 +91,7 @@ extension MainViewDelegate{
     func didCompleteWithConversation(_ data: Conversation?,_ error: String?){}
     func didCompleteReopenConversation(_ error: String?){}
     func didCompleteLockConversation(_ error: String?){}
+    func didCompleteExchangePointsToWallet(_ error: String?){}
 }
 
 class MainPresenter{
@@ -98,6 +100,24 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func exchangePointsToWallet(_ amount: Int){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.updateWallet(["points": "\(amount)"])) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    self.delegate?.didCompleteExchangePointsToWallet(nil)
+                }else{
+                    self.delegate?.didCompleteExchangePointsToWallet(json["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompleteExchangePointsToWallet(Shared.errorMsg)
+            }
+        }
     }
     
     func getConversation(_ id: Int){
@@ -263,7 +283,10 @@ class MainPresenter{
     }
     
     func getPoints(){
+        self.delegate?.showProgress()
         APIServices.shared.call(.points) { (data) in
+            self.delegate?.dismissProgress()
+            print(JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: PointsResponse.self),
                let pointsData = dataModel.data{
@@ -507,7 +530,7 @@ class MainPresenter{
     
     func getBranches(_ prms: [String:String]){
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            print("getBranches",JSON(data))
+            //print("getBranches",JSON(data))
             if let data = data,
                var dataModel = data.getDecodedObject(from: BranchesResponse.self){
                 for i in 0...dataModel.data.count-1{
@@ -528,7 +551,7 @@ class MainPresenter{
         var prms = prms
         prms.updateValue("is_featured=1", forKey: "filter")
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            //print("is_featured branches", JSON(data))
+            print("is_featured branches", JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: BranchesResponse.self){
                 delegate?.didCompleteWithFeaturedBranches(dataModel.data)

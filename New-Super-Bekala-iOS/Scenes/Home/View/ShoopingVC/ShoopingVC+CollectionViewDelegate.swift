@@ -42,12 +42,14 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case filtersCollectionView:
             return self.categories?.count ?? 0
         case featuredVendorsCollection:
-            if (self.featuredBranches?.count ?? 5) > 3{
+            if featuredLoading{
+                return 3
+            }else if (self.featuredBranches?.count ?? 0) > 3{
                 self.allFeaturedBtn.isHidden = false
                 return 3
             }else{
                 self.allFeaturedBtn.isHidden = true
-                return self.branches?.count ?? 3
+                return self.featuredBranches?.count ?? 0
             }
         default:
             return 0
@@ -105,23 +107,23 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             selectCategory(index: indexPath.row)
 
         case featuredVendorsCollection:
-
-            if self.featuredBranches![indexPath.row].isOpen == 1{
-                Router.toBranch(self, self.featuredBranches![indexPath.row])
-            }else if self.featuredBranches![indexPath.row].isOnhold == 1{
-                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
-                showAlert(title: "", message: msg)
-            }else if self.featuredBranches![indexPath.row].isOpen == 0 || self.featuredBranches![indexPath.row].isBusy == 1{
-                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
-                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
-                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
-                    Router.toBranch(self, self.featuredBranches![indexPath.row])
-                }
-                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
-                alert.addAction(continueAction)
-                alert.addAction(cancelAction)
-                self.present(alert, animated: true, completion: nil)
-            }
+            Router.toBranch(self, self.featuredBranches![indexPath.row])
+//            if self.featuredBranches![indexPath.row].isOpen == 1{
+//                Router.toBranch(self, self.featuredBranches![indexPath.row])
+//            }else if self.featuredBranches![indexPath.row].isOnhold == 1{
+//                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
+//                showAlert(title: "", message: msg)
+//            }else if self.featuredBranches![indexPath.row].isOpen == 0 || self.featuredBranches![indexPath.row].isBusy == 1{
+//                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
+//                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+//                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+//                    Router.toBranch(self, self.featuredBranches![indexPath.row])
+//                }
+//                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+//                alert.addAction(continueAction)
+//                alert.addAction(cancelAction)
+//                self.present(alert, animated: true, completion: nil)
+//            }
 
         default:
             break

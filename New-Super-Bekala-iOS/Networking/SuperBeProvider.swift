@@ -45,6 +45,7 @@ enum SuperBe{
     case getConversation(_ id: Int)
     case reopenConversation(_ id: Int)
     case lockConversation(_ id: Int)
+    case updateWallet(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
@@ -92,7 +93,7 @@ extension SuperBe: TargetType{
             return "orders/\(id)"
         case .placeSuperService(_,_,_):
             return "orders/super_services"
-        case .wallet, .addToWallet(_):
+        case .wallet, .addToWallet(_),.updateWallet(_):
             return "wallet"
         case .getBranchRating(let id):
             return "branches/\(id)?with=ratings.user"
@@ -128,7 +129,8 @@ extension SuperBe: TargetType{
              .startConversation,
              .sendMessage(_, _),
              .reopenConversation(_),
-             .lockConversation(_):
+             .lockConversation(_),
+             .updateWallet(_):
             return .post
         case .updateAddress(_, _),
              .updateOrder(_, _):
@@ -157,7 +159,8 @@ extension SuperBe: TargetType{
              .getMyOrders(let prms),
              .search(let prms),
              .slider(let prms),
-             .getShippingCost(let prms):
+             .getShippingCost(let prms),
+             .updateWallet(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),

@@ -49,7 +49,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McDonald's" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNX-Do-ePG">
-                                <rect key="frame" x="75" y="59" width="185" height="18"/>
+                                <rect key="frame" x="75" y="58" width="185" height="18"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fdr-Ym-jaU">
-                                <rect key="frame" x="72" y="82" width="100" height="20"/>
+                                <rect key="frame" x="72" y="83" width="100" height="20"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ll-q9-Ih8" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
@@ -200,7 +200,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fdr-Ym-jaU" firstAttribute="centerY" secondItem="Juq-dK-g0u" secondAttribute="centerY" constant="12" id="1Do-uU-0LW"/>
+                            <constraint firstItem="fdr-Ym-jaU" firstAttribute="centerY" secondItem="Juq-dK-g0u" secondAttribute="centerY" constant="13" id="1Do-uU-0LW"/>
                             <constraint firstItem="v6V-oy-5Zc" firstAttribute="centerY" secondItem="IFY-fc-xxm" secondAttribute="centerY" id="64F-MO-HsQ"/>
                             <constraint firstItem="Juq-dK-g0u" firstAttribute="leading" secondItem="IFY-fc-xxm" secondAttribute="leading" constant="5" id="HFp-8H-3lR"/>
                             <constraint firstItem="Juq-dK-g0u" firstAttribute="centerY" secondItem="IFY-fc-xxm" secondAttribute="centerY" id="HgI-CX-G5c"/>
@@ -209,7 +209,7 @@
                             <constraint firstItem="fdr-Ym-jaU" firstAttribute="leading" secondItem="Juq-dK-g0u" secondAttribute="trailing" constant="7" id="JV7-S7-10B"/>
                             <constraint firstItem="juJ-Un-O8p" firstAttribute="centerY" secondItem="IFY-fc-xxm" secondAttribute="centerY" id="Ouh-I7-zZF"/>
                             <constraint firstItem="Xrk-dU-d3P" firstAttribute="top" secondItem="Juq-dK-g0u" secondAttribute="bottom" constant="-5" id="QI5-mf-ljt"/>
-                            <constraint firstItem="TNX-Do-ePG" firstAttribute="centerY" secondItem="IFY-fc-xxm" secondAttribute="centerY" constant="-12" id="er7-94-SLP"/>
+                            <constraint firstItem="TNX-Do-ePG" firstAttribute="centerY" secondItem="IFY-fc-xxm" secondAttribute="centerY" constant="-13" id="er7-94-SLP"/>
                             <constraint firstItem="Xrk-dU-d3P" firstAttribute="centerX" secondItem="Juq-dK-g0u" secondAttribute="centerX" id="iGy-EY-z7M"/>
                             <constraint firstItem="v6V-oy-5Zc" firstAttribute="leading" secondItem="juJ-Un-O8p" secondAttribute="trailing" constant="5" id="m9Z-IN-7ge"/>
                             <constraint firstItem="juJ-Un-O8p" firstAttribute="leading" secondItem="TNX-Do-ePG" secondAttribute="trailing" constant="7" id="wxw-dt-4ly"/>

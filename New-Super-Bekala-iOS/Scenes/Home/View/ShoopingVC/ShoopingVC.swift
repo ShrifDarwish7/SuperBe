@@ -18,6 +18,7 @@ class ShoopingVC: UIViewController, ChooserDelegate {
     @IBOutlet weak var allFeaturedBtn: UIButton!
     @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var categoriesBtn: UIButton!
+    @IBOutlet weak var featuredStackContainer: UIStackView!
     
     var presenter: MainPresenter?
     var categories: [Category]?
