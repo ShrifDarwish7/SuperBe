@@ -48,3 +48,7 @@
 "TAP TO REOPEN" = "اضغط لإعادة الفتح";
 "Please first close your current conversation session to start new one" = "يرجى أولاً إغلاق المحادثة الحالية لبدء محادثة جديدة";
 "You have no enough points to exchange" = "ليس لديك نقاط كافية لاستبدالها";
+"Pick up location" = "موقع الإستلام";
+"Confirm Pick Up" = "تأكيد مكان الإستلام";
+"Drop off location" = "مكان التسليم";
+"Confirm Drop Off" = "تأكيد مكان التسليم";

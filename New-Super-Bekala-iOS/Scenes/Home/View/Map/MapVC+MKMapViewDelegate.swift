@@ -49,7 +49,7 @@ extension MapVC: MKMapViewDelegate{
                 guard let placemark = placemarks?.first else { return }
                 switch Shared.mapState{
                 case .fetchLocation:
-                    Shared.deliveringToTitle = (placemark.administrativeArea ?? "") + "(\((placemark.subAdministrativeArea ?? placemark.name) ?? placemark.thoroughfare ?? ""))"
+                    Shared.deliveringToTitle = (placemark.administrativeArea ?? "") + " (\((placemark.subAdministrativeArea ?? placemark.name) ?? placemark.thoroughfare ?? ""))"
                 default : break
                 }
                 DispatchQueue.main.async {

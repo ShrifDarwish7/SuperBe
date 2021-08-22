@@ -44,6 +44,7 @@
 		1026E97B2625C44A004F1DEA /* OptionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1026E9792625C44A004F1DEA /* OptionsTableViewCell.xib */; };
 		1026E9802625CCFD004F1DEA /* ProductVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1026E97F2625CCFD004F1DEA /* ProductVC+TableViewDelegate.swift */; };
 		102EBCBE263199B000FA85DB /* OrderVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102EBCBD263199B000FA85DB /* OrderVC+TableViewDelegate.swift */; };
+		10307DCA26D0FBEF0062F196 /* PickLocationVC+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10307DC926D0FBEF0062F196 /* PickLocationVC+MKMapViewDelegate.swift */; };
 		103191002614AEE80002C47E /* ProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103190FF2614AEE80002C47E /* ProductsResponse.swift */; };
 		103191072614B2140002C47E /* ProductSkeletonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103191052614B2140002C47E /* ProductSkeletonCollectionViewCell.swift */; };
 		103191082614B2140002C47E /* ProductSkeletonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103191062614B2140002C47E /* ProductSkeletonCollectionViewCell.xib */; };
@@ -120,7 +121,6 @@
 		10813E92268CCCD500C56B25 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10813E91268CCCD500C56B25 /* LocationManager.swift */; };
 		10813E94268CD35D00C56B25 /* PickLocationVC+GMSMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10813E93268CD35C00C56B25 /* PickLocationVC+GMSMapViewDelegate.swift */; };
 		10813E96268CD3A300C56B25 /* PickLocationVC+ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10813E95268CD3A300C56B25 /* PickLocationVC+ViewDelegate.swift */; };
-		10813E98268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10813E97268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift */; };
 		108F2B8826ADCDBE0027A755 /* Other.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 108F2B8726ADCDBE0027A755 /* Other.storyboard */; };
 		108F2B8B26ADCEC70027A755 /* RatingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2B8A26ADCEC70027A755 /* RatingsVC.swift */; };
 		108F2B8D26ADCF5E0027A755 /* RatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2B8C26ADCF5E0027A755 /* RatesResponse.swift */; };
@@ -317,6 +317,7 @@
 		1026E9792625C44A004F1DEA /* OptionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsTableViewCell.xib; sourceTree = "<group>"; };
 		1026E97F2625CCFD004F1DEA /* ProductVC+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		102EBCBD263199B000FA85DB /* OrderVC+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		10307DC926D0FBEF0062F196 /* PickLocationVC+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickLocationVC+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
 		103190FF2614AEE80002C47E /* ProductsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsResponse.swift; sourceTree = "<group>"; };
 		103191052614B2140002C47E /* ProductSkeletonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSkeletonCollectionViewCell.swift; sourceTree = "<group>"; };
 		103191062614B2140002C47E /* ProductSkeletonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductSkeletonCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -393,7 +394,6 @@
 		10813E91268CCCD500C56B25 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		10813E93268CD35C00C56B25 /* PickLocationVC+GMSMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickLocationVC+GMSMapViewDelegate.swift"; sourceTree = "<group>"; };
 		10813E95268CD3A300C56B25 /* PickLocationVC+ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickLocationVC+ViewDelegate.swift"; sourceTree = "<group>"; };
-		10813E97268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickLocationVC+GMSAutocompleteViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		108F2B8726ADCDBE0027A755 /* Other.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Other.storyboard; sourceTree = "<group>"; };
 		108F2B8A26ADCEC70027A755 /* RatingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsVC.swift; sourceTree = "<group>"; };
 		108F2B8C26ADCF5E0027A755 /* RatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesResponse.swift; sourceTree = "<group>"; };
@@ -1021,7 +1021,7 @@
 				10813E8F268CC43600C56B25 /* PickLocationVC.swift */,
 				10813E93268CD35C00C56B25 /* PickLocationVC+GMSMapViewDelegate.swift */,
 				10813E95268CD3A300C56B25 /* PickLocationVC+ViewDelegate.swift */,
-				10813E97268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift */,
+				10307DC926D0FBEF0062F196 /* PickLocationVC+MKMapViewDelegate.swift */,
 			);
 			path = PickLocation;
 			sourceTree = "<group>";
@@ -1999,6 +1999,7 @@
 				AA08E45524E01490001629A0 /* LoginPresenter.swift in Sources */,
 				105B7AED26B19A1F00227955 /* Doubles.swift in Sources */,
 				1054719326305BEC001EE33F /* LastOrdersVC+ViewDelegate.swift in Sources */,
+				10307DCA26D0FBEF0062F196 /* PickLocationVC+MKMapViewDelegate.swift in Sources */,
 				103191072614B2140002C47E /* ProductSkeletonCollectionViewCell.swift in Sources */,
 				109DC2CE26B5321400887263 /* ChatMinimizeView.swift in Sources */,
 				109703882699D37900C585AE /* InfoVC+TableViewDelegate.swift in Sources */,
@@ -2058,7 +2059,6 @@
 				1034F52E26A0792F0054038F /* FavouritesResponse.swift in Sources */,
 				881594BC24B610FF008BE195 /* AppDelegate.swift in Sources */,
 				10227B902688D20000626C74 /* ChangeLocationVC.swift in Sources */,
-				10813E98268CD61C00C56B25 /* PickLocationVC+GMSAutocompleteViewControllerDelegate.swift in Sources */,
 				1006E17225FCDE4300D325F0 /* AskLocationVC+HomeViewDelegate.swift in Sources */,
 				109E085726C7503E0085FBBE /* ContactUsVC.swift in Sources */,
 				103A23C726483C7E00945EBC /* ProductSearchResultTableViewCell.swift in Sources */,
@@ -2339,7 +2339,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2371,7 +2371,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

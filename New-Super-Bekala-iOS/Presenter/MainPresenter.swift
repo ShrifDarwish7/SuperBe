@@ -530,10 +530,11 @@ class MainPresenter{
     
     func getBranches(_ prms: [String:String]){
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            //print("getBranches",JSON(data))
+            print("getBranches",JSON(data))
             if let data = data,
-               var dataModel = data.getDecodedObject(from: BranchesResponse.self){
-                for i in 0...dataModel.data.count-1{
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self),
+               !dataModel.data.isEmpty{
+                for i in 0...(dataModel.data.count-1){
                     if let favBranches = Shared.favBranches,
                        !favBranches.isEmpty,
                        !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{

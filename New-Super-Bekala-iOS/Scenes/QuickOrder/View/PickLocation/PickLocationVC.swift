@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import GoogleMaps
-import GooglePlaces
+import MapKit
 
 class PickLocationVC: UIViewController {
 
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var askLocationView: AskLocationView!
     @IBOutlet weak var hintZoomView: UIView!
     @IBOutlet weak var markerImageView: UIImageView!
@@ -21,9 +20,8 @@ class PickLocationVC: UIViewController {
     @IBOutlet weak var confirmBtn: RoundedButton!
     @IBOutlet weak var landmarkTF: UITextField!
     
-    var camera: GMSCameraPosition?
+    var previousLocation: CLLocation?
     var presenter: MainPresenter?
-    var autocompleteVC: GMSAutocompleteViewController?
     var locationState: LocationState?
     var pickedCoords: String?{
         didSet{
@@ -37,48 +35,47 @@ class PickLocationVC: UIViewController {
         
         switch locationState {
         case .pickup:
-            titleTop.text = "Pick up location"
-            confirmBtn.setTitle("Confirm Pick Up", for: .normal)
+            titleTop.text = "Pick up location".localized
+            confirmBtn.setTitle("Confirm Pick Up".localized, for: .normal)
         case .dropOff:
-            titleTop.text = "Drop off location"
-            confirmBtn.setTitle("Confirm Drop Off", for: .normal)
+            titleTop.text = "Drop off location".localized
+            confirmBtn.setTitle("Confirm Drop Off".localized, for: .normal)
         default:
             break
         }
         
         mapView.delegate = self
-        hintZoomView.transform = CGAffineTransform(scaleX: 0, y: 0)
-        showHintZoom()
         
         presenter = MainPresenter(self)
         
         switch CLLocationManager.authorizationStatus() {
         case .denied, .notDetermined, .restricted:
-            camera = GMSCameraPosition.camera(withLatitude: 30.0444, longitude: 31.2357, zoom: 10)
-            mapView.camera = camera!
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357), latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.setRegion(region, animated: true)
         default:
             self.getUserLocation()
         }
+        
+        previousLocation = self.getCenterLocation(for: mapView)
     }
     
+    func getCenterLocation(for mapView: MKMapView) -> CLLocation{
+        let lat = mapView.centerCoordinate.latitude
+        let lng = mapView.centerCoordinate.longitude
+        return CLLocation(latitude: lat, longitude: lng)
+    }
     
     func getUserLocation(){
         LocationManager.shared.getUserLocation { [weak self] location in
             guard let self = self else { return }
-            self.camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude , longitude: location.coordinate.longitude, zoom: 19)
-            self.mapView.camera = self.camera!
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 200, longitudinalMeters: 200)
+            self.mapView.setRegion(region, animated: true)
         }
 
     }
     
     @IBAction func search(_ sender: Any) {
-        self.autocompleteVC = GMSAutocompleteViewController()
-        self.autocompleteVC!.delegate = self
-        self.autocompleteVC?.modalPresentationStyle = .formSheet
-        self.autocompleteVC?.tintColor = UIColor.white
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        self.present(self.autocompleteVC!, animated: true, completion: nil)
     }
     
     

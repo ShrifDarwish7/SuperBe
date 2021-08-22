@@ -41,20 +41,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xg1-IO-yZM">
-                                <rect key="frame" x="60" y="59" width="192.5" height="35"/>
+                                <rect key="frame" x="60" y="59" width="192" height="36"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-Z1-2Mu" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="239" width="414" height="623"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-Z1-2Mu" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="240" width="414" height="622"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JfS-9v-FHK" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="15" y="767" width="384" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-fN-jHc">
-                                        <rect key="frame" x="15" y="18" width="85" height="24.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-fN-jHc">
+                                        <rect key="frame" x="148.5" y="17.5" width="87" height="25.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -75,6 +75,7 @@
                                 <color key="backgroundColor" name="Buttons-Red"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="0zh-wV-9KX" secondAttribute="trailing" constant="15" id="2Rd-c7-0G5"/>
+                                    <constraint firstItem="BVk-fN-jHc" firstAttribute="centerX" secondItem="JfS-9v-FHK" secondAttribute="centerX" id="Dei-Gd-DQk"/>
                                     <constraint firstAttribute="height" constant="60" id="YxR-YF-vjc"/>
                                     <constraint firstItem="BVk-fN-jHc" firstAttribute="centerY" secondItem="JfS-9v-FHK" secondAttribute="centerY" id="ZHj-V5-Yuv"/>
                                     <constraint firstItem="gKD-gF-XtL" firstAttribute="top" secondItem="JfS-9v-FHK" secondAttribute="top" id="aZr-FR-VMp"/>
@@ -82,7 +83,6 @@
                                     <constraint firstAttribute="bottom" secondItem="gKD-gF-XtL" secondAttribute="bottom" id="eOf-1V-MoA"/>
                                     <constraint firstAttribute="trailing" secondItem="gKD-gF-XtL" secondAttribute="trailing" id="fId-gg-5Nj"/>
                                     <constraint firstItem="gKD-gF-XtL" firstAttribute="leading" secondItem="JfS-9v-FHK" secondAttribute="leading" id="gSs-ZH-A0F"/>
-                                    <constraint firstItem="BVk-fN-jHc" firstAttribute="leading" secondItem="JfS-9v-FHK" secondAttribute="leading" constant="15" id="xWb-5H-HRZ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
@@ -91,7 +91,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Heq-BO-cLY" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="104" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="105" width="414" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lV4-vS-yMK">
                                         <rect key="frame" x="0.0" y="22" width="394" height="106"/>
@@ -347,10 +347,10 @@
                                                         <rect key="frame" x="0.0" y="240" width="334" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5RV-79-HS5">
-                                                                <rect key="frame" x="98" y="4.5" width="138" height="21"/>
+                                                                <rect key="frame" x="100" y="4" width="134" height="22"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select from map " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4L-jG-M2h">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="21"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="22"/>
                                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
                                                                         <color key="textColor" name="Main"/>
                                                                         <nil key="highlightedColor"/>
@@ -467,10 +467,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gi-sI-Vf8" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jo0-6h-bmj">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPY-W5-oRm" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="359" y="601" width="40" height="40"/>
                                 <subviews>
@@ -502,7 +501,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKF-ri-SPZ" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKF-ri-SPZ" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                 <rect key="frame" x="359" y="114" width="40" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loupe" translatesAutoresizingMaskIntoConstraints="NO" id="DtZ-wx-ytw">
@@ -567,7 +566,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EA2-x5-RYX">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EA2-x5-RYX">
                                 <rect key="frame" x="87" y="333" width="240" height="90"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hint" translatesAutoresizingMaskIntoConstraints="NO" id="uJg-mk-gJe">
@@ -778,22 +777,22 @@
                             <constraint firstItem="EA2-x5-RYX" firstAttribute="centerX" secondItem="dWp-WS-YLE" secondAttribute="centerX" id="2oI-Gy-06g"/>
                             <constraint firstItem="NCL-pW-ya9" firstAttribute="bottom" secondItem="KcX-aQ-nrf" secondAttribute="bottom" constant="30" id="4Od-MT-CoV"/>
                             <constraint firstItem="gi5-fO-Fvy" firstAttribute="bottom" secondItem="pId-kA-8HQ" secondAttribute="bottom" id="4ja-EG-II4"/>
-                            <constraint firstItem="3gi-sI-Vf8" firstAttribute="top" secondItem="aKI-an-ccf" secondAttribute="bottom" constant="10" id="61E-02-ZcC"/>
                             <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="JPY-W5-oRm" secondAttribute="trailing" constant="15" id="7rD-wt-ebn"/>
-                            <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="3gi-sI-Vf8" secondAttribute="trailing" id="97u-bC-a1N"/>
                             <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="gi5-fO-Fvy" secondAttribute="trailing" id="C7W-CY-8mP"/>
-                            <constraint firstItem="gKF-ri-SPZ" firstAttribute="top" secondItem="3gi-sI-Vf8" secondAttribute="top" constant="10" id="E13-RF-uTC"/>
                             <constraint firstAttribute="top" secondItem="gi5-fO-Fvy" secondAttribute="top" id="GqM-E7-Tl2"/>
-                            <constraint firstItem="3gi-sI-Vf8" firstAttribute="leading" secondItem="NCL-pW-ya9" secondAttribute="leading" id="JBq-WQ-psH"/>
-                            <constraint firstItem="gKF-ri-SPZ" firstAttribute="trailing" secondItem="3gi-sI-Vf8" secondAttribute="trailing" constant="-15" id="L9a-qz-TOg"/>
+                            <constraint firstItem="Jo0-6h-bmj" firstAttribute="leading" secondItem="NCL-pW-ya9" secondAttribute="leading" id="Hkd-hM-nXt"/>
                             <constraint firstItem="gi5-fO-Fvy" firstAttribute="leading" secondItem="NCL-pW-ya9" secondAttribute="leading" id="N5T-oD-0pg"/>
                             <constraint firstItem="dWp-WS-YLE" firstAttribute="centerY" secondItem="pId-kA-8HQ" secondAttribute="centerY" id="OTf-5z-ftr"/>
                             <constraint firstItem="KcX-aQ-nrf" firstAttribute="leading" secondItem="NCL-pW-ya9" secondAttribute="leading" constant="15" id="PgS-S8-pbs"/>
+                            <constraint firstItem="gKF-ri-SPZ" firstAttribute="top" secondItem="NCL-pW-ya9" secondAttribute="top" constant="70" id="Vua-JV-eyl"/>
+                            <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="gKF-ri-SPZ" secondAttribute="trailing" constant="15" id="ckf-1J-egL"/>
                             <constraint firstItem="EA2-x5-RYX" firstAttribute="bottom" secondItem="dWp-WS-YLE" secondAttribute="top" id="fbz-Po-Jy9"/>
-                            <constraint firstItem="NCL-pW-ya9" firstAttribute="bottom" secondItem="3gi-sI-Vf8" secondAttribute="bottom" id="h73-nh-tJm"/>
                             <constraint firstItem="KcX-aQ-nrf" firstAttribute="top" secondItem="JPY-W5-oRm" secondAttribute="bottom" constant="15" id="hke-IC-yvV"/>
                             <constraint firstItem="aKI-an-ccf" firstAttribute="leading" secondItem="NCL-pW-ya9" secondAttribute="leading" constant="15" id="kkQ-h2-yvD"/>
+                            <constraint firstItem="Jo0-6h-bmj" firstAttribute="top" secondItem="aKI-an-ccf" secondAttribute="bottom" id="lDu-QQ-sRK"/>
+                            <constraint firstItem="NCL-pW-ya9" firstAttribute="bottom" secondItem="Jo0-6h-bmj" secondAttribute="bottom" id="opl-ld-cb1"/>
                             <constraint firstItem="aKI-an-ccf" firstAttribute="top" secondItem="NCL-pW-ya9" secondAttribute="top" constant="15" id="sY8-sD-0yO"/>
+                            <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="Jo0-6h-bmj" secondAttribute="trailing" id="uBj-Hu-hqj"/>
                             <constraint firstItem="dWp-WS-YLE" firstAttribute="centerX" secondItem="pId-kA-8HQ" secondAttribute="centerX" id="uLO-c5-T7z"/>
                             <constraint firstItem="NCL-pW-ya9" firstAttribute="trailing" secondItem="KcX-aQ-nrf" secondAttribute="trailing" constant="15" id="wjV-mg-5Km"/>
                         </constraints>
@@ -804,7 +803,7 @@
                         <outlet property="hintZoomView" destination="EA2-x5-RYX" id="gYH-6v-ghy"/>
                         <outlet property="landmarkTF" destination="LZV-2e-eUL" id="mhE-f6-r5i"/>
                         <outlet property="locationLbl" destination="8aq-eK-UTZ" id="AWq-LW-RSk"/>
-                        <outlet property="mapView" destination="3gi-sI-Vf8" id="UqM-qp-vog"/>
+                        <outlet property="mapView" destination="Jo0-6h-bmj" id="xCI-ZW-5n8"/>
                         <outlet property="markerImageView" destination="dWp-WS-YLE" id="h16-BT-NZP"/>
                         <outlet property="titleTop" destination="gO4-BS-jS2" id="6uz-um-vuU"/>
                     </connections>

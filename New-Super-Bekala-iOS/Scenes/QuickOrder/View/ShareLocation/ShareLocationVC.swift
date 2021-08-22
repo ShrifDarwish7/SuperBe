@@ -72,6 +72,7 @@ class ShareLocationVC: UIViewController {
         default:
             break
         }
+        self.dismissAdddressesAlert()
     }
     
     func updateMapView(){

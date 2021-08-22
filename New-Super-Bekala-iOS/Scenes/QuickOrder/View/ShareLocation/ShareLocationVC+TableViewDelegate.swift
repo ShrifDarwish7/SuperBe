@@ -23,9 +23,9 @@ extension ShareLocationVC: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AddressesTableViewCell.identifier, for: indexPath) as! AddressesTableViewCell
-        cell.name.text = self.addresses![indexPath.row].title
         cell.name.alpha = 1
         cell.selectedImg.isHidden = true
+        cell.loadFrom(self.addresses![indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -50,6 +50,8 @@ extension ShareLocationVC: UITableViewDelegate, UITableViewDataSource{
         default:
             break
         }
+        
+        self.dismissAdddressesAlert()
     }
 }
 
