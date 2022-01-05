@@ -1,0 +1,6 @@
+framework module PayButton {
+  umbrella header "PayButton-umbrella.h"
+
+  export *
+  module * { export * }
+}
