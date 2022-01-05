@@ -7,17 +7,36 @@
 //
 
 import UIKit
+import Lottie
+import CoreLocation
 
 class AskLocationVC: UIViewController {
     
+    @IBOutlet weak var lottieContainier: UIView!
     
     var presenter: MainPresenter?
+    var animationView: AnimationView?
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter = MainPresenter(self)
-
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.requestWhenInUseAuthorization()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        animationView?.removeFromSuperview()
+        animationView = .init(name: "location-animation")
+        animationView!.frame = lottieContainier.bounds
+        animationView!.contentMode = .scaleAspectFit
+        animationView!.loopMode = .loop
+        lottieContainier.addSubview(animationView!)
+        animationView!.play()
     }
     
     @IBAction func toMap(_ sender: Any) {

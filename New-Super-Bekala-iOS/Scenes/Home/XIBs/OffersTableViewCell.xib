@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,10 +30,10 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZDw-8F-gAa">
-                        <rect key="frame" x="95" y="28" width="409" height="49.5"/>
+                        <rect key="frame" x="95" y="28" width="120" height="49.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McDonald's" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXh-Fh-iTB">
-                                <rect key="frame" x="0.0" y="0.0" width="409" height="19.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,14 +55,6 @@
                             <constraint firstAttribute="trailing" secondItem="dXh-Fh-iTB" secondAttribute="trailing" id="HTA-Sa-bf7"/>
                         </constraints>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgo-Wh-bVF">
-                        <rect key="frame" x="519" y="37.5" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="AKE-m8-t8e"/>
-                            <constraint firstAttribute="width" constant="30" id="HG4-Lg-h5r"/>
-                        </constraints>
-                        <state key="normal" image="more"/>
-                    </button>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CAt-wj-Y7B">
                         <rect key="frame" x="25" y="92.5" width="519" height="245.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,8 +68,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="CAt-wj-Y7B" firstAttribute="top" secondItem="ZDw-8F-gAa" secondAttribute="bottom" constant="15" id="5vd-f0-Ecz"/>
-                    <constraint firstItem="xgo-Wh-bVF" firstAttribute="leading" secondItem="ZDw-8F-gAa" secondAttribute="trailing" constant="15" id="CQQ-wZ-eHC"/>
-                    <constraint firstAttribute="trailing" secondItem="xgo-Wh-bVF" secondAttribute="trailing" constant="20" id="Cxn-rl-waW"/>
                     <constraint firstAttribute="bottomMargin" secondItem="CAt-wj-Y7B" secondAttribute="bottom" constant="5" id="DPN-Rp-qHF"/>
                     <constraint firstItem="PWa-9r-iep" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="IcM-lL-atk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="CAt-wj-Y7B" secondAttribute="trailing" constant="5" id="Kxn-Qj-I9n"/>
@@ -85,7 +75,6 @@
                     <constraint firstItem="ZDw-8F-gAa" firstAttribute="centerY" secondItem="PWa-9r-iep" secondAttribute="centerY" id="YEz-Gl-BVr"/>
                     <constraint firstItem="CAt-wj-Y7B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="kFm-JY-VM3"/>
                     <constraint firstItem="PWa-9r-iep" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="xBI-DK-svH"/>
-                    <constraint firstItem="xgo-Wh-bVF" firstAttribute="centerY" secondItem="PWa-9r-iep" secondAttribute="centerY" id="xaP-O4-UtM"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -94,7 +83,6 @@
                 <outlet property="branchName" destination="dXh-Fh-iTB" id="BlR-XO-81j"/>
                 <outlet property="branchRate" destination="tnb-Dn-MRE" id="1Ey-Wa-5Fk"/>
                 <outlet property="onsaleCollectionView" destination="CAt-wj-Y7B" id="xYy-hZ-dyp"/>
-                <outlet property="showMore" destination="xgo-Wh-bVF" id="YYv-PM-ZzV"/>
                 <outlet property="vendorImage" destination="PWa-9r-iep" id="YyG-xg-JjQ"/>
             </connections>
             <point key="canvasLocation" x="44" y="151"/>
@@ -110,6 +98,5 @@
     </designables>
     <resources>
         <image name="9a479882-c273-4a43-9fdf-919c5b927660" width="600" height="473"/>
-        <image name="more" width="28" height="10"/>
     </resources>
 </document>

@@ -18,7 +18,7 @@ struct BranchesResponse: Codable {
 
 struct Branch: Codable {
     let id: Int
-     let bio: Localized?
+    let bio: Localized?
     let name: Localized?
     let phones, emails, fax: [String?]?
     let website: String?
@@ -28,7 +28,7 @@ struct Branch: Codable {
     let logo: String?
     let images: [String]?
     let acceptWalletPayment, fastDelivery, vendorDelivery, receiveFromShop, supportDelivery, creditOnDelivery: Int?
-    let coordinates: String?
+    var coordinates: String?
     let deliveryFees, minOrder: Double?
     let quickOrder, quickVoice, receiveCalls, cashOnDelivery: Int?
     let onlinePayment, acceptCoupons, acceptChats, isFeatured: Int?
@@ -60,11 +60,12 @@ struct Branch: Codable {
     //let openCloseTimes: String?
     var favouriteId: Int?
     var useCustomTimes: Int?
+    var coupons: [Coupon]?
     
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, phones, emails, fax, website, name, bio
+        case id, phones, emails, fax, website, name, bio, coupons
         case isNewBranch = "is_new_branch"
         case postalCode = "postal_code"
         case street, landmark
@@ -135,7 +136,7 @@ struct Localized: Codable {
 
 struct DeliveryRegion: Codable {
     let id: Int
-    let name: String
+    let name: String?//Localized?
     let cityID: Int
     let coordinates: [String]
 

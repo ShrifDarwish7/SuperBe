@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kMB-HK-oCd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kMB-HK-oCd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -133,16 +133,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tI-Po-Lbs">
-                                <rect key="frame" x="63" y="423.5" width="81" height="17.5"/>
+                                <rect key="frame" x="63" y="423.5" width="81" height="18"/>
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="15"/>
                                 <color key="textColor" name="Gold"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Cnz-W1-XbF">
-                                <rect key="frame" x="20" y="466" width="374" height="155"/>
+                                <rect key="frame" x="20" y="466.5" width="374" height="155"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Butchers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NwD-mp-VP4">
-                                        <rect key="frame" x="100.5" y="0.0" width="173" height="50"/>
+                                        <rect key="frame" x="100.5" y="0.0" width="173.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="rFP-EP-T9Z"/>
                                         </constraints>
@@ -168,7 +168,7 @@ ever since the 1500s</string>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O3-px-dnJ">
-                                <rect key="frame" x="157" y="661" width="100" height="40"/>
+                                <rect key="frame" x="157" y="661.5" width="100" height="40"/>
                                 <color key="backgroundColor" name="Buttons-Red"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="DTb-Q3-56q"/>
@@ -180,7 +180,7 @@ ever since the 1500s</string>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUD-ov-e5t">
-                                <rect key="frame" x="308.5" y="666" width="45" height="30"/>
+                                <rect key="frame" x="308.5" y="666.5" width="45" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="14X-em-YWH"/>
                                     <constraint firstAttribute="width" constant="45" id="zBk-fF-kRc"/>
@@ -188,7 +188,7 @@ ever since the 1500s</string>
                                 <state key="normal" image="nextIcon"/>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="877-tT-ROF">
-                                <rect key="frame" x="60.5" y="666" width="45" height="30"/>
+                                <rect key="frame" x="60.5" y="666.5" width="45" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Vso-Y9-S9V"/>
                                     <constraint firstAttribute="width" constant="45" id="u8W-EC-890"/>
@@ -234,7 +234,7 @@ ever since the 1500s</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAm-4B-huP">
-                                        <rect key="frame" x="117.5" y="402.5" width="179" height="91"/>
+                                        <rect key="frame" x="124" y="401" width="166.5" height="94"/>
                                         <string key="text">And much
 more ...</string>
                                         <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="39"/>
@@ -242,7 +242,7 @@ more ...</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQw-Dq-1Kx">
-                                        <rect key="frame" x="165.5" y="512" width="83" height="23.5"/>
+                                        <rect key="frame" x="166.5" y="512" width="81" height="24"/>
                                         <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -326,6 +326,321 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="2013.0434782608697" y="158.70535714285714"/>
         </scene>
+        <!--RegisterVC-->
+        <scene sceneID="g8p-n6-wG2">
+            <objects>
+                <viewController storyboardIdentifier="RegisterVC" id="r3w-zA-eWe" customClass="RegisterVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ESl-xE-on4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jxj-qn-Rrt">
+                                <rect key="frame" x="0.0" y="-74" width="414" height="488"/>
+                            </imageView>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BaT-SA-GC4" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="399" width="414" height="497"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9aT-xj-6IV">
+                                        <rect key="frame" x="20" y="113" width="374" height="335"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FM2-8p-co4" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="1sG-6k-Dah">
+                                                        <rect key="frame" x="5" y="15" width="60" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="GCL-6M-2Kj"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZm-ny-zQS" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="91.5" y="15.5" width="191" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igr-9J-duB">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                        <connections>
+                                                            <action selector="googleAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="VkG-Lt-fK0"/>
+                                                            <action selector="signinWithGoogleAction:" destination="LU3-qL-uRq" eventType="touchUpInside" id="eSo-3R-tXG"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="OBQ-B9-kas"/>
+                                                    <constraint firstItem="igr-9J-duB" firstAttribute="leading" secondItem="FM2-8p-co4" secondAttribute="leading" id="T8g-7X-xE0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="igr-9J-duB" secondAttribute="trailing" id="Vbh-kG-lXZ"/>
+                                                    <constraint firstItem="fZm-ny-zQS" firstAttribute="centerY" secondItem="FM2-8p-co4" secondAttribute="centerY" id="bkd-Kf-KT4"/>
+                                                    <constraint firstItem="1sG-6k-Dah" firstAttribute="top" secondItem="FM2-8p-co4" secondAttribute="top" constant="15" id="iBG-ND-aJu"/>
+                                                    <constraint firstAttribute="bottom" secondItem="1sG-6k-Dah" secondAttribute="bottom" constant="15" id="j0I-BA-u83"/>
+                                                    <constraint firstItem="1sG-6k-Dah" firstAttribute="leading" secondItem="FM2-8p-co4" secondAttribute="leading" constant="5" id="kzH-e1-AAr"/>
+                                                    <constraint firstAttribute="bottom" secondItem="igr-9J-duB" secondAttribute="bottom" id="oKY-IW-5jI"/>
+                                                    <constraint firstItem="fZm-ny-zQS" firstAttribute="centerX" secondItem="FM2-8p-co4" secondAttribute="centerX" id="qzz-PW-cg2"/>
+                                                    <constraint firstItem="igr-9J-duB" firstAttribute="top" secondItem="FM2-8p-co4" secondAttribute="top" id="wZz-0y-uR7"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jes-76-GZ8" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="70" width="374" height="55"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="ezb-CH-eGO">
+                                                        <rect key="frame" x="5" y="15" width="60" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="K15-ds-oMC"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFZ-us-8Be" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="80.5" y="15.5" width="213.5" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnB-Vh-QPd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                        <connections>
+                                                            <action selector="facebookAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="8eI-xJ-P0W"/>
+                                                            <action selector="signinWithGoogleAction:" destination="LU3-qL-uRq" eventType="touchUpInside" id="gHy-1b-uY2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="FnB-Vh-QPd" secondAttribute="bottom" id="3Pp-gq-iPe"/>
+                                                    <constraint firstItem="KFZ-us-8Be" firstAttribute="centerX" secondItem="Jes-76-GZ8" secondAttribute="centerX" id="4SX-Py-YqO"/>
+                                                    <constraint firstItem="FnB-Vh-QPd" firstAttribute="leading" secondItem="Jes-76-GZ8" secondAttribute="leading" id="8Kl-Lg-N0z"/>
+                                                    <constraint firstItem="ezb-CH-eGO" firstAttribute="leading" secondItem="Jes-76-GZ8" secondAttribute="leading" constant="5" id="D3y-bA-ZX7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="FnB-Vh-QPd" secondAttribute="trailing" id="J70-Ka-xN3"/>
+                                                    <constraint firstItem="FnB-Vh-QPd" firstAttribute="top" secondItem="Jes-76-GZ8" secondAttribute="top" id="JgQ-tt-Hu9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ezb-CH-eGO" secondAttribute="bottom" constant="15" id="KeY-Ae-U0B"/>
+                                                    <constraint firstAttribute="height" constant="55" id="Rza-OI-nNC"/>
+                                                    <constraint firstItem="ezb-CH-eGO" firstAttribute="top" secondItem="Jes-76-GZ8" secondAttribute="top" constant="15" id="TA2-fB-STv"/>
+                                                    <constraint firstItem="KFZ-us-8Be" firstAttribute="centerY" secondItem="Jes-76-GZ8" secondAttribute="centerY" id="fpN-8Q-RfW"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssp-iM-nV0" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="132.5" width="374" height="55"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone-call-2" translatesAutoresizingMaskIntoConstraints="NO" id="HUv-Rm-ISC">
+                                                        <rect key="frame" x="5" y="15" width="60" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="pdP-tY-bBu"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3T-HK-ea9" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="95" y="15.5" width="184.5" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMz-9a-Nb3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                        <connections>
+                                                            <action selector="phoneAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="nLl-Ek-8oD"/>
+                                                            <action selector="signinWithGoogleAction:" destination="LU3-qL-uRq" eventType="touchUpInside" id="4d8-Ai-mSS"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="HUv-Rm-ISC" secondAttribute="bottom" constant="15" id="4Pt-xV-zVI"/>
+                                                    <constraint firstItem="AMz-9a-Nb3" firstAttribute="leading" secondItem="ssp-iM-nV0" secondAttribute="leading" id="7Wp-tk-xNZ"/>
+                                                    <constraint firstAttribute="height" constant="55" id="FIj-sh-3kG"/>
+                                                    <constraint firstAttribute="bottom" secondItem="AMz-9a-Nb3" secondAttribute="bottom" id="JgH-LT-NuE"/>
+                                                    <constraint firstItem="HUv-Rm-ISC" firstAttribute="top" secondItem="ssp-iM-nV0" secondAttribute="top" constant="15" id="O4M-HK-ZvX"/>
+                                                    <constraint firstItem="a3T-HK-ea9" firstAttribute="centerY" secondItem="ssp-iM-nV0" secondAttribute="centerY" id="TJy-Ng-w8e"/>
+                                                    <constraint firstItem="AMz-9a-Nb3" firstAttribute="top" secondItem="ssp-iM-nV0" secondAttribute="top" id="Ubk-L4-qcx"/>
+                                                    <constraint firstItem="HUv-Rm-ISC" firstAttribute="leading" secondItem="ssp-iM-nV0" secondAttribute="leading" constant="5" id="a4q-OJ-UuT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="AMz-9a-Nb3" secondAttribute="trailing" id="hFz-2O-BRb"/>
+                                                    <constraint firstItem="a3T-HK-ea9" firstAttribute="centerX" secondItem="ssp-iM-nV0" secondAttribute="centerX" id="pQK-m6-2FT"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-Zc-78x" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="140" width="374" height="55"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple-logo" translatesAutoresizingMaskIntoConstraints="NO" id="r4w-fX-Uya">
+                                                        <rect key="frame" x="5" y="15" width="60" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="jIt-PL-Szx"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Apple" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-Ik-QQ5" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="97.5" y="15.5" width="179.5" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pg-35-HQN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                        <connections>
+                                                            <action selector="appleAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="fFu-zI-tfq"/>
+                                                            <action selector="signinWithGoogleAction:" destination="LU3-qL-uRq" eventType="touchUpInside" id="vn8-uE-kew"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="r4w-fX-Uya" secondAttribute="bottom" constant="15" id="0wG-uI-hst"/>
+                                                    <constraint firstAttribute="height" constant="55" id="4jx-TJ-da7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9Pg-35-HQN" secondAttribute="trailing" id="8Ct-tG-6lQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9Pg-35-HQN" secondAttribute="bottom" id="HoW-nm-9RP"/>
+                                                    <constraint firstItem="YOX-Ik-QQ5" firstAttribute="centerY" secondItem="b1y-Zc-78x" secondAttribute="centerY" id="OZ2-g1-xjJ"/>
+                                                    <constraint firstItem="YOX-Ik-QQ5" firstAttribute="centerX" secondItem="b1y-Zc-78x" secondAttribute="centerX" id="V85-mX-bV5"/>
+                                                    <constraint firstItem="r4w-fX-Uya" firstAttribute="top" secondItem="b1y-Zc-78x" secondAttribute="top" constant="15" id="Z9s-SU-rkR"/>
+                                                    <constraint firstItem="9Pg-35-HQN" firstAttribute="top" secondItem="b1y-Zc-78x" secondAttribute="top" id="jDO-fD-2Wp"/>
+                                                    <constraint firstItem="9Pg-35-HQN" firstAttribute="leading" secondItem="b1y-Zc-78x" secondAttribute="leading" id="pe7-pg-QB4"/>
+                                                    <constraint firstItem="r4w-fX-Uya" firstAttribute="leading" secondItem="b1y-Zc-78x" secondAttribute="leading" constant="5" id="wH9-TE-iQL"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bML-Pu-mS3" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="210" width="374" height="55"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uPj-53-Zj5">
+                                                        <rect key="frame" x="5" y="12.5" width="60" height="30"/>
+                                                        <color key="tintColor" systemColor="systemGreenColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="8eg-yw-TPz"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJw-wZ-1d7" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="95" y="15.5" width="184.5" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xv-6M-poI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                                        <connections>
+                                                            <action selector="toPHone:" destination="r3w-zA-eWe" eventType="touchUpInside" id="nS6-Sa-Zom"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="mJw-wZ-1d7" firstAttribute="centerX" secondItem="bML-Pu-mS3" secondAttribute="centerX" id="Gi4-2w-ie5"/>
+                                                    <constraint firstItem="uPj-53-Zj5" firstAttribute="top" secondItem="bML-Pu-mS3" secondAttribute="top" constant="12" id="S1b-zT-jQg"/>
+                                                    <constraint firstItem="mJw-wZ-1d7" firstAttribute="centerY" secondItem="bML-Pu-mS3" secondAttribute="centerY" id="S8Y-6u-huO"/>
+                                                    <constraint firstItem="7Xv-6M-poI" firstAttribute="top" secondItem="bML-Pu-mS3" secondAttribute="top" id="chl-4u-aL1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7Xv-6M-poI" secondAttribute="bottom" id="cv4-Q5-KGq"/>
+                                                    <constraint firstAttribute="height" constant="55" id="hAE-GW-2qi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7Xv-6M-poI" secondAttribute="trailing" id="hCo-QU-q3x"/>
+                                                    <constraint firstItem="7Xv-6M-poI" firstAttribute="leading" secondItem="bML-Pu-mS3" secondAttribute="leading" id="kIs-uP-PMh"/>
+                                                    <constraint firstItem="uPj-53-Zj5" firstAttribute="leading" secondItem="bML-Pu-mS3" secondAttribute="leading" constant="5" id="kQZ-QD-3tA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uPj-53-Zj5" secondAttribute="bottom" constant="12" id="neE-xy-yzP"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yq-GS-UQb" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="280" width="374" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="f6T-Qn-hr6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                <state key="normal" title="Skip For Now">
+                                                    <color key="titleColor" name="Main"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="skipAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="vdZ-BX-nqa"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="9yq-GS-UQb" secondAttribute="trailing" id="2Nw-ra-Z7g"/>
+                                            <constraint firstItem="9yq-GS-UQb" firstAttribute="leading" secondItem="9aT-xj-6IV" secondAttribute="leading" id="qe1-eP-twd"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SB_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZIt-ss-6X0">
+                                        <rect key="frame" x="135.5" y="15" width="143" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="143" id="ZIC-1h-L6J"/>
+                                            <constraint firstAttribute="height" constant="40" id="k7k-KK-Y75"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get in touch with us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NzY-tj-UXB" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="65" width="384" height="23"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="19"/>
+                                        <color key="textColor" name="Dark-Blue"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RQ-6q-RwG">
+                                        <rect key="frame" x="20" y="20" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="MSz-T4-R0j"/>
+                                            <constraint firstAttribute="height" constant="20" id="giR-vX-xOO"/>
+                                        </constraints>
+                                        <state key="normal" image="close-1"/>
+                                        <connections>
+                                            <action selector="closeAction:" destination="r3w-zA-eWe" eventType="touchUpInside" id="OMy-ib-Bdy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="BgColor"/>
+                                <constraints>
+                                    <constraint firstItem="NzY-tj-UXB" firstAttribute="top" secondItem="ZIt-ss-6X0" secondAttribute="bottom" constant="10" id="3Bi-sO-Gbx"/>
+                                    <constraint firstItem="9aT-xj-6IV" firstAttribute="leading" secondItem="BaT-SA-GC4" secondAttribute="leading" constant="20" id="4R8-ru-Jn8"/>
+                                    <constraint firstItem="0RQ-6q-RwG" firstAttribute="leading" secondItem="BaT-SA-GC4" secondAttribute="leading" constant="20" id="6Ww-7g-6BZ"/>
+                                    <constraint firstItem="NzY-tj-UXB" firstAttribute="leading" secondItem="BaT-SA-GC4" secondAttribute="leading" constant="15" id="A1B-l3-P6W"/>
+                                    <constraint firstItem="ZIt-ss-6X0" firstAttribute="centerX" secondItem="BaT-SA-GC4" secondAttribute="centerX" id="Agh-Rl-nJz"/>
+                                    <constraint firstItem="9aT-xj-6IV" firstAttribute="top" secondItem="NzY-tj-UXB" secondAttribute="bottom" constant="25" id="Bss-df-J2J"/>
+                                    <constraint firstAttribute="trailing" secondItem="NzY-tj-UXB" secondAttribute="trailing" constant="15" id="Mpi-j9-nn9"/>
+                                    <constraint firstItem="ZIt-ss-6X0" firstAttribute="top" secondItem="BaT-SA-GC4" secondAttribute="top" constant="15" id="Xwc-O6-1XH"/>
+                                    <constraint firstAttribute="trailing" secondItem="9aT-xj-6IV" secondAttribute="trailing" constant="20" id="mAf-Jz-AKc"/>
+                                    <constraint firstItem="0RQ-6q-RwG" firstAttribute="top" secondItem="BaT-SA-GC4" secondAttribute="top" constant="20" id="rXm-dq-fez"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zoZ-Vv-Pxf"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zoZ-Vv-Pxf" firstAttribute="bottom" secondItem="9aT-xj-6IV" secondAttribute="bottom" constant="15" id="4iD-Ct-Nwf"/>
+                            <constraint firstItem="zoZ-Vv-Pxf" firstAttribute="trailing" secondItem="BaT-SA-GC4" secondAttribute="trailing" id="9AO-Dh-vrH"/>
+                            <constraint firstItem="BaT-SA-GC4" firstAttribute="leading" secondItem="zoZ-Vv-Pxf" secondAttribute="leading" id="KVf-AB-x5p"/>
+                            <constraint firstItem="jxj-qn-Rrt" firstAttribute="height" secondItem="ESl-xE-on4" secondAttribute="height" multiplier="0.544643" id="c0v-Tm-JQp"/>
+                            <constraint firstItem="jxj-qn-Rrt" firstAttribute="leading" secondItem="zoZ-Vv-Pxf" secondAttribute="leading" id="mo3-HW-5el"/>
+                            <constraint firstAttribute="bottom" secondItem="BaT-SA-GC4" secondAttribute="bottom" id="via-Vg-RTA"/>
+                            <constraint firstItem="BaT-SA-GC4" firstAttribute="top" secondItem="jxj-qn-Rrt" secondAttribute="bottom" constant="-15" id="xV3-BV-6T1"/>
+                            <constraint firstItem="zoZ-Vv-Pxf" firstAttribute="trailing" secondItem="jxj-qn-Rrt" secondAttribute="trailing" id="yGk-6Y-rr9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8tS-vD-LDL"/>
+                    <connections>
+                        <outlet property="closeBtn" destination="0RQ-6q-RwG" id="8Qf-6c-05l"/>
+                        <outlet property="introImageView" destination="jxj-qn-Rrt" id="IoQ-DY-IW9"/>
+                        <outlet property="skipBtn" destination="9yq-GS-UQb" id="mA3-3h-m1w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7QO-7i-hbR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1120" y="159"/>
+        </scene>
         <!--LoginVC-->
         <scene sceneID="MBZ-Pk-N6J">
             <objects>
@@ -371,13 +686,13 @@ more ...</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with us by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E67-jI-jyN">
-                                <rect key="frame" x="97.5" y="265.5" width="219.5" height="35"/>
+                                <rect key="frame" x="102.5" y="265.5" width="209" height="36"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xdE-pA-Xvp">
-                                <rect key="frame" x="40" y="345.5" width="334" height="224"/>
+                                <rect key="frame" x="40" y="346.5" width="334" height="224"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzD-x6-rmB">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="65"/>
@@ -386,13 +701,13 @@ more ...</string>
                                                 <rect key="frame" x="50" y="0.0" width="234" height="65"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="n53-sc-XFM">
-                                                        <rect key="frame" x="0.0" y="4" width="60" height="57"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="xa9-rM-dj2"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8I-q0-MCP">
-                                                        <rect key="frame" x="75" y="16" width="159" height="33"/>
+                                                        <rect key="frame" x="75" y="15.5" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -431,7 +746,7 @@ more ...</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieQ-YZ-weD">
-                                                        <rect key="frame" x="75" y="15.5" width="159" height="33"/>
+                                                        <rect key="frame" x="75" y="15" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -470,7 +785,7 @@ more ...</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaX-3t-sSN">
-                                                        <rect key="frame" x="75" y="16" width="159" height="33"/>
+                                                        <rect key="frame" x="75" y="15.5" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="28"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -533,7 +848,7 @@ more ...</string>
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234567890" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YIu-xm-THd">
-                                                <rect key="frame" x="96" y="14" width="233" height="22.5"/>
+                                                <rect key="frame" x="96" y="13.5" width="233" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
@@ -554,7 +869,7 @@ more ...</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycO-Dp-lYC">
-                                        <rect key="frame" x="57" y="174" width="300" height="61"/>
+                                        <rect key="frame" x="57" y="173.5" width="300" height="62.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="vih-wJ-jmh"/>
                                         </constraints>
@@ -568,7 +883,7 @@ more ...</string>
                                         <rect key="frame" x="72.5" y="581" width="269" height="65"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHf-4M-z6X">
-                                                <rect key="frame" x="83.5" y="20.5" width="102" height="24.5"/>
+                                                <rect key="frame" x="86.5" y="20" width="96" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -581,7 +896,7 @@ more ...</string>
                                             <constraint firstItem="SHf-4M-z6X" firstAttribute="centerX" secondItem="8Ln-5R-vUz" secondAttribute="centerX" id="wMU-q1-k3u"/>
                                         </constraints>
                                     </view>
-                                    <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOl-9U-MMl">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOl-9U-MMl">
                                         <rect key="frame" x="20.5" y="258" width="373" height="220"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eat-tI-KY6">
@@ -740,7 +1055,7 @@ more ...</string>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="eat-tI-KY6" firstAttribute="top" secondItem="pOl-9U-MMl" secondAttribute="top" constant="10" id="51d-6b-ele"/>
                                             <constraint firstItem="pZJ-jq-wbX" firstAttribute="centerX" secondItem="pOl-9U-MMl" secondAttribute="centerX" id="6Qc-pz-qdy"/>
@@ -866,24 +1181,8 @@ more ...</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="64R-QR-z94">
                                         <rect key="frame" x="15" y="195" width="270" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvL-n6-VFE" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                <state key="normal" title="Exit">
-                                                    <color key="titleColor" name="Dark-Red"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="7"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="exitAction:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="KCW-JB-0aM"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZ3-N8-Ztv" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="140" y="0.0" width="130" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
                                                 <color key="backgroundColor" name="Main"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                 <state key="normal" title="Retry">
@@ -891,11 +1190,32 @@ more ...</string>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="7"/>
+                                                        <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="retryActiion:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="cQl-wD-gsp"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvL-n6-VFE" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="140" y="0.0" width="130" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                <color key="tintColor" name="Main"/>
+                                                <state key="normal" title="Exit">
+                                                    <color key="titleColor" name="Dark-Red"/>
+                                                </state>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Exit">
+                                                    <fontDescription key="titleFontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                    <color key="baseForegroundColor" name="Dark-Red"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="exitAction:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="KCW-JB-0aM"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -975,6 +1295,109 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="305.79710144927537" y="158.70535714285714"/>
         </scene>
+        <!--PhoneVC-->
+        <scene sceneID="0PW-qF-6lg">
+            <objects>
+                <viewController storyboardIdentifier="PhoneVC" id="8oN-W2-N74" customClass="PhoneVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OKc-e2-ij0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ywQ-PG-TQl">
+                                <rect key="frame" x="15" y="51" width="46" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spw-p8-Jo9" customClass="LocalizedBtn" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="IsG-mJ-Iia"/>
+                                            <constraint firstAttribute="height" constant="45" id="WQ9-Ci-tBB"/>
+                                        </constraints>
+                                        <state key="normal" image="back"/>
+                                        <connections>
+                                            <action selector="back:" destination="8oN-W2-N74" eventType="touchUpInside" id="eYJ-zk-EsM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t95-0s-J5t">
+                                <rect key="frame" x="25" y="182" width="364" height="84"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h11-gp-ohl" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="23"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mdi-6I-e6H">
+                                        <rect key="frame" x="0.0" y="33" width="364" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Bdh-as-23Y"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                    </textField>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fo-5e-R9s">
+                                        <rect key="frame" x="0.0" y="83" width="364" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="j8R-EV-u4R"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="mdi-6I-e6H" firstAttribute="leading" secondItem="t95-0s-J5t" secondAttribute="leading" id="EW3-5N-R1f"/>
+                                    <constraint firstAttribute="trailing" secondItem="mdi-6I-e6H" secondAttribute="trailing" id="WgO-eY-RS1"/>
+                                    <constraint firstAttribute="trailing" secondItem="h11-gp-ohl" secondAttribute="trailing" id="Yto-uT-uL7"/>
+                                    <constraint firstItem="8fo-5e-R9s" firstAttribute="leading" secondItem="t95-0s-J5t" secondAttribute="leading" id="hp1-JZ-6nn"/>
+                                    <constraint firstItem="h11-gp-ohl" firstAttribute="leading" secondItem="t95-0s-J5t" secondAttribute="leading" id="wzZ-Ka-eqv"/>
+                                    <constraint firstAttribute="trailing" secondItem="8fo-5e-R9s" secondAttribute="trailing" id="xNo-9D-a7N"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuP-Ia-ChR" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="15" y="817" width="384" height="45"/>
+                                <color key="backgroundColor" name="Main"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="6Bi-GI-uNC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="next:" destination="8oN-W2-N74" eventType="touchUpInside" id="aQu-IY-0oZ"/>
+                                    <action selector="retryActiion:" destination="gdX-Vq-yVV" eventType="touchUpInside" id="HQT-Ox-Dhi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="edw-Oq-96a"/>
+                        <color key="backgroundColor" name="BgColor"/>
+                        <constraints>
+                            <constraint firstItem="ywQ-PG-TQl" firstAttribute="top" secondItem="edw-Oq-96a" secondAttribute="top" constant="7" id="6L9-M8-Uyk"/>
+                            <constraint firstItem="edw-Oq-96a" firstAttribute="trailing" secondItem="iuP-Ia-ChR" secondAttribute="trailing" constant="15" id="6gq-NS-MsA"/>
+                            <constraint firstItem="edw-Oq-96a" firstAttribute="bottom" secondItem="iuP-Ia-ChR" secondAttribute="bottom" id="EIa-xz-x7R"/>
+                            <constraint firstItem="edw-Oq-96a" firstAttribute="trailing" secondItem="t95-0s-J5t" secondAttribute="trailing" constant="25" id="Q7v-8z-bJR"/>
+                            <constraint firstItem="t95-0s-J5t" firstAttribute="centerY" secondItem="OKc-e2-ij0" secondAttribute="centerY" multiplier="0.5" id="TnG-cT-8AH"/>
+                            <constraint firstItem="ywQ-PG-TQl" firstAttribute="leading" secondItem="edw-Oq-96a" secondAttribute="leading" constant="15" id="bHQ-hI-oyA"/>
+                            <constraint firstItem="t95-0s-J5t" firstAttribute="leading" secondItem="edw-Oq-96a" secondAttribute="leading" constant="25" id="fjL-1F-glc"/>
+                            <constraint firstItem="iuP-Ia-ChR" firstAttribute="leading" secondItem="edw-Oq-96a" secondAttribute="leading" constant="15" id="uxp-oS-e6Y"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="yp6-Hf-Iqj"/>
+                    <connections>
+                        <outlet property="phoneTF" destination="mdi-6I-e6H" id="NIz-Lw-Nuk"/>
+                        <outlet property="tfBottomCnst" destination="EIa-xz-x7R" id="Hlm-02-aoY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xm9-jc-fye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368.1159420289855" y="971.65178571428567"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xhD-4q-ZPN">
             <objects>
@@ -992,23 +1415,6 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="-604.34782608695662" y="158.70535714285714"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="tjZ-cn-60p">
-            <objects>
-                <navigationController storyboardIdentifier="NavGuide" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="imC-tK-coj" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7EX-st-kTu">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uab-OJ-YmE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="37C-Fo-nJw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1102.8985507246377" y="158.70535714285714"/>
-        </scene>
         <!--Order PlacedVC-->
         <scene sceneID="udA-J4-uKn">
             <objects>
@@ -1018,89 +1424,104 @@ more ...</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-at-rg8" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                <rect key="frame" x="57" y="323" width="300" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="vze-gj-Okl">
-                                        <rect key="frame" x="125" y="15" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="FNc-c4-qkN"/>
-                                            <constraint firstAttribute="width" constant="50" id="QWT-Yc-db6"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-67-wci">
-                                        <rect key="frame" x="15" y="85" width="270" height="72.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wFN-Jb-3aj">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="358.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Great !!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oez-ZR-Sm2" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="270" height="24"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order placed successfully, we hope you enjoy it" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-me-pbN" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="34" width="270" height="38.5"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vze-gj-Okl">
+                                                <rect key="frame" x="157" y="129.5" width="100" height="99"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="AJ0-hj-ES9"/>
+                                                    <constraint firstAttribute="width" constant="100" id="kRh-LD-NZe"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yEb-zD-uib">
-                                        <rect key="frame" x="15" y="195" width="270" height="40"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz9-n9-d0s" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="40"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                <state key="normal" title="Cancel Order">
-                                                    <color key="titleColor" name="Dark-Red"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="7"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="cancelOrder:" destination="zsv-lw-jMT" eventType="touchUpInside" id="N58-q7-TNE"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-cm-xMN" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="140" y="0.0" width="130" height="40"/>
-                                                <color key="backgroundColor" name="Main"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                <state key="normal" title="Home">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="7"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="homeAction:" destination="zsv-lw-jMT" eventType="touchUpInside" id="hMo-zb-kwV"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                        <color key="backgroundColor" red="0.38414397839999997" green="0.59087044" blue="0.36466822030000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstItem="yz9-n9-d0s" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="3iS-mU-CmP"/>
-                                            <constraint firstItem="Jf1-cm-xMN" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="Fwh-2A-bY7"/>
-                                            <constraint firstAttribute="bottom" secondItem="yz9-n9-d0s" secondAttribute="bottom" id="Sng-pG-uyU"/>
-                                            <constraint firstAttribute="bottom" secondItem="Jf1-cm-xMN" secondAttribute="bottom" id="aS9-Rg-zsN"/>
-                                            <constraint firstAttribute="height" constant="40" id="f57-al-Fbx"/>
+                                            <constraint firstItem="vze-gj-Okl" firstAttribute="centerY" secondItem="wFN-Jb-3aj" secondAttribute="centerY" id="Ngb-Cg-k0T"/>
+                                            <constraint firstItem="vze-gj-Okl" firstAttribute="centerX" secondItem="wFN-Jb-3aj" secondAttribute="centerX" id="Ult-od-qOb"/>
+                                            <constraint firstItem="vze-gj-Okl" firstAttribute="centerX" secondItem="wFN-Jb-3aj" secondAttribute="centerX" id="gnP-wC-nsR"/>
                                         </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="fDM-67-wci">
+                                        <rect key="frame" x="15" y="398.5" width="384" height="162.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mnn-jb-CIf">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="72.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your order has been sent successfully" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oez-ZR-Sm2" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The order will be prepared and delivered to you as soon as possible .. Happy experience" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-me-pbN" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="34" width="384" height="38.5"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yEb-zD-uib">
+                                                <rect key="frame" x="0.0" y="122.5" width="384" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jf1-cm-xMN" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
+                                                        <color key="backgroundColor" name="Main"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                        <state key="normal" title="Continue">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="homeAction:" destination="zsv-lw-jMT" eventType="touchUpInside" id="hMo-zb-kwV"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz9-n9-d0s" customClass="SystemLocalizedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="197" y="0.0" width="187" height="40"/>
+                                                        <color key="tintColor" name="Main"/>
+                                                        <state key="normal" title="Cancel Order"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="Cancel Order">
+                                                            <fontDescription key="titleFontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                            <color key="baseBackgroundColor" name="Main"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="7"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="cancelOrder:" destination="zsv-lw-jMT" eventType="touchUpInside" id="N58-q7-TNE"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="yz9-n9-d0s" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="3iS-mU-CmP"/>
+                                                    <constraint firstItem="Jf1-cm-xMN" firstAttribute="top" secondItem="yEb-zD-uib" secondAttribute="top" id="Fwh-2A-bY7"/>
+                                                    <constraint firstAttribute="bottom" secondItem="yz9-n9-d0s" secondAttribute="bottom" id="Sng-pG-uyU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Jf1-cm-xMN" secondAttribute="bottom" id="aS9-Rg-zsN"/>
+                                                    <constraint firstAttribute="height" constant="40" id="f57-al-Fbx"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="yEb-zD-uib" secondAttribute="trailing" constant="15" id="2So-H8-Oba"/>
-                                    <constraint firstItem="vze-gj-Okl" firstAttribute="top" secondItem="Eex-at-rg8" secondAttribute="top" constant="15" id="B1Z-le-dkM"/>
-                                    <constraint firstAttribute="bottom" secondItem="yEb-zD-uib" secondAttribute="bottom" constant="15" id="INb-2c-OyZ"/>
-                                    <constraint firstAttribute="height" constant="250" id="TXt-1a-thX"/>
-                                    <constraint firstAttribute="width" constant="300" id="Trx-ed-DVy"/>
+                                    <constraint firstItem="wFN-Jb-3aj" firstAttribute="leading" secondItem="Eex-at-rg8" secondAttribute="leading" id="AyX-Sf-dwR"/>
+                                    <constraint firstAttribute="trailing" secondItem="wFN-Jb-3aj" secondAttribute="trailing" id="K75-hJ-Edf"/>
                                     <constraint firstItem="fDM-67-wci" firstAttribute="leading" secondItem="Eex-at-rg8" secondAttribute="leading" constant="15" id="abE-RV-QNs"/>
-                                    <constraint firstItem="vze-gj-Okl" firstAttribute="centerX" secondItem="Eex-at-rg8" secondAttribute="centerX" id="bxx-sg-S6X"/>
-                                    <constraint firstItem="yEb-zD-uib" firstAttribute="leading" secondItem="Eex-at-rg8" secondAttribute="leading" constant="15" id="gek-SK-oWF"/>
+                                    <constraint firstItem="wFN-Jb-3aj" firstAttribute="top" secondItem="Eex-at-rg8" secondAttribute="top" id="fCQ-Vk-SUm"/>
+                                    <constraint firstItem="wFN-Jb-3aj" firstAttribute="height" secondItem="Eex-at-rg8" secondAttribute="height" multiplier="0.4" id="fiL-2H-af4"/>
+                                    <constraint firstItem="fDM-67-wci" firstAttribute="top" secondItem="wFN-Jb-3aj" secondAttribute="bottom" constant="40" id="iAY-Tb-NTV"/>
                                     <constraint firstAttribute="trailing" secondItem="fDM-67-wci" secondAttribute="trailing" constant="15" id="uA7-pO-XSD"/>
-                                    <constraint firstItem="fDM-67-wci" firstAttribute="top" secondItem="vze-gj-Okl" secondAttribute="bottom" constant="20" id="zBE-6P-aYJ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
@@ -1110,10 +1531,12 @@ more ...</string>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="W0i-tB-Aas"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Eex-at-rg8" firstAttribute="centerX" secondItem="VPQ-2a-NjG" secondAttribute="centerX" id="3rf-47-ODE"/>
-                            <constraint firstItem="Eex-at-rg8" firstAttribute="centerY" secondItem="VPQ-2a-NjG" secondAttribute="centerY" id="JhB-5D-rEs"/>
+                            <constraint firstItem="Eex-at-rg8" firstAttribute="top" secondItem="VPQ-2a-NjG" secondAttribute="top" id="C3c-uv-oYO"/>
+                            <constraint firstItem="Eex-at-rg8" firstAttribute="leading" secondItem="W0i-tB-Aas" secondAttribute="leading" id="PyX-iw-XeC"/>
+                            <constraint firstItem="W0i-tB-Aas" firstAttribute="trailing" secondItem="Eex-at-rg8" secondAttribute="trailing" id="WQU-Cv-s2J"/>
+                            <constraint firstAttribute="bottom" secondItem="Eex-at-rg8" secondAttribute="bottom" id="bEg-sR-waE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wud-op-ZFb"/>
@@ -1139,37 +1562,69 @@ more ...</string>
             </objects>
             <point key="canvasLocation" x="4786.9565217391309" y="158.70535714285714"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IKX-7h-P5G">
+            <objects>
+                <navigationController storyboardIdentifier="PhoneNav" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="7GZ-rC-lUU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xnu-pX-evx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8oN-W2-N74" kind="relationship" relationship="rootViewController" id="Lpe-xe-ntZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vEa-ME-qDe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="457.97101449275368" y="971.65178571428567"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="3cC-eF-9xO">
             <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
+        <designable name="9yq-GS-UQb">
+            <size key="intrinsicContentSize" width="117" height="36"/>
+        </designable>
         <designable name="GbR-Ao-PtH">
             <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
         <designable name="Jf1-cm-xMN">
-            <size key="intrinsicContentSize" width="46" height="33"/>
+            <size key="intrinsicContentSize" width="70" height="33"/>
         </designable>
         <designable name="hZ3-N8-Ztv">
             <size key="intrinsicContentSize" width="42" height="33"/>
         </designable>
+        <designable name="iuP-Ia-ChR">
+            <size key="intrinsicContentSize" width="70" height="33"/>
+        </designable>
+        <designable name="spw-p8-Jo9">
+            <size key="intrinsicContentSize" width="39" height="39"/>
+        </designable>
         <designable name="uvL-n6-VFE">
-            <size key="intrinsicContentSize" width="30" height="33"/>
+            <size key="intrinsicContentSize" width="53.5" height="34.5"/>
         </designable>
         <designable name="yz9-n9-d0s">
-            <size key="intrinsicContentSize" width="100" height="33"/>
+            <size key="intrinsicContentSize" width="124" height="34.5"/>
         </designable>
     </designables>
     <resources>
         <image name="255px-Flag_of_Egypt" width="24" height="16"/>
+        <image name="SB_logo" width="2000" height="413"/>
         <image name="aboutUsImg1" width="199" height="199"/>
+        <image name="apple-logo" width="512" height="512"/>
+        <image name="back" width="39" height="39"/>
         <image name="back-white" width="56" height="51"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="close-1" width="512" height="512"/>
         <image name="down 1" width="615" height="594"/>
         <image name="down 2" width="615" height="594"/>
         <image name="down 3" width="615" height="594"/>
         <image name="down 4" width="615" height="594"/>
+        <image name="facebook" width="512" height="512"/>
         <image name="fb" width="57" height="57"/>
-        <image name="google" width="57" height="57"/>
+        <image name="google" width="512" height="512"/>
         <image name="icons8-wi-fi-disconnected-100" width="100" height="100"/>
         <image name="loginPath 59" width="375" height="255"/>
         <image name="logo" width="118" height="118"/>
@@ -1177,15 +1632,19 @@ more ...</string>
         <image name="nextIcon" width="49.5" height="24"/>
         <image name="nextIcon_" width="49.5" height="24"/>
         <image name="phone" width="57" height="57"/>
+        <image name="phone-call-2" width="512" height="512"/>
+        <image name="phone.circle.fill" catalog="system" width="128" height="121"/>
         <image name="restaurant-araz" width="1235" height="823"/>
         <image name="rightLines" width="54" height="32"/>
         <image name="rightLines_" width="54" height="32"/>
         <image name="sbLoader2" width="301" height="127"/>
-        <image name="tick" width="512" height="512"/>
         <image name="up 1" width="649" height="682"/>
         <image name="up 2" width="636" height="641"/>
         <image name="up 3" width="612" height="567"/>
         <image name="up 4" width="640" height="566"/>
+        <namedColor name="BgColor">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Buttons-Red">
             <color red="0.68199998140335083" green="0.11800000071525574" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1203,6 +1662,9 @@ more ...</string>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

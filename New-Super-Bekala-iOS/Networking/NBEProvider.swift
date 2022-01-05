@@ -62,9 +62,7 @@ extension NBE: TargetType{
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
         
-        return [
-            "Authorization": "Basic \(base64LoginString)"
-        ]
+        return [ "Authorization": "Basic \(base64LoginString)" ]
     }
     
     

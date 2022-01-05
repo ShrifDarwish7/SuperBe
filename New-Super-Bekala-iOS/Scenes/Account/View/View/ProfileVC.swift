@@ -8,6 +8,8 @@
 
 import UIKit
 import DropDown
+import SVProgressHUD
+import PayButton
 
 class ProfileVC: UIViewController {
     
@@ -29,24 +31,34 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var phone: UITextField!
     @IBOutlet weak var profileImg: CircluarImage!
+    @IBOutlet weak var emailStack: UIStackView!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var updateBtn: RoundedButton!
+    @IBOutlet weak var version: UILabel!
+    @IBOutlet weak var profileHintView: UIView!
+    @IBOutlet weak var profileHintTopCnst: NSLayoutConstraint!
+    @IBOutlet weak var addressTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var showAllBtn: LocalizedBtn!
     
     var bottomSheetPanStartingTopConstant : CGFloat = 30.0
+    var loginDelegate: LoginDelegate?
     var presenter: MainPresenter?
     var addresses: [Address]?
     let menu: DropDown = {
         let menu = DropDown()
         menu.dataSource = [
             "My account".localized,
-            //"My promocodes".localized,
             "Contact us".localized,
             "Langauge".localized,
+            "Notifications".localized,
             "Logout".localized
         ]
         let icons: [String] = [
             "profile_icon",
-            //"promo",
             "contact",
             "global",
+            "notification-bell",
             "logout_icon"
         ]
         menu.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
@@ -57,15 +69,28 @@ class ProfileVC: UIViewController {
         }
         return menu
     }()
+    var amountToBbAdd: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        self.navigationController?.isNavigationBarHidden = true
+        
+        version.text = "Version ".localized + (Bundle.main.releaseVersionNumber ?? "0.0")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(dismissBtmSheetNotify), name: NSNotification.Name("DISMISS_BOTTOM_SHEET"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(paymentDidFinish(sender:)), name: NSNotification.Name("FINISH_PAYMENT"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startPaymentNotify), name: NSNotification.Name("START_PAYMENT"), object: nil)
         
         name.text = APIServices.shared.user?.name ?? ""
-        phone.text = APIServices.shared.user?.phone ?? ""
+        
+        if let _ = APIServices.shared.user?.phoneVerifiedAt,
+           let phone = APIServices.shared.user?.phone{
+            self.phone.text = phone.replacingOccurrences(of: "+2", with: "")
+        }else{
+            self.phone.text = ""
+        }
+        email.text = APIServices.shared.user?.email ?? ""
+        emailStack.isHidden = email.text!.isEmpty ? true : false
         profileImg.kf.indicatorType = .activity
         profileImg.kf.setImage(with: URL(string: Shared.storageBase + (APIServices.shared.user?.avatar ?? "")))
         
@@ -73,20 +98,7 @@ class ProfileVC: UIViewController {
         presenter = MainPresenter(self)
         presenter?.getAddresses()
     }
-    
-    @objc func paymentDidFinish(sender: NSNotification){
-        
-        guard let userInfo = sender.userInfo as? [String: String] else { return }
-        if let success = userInfo["success"],
-           let transactionId = userInfo["transactionId"],
-           success == "1"{
-            self.presenter?.addToWallet((Shared.transaction?.amount)!)
-        }else{
-            showToast("Transaction failed, please make sure you entered correct card information and the card is valid")
-        }
-        
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,19 +129,68 @@ class ProfileVC: UIViewController {
                 }
             case 1:
                 Router.toContactUs(self)
-            case 2:
+            case 2,3:
                 if let _ = Bundle.main.bundleIdentifier,
                     let url = URL(string: "\(UIApplication.openSettingsURLString)") {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
-            case 3:
-                APIServices.shared.isLogged = false
-                Router.toMainNav(self)
+            case 4:
+                SVProgressHUD.show()
+                let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+                loginPresenter.logout()
             default:
                 break
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) { [self] in
+            if !Shared.didGetProfileInsideHint{
+                shakeProfileHint()
+                profileHintView.isHidden = false
+            }else{
+                profileHintView.isHidden = true
+            }
+        }
+        
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        addressTableHeight.constant = addressesTableView.contentSize.height
+        view.layoutIfNeeded()
+    }
+    
+    func shakeProfileHint(){
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) { [self] in
+                profileHintTopCnst.constant = 30
+                view.layoutIfNeeded()
+            } completion: { [self] _ in
+                UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) {
+                    profileHintTopCnst.constant = 15
+                    view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    @IBAction func dismissProfileHint(_ sender: Any) {
+        Shared.didGetProfileInsideHint = true
+        UIView.animate(withDuration: 0.2) { [self] in
+            profileHintView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        } completion: { [self] _ in
+            profileHintView.isHidden = true
+        }
+    }
+    
+    @IBAction func updateName(_ sender: Any) {
+        guard !name.text!.isEmpty else { return }
+        let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+        activityIndicator.startAnimating()
+        updateBtn.isHidden = true
+        loginPresenter.updateProfile(["name": name.text!])
+    }
+    
     
     @IBAction func shareAction(_ sender: Any) {
         let textToShare = [ "Download Super Be from : http://onelink.to/super-be" ]
@@ -178,7 +239,28 @@ class ProfileVC: UIViewController {
 
     }
     
-
+    @objc func startPaymentNotify(){
+        
+        dismissBottomSheet(self)
+        Router.toPayContainer(self)
+        
+//        showInputAlert(title: "Add Balance".localized, subtitle: "Please enter your amount".localized, actionTitle: "Proceed".localized, cancelTitle: "Cancel".localized, secureTF: false, inputPlaceholder: "amount".localized, inputKeyboardType: .numberPad, cancelHandler: nil) { (amount, alert) in
+//            self.amountToBbAdd = amount
+//            let paymentViewController = PaymentViewController()
+//            paymentViewController.amount =  String(amount!)
+//            paymentViewController.delegate = self
+//            paymentViewController.refnumber =  "5236975231"
+//            paymentViewController.mId = "10253847133"
+//            paymentViewController.tId = "57547386"
+//            paymentViewController.Currency = "818"
+//            paymentViewController.isProduction = true
+//            paymentViewController.AppStatus = .Production
+//            paymentViewController.Key = "37353137326166332D326561322D343665652D383461612D353630383335653231396638"
+//            paymentViewController.pushViewController()
+//        }
+        
+    }
+    
     @objc func dismissBtmSheetNotify(){
         dismissBottomSheet(self)
     }
@@ -234,4 +316,34 @@ class ProfileVC: UIViewController {
         }
     }
     
+    @IBAction func showAllAction(_ sender: Any) {
+        Router.toAllAddress(self, addresses)
+    }
+    
+    
+}
+
+extension ProfileVC: CompletedPaymentDelegate{
+    func onPayment(_ success: Bool, _ transactionId: String) {
+        if success {
+            self.presenter?.addToWallet((Shared.transaction?.amount)!)
+        }else{
+            showToast("Transaction failed, please make sure you entered correct card information and the card is valid".localized)
+        }
+    }
+    
+    func onCancelPaymentSession() {
+        
+    }
+    
+}
+
+extension ProfileVC: PaymentDelegate{
+    func finishSdkPayment(_ receipt: TransactionStatusResponse) {
+        if receipt.Success {
+            self.presenter?.addToWallet(Double(self.amountToBbAdd ?? "0.0")!)
+        }else {
+            
+        }
+    }
 }

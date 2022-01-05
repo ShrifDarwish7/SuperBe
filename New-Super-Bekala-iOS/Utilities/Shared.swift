@@ -17,13 +17,15 @@ class Shared{
   //  static var userLat: CLLocationDegrees?
   //  static var userLng: CLLocationDegrees?
     static let errorMsg = "An error occuered, please try again later".localized
+    static let defaultLat = 31.264307
+    static let defaultLng = 32.282316
     static var isChatting: Bool{
         set { UserDefaults.init().setValue(newValue, forKey: "is_chatting") }
         get { UserDefaults.init().bool(forKey: "is_chatting") }
     }
-    static let storageBase = "https://dev4.superbekala.com/storage/"
+    static let storageBase = "https://new.superbekala.com/storage/"
     static var headers = [
-        "Authorization": "Bearer " + (APIServices.shared.user?.token ?? ""),
+        "Authorization": "Bearer " + (UserDefaults.init().string(forKey: "token") ?? ""),
         "Accept": "application/json",
         //"lang": "lang".localized
     ]
@@ -31,6 +33,16 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "is_region") }
         get { UserDefaults.init().bool(forKey: "is_region") }
     }
+//    static var coupons: [Coupon]?{
+//        set{
+//            UserDefaults.init().setValue(try! JSONEncoder.init().encode(newValue), forKey: "coupons")
+//        }
+//        get{
+//            let data = UserDefaults.init().data(forKey: "coupons")
+//            return (data?.getDecodedObject(from: [Coupon].self)) ?? nil
+//        }
+//    }
+    static var coupons: [Coupon] = []
     static var isCoords: Bool{
         set { UserDefaults.init().setValue(newValue, forKey: "is_coords") }
         get { UserDefaults.init().bool(forKey: "is_coords") }
@@ -47,15 +59,29 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "user_select_location") }
         get { return UserDefaults.init().bool(forKey: "user_select_location") }
     }
+    static var didGetProfileHint: Bool{
+        set { UserDefaults.init().setValue(newValue, forKey: "profile_hint") }
+        get { return UserDefaults.init().bool(forKey: "profile_hint") }
+    }
+    static var didGetProfileInsideHint: Bool{
+        set { UserDefaults.init().setValue(newValue, forKey: "inside_profile_hint") }
+        get { return UserDefaults.init().bool(forKey: "inside_profile_hint") }
+    }
+    static var didGetServiceHint: Bool{
+        set { UserDefaults.init().setValue(newValue, forKey: "service_hint") }
+        get { return UserDefaults.init().bool(forKey: "service_hint") }
+    }
     static var unseenMessages: Int{
         set { UserDefaults.init().setValue(newValue, forKey: "unseen_messages") }
         get { return UserDefaults.init().integer(forKey: "unseen_messages") }
     }
+    static var selectedOrders = true
     static var mapState: MapState?
     static var transaction: Transaction?
     static var selectedServices: SelectedServices?
     static var superService: SuperService?
     static var favBranches: [Branch]?
+    static var shouldShowCategories = false
     static var favProducts: [Product]?
     static var currentConversationId: Int?{
         set { UserDefaults.init().setValue(newValue, forKey: "current_conversation_id") }

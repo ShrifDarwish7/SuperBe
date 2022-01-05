@@ -23,8 +23,8 @@ class CartServices{
     func addToCart(_ item: Product, completed: @escaping (Bool)->Void){
         
         self.getCartBranches(id: item.branch?.id) { (branches) in
-            if let branches = branches{
-                if branches.isEmpty{
+            if let _ = branches{
+                if branches!.isEmpty{
                     
                     self.addCartItemWith(item, nil)
                     completed(true)
@@ -32,21 +32,63 @@ class CartServices{
                 }else{
                     
                     let cartItem = CartItem(context: CartServices.managedObjectContext)
+                    self.getCartBranches(id: nil) { branches in
+                        guard let branches = branches else {
+                            return
+                        }
+                        for i in 0...branches.count-1{
+                            branches[i].selected = false
+                        }
+                    }
+                    branches![0].selected = true
                     
                     if let _ = item.photos{
                         
                         cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
                         cartItem.cart_id = UUID().uuidString
+                        cartItem.branch = branches?.first
+                        cartItem.is_media = true
+                        
+                        do {
+                            try CartServices.managedObjectContext.save()
+                            print("add to cart success")
+                            completed(true)
+                        }catch let error{
+                            completed(false)
+                            print("context error",error)
+                        }
                         
                     }else if let _ = item.voice{
                         
                         cartItem.voice = item.voice
                         cartItem.cart_id = UUID().uuidString
+                        cartItem.branch = branches?.first
+                        cartItem.is_media = true
+                        
+                        do {
+                            try CartServices.managedObjectContext.save()
+                            print("add to cart success")
+                            completed(true)
+                        }catch let error{
+                            completed(false)
+                            print("context error",error)
+                        }
                         
                     }else if let _ = item.text{
                         
                         cartItem.text = item.text
                         cartItem.cart_id = UUID().uuidString
+                        cartItem.branch = branches?.first
+                        cartItem.is_media = true
+                        
+                        do {
+                            try CartServices.managedObjectContext.save()
+                            print("add to cart success")
+                            completed(true)
+                        }catch let error{
+                            completed(false)
+                            print("context error",error)
+                        }
                         
                     }else{
                         
@@ -58,12 +100,12 @@ class CartServices{
                         self.getCartItems(itemId: cartId, branch: -1) { (items) in
                             if let items = items{
                                 if items.isEmpty{
-                                    cartItem.product_id = Int16(Int(item.id!))
+                                    cartItem.product_id = "\(item.id!)"
                                     cartItem.name_en = item.name?.en
                                     cartItem.name_ar = item.name?.ar
-                                    cartItem.logo = item.images?.first
+                                    cartItem.logo = item.logo
                                     cartItem.notes = item.notes
-                                    cartItem.price = Double(item.price!)
+                                    cartItem.price = Double(item.price!).roundToDecimal(2)
                                     cartItem.quantity = Int16(item.quantity)
                                     cartItem.cart_id = cartId
                                     cartItem.desc = item.desc
@@ -73,23 +115,25 @@ class CartServices{
                                         let data = try! JSONEncoder.init().encode(variations)
                                         cartItem.variations = data
                                     }
+                                    cartItem.branch = branches?.first
+                                    
+                                    do {
+                                        try CartServices.managedObjectContext.save()
+                                        print("add to cart success")
+                                        completed(true)
+                                    }catch let error{
+                                        completed(false)
+                                        print("context error",error)
+                                    }
                                 }else{
                                     self.updateQuantity(newValue: Int(items.first!.quantity) + item.quantity, id: (items.first?.cart_id)!, nil)
+                                    completed(true)
                                 }
                             }
                         }
                     }
                                         
-                    cartItem.branch = branches.first
                     
-                    do {
-                        try CartServices.managedObjectContext.save()
-                        print("add to cart success")
-                        completed(true)
-                    }catch let error{
-                        completed(false)
-                        print("context error",error)
-                    }
                 }
             }else{
                 completed(false)
@@ -103,27 +147,30 @@ class CartServices{
         let cartItem = CartItem(context: CartServices.managedObjectContext)
         if let _ = item.photos{
             
-            let cartItem = CartItem(context: CartServices.managedObjectContext)
+            //let cartItem = CartItem(context: CartServices.managedObjectContext)
             cartItem.photos = try! JSONEncoder.init().encode(item.photos!.map({ $0.jpegData(compressionQuality: 0.5)! }))
             cartItem.cart_id = UUID().uuidString
+            cartItem.is_media = true
             
         }else if let _ = item.voice{
             
             cartItem.voice = item.voice
             cartItem.cart_id = UUID().uuidString
+            cartItem.is_media = true
             
         }else if let _ = item.text{
             
             cartItem.text = item.text
             cartItem.cart_id = UUID().uuidString
+            cartItem.is_media = true
             
         }else{
-            cartItem.product_id = Int16(item.id!)
+            cartItem.product_id = "\(item.id!)"
             cartItem.name_en = item.name?.en
             cartItem.name_ar = item.name?.ar
-            cartItem.logo = item.images?.first
+            cartItem.logo = item.logo
             cartItem.notes = item.notes
-            cartItem.price = Double(item.price!)
+            cartItem.price = Double(item.price!).roundToDecimal(2)
             cartItem.quantity = Int16(item.quantity)
             cartItem.desc = item.desc
             cartItem.min_qty = Int16(item.minQty ?? 0)
@@ -132,7 +179,6 @@ class CartServices{
             item.variations?.forEach({ (variation) in
                 cartId += variation.options!.map({String($0.id!)}).joined()
             })
-            print("cartId",cartId)
             cartItem.cart_id = cartId
             
             if let variations = item.variations{
@@ -140,11 +186,20 @@ class CartServices{
                 cartItem.variations = data
             }
         }
+        self.getCartBranches(id: nil) { branches in
+            guard let branches = branches, !branches.isEmpty else {
+                return
+            }
+            for i in 0...branches.count-1{
+                branches[i].selected = false
+            }
+        }
         let cartBranch = CartBranch(context: CartServices.managedObjectContext)
-        cartBranch.id = Int16(item.branch!.id)
+        cartBranch.id = Int32(item.branch!.id)
         cartBranch.logo = item.branch?.logo
         cartBranch.name_en = item.branch?.name?.en
         cartBranch.name_ar = item.branch?.name?.ar
+        cartBranch.selected = true
         cartItem.branch = cartBranch
         
         do{
@@ -218,6 +273,27 @@ class CartServices{
         do{
             let fetchResult = try CartServices.managedObjectContext.fetch(fetchRequest)
             CartServices.managedObjectContext.delete(fetchResult.first!)
+            try CartServices.managedObjectContext.save()
+            removed?(true)
+        }catch{
+            removed?(false)
+        }
+    }
+    
+    func removeBranchWithItems(_ id: Int,_ removed: ((Bool)->Void)?){
+        let branchFetchRequest = NSFetchRequest<NSManagedObject>(entityName: Entity.cartBranch.rawValue)
+        branchFetchRequest.predicate = NSPredicate(format: "id == %i", id)
+        let itemFetchRequest = NSFetchRequest<NSManagedObject>(entityName: Entity.cartItem.rawValue)
+        itemFetchRequest.predicate = NSPredicate(format: "ANY branch.id = %i", id)
+        do{
+            let branchFetchResult = try CartServices.managedObjectContext.fetch(branchFetchRequest)
+            let itemsFetchResult = try CartServices.managedObjectContext.fetch(itemFetchRequest)
+            for i in 0...branchFetchResult.count-1{
+                CartServices.managedObjectContext.delete(branchFetchResult[i])
+            }
+            for i in 0...itemsFetchResult.count-1{
+                CartServices.managedObjectContext.delete(itemsFetchResult[i])
+            }
             try CartServices.managedObjectContext.save()
             removed?(true)
         }catch{

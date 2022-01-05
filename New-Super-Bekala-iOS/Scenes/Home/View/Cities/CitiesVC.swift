@@ -22,7 +22,10 @@ class CitiesVC: UIViewController {
         citiesTableView.reloadData()
         
     }
-
+    @IBAction func toMaps(_ sender: Any) {
+        Router.toMaps(self)
+    }
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

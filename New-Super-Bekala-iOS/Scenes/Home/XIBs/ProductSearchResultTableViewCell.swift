@@ -23,6 +23,7 @@ class ProductSearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var quantity: UILabel!
     @IBOutlet weak var inCartView: UIView!
     @IBOutlet weak var stockView: ViewCorners!
+    @IBOutlet weak var closedView: ViewCorners!
     
     
     func loadFrom(_ product: Product){
@@ -43,13 +44,18 @@ class ProductSearchResultTableViewCell: UITableViewCell {
 //            price.isHidden = false
 //        }
         
-        if product.inStock == 1{
-            stockView.isHidden = true
-            addToCart.isHidden = false
-        }else{
-            stockView.isHidden = false
-            addToCart.isHidden = true
-        }
+        stockView.isHidden = product.inStock == 1 ? true : false
+       // addToCart.isHidden = product.inStock == 1 ? false : true
+        
+        closedView.isHidden = product.isOpen == 1 ? true : false
+        
+//        if product.inStock == 1{
+//            stockView.isHidden = true
+//            addToCart.isHidden = false
+//        }else{
+//            stockView.isHidden = false
+//            addToCart.isHidden = true
+//        }
     }
     
 }

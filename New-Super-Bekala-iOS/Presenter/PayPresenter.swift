@@ -144,8 +144,8 @@ class PayPresenter{
                 the3Ds: nil,
                 the3Ds1: nil),
             customer: Customer(
-                firstName: "name",
-                email: "info@sb.com",
+                firstName: APIServices.shared.user?.name ?? "name",
+                email: "aatrap@gmail.com",
                 lastName: "_"),
             device: Device(
                 browserDetails: BrowserDetails(

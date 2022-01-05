@@ -86,6 +86,56 @@ class LocalizedImg: UIImageView {
 }
 
 @IBDesignable
+class LocalizedSystemBtn: UIButton{
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sharedInit()
+    }
+
+    override func prepareForInterfaceBuilder() {
+        sharedInit()
+    }
+
+    func sharedInit() {
+        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
+    }
+}
+
+extension UIButton{
+    open override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
+    }
+}
+
+@IBDesignable
+class SystemLocalizedButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sharedInit()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        sharedInit()
+    }
+    
+    func sharedInit() {
+        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
+    }
+    
+}
+
+@IBDesignable
 class RoundedButton: UIButton {
     @IBInspectable var borderColor: UIColor? {
         didSet {
@@ -104,23 +154,6 @@ class RoundedButton: UIButton {
             setNeedsLayout()
         }
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //self.round()
-        self.setupBorder()
-        self.setupCornerRadius()
-        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
-    }
-    
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-       // self.round()
-        self.setupBorder()
-        self.setupCornerRadius()
-        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
-    }
-    
     private func setupBorder() {
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = borderColor?.cgColor
@@ -129,6 +162,36 @@ class RoundedButton: UIButton {
     private func setupCornerRadius() {
         self.layer.cornerRadius = cornerRadius
         self.clipsToBounds = true
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sharedInit()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        sharedInit()
+    }
+    
+    func sharedInit() {
+        self.setupBorder()
+        self.setupCornerRadius()
+        self.setTitle(self.title(for: .normal)?.localized, for: .normal)
+    }
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        self.sharedInit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.sharedInit()
     }
 }
 

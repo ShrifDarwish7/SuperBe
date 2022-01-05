@@ -33,6 +33,7 @@ extension InfoVC: UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = branch?.phones![indexPath.row]
         case deliveryAreasTableView:
             cell.textLabel?.text = branch?.deliveryRegions![indexPath.row].name
+            //cell.textLabel?.text = "lang".localized == "en" ? branch?.deliveryRegions![indexPath.row].name?.en : branch?.deliveryRegions![indexPath.row].name?.ar
         default:
             break
         }

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
@@ -33,19 +36,59 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iF-6t-Wzl">
-                                <rect key="frame" x="15" y="16" width="221" height="22"/>
+                                <rect key="frame" x="15" y="16" width="169" height="22"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ex5-N1-jvc">
+                                <rect key="frame" x="199" y="15.5" width="37" height="23"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valid Until" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qun-iN-AIf" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="10"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="8"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iF1-oC-aVT">
+                                        <rect key="frame" x="0.0" y="13" width="37" height="10"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="8"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666669999997" green="0.89411764709999997" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4iF-6t-Wzl" firstAttribute="leading" secondItem="Nv5-n9-4I4" secondAttribute="leading" constant="15" id="6u3-bV-tjL"/>
                             <constraint firstItem="wyr-x6-mJu" firstAttribute="centerY" secondItem="Nv5-n9-4I4" secondAttribute="centerY" id="9h8-TK-WID"/>
+                            <constraint firstItem="Ex5-N1-jvc" firstAttribute="leading" secondItem="4iF-6t-Wzl" secondAttribute="trailing" constant="15" id="BX3-JM-5Hn"/>
                             <constraint firstItem="4iF-6t-Wzl" firstAttribute="centerY" secondItem="Nv5-n9-4I4" secondAttribute="centerY" id="IyS-UX-Xh7"/>
+                            <constraint firstItem="wyr-x6-mJu" firstAttribute="leading" secondItem="Ex5-N1-jvc" secondAttribute="trailing" constant="15" id="JPC-LW-DpX"/>
                             <constraint firstAttribute="trailing" secondItem="wyr-x6-mJu" secondAttribute="trailing" constant="15" id="b4J-gO-D6W"/>
-                            <constraint firstItem="wyr-x6-mJu" firstAttribute="leading" secondItem="4iF-6t-Wzl" secondAttribute="trailing" constant="15" id="nit-Ms-IJN"/>
+                            <constraint firstItem="Ex5-N1-jvc" firstAttribute="centerY" secondItem="Nv5-n9-4I4" secondAttribute="centerY" id="tUg-89-BqY"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3w-0w-L4t" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                        <rect key="frame" x="5" y="5" width="296" height="54"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expired" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rw-dl-T30" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="115" y="15.5" width="66" height="23"/>
+                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Rw-dl-T30" firstAttribute="centerY" secondItem="G3w-0w-L4t" secondAttribute="centerY" id="W5f-L4-hgq"/>
+                            <constraint firstItem="1Rw-dl-T30" firstAttribute="centerX" secondItem="G3w-0w-L4t" secondAttribute="centerX" id="d74-LE-Lsh"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
@@ -55,18 +98,25 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="G3w-0w-L4t" secondAttribute="bottom" constant="5" id="1rf-2K-oZa"/>
                     <constraint firstAttribute="bottom" secondItem="Nv5-n9-4I4" secondAttribute="bottom" constant="5" id="2Cj-gb-EfO"/>
                     <constraint firstItem="Nv5-n9-4I4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="30N-J6-RyC"/>
+                    <constraint firstItem="G3w-0w-L4t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Oe3-z4-3RR"/>
                     <constraint firstAttribute="trailing" secondItem="Nv5-n9-4I4" secondAttribute="trailing" constant="5" id="lFt-3X-JnZ"/>
+                    <constraint firstItem="G3w-0w-L4t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="pge-W5-oRK"/>
                     <constraint firstItem="Nv5-n9-4I4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="qPP-Yu-me0"/>
+                    <constraint firstAttribute="trailing" secondItem="G3w-0w-L4t" secondAttribute="trailing" constant="5" id="rX5-3G-YgJ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="containerView" destination="Nv5-n9-4I4" id="XOo-hJ-y0s"/>
+                <outlet property="expireView" destination="G3w-0w-L4t" id="FDD-2v-Kdy"/>
                 <outlet property="points" destination="4iF-6t-Wzl" id="aIk-Yu-Pcw"/>
                 <outlet property="statusIcon" destination="wyr-x6-mJu" id="Hg5-Ab-nw9"/>
+                <outlet property="time" destination="iF1-oC-aVT" id="alk-5M-AFu"/>
+                <outlet property="validStack" destination="Ex5-N1-jvc" id="HwZ-5B-IT2"/>
             </connections>
             <point key="canvasLocation" x="73.913043478260875" y="92.410714285714278"/>
         </tableViewCell>

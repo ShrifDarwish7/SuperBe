@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import SVProgressHUD
 
-class HomeContainerVC: UIViewController {
-
-
+class HomeContainerVC: UIViewController, LoginDelegate {
+    
     @IBOutlet weak var shoopingTabBtn: UIButton!
     @IBOutlet weak var offersTabBtn: UIButton!
     @IBOutlet weak var ordersTabBtn: UIButton!
@@ -20,7 +20,6 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var offersTab: UILabel!
     @IBOutlet weak var ordersTab: UILabel!
     @IBOutlet weak var favouriteTab: UILabel!
-    @IBOutlet weak var profilePic: CircluarImage!
     
     @IBOutlet weak var addView: UIView!
     
@@ -41,45 +40,90 @@ class HomeContainerVC: UIViewController {
     @IBOutlet weak var addressesContainer: UIView!
     @IBOutlet weak var profileImage: CircluarImage!
     @IBOutlet weak var deliveryLocationTitle: UILabel!
+    @IBOutlet weak var profileHintView: UIView!
+    @IBOutlet weak var profileHintTopCnst: NSLayoutConstraint!
+    @IBOutlet weak var serviceHintView: UIView!
+    @IBOutlet weak var serviceHintBottomCnst: NSLayoutConstraint!
     
-    var cartItems: [CartItem]?
+   // var cartItems: [CartItem]?
     var selectedTab = Tabs.shooping
-    
+   // var shouldShowCats = false
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileImage.kf.setImage(with: URL(string: Shared.storageBase + APIServices.shared.user!.avatar!))
-        
         NotificationCenter.default.addObserver(self, selector: #selector(didChooseAddress), name: NSNotification.Name("DID_CHOOSE_ADDRESS"), object: nil)
-        
+
         orderMethodsView.transform = CGAffineTransform(scaleX: 0, y: 0)
         addView.layer.cornerRadius = 10
-        coverViewCnst.constant = self.view.frame.width - (self.view.frame.width*0.43)
+        coverViewCnst.constant = self.view.frame.width - (self.view.frame.width*0.5)
         if "lang".localized == "en"{
             coverView.roundCorners([.layerMaxXMinYCorner,.layerMaxXMaxYCorner], radius: self.coverView.frame.height/2)
         }else{
             coverView.roundCorners([.layerMinXMinYCorner,.layerMinXMaxYCorner], radius: self.coverView.frame.height/2)
         }
         
-        self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+        if let lastVC = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)!-2],
+           lastVC.isKind(of: OrderPlacedVC.self) == true || lastVC.isKind(of: ServicesCheckoutVC.self) == true{
+            shoopingTab.isHidden = true
+            offersTab.isHidden = true
+            favouriteTab.isHidden = true
+            
+            shoopingTabBtn.setImage(UIImage(named: "shooping-unselect"), for: .normal)
+            offersTabBtn.setImage(UIImage(named: "offers-unselect"), for: .normal)
+            favouriteTabBtn.setImage(UIImage(named: "favourites-unselect"), for: .normal)
+            ordersTab.isHidden = false
+            ordersTabBtn.setImage(UIImage(named: "last-orders-select"), for: .normal)
+            
+            guard selectedTab != .orders else {
+                NotificationCenter.default.post(name: NSNotification.Name("SCROLL_TO_TOP"), object: nil, userInfo: nil)
+                return
+            }
+            
+            tabTitle.text = "Last Orders".localized
+            self.replaceView(containerView: containerView, identifier: "LastOrderVC", storyboard: .orders)
+            selectedTab = .orders
+        
+        }else{
+            self.replaceView(containerView: containerView, identifier: "ShoopingNav", storyboard: .home)
+        }
                 
         profileImage.addTapGesture { (_) in
-            Router.toProfile(self)
+            if APIServices.shared.isLogged{
+                let presenter = LoginViewPresenter(loginViewDelegate: self)
+                SVProgressHUD.show()
+                presenter.getProfile()
+            }else{
+                Router.toRegister(self)
+            }
         }
         
         blockBlurView.addTapGesture { (_) in
             self.dismissOrderMethodsView()
         }
-       
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) { [self] in
+            if !Shared.didGetProfileHint{
+                shakeProfileHint()
+                profileHintView.isHidden = false
+            }else{
+                profileHintView.isHidden = true
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        if !APIServices.shared.isLogged{
+            profileImage.image = UIImage(systemName: "person.fill")
+        }else{
+            profileImage.kf.setImage(with: URL(string: Shared.storageBase + (APIServices.shared.user?.avatar ?? "")))
+        }
         deliveryLocationTitle.text = Shared.deliveringToTitle
-        CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
-            self.cartItems = items
-            if let items = items,
-               !items.isEmpty{
+        CartServices.shared.getCartBranches(id: nil) { [self] branches in
+            if let branches = branches, !branches.isEmpty {
                 cartFlage.isHidden = false
             }else{
                 cartFlage.isHidden = true
@@ -87,9 +131,83 @@ class HomeContainerVC: UIViewController {
         }
     }
     
+    func shakeProfileHint(){
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) { [self] in
+                profileHintTopCnst.constant = 30
+                view.layoutIfNeeded()
+            } completion: { [self] _ in
+                UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) {
+                    profileHintTopCnst.constant = 15
+                    view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    func shakeServiceHint(){
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) { [self] in
+                serviceHintBottomCnst.constant = 30
+                view.layoutIfNeeded()
+            } completion: { [self] _ in
+                UIView.animate(withDuration: 0.5, delay: 0, options: [.allowUserInteraction]) {
+                    serviceHintBottomCnst.constant = 15
+                    view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    @IBAction func dismissProfileHint(_ sender: Any) {
+        Shared.didGetProfileHint = true
+        UIView.animate(withDuration: 0.2) { [self] in
+            profileHintView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        } completion: { [self] _ in
+            profileHintView.isHidden = true
+            serviceHintView.isHidden = false
+            shakeServiceHint()
+        }
+    }
+    
+    @IBAction func dismissServiceHint(_ sender: Any) {
+        Shared.didGetServiceHint = true
+        UIView.animate(withDuration: 0.2) { [self] in
+            serviceHintView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        } completion: { [self] _ in
+            serviceHintView.isHidden = true
+        }
+    }
+    
+    
+    func onLogin() {
+        self.selectShooping()
+        self.replaceView(containerView: containerView, identifier: "ShoopingNav", storyboard: .home)
+        profileImage.kf.setImage(with: URL(string: Shared.storageBase + (APIServices.shared.user?.avatar ?? "")))
+    }
+    
+    func onLogout() {
+        self.selectShooping()
+        self.replaceView(containerView: containerView, identifier: "ShoopingNav", storyboard: .home)
+        profileImage.image = UIImage(systemName: "person.fill")
+    }
+    
+    func selectShooping(){
+        offersTab.isHidden = true
+        ordersTab.isHidden = true
+        favouriteTab.isHidden = true
+        offersTabBtn.setImage(UIImage(named: "offers-unselect"), for: .normal)
+        ordersTabBtn.setImage(UIImage(named: "last-orders-unselect"), for: .normal)
+        favouriteTabBtn.setImage(UIImage(named: "favourites-unselect"), for: .normal)
+        shoopingTab.isHidden = false
+        shoopingTabBtn.setImage(UIImage(named: "shooping-select"), for: .normal)
+        tabTitle.text = "Shooping".localized
+        selectedTab = .shooping
+    }
     
     @IBAction func toProfile(_ sender: Any) {
-        Router.toProfile(self)
+        let presenter = LoginViewPresenter(loginViewDelegate: self)
+        presenter.getProfile()
     }
     
     @IBAction func toChat(_ sender: Any) {
@@ -117,7 +235,7 @@ class HomeContainerVC: UIViewController {
     
     @objc func didChooseAddress(){
         deliveryLocationTitle.text = Shared.deliveringToTitle
-        self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+        self.replaceView(containerView: containerView, identifier: "ShoopingNav", storyboard: .home)
     }
     
     @IBAction func changeLocation(_ sender: Any) {
@@ -173,14 +291,21 @@ class HomeContainerVC: UIViewController {
     }
     
     @IBAction func toCart(_ sender: Any) {
-        CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
-            if let items = items,
-               items.isEmpty{
-                showToast("Your cart is empty")
-            }else{
+        CartServices.shared.getCartBranches(id: nil) { branches in
+            if let branches = branches, !branches.isEmpty {
                 Router.toCart(self)
+            }else{
+                self.showToast("Your cart is empty".localized)
             }
         }
+//        CartServices.shared.getCartItems(itemId: "-1", branch: -1) { [self] (items) in
+//            if let items = items,
+//               !items.isEmpty{
+//                Router.toCart(self)
+//            }else{
+//                showToast("Your cart is empty".localized)
+//            }
+//        }
     }
     
     @IBAction func showMoreOptiions(_ sender: UIButton) {
@@ -215,6 +340,15 @@ class HomeContainerVC: UIViewController {
     
     @IBAction func TabsActions(_ sender: UIButton) {
         
+        switch sender.tag {
+        case 2,3:
+            guard APIServices.shared.isLogged else{
+                Router.toRegister(self)
+                return
+            }
+        default: break
+        }
+        
         shoopingTab.isHidden = true
         offersTab.isHidden = true
         ordersTab.isHidden = true
@@ -237,7 +371,7 @@ class HomeContainerVC: UIViewController {
                 return
             }
             
-            self.replaceView(containerView: containerView, identifier: "ShoopingVC", storyboard: .home)
+            self.replaceView(containerView: containerView, identifier: "ShoopingNav", storyboard: .home)
             
             tabTitle.text = "Shooping".localized
             selectedTab = .shooping
@@ -342,6 +476,17 @@ extension HomeContainerVC: MainViewDelegate{
         if let id = Id{
             Shared.currentConversationId = id
             Router.toChat(self)
+        }
+    }
+}
+
+extension HomeContainerVC: LoginViewDelegate{
+    func didCompleteWithProfile(_ error: String?) {
+        SVProgressHUD.dismiss()
+        if let err = error{
+            showToast(err)
+        }else{
+            Router.toProfile(self)
         }
     }
 }

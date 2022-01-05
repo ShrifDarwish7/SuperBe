@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "delivery-truck.png",
+      "filename" : "flash.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "delivery-truck@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "delivery-truck@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

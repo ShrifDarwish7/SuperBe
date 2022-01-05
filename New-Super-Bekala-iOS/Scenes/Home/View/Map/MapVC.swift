@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import GooglePlaces
+//import GooglePlaces
 import Closures
 import MapKit
+import SVProgressHUD
 
 class MapVC: UIViewController {
     
@@ -34,13 +35,18 @@ class MapVC: UIViewController {
     @IBOutlet weak var hintZoom: UILabel!
     @IBOutlet weak var mapKitView: MKMapView!
     @IBOutlet weak var scroller: UIScrollView!
+    @IBOutlet weak var workView: ViewCorners!
+    @IBOutlet weak var homeView: ViewCorners!
+    @IBOutlet weak var otherView: ViewCorners!
     
     let locationManager = CLLocationManager()
     var presenter: MainPresenter?
-    var path: MKPolyline?
-    var polygone: MKPolygon?
+    var path: [MKPolyline]?
+    var polygone: [MKPolygon]?
     var inRegion = true
     var previousLocation: CLLocation?
+    var addressTitle: String?
+    var editableAddress: Address?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,21 +60,47 @@ class MapVC: UIViewController {
         addressTitleStack.isHidden = Shared.mapState == .addAddress ? false : true
         
         hintZoomView.transform = CGAffineTransform(scaleX: 0, y: 0)
-        showHintZoom()
         
         presenter = MainPresenter(self)
         
         if let path = path{
-            mapKitView.addOverlay(path, level: MKOverlayLevel.aboveRoads)
+            path.forEach { path in
+                mapKitView.addOverlay(path, level: MKOverlayLevel.aboveRoads)
+            }
         }
-        
-        switch CLLocationManager.authorizationStatus() {
-        case .denied, .notDetermined, .restricted:
-            self.showHintZoom()
-            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.0444, longitude: 31.2357), latitudinalMeters: 1000, longitudinalMeters: 1000)
+                
+        switch Shared.mapState {
+        case .editAddress:
+            guard let address = self.editableAddress else { return }
+            addressTitleStack.isHidden = false
+            let lat = Double(address.coordinates?.split(separator: ",")[0].replacingOccurrences(of: " ", with: "") ?? "0.0")!
+            let lng = Double(address.coordinates?.split(separator: ",")[1].replacingOccurrences(of: " ", with: "") ?? "0.0")!
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lng), latitudinalMeters: 200, longitudinalMeters: 200)
             mapKitView.setRegion(region, animated: true)
+            addressTitleTF.text = address.title
+            cityTF.text = address.city
+            districtTF.text = address.dist
+            streetTF.text = address.landmark
+            buildingTF.text = address.building
+            floorTF.text = address.floor
+            flatTF.text = address.flat
+            phoneNumber.text = address.phone
+            notesTF.text = address.notes
+            UIView.animate(withDuration: 0.25) { [self] in
+                addAddressBlockView.isHidden = false
+                detectBtn.isHidden = true
+                addAddressBlockView.alpha = 1
+                addressTitleTF.becomeFirstResponder()
+            }
         default:
-            self.getUserLocation()
+            switch CLLocationManager.authorizationStatus() {
+            case .denied, .notDetermined, .restricted:
+                self.showHintZoom()
+                let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: Shared.defaultLat, longitude: Shared.defaultLng), latitudinalMeters: 5000, longitudinalMeters: 5000)
+                mapKitView.setRegion(region, animated: true)
+            default:
+                self.getUserLocation()
+            }
         }
         
         previousLocation = self.getCenterLocation(for: mapKitView)
@@ -87,18 +119,21 @@ class MapVC: UIViewController {
     @IBAction func confirmAction(_ sender: Any) {
         switch Shared.mapState {
         case .fetchLocation:
-            Shared.isCoords = true
-            Shared.isRegion = false
-            Shared.selectedCoords = "\(mapKitView.centerCoordinate.latitude),\(mapKitView.centerCoordinate.longitude)"
-            Shared.userSelectLocation = true
-            Router.toHome(self)
-        case .addAddress:
+            SVProgressHUD.show()
+            presenter?.getCategories(["coordinates": "\(mapKitView.centerCoordinate.latitude),\(mapKitView.centerCoordinate.longitude)"])
+        case .addAddress, .editAddress:
             guard self.inRegion else { return }
+            let zoomWidth = self.mapKitView.visibleMapRect.size.width
+            let zoomFactor = Int(log2(zoomWidth)) - 9
+            guard zoomFactor <= 1 else {
+                hintZoomView.shake(.error)
+                return
+            }
             UIView.animate(withDuration: 0.25) {
                 self.addAddressBlockView.isHidden = false
                 self.detectBtn.isHidden = true
                 self.addAddressBlockView.alpha = 1
-                self.addressTitleTF.becomeFirstResponder()
+                //self.addressTitleTF.becomeFirstResponder()
             }
         default:
             break
@@ -106,9 +141,57 @@ class MapVC: UIViewController {
         
     }
     
+    @IBAction func selectAddressName(_ sender: UIButton) {
+        
+        workView.alpha = 0.2
+        homeView.alpha = 0.2
+        otherView.alpha = 0.2
+        addressTitleTF.isHidden = true
+        addressTitleTF.text = ""
+        
+        switch sender.tag {
+        case 0:
+            workView.alpha = 1
+            addressTitleTF.text = "Work"
+        case 1:
+            homeView.alpha = 1
+            addressTitleTF.text = "Home"
+        case 2:
+            otherView.alpha = 1
+            addressTitleTF.isHidden = false
+        default: break
+        }
+        
+    }
+    
+    
     @IBAction func save(_ sender: Any) {
         guard !self.addressTitleTF.text!.isEmpty else {
-            self.addressTitleTF.shake(.error)
+            self.addressTitleStack.shake(.error)
+            return
+        }
+        guard !self.cityTF.text!.isEmpty else {
+            cityTF.shake(.error)
+            return
+        }
+        guard !self.districtTF.text!.isEmpty else {
+            districtTF.shake(.error)
+            return
+        }
+        guard !self.streetTF.text!.isEmpty else {
+            streetTF.shake(.error)
+            return
+        }
+        guard !self.buildingTF.text!.isEmpty else {
+            buildingTF.shake(.error)
+            return
+        }
+        guard !self.floorTF.text!.isEmpty else {
+            floorTF.shake(.error)
+            return
+        }
+        guard !self.flatTF.text!.isEmpty else {
+            flatTF.shake(.error)
             return
         }
         let parameters: [String: String] = [
@@ -124,7 +207,16 @@ class MapVC: UIViewController {
             "notes": notesTF.text!,
             "selected": "1"
         ]
-        presenter?.addAddress(parameters)
+        switch Shared.mapState{
+        case .addAddress:
+            presenter?.addAddress(parameters)
+        case .editAddress:
+            guard let address = self.editableAddress else { return }
+            SVProgressHUD.show()
+            presenter?.updateAddress(address.id, parameters)
+        default: break
+        }
+        
     }
     
     @IBAction func searchAction(_ sender: Any) {
@@ -188,5 +280,6 @@ class MapVC: UIViewController {
 
 enum MapState{
     case addAddress
+    case editAddress
     case fetchLocation
 }

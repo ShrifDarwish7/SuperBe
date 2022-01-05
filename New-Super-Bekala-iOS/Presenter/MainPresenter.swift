@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import SVProgressHUD
+import UIKit
 
 protocol MainViewDelegate {
     func showProgress()
@@ -28,7 +29,8 @@ protocol MainViewDelegate {
     func didCompleteUpdateAddress(_ error: String?)
     func didCompleteDeleteAddress(_ error: String?)
     func didCompletePlaceOrder(_ error: String?,_ id: Int)
-    func didCompleteWithMyOrders(_ data: [LastOrder]?)
+    func didCompleteWithMyOrders(_ data: [LastOrder]?,_ meta: Meta?)
+    func didCompleteWithMyServices(_ data: [LastOrder]?,_ meta: Meta?)
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?)
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?)
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?)
@@ -42,7 +44,7 @@ protocol MainViewDelegate {
     func didCompleteAddToWallet(_ msg: String,_ status: Int)
     func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?)
     func didCompleteRate(_ error: String?)
-    func didCompleteValidateCoupons(_ status: Int,_ message: String?)
+    func didCompleteValidateCoupons(_ status: Int,_ message: String?,_ discountAmount: Double?)
     func didCompleteWithShippingDetails(_ data: ShippingDetails?)
     func didCompleteStartConversation(_ Id: Int?)
     func didCompleteSendMessage(_ sent: Bool,_ id: Int)
@@ -50,6 +52,14 @@ protocol MainViewDelegate {
     func didCompleteReopenConversation(_ error: String?)
     func didCompleteLockConversation(_ error: String?)
     func didCompleteExchangePointsToWallet(_ error: String?)
+    func didCompleteWithCaptainCoords(_ coords: String?)
+    func didCompleteWithOrder(_ data: LastOrder?)
+    func didCompleteVerifyPhoneNumber(_ error: String?)
+    func didCompletedRequestOtp(_ error: String?)
+    func didCompleteUploadOrderFiles(_ error: String?)
+    func didCompleteWithTags(_ data: [Tag]?,_ error: String?)
+    //func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?)
+    
 }
 
 extension MainViewDelegate{
@@ -70,7 +80,7 @@ extension MainViewDelegate{
     func didCompleteUpdateAddress(_ error: String?){}
     func didCompleteDeleteAddress(_ error: String?){}
     func didCompletePlaceOrder(_ error: String?,_ id: Int){}
-    func didCompleteWithMyOrders(_ data: [LastOrder]?){}
+    func didCompleteWithMyOrders(_ data: [LastOrder]?,_ meta: Meta?){}
     func didCompeleteBranchesSearch(_ data: [Branch]?,_ error: String?){}
     func didCompeleteProductsSearch(_ data: [Product]?,_ error: String?){}
     func didCompleteWithPoints(_ data: PointsData?,_ error: String?){}
@@ -84,7 +94,7 @@ extension MainViewDelegate{
     func didCompleteAddToWallet(_ msg: String,_ status: Int){}
     func didCompleteWithBranchRates(_ data: [Rating]?,_ error: String?){}
     func didCompleteRate(_ error: String?){}
-    func didCompleteValidateCoupons(_ status: Int,_ message: String?){}
+    func didCompleteValidateCoupons(_ status: Int,_ message: String?,_ discountAmount: Double?){}
     func didCompleteWithShippingDetails(_ data: ShippingDetails?){}
     func didCompleteStartConversation(_ Id: Int?){}
     func didCompleteSendMessage(_ sent: Bool,_ id: Int){}
@@ -92,6 +102,14 @@ extension MainViewDelegate{
     func didCompleteReopenConversation(_ error: String?){}
     func didCompleteLockConversation(_ error: String?){}
     func didCompleteExchangePointsToWallet(_ error: String?){}
+    func didCompleteWithCaptainCoords(_ coords: String?){}
+    func didCompleteWithOrder(_ data: LastOrder?){}
+    func didCompleteVerifyPhoneNumber(_ error: String?){}
+    func didCompletedRequestOtp(_ error: String?){}
+    func didCompleteWithMyServices(_ data: [LastOrder]?,_ meta: Meta?){}
+    func didCompleteUploadOrderFiles(_ error: String?){}
+    func didCompleteWithTags(_ data: [Tag]?,_ error: String?){}
+   // func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?){}
 }
 
 class MainPresenter{
@@ -100,6 +118,81 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func getTags(){
+        delegate?.showProgress()
+        APIServices.shared.call(.tags) { [self] data in
+            print(JSON(data))
+            delegate?.dismissProgress()
+            if let data = data, let response = data.getDecodedObject(from: TagsResponse.self) {
+                delegate?.didCompleteWithTags(response.data, nil)
+            }else{
+                delegate?.didCompleteWithTags(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func requestOTP(_ phone: String){
+        delegate?.showProgress()
+        APIServices.shared.call(.requestOtp(["phone": phone])) { [self] data in
+            delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    delegate?.didCompletedRequestOtp(nil)
+                }else{
+                    delegate?.didCompletedRequestOtp(json["message"].stringValue)
+                }
+            }else{
+                delegate?.didCompletedRequestOtp(Shared.errorMsg)
+            }
+        }
+    }
+    
+    func verifyOTP(_ code: String){
+        delegate?.showProgress()
+        APIServices.shared.call(.verifyOTP(["otp": code.arToEnDigits!])) { [self] data in
+            delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                if json["status"].intValue == 1{
+                    delegate?.didCompleteVerifyPhoneNumber(nil)
+                }else{
+                    delegate?.didCompleteVerifyPhoneNumber(json["message"].stringValue)
+                }
+            }else{
+                delegate?.didCompleteVerifyPhoneNumber(Shared.errorMsg)
+            }
+        }
+    }
+    
+    func getOrderBy(_ id: Int){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.getOrderBy(id, ["with": "captain.user,destinationAddress"])) { [self] data in
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data),
+               let order = try? json["data"].rawData().getDecodedObject(from: LastOrder.self){
+                delegate?.didCompleteWithOrder(order)
+            }else{
+                delegate?.didCompleteWithOrder(nil)
+            }
+        }
+    }
+    
+    func getCurrentCaptainCoords(_ id: Int){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.getCaptain(id)) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data){
+                self.delegate?.didCompleteWithCaptainCoords(json["data"]["coordinates"].string ?? "")
+            }else{
+                self.delegate?.didCompleteWithCaptainCoords(nil)
+            }
+        }
     }
     
     func exchangePointsToWallet(_ amount: Int){
@@ -187,6 +280,20 @@ class MainPresenter{
         }
     }
     
+    func startConversation(_ title: String,_ orderId: String){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.startOrderIssueConveration(["title": title, "order_id": orderId])) { data in
+            self.delegate?.dismissProgress()
+            if let data = data,
+               let json = try? JSON(data: data),
+               json["status"].intValue == 1{
+                self.delegate?.didCompleteStartConversation(json["data"]["id"].intValue)
+            }else{
+                self.delegate?.didCompleteStartConversation(nil)
+            }
+        }
+    }
+    
     func getShippingDetails(_ branchId: Int){
         APIServices.shared.call(.getShippingCost(["branch_id": "\(branchId)"])) { data in
             print("getShippingDetails",JSON(data))
@@ -204,9 +311,9 @@ class MainPresenter{
             print("validateCoupons", JSON(data))
             if let data = data,
                let json = try? JSON(data: data){
-                self.delegate?.didCompleteValidateCoupons(json["status"].intValue, json["message"].stringValue)
+                self.delegate?.didCompleteValidateCoupons(json["status"].intValue, json["message"].stringValue, json["data"].arrayValue.first?["discount_value"].doubleValue.roundToDecimal(1))
             }else{
-                self.delegate?.didCompleteValidateCoupons(0, Shared.errorMsg)
+                self.delegate?.didCompleteValidateCoupons(0, Shared.errorMsg, nil)
             }
         }
     }
@@ -272,11 +379,12 @@ class MainPresenter{
     
     func addToWallet(_ amount: Double){
         self.delegate?.showProgress()
-        APIServices.shared.call(.addToWallet(["value": amount])) { data in
+        APIServices.shared.call(.addToWallet(["value": amount, "transaction_id": Shared.transaction?.orderId ?? ""])) { data in
             print(JSON(data))
             self.delegate?.dismissProgress()
             if let data = data,
                let json = try? JSON(data: data){
+                Shared.transaction = nil
                 self.delegate?.didCompleteAddToWallet(json["message"].stringValue, json["status"].intValue)
             }
         }
@@ -314,12 +422,11 @@ class MainPresenter{
         switch context {
         case .products:
             prms.updateValue("variations.options", forKey: "with")
-        default:
-            break
+        case .vendors:
+            prms.updateValue("coupons", forKey: "with")
         }
-        print(prms)
         APIServices.shared.call(.search(prms)) { (data) in
-            print(JSON(data))
+            print("searchWith ",JSON(data))
             if let data = data{
                 switch context {
                 case .vendors:
@@ -333,38 +440,36 @@ class MainPresenter{
                         self.delegate?.didCompeleteProductsSearch(nil, Shared.errorMsg)
                         return
                     }
-                    self.delegate?.didCompeleteProductsSearch(dataModel.data, nil)
+                    self.delegate?.didCompeleteProductsSearch(dataModel.data.filter({$0.branch != nil}), nil)
                 }
             }
         }
     }
     
-    func getMyOrders(){
-        let prms = [
-            "filter": "user_id=\(APIServices.shared.user?.id ?? 0)",
-            "with": "captain.user"
-        ]
+    func getMyOrders(_ prms: [String: String]){
         APIServices.shared.call(.getMyOrders(prms)) { (data) in
             print("getMyOrders",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: LastOrdersResponse.self){
-                self.delegate?.didCompleteWithMyOrders(dataModel.data?.filter({ $0.branch != nil }))
+                self.delegate?.didCompleteWithMyOrders(dataModel.data?.filter({ $0.branch != nil }), dataModel.meta)
             }else{
-                self.delegate?.didCompleteWithMyOrders(nil)
+                self.delegate?.didCompleteWithMyOrders(nil, nil)
             }
         }
     }
     
-    func getMyServices(){
-        let prms = ["filter": "user_id=\(APIServices.shared.user?.id ?? 0)"]
-       // let prms = ["filter": "user_id=1"]
-        APIServices.shared.call(.getMyOrders(prms)) { (data) in
+    func getMyServices(_ prms: [String: String]){
+//        let prms = [
+//            "filter": "user_id=\(APIServices.shared.user?.id ?? 0)",
+//            "with": "captain.user,destinationAddress"
+//        ]
+        APIServices.shared.call(.getServices(prms)) { (data) in
             print("getMyServices",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: LastOrdersResponse.self){
-                self.delegate?.didCompleteWithMyOrders(dataModel.data?.filter({ return $0.branch == nil }))
+                self.delegate?.didCompleteWithMyServices(dataModel.data, dataModel.meta)
             }else{
-                self.delegate?.didCompleteWithMyOrders(nil)
+                self.delegate?.didCompleteWithMyServices(nil, nil)
             }
         }
     }
@@ -383,6 +488,50 @@ class MainPresenter{
                 }
             }else{
                 self.delegate?.didCompletePlaceOrder(Shared.errorMsg, 0)
+            }
+        }
+    }
+    
+    func uploadFilesToOrder(_ id: Int,_ items: [CartItem]){
+        delegate?.showProgress()
+        
+        let mediaItems = items.filter({ return $0.is_media })
+        
+        var photos = [UIImage]()
+        var voices = [Data]()
+        var notes = [String]()
+        
+        for item in mediaItems{
+            
+            if let _ = item.photos{
+                let photosData = try! JSONDecoder.init().decode([Data].self, from: item.photos!)
+                let photosTemp = photosData.map({ UIImage(data: $0) })
+                photosTemp.forEach { photo in
+                    photos.append(photo!)
+                }
+            }
+            
+            if let voice = item.voice{
+                voices.append(voice)
+            }
+            
+            if let note = item.text{
+                notes.append(note)
+            }
+        }
+        
+        APIServices.shared.call(.uploadFilesToOrder(id, photos, voices, notes)) { [self] data in
+            delegate?.dismissProgress()
+            if let data = data{
+                let json = JSON(data)
+                print("upload  response",json)
+                if json["status"].intValue == 0{
+                    self.delegate?.didCompleteUploadOrderFiles(json["message"].stringValue)
+                }else{
+                    self.delegate?.didCompleteUploadOrderFiles(nil)
+                }
+            }else{
+                self.delegate?.didCompleteUploadOrderFiles(Shared.errorMsg)
             }
         }
     }
@@ -548,13 +697,82 @@ class MainPresenter{
         }
     }
     
+    func getOffers(_ prms: [String:String]){
+        APIServices.shared.call(.productOffers(prms)) { [self] (data) in
+            print("getBranches",JSON(data))
+            if let data = data,
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self),
+               !dataModel.data.isEmpty{
+                for i in 0...(dataModel.data.count-1){
+                    if let favBranches = Shared.favBranches,
+                       !favBranches.isEmpty,
+                       !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{
+                        dataModel.data[i].isFavourite = 1
+                    }
+                }
+                delegate?.didCompleteWithBranches(dataModel.data, dataModel.meta)
+            }else{
+                delegate?.didCompleteWithBranches(nil, nil)
+            }
+        }
+    }
+    
+    func getCouponsOffers(_ prms: [String:String]){
+        APIServices.shared.call(.couponsOffers(prms)) { [self] (data) in
+            print("getBranches",JSON(data))
+            if let data = data,
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self),
+               !dataModel.data.isEmpty{
+                for i in 0...(dataModel.data.count-1){
+                    if let favBranches = Shared.favBranches,
+                       !favBranches.isEmpty,
+                       !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{
+                        dataModel.data[i].isFavourite = 1
+                    }
+                }
+                delegate?.didCompleteWithBranches(dataModel.data, dataModel.meta)
+            }else{
+                delegate?.didCompleteWithBranches(nil, nil)
+            }
+        }
+    }
+    
+    func getOrdinaryBranches(_ prms: [String:String]){
+        var prms = prms
+        prms.updateValue("is_featured=0", forKey: "filter")
+        APIServices.shared.call(.getBranches(prms)) { [self] (data) in
+            print("getBranches",JSON(data))
+            if let data = data,
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self),
+               !dataModel.data.isEmpty{
+                for i in 0...(dataModel.data.count-1){
+                    if let favBranches = Shared.favBranches,
+                       !favBranches.isEmpty,
+                       !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{
+                        dataModel.data[i].isFavourite = 1
+                    }
+                }
+                delegate?.didCompleteWithBranches(dataModel.data, dataModel.meta)
+            }else{
+                delegate?.didCompleteWithBranches(nil, nil)
+            }
+        }
+    }
+    
     func getFeaturedBranches(_ prms: [String:String]){
         var prms = prms
         prms.updateValue("is_featured=1", forKey: "filter")
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
             print("is_featured branches", JSON(data))
             if let data = data,
-               let dataModel = data.getDecodedObject(from: BranchesResponse.self){
+               var dataModel = data.getDecodedObject(from: BranchesResponse.self), !dataModel.data.isEmpty{
+                for i in 0...(dataModel.data.count-1){
+                    if let favBranches = Shared.favBranches,
+                       !favBranches.isEmpty,
+                       !favBranches.filter({ return $0.id == dataModel.data[i].id}).isEmpty{
+                        dataModel.data[i].isFavourite = 1
+                    }
+                }
                 delegate?.didCompleteWithFeaturedBranches(dataModel.data)
             }else{
                 delegate?.didCompleteWithFeaturedBranches(nil)
@@ -564,7 +782,7 @@ class MainPresenter{
     
     func getSlider(_ prms: [String: String]){
         APIServices.shared.call(.slider(prms)) { [self] data in
-            //print("getSlider",JSON(data))
+            print("getSlider",JSON(data))
             if let data = data,
                let dataModel = data.getDecodedObject(from: SliderResponse.self){
                 delegate?.didCompleteWithSlider(dataModel.data, nil)
@@ -583,13 +801,13 @@ class MainPresenter{
                 var branches = [Branch]()
                 var products = [Product]()
                 
-                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                dataModel.data?.favouritableBranches?.filter({ $0.favouritable != nil }).forEach({ favBranch in
                     var branch: Branch = favBranch.favouritable!
                     branch.favouriteId = favBranch.id
                     branches.append(branch)
                 })
                 
-                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                dataModel.data?.favouritableProducts?.filter({ $0.favouritable != nil }).forEach({ favProduct in
                     var product: Product = favProduct.favouritable!
                     product.favouriteId = favProduct.id
                     products.append(product)
@@ -614,13 +832,13 @@ class MainPresenter{
                 var branches = [Branch]()
                 var products = [Product]()
                 
-                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                dataModel.data?.favouritableBranches?.filter({ $0.favouritable != nil }).forEach({ favBranch in
                     var branch: Branch = favBranch.favouritable!
                     branch.favouriteId = favBranch.id
                     branches.append(branch)
                 })
                 
-                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                dataModel.data?.favouritableProducts?.filter({ $0.favouritable != nil }).forEach({ favProduct in
                     var product: Product = favProduct.favouritable!
                     product.favouriteId = favProduct.id
                     products.append(product)
@@ -645,13 +863,14 @@ class MainPresenter{
                 var branches = [Branch]()
                 var products = [Product]()
                 
-                dataModel.data?.favouritableBranches?.forEach({ favBranch in
+                dataModel.data?.favouritableBranches?.filter({ $0.favouritable != nil }).forEach({ favBranch in
+               //     print(favBranch.favouritable)
                     var branch: Branch = favBranch.favouritable!
                     branch.favouriteId = favBranch.id
                     branches.append(branch)
                 })
                 
-                dataModel.data?.favouritableProducts?.forEach({ favProduct in
+                dataModel.data?.favouritableProducts?.filter({ $0.favouritable != nil }).forEach({ favProduct in
                     var product: Product = favProduct.favouritable!
                     product.favouriteId = favProduct.id
                     products.append(product)

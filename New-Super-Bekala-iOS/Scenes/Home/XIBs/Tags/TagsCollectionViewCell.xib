@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TagsCollectionViewCell" id="gTV-IL-0wX" customClass="TagsCollectionViewCell" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="188" height="121"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="188" height="121"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="yzC-Wc-EIu">
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="121"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-G5-Pcb">
+                                <rect key="frame" x="0.0" y="0.0" width="188" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="8IM-Wr-E0m"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mI1-HG-Iau">
+                                <rect key="frame" x="0.0" y="78" width="188" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mI1-HG-Iau" secondAttribute="trailing" id="jn7-hb-4O9"/>
+                            <constraint firstItem="mI1-HG-Iau" firstAttribute="leading" secondItem="yzC-Wc-EIu" secondAttribute="leading" id="per-Cb-yBf"/>
+                        </constraints>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pU9-ze-COM" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="188" height="121"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-rQ-bqG">
+                                <rect key="frame" x="76.5" y="43.5" width="35" height="34"/>
+                                <color key="tintColor" name="Gold"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="eVT-d7-bxv"/>
+                                    <constraint firstAttribute="height" constant="35" id="ufy-ze-l3Y"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mf3-rQ-bqG" firstAttribute="centerX" secondItem="pU9-ze-COM" secondAttribute="centerX" id="Pph-o0-te2"/>
+                            <constraint firstItem="mf3-rQ-bqG" firstAttribute="centerY" secondItem="pU9-ze-COM" secondAttribute="centerY" id="dTN-xh-zgQ"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="yzC-Wc-EIu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5MW-BU-rGy"/>
+                <constraint firstItem="pU9-ze-COM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HnK-NI-OFJ"/>
+                <constraint firstAttribute="bottom" secondItem="yzC-Wc-EIu" secondAttribute="bottom" id="KJs-uR-pK6"/>
+                <constraint firstItem="pU9-ze-COM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MSr-Nf-hJE"/>
+                <constraint firstAttribute="bottom" secondItem="pU9-ze-COM" secondAttribute="bottom" id="Rqd-U7-da0"/>
+                <constraint firstAttribute="trailing" secondItem="yzC-Wc-EIu" secondAttribute="trailing" id="Uhf-b4-who"/>
+                <constraint firstItem="yzC-Wc-EIu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jcn-Pp-UJf"/>
+                <constraint firstAttribute="trailing" secondItem="pU9-ze-COM" secondAttribute="trailing" id="opU-UO-iK6"/>
+            </constraints>
+            <size key="customSize" width="188" height="121"/>
+            <connections>
+                <outlet property="selectView" destination="pU9-ze-COM" id="Etm-jr-Exq"/>
+                <outlet property="tagImage" destination="2ws-G5-Pcb" id="Ewd-Nb-aQs"/>
+                <outlet property="tagName" destination="mI1-HG-Iau" id="WtA-eb-UVS"/>
+            </connections>
+            <point key="canvasLocation" x="237.68115942028987" y="149.66517857142856"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="Gold">
+            <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

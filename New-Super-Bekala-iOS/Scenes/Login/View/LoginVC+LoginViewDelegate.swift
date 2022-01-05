@@ -42,13 +42,11 @@ extension LoginVC: LoginViewDelegate{
     }
     
     func didSuccessLogin(uid: String) {
-     
-//        let prms: [String: String] = [
-//            "email": "admin@gmail.com",
-//            "password": "admin"
-//        ]
+        
         let prms: [String: String] = [
-            "uid": uid
+            "uid": uid,
+            "device_token": UserDefaults.init().string(forKey: "FCM_Token") ?? "",
+            "notification_lang": "lang".localized
         ]
         loginViewPresenter?.signinToApi(prms: prms)
     }
@@ -74,7 +72,7 @@ extension LoginVC: LoginViewDelegate{
         if Shared.userSelectLocation == false{
             Router.toAskLocation(self)
         }else{
-            Router.toHome(self)
+            Router.toHome(self, true)
         }
         //  Router.toMaps(self)
     }

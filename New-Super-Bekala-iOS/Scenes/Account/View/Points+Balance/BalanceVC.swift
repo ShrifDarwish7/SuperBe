@@ -30,8 +30,7 @@ class BalanceVC: UIViewController {
     
     
     @IBAction func addBalance(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("DISMISS_BOTTOM_SHEET"), object: nil, userInfo: nil)
-        Router.toPayContainer(self)
+        NotificationCenter.default.post(name: NSNotification.Name("START_PAYMENT"), object: nil, userInfo: nil)
     }
     
 }
@@ -69,10 +68,24 @@ extension BalanceVC: UITableViewDelegate, UITableViewDataSource{
         if value! < 0{
             cell.containerView.backgroundColor = #colorLiteral(red: 0.9880966544, green: 0.4059396982, blue: 0.4844449759, alpha: 1)
             cell.statusIcon.image = UIImage(named: "minus-1")
+            cell.validStack.isHidden = true
         }else{
             cell.containerView.backgroundColor = #colorLiteral(red: 0.6666666667, green: 0.8941176471, blue: 0.6470588235, alpha: 1)
             cell.statusIcon.image = UIImage(named: "added")
+            if let expireDateStr = self.transactions![indexPath.section].trans[indexPath.row].expireDate{
+                cell.validStack.isHidden = false
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let calendar = Calendar.current
+                let date = calendar.startOfDay(for: dateFormatter.date(from: expireDateStr)!)
+                let components = calendar.dateComponents([.day], from: date, to: Date())
+                cell.time.text = "\((components.day ?? 0) * (-1)) " + "Days".localized
+            }else{
+                cell.validStack.isHidden = true
+            }
         }
+        
+        cell.expireView.isHidden = self.transactions![indexPath.section].trans[indexPath.row].isExpired == 0 ? true : false
         
         return cell
     }

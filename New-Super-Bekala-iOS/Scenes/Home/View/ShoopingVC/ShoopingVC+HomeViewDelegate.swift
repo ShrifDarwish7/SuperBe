@@ -13,24 +13,16 @@ extension ShoopingVC: MainViewDelegate{
     
     func updateBranches(){
         self.parameters.updateValue("\(self.selectedCategory?.id ?? 0)", forKey: "category_id")
+       // self.parameters.updateValue("coupons", forKey: "with")
         
         self.presenter?.getFeaturedBranches(parameters)
-        self.presenter?.getBranches(parameters)
+        self.presenter?.getOrdinaryBranches(parameters)
         
         print("here parameters",parameters)
     }
     
     func didCompleteWithFavourites() {
         
-        if Shared.isRegion{
-            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
-            if Shared.selectedArea.subregionID != 0{
-                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
-            }
-        }else if Shared.isCoords{
-            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
-        }
-        parameters.updateValue("all", forKey: "lang")
         print("cats prms",parameters)
         self.presenter?.getCategories(parameters)
         
@@ -40,15 +32,28 @@ extension ShoopingVC: MainViewDelegate{
         if let _ = data{
             self.categoriesBtn.isHidden = false
             self.categories = data
-            if "lang".localized == "en"{
-                self.categories?[0].selected = true
-                self.selectedCategory = self.categories?[0]
+//            self.categories?[0].selected = true
+//            self.selectedCategory = self.categories?[0]
+//            if "lang".localized == "en"{
+//                self.categories?[0].selected = true
+//                self.selectedCategory = self.categories?[0]
+//            }else{
+//               // self.categories = self.categories?.reversed()
+//                self.categories![self.categories!.count-1].selected = true
+//                self.selectedCategory = self.categories?[self.categories!.count-1]
+//            }
+            if "lang".localized == "ar"{
+                self.categories = self.categories?.reversed()
+                selectCategory(index: categories!.count-1)
             }else{
-                self.categories![self.categories!.count-1].selected = true
-                self.selectedCategory = self.categories?[self.categories!.count-1]
+                selectCategory(index: 0)
             }
-            self.loadFiltersCollection()
-            updateBranches()
+            
+            if Shared.shouldShowCategories{
+                Router.toChooseCategory(self, self, "lang".localized == "ar" ? categories!.reversed() : categories!)
+            }
+//            self.loadFiltersCollection()
+//            updateBranches()
         }
     }
     
@@ -56,13 +61,15 @@ extension ShoopingVC: MainViewDelegate{
         ordinaryVendorsTAbleView.hideSkeleton()
         if let data = data,
            !data.isEmpty{
-            print("here last branch",data.reversed().last)
-            self.branches = data.reversed()
+            ordinaryVendorsTAbleView.isHidden = false
+            self.branches = data
             self.ordinaryLoading = false
             self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
             self.ordinaryVendorsTAbleView.stopSkeletonAnimation()
             self.tableViewHeight.constant = self.ordinaryVendorsTAbleView.contentSize.height + 20
             self.view.layoutIfNeeded()
+        }else{
+            ordinaryVendorsTAbleView.isHidden = true
         }
     }
     
@@ -73,7 +80,7 @@ extension ShoopingVC: MainViewDelegate{
             self.featuredStackContainer.isHidden = false
             self.featuredLoading = false
             self.featuredVendorsCollection.isHidden = false
-            self.featuredBranches = data.reversed()
+            self.featuredBranches = data
             self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
         }else{
             self.featuredStackContainer.isHidden = true
@@ -84,17 +91,13 @@ extension ShoopingVC: MainViewDelegate{
         if let error = error{
             showToast(error)
         }else{
-            if isFeatured!{
-                self.featuredBranches![index!].isFavourite = 1
-                let contentOffset = featuredVendorsCollection.contentOffset
-                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
-                featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
-            }else{
-                self.branches![index!].isFavourite = 1
-                let contentOffset = scroller.contentOffset
-                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
-                scroller.setContentOffset(contentOffset, animated: true)
-            }
+//            if isFeatured!{
+//                self.featuredBranches![index!].isFavourite = 1
+//                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+//            }else{
+//                self.branches![index!].isFavourite = 1
+//                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
+//            }
         }
     }
     
@@ -102,17 +105,17 @@ extension ShoopingVC: MainViewDelegate{
         if let error = error{
             showToast(error)
         }else{
-            if isFeatured!{
-                self.featuredBranches![index!].isFavourite = 0
-                let contentOffset = featuredVendorsCollection.contentOffset
-                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
-                featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
-            }else{
-                self.branches![index!].isFavourite = 0
-                let contentOffset = scroller.contentOffset
-                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
-                scroller.setContentOffset(contentOffset, animated: true)
-            }
+//            if isFeatured!{
+//                self.featuredBranches![index!].isFavourite = 0
+//                let contentOffset = featuredVendorsCollection.contentOffset
+//                self.loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
+//                featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
+//            }else{
+//                self.branches![index!].isFavourite = 0
+//                let contentOffset = scroller.contentOffset
+//                self.loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
+//                scroller.setContentOffset(contentOffset, animated: true)
+//            }
         }
     }
     

@@ -37,7 +37,7 @@ extension UIViewController{
         mapItem.openInMaps(launchOptions: options)
     }
     
-    func showAlert(title : String , message : String){
+    func showAlert(title : String? , message : String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Ok".localized, style: .default, handler: nil)
         alert.addAction(alertAction)
@@ -45,7 +45,37 @@ extension UIViewController{
     }
     
     func showToast(_ msg: String){
-        self.view.makeToast(msg, duration: 2, position: .bottom)
+        //self.view.makeToast(msg, duration: 2, position: .bottom)
+        //self.view.makeToast(msg, duration: 2, position: .bottom, title: nil, image: nil, completion: nil)
+        showAlert(title: nil, message: msg.localized)
+    }
+    
+    func showInputAlert(title:String? = nil,
+                        subtitle:String? = nil,
+                        actionTitle:String?,
+                        cancelTitle:String? = "Cancel".localized,
+                        secureTF:Bool = false,
+                        inputPlaceholder:String? = nil,
+                        inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+                        cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+                        actionHandler: ((_ text: String?,_ alert: UIAlertController) -> Void)? = nil) {
+        
+        let alert = UIAlertController(title: title?.localized, message: subtitle?.localized, preferredStyle: .alert)
+        alert.addTextField { (textField:UITextField) in
+            textField.placeholder = inputPlaceholder?.localized
+            textField.keyboardType = inputKeyboardType
+            textField.isSecureTextEntry = secureTF ? true : false
+        }
+        alert.addAction(UIAlertAction(title: actionTitle?.localized, style: .default, handler: { (action:UIAlertAction) in
+            guard let textField =  alert.textFields?.first else {
+                actionHandler?(nil, alert)
+                return
+            }
+            actionHandler?(textField.text, alert)
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
 }

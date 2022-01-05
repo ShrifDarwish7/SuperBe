@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,48 +20,47 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zE-m2-AoS">
                         <rect key="frame" x="0.0" y="0.0" width="271" height="276"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="GXR-NM-Xy8">
-                                <rect key="frame" x="78" y="15" width="115" height="115.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="GXR-NM-Xy8">
+                                <rect key="frame" x="15" y="15" width="241" height="160"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCc-y9-mLh">
-                                        <rect key="frame" x="22.5" y="0.0" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="241" height="120"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="Kq3-of-wMc"/>
-                                            <constraint firstAttribute="height" constant="70" id="pdf-Ey-mkl"/>
+                                            <constraint firstAttribute="height" constant="120" id="pdf-Ey-mkl"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
-                                                <real key="value" value="35"/>
+                                                <real key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWT-e1-Fts">
-                                        <rect key="frame" x="0.0" y="95" width="115" height="20.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWr-ms-APS">
+                                        <rect key="frame" x="0.0" y="135" width="241" height="25"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20.5" id="j2M-1O-gv7"/>
-                                            <constraint firstAttribute="width" constant="115" id="ne4-0Q-g6y"/>
+                                            <constraint firstAttribute="height" constant="25" id="Hmy-mO-FGr"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </label>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="NCc-y9-mLh" firstAttribute="leading" secondItem="GXR-NM-Xy8" secondAttribute="leading" id="SMR-8f-Qxu"/>
+                                    <constraint firstItem="yWr-ms-APS" firstAttribute="leading" secondItem="GXR-NM-Xy8" secondAttribute="leading" id="joD-Qc-ohP"/>
+                                    <constraint firstAttribute="trailing" secondItem="NCc-y9-mLh" secondAttribute="trailing" id="sCd-oJ-76V"/>
+                                    <constraint firstAttribute="trailing" secondItem="yWr-ms-APS" secondAttribute="trailing" id="vDh-eO-frl"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2ze-NE-S3R">
-                                <rect key="frame" x="65.5" y="196" width="140" height="50"/>
+                                <rect key="frame" x="65.5" y="216" width="140" height="50"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xER-Al-uOx">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
@@ -237,7 +236,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GXR-NM-Xy8" firstAttribute="top" secondItem="8zE-m2-AoS" secondAttribute="top" constant="15" id="0xP-D7-JUw"/>
-                            <constraint firstAttribute="bottom" secondItem="2ze-NE-S3R" secondAttribute="bottom" constant="30" id="5jF-1N-HIU"/>
+                            <constraint firstAttribute="trailing" secondItem="GXR-NM-Xy8" secondAttribute="trailing" constant="15" id="4Zq-cY-scL"/>
+                            <constraint firstAttribute="bottom" secondItem="2ze-NE-S3R" secondAttribute="bottom" constant="10" id="5jF-1N-HIU"/>
+                            <constraint firstItem="GXR-NM-Xy8" firstAttribute="leading" secondItem="8zE-m2-AoS" secondAttribute="leading" constant="15" id="HXb-kE-i1w"/>
                             <constraint firstItem="GXR-NM-Xy8" firstAttribute="centerX" secondItem="8zE-m2-AoS" secondAttribute="centerX" id="VOi-lT-hbQ"/>
                             <constraint firstItem="2ze-NE-S3R" firstAttribute="centerX" secondItem="8zE-m2-AoS" secondAttribute="centerX" id="sgB-6c-ZBd"/>
                         </constraints>

@@ -15,6 +15,9 @@ class TransactionsTableViewCell: UITableViewCell {
     @IBOutlet weak var containerView: ViewCorners!
     @IBOutlet weak var statusIcon: UIImageView!
     @IBOutlet weak var points: UILabel!
+    @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var validStack: UIStackView!
+    @IBOutlet weak var expireView: ViewCorners!
     
     
 }

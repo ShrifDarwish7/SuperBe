@@ -28,7 +28,7 @@ class RateOrderVC: UIViewController {
             self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
         }
         presenter = MainPresenter(self)
-        orderTitle.text = "Rate Order #\(orderId!)"
+        orderTitle.text = "Rate Order ".localized + "#\(orderId!)"
     }
 
     @IBAction func dismissAction(_ sender: Any) {

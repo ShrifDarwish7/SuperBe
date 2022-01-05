@@ -12,7 +12,7 @@
 "1t0-Ia-Fca.text" = "40 EGP";
 
 /* Class = "UILabel"; text = "Delivered at"; ObjectID = "3HM-Kb-d9P"; */
-"3HM-Kb-d9P.text" = "التوصيل إلي";
+"3HM-Kb-d9P.text" = "تم الإستلام في";
 
 /* Class = "UILabel"; text = "Orders"; ObjectID = "456-qF-6GF"; */
 "456-qF-6GF.text" = "طلباتي";
@@ -78,7 +78,7 @@
 "JtO-rs-Ujp.text" = "محفظة";
 
 /* Class = "UILabel"; text = "pending"; ObjectID = "K6y-oQ-hva"; */
-"K6y-oQ-hva.text" = "تحت العمل";
+"K6y-oQ-hva.text" = "جاري التحضير";
 
 /* Class = "UILabel"; text = "Canceled"; ObjectID = "Kgq-I3-1HE"; */
 "Kgq-I3-1HE.text" = "ملغي";
@@ -87,7 +87,7 @@
 "Ksx-ER-G2H.placeholder" = "تاريخ الانتهاء";
 
 /* Class = "UITextField"; text = "08/25"; ObjectID = "Ksx-ER-G2H"; */
-"Ksx-ER-G2H.text" = "08/25";
+"Ksx-ER-G2H.text" = "";
 
 /* Class = "UILabel"; text = "No image uploaded!"; ObjectID = "Ovg-2K-ZCG"; */
 "Ovg-2K-ZCG.text" = "لم يتم تحميل أي صورة!";
@@ -96,7 +96,7 @@
 "PH4-8J-e0J.text" = "40 EGP";
 
 /* Class = "UILabel"; text = "completed"; ObjectID = "QdL-Gg-tZn"; */
-"QdL-Gg-tZn.text" = "مكتمل";
+"QdL-Gg-tZn.text" = "تم التسليم";
 
 /* Class = "UILabel"; text = "Receive"; ObjectID = "Qdq-fu-3BX"; */
 "Qdq-fu-3BX.text" = "الإستلام";
@@ -135,7 +135,7 @@
 "bWV-hL-EkI.text" = "ادخل بيانات البطاقة";
 
 /* Class = "UILabel"; text = "processing"; ObjectID = "bss-Td-V29"; */
-"bss-Td-V29.text" = "يتم المعالجة";
+"bss-Td-V29.text" = "جاري التنفيذ";
 
 /* Class = "UILabel"; text = "23 july Portsaid,Egypt"; ObjectID = "c3h-4u-b6m"; */
 "c3h-4u-b6m.text" = "23 july Portsaid,Egypt";
@@ -150,7 +150,7 @@
 "dma-BI-5tE.placeholder" = "رمز الحماية";
 
 /* Class = "UITextField"; text = "840"; ObjectID = "dma-BI-5tE"; */
-"dma-BI-5tE.text" = "840";
+"dma-BI-5tE.text" = "";
 
 /* Class = "UILabel"; text = "Tax"; ObjectID = "ee3-gj-A2Y"; */
 "ee3-gj-A2Y.text" = "ضريبة";
@@ -162,7 +162,7 @@
 "ep6-nC-szb.placeholder" = "رقم البطاقة";
 
 /* Class = "UITextField"; text = "4988134196157791"; ObjectID = "ep6-nC-szb"; */
-"ep6-nC-szb.text" = "4988134196157791";
+"ep6-nC-szb.text" = "";
 
 /* Class = "UILabel"; text = "00:00"; ObjectID = "fwN-Ry-z9R"; */
 "fwN-Ry-z9R.text" = "00:00";
@@ -186,7 +186,7 @@
 "lpb-cK-kak.placeholder" = "إسم صاحب البطاقة";
 
 /* Class = "UITextField"; text = "sherif mohamed elsayed"; ObjectID = "lpb-cK-kak"; */
-"lpb-cK-kak.text" = "sherif mohamed elsayed";
+"lpb-cK-kak.text" = "";
 
 /* Class = "UILabel"; text = "Receive from vendor"; ObjectID = "m8B-CT-aMW"; */
 "m8B-CT-aMW.text" = "إستلام من المتجر";

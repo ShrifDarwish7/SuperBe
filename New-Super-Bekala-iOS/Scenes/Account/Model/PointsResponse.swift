@@ -23,6 +23,8 @@ struct PointsData: Codable {
 // MARK: - Transaction
 struct PointTransaction: Codable {
     let id, value, orderID, userID: Int?
+    let expireDate: String?
+    let isExpired: Int?
     let createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -31,5 +33,7 @@ struct PointTransaction: Codable {
         case userID = "user_id"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case expireDate = "expire_date"
+        case isExpired = "is_expired"
     }
 }

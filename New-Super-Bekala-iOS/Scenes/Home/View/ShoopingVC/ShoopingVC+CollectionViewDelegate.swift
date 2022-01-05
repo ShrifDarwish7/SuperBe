@@ -22,15 +22,17 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         }
         filtersCollectionView.reloadData()
-
+        
     }
     
     func loadFeaturedCollection(identifier: String){
+        let contentOffset = featuredVendorsCollection.contentOffset
         let nib = UINib(nibName: identifier, bundle: nil)
         featuredVendorsCollection.register(nib, forCellWithReuseIdentifier: identifier)
         featuredVendorsCollection.delegate = self
         featuredVendorsCollection.dataSource = self
         featuredVendorsCollection.reloadData()
+        featuredVendorsCollection.setContentOffset(contentOffset, animated: true)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -44,10 +46,10 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case featuredVendorsCollection:
             if featuredLoading{
                 return 3
-            }else if (self.featuredBranches?.count ?? 0) > 3{
+            }/*else if (self.featuredBranches?.count ?? 0) > 3{
                 self.allFeaturedBtn.isHidden = false
                 return 3
-            }else{
+            }*/else{
                 self.allFeaturedBtn.isHidden = true
                 return self.featuredBranches?.count ?? 0
             }
@@ -87,6 +89,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
 //                   !favBranches.filter({ return $0.id == self.featuredBranches![indexPath.row].id}).isEmpty{
 //                    self.featuredBranches![indexPath.row].isFavourite = 1
 //                }
+                cell.favouriteBtn.isHidden = APIServices.shared.isLogged ? false : true
                 cell.loadFrom(data: self.featuredBranches![indexPath.row])
                 cell.favouriteBtn.tag = indexPath.row
                 cell.favouriteBtn.addTarget(self, action: #selector(addToFavourite(sender:)), for: .touchUpInside)
@@ -107,23 +110,42 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
             selectCategory(index: indexPath.row)
 
         case featuredVendorsCollection:
-            Router.toBranch(self, self.featuredBranches![indexPath.row])
-//            if self.featuredBranches![indexPath.row].isOpen == 1{
-//                Router.toBranch(self, self.featuredBranches![indexPath.row])
-//            }else if self.featuredBranches![indexPath.row].isOnhold == 1{
-//                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
-//                showAlert(title: "", message: msg)
-//            }else if self.featuredBranches![indexPath.row].isOpen == 0 || self.featuredBranches![indexPath.row].isBusy == 1{
-//                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
-//                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
-//                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
-//                    Router.toBranch(self, self.featuredBranches![indexPath.row])
-//                }
-//                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
-//                alert.addAction(continueAction)
-//                alert.addAction(cancelAction)
-//                self.present(alert, animated: true, completion: nil)
-//            }
+            
+            if self.featuredBranches![indexPath.row].isOnhold == 1{
+                
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") معلق حاليا"
+                showAlert(title: "", message: msg)
+                
+            }else if self.featuredBranches![indexPath.row].isBusy == 1 {
+                
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently busy, and your order may take longer than expected" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، وقد يستغرق طلبك وقتًا أطول من المتوقع"
+                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+                    Router.toBranch(UIApplication.getTopViewController()!, self.featuredBranches![indexPath.row])
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                alert.addAction(continueAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+                
+            }else if self.featuredBranches![indexPath.row].isOpen == 1{
+                
+                Router.toBranch(UIApplication.getTopViewController()!, self.featuredBranches![indexPath.row])
+                
+            }else if self.featuredBranches![indexPath.row].isOpen == 0{
+                
+                //let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently closed, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") مغلق حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
+                let msg = "lang".localized == "en" ? "\(self.featuredBranches![indexPath.row].name?.en ?? "") is currently closed, and will open in \(self.featuredBranches![indexPath.row].openingTime ?? "")" : "\(self.featuredBranches![indexPath.row].name?.ar ?? "") " +  "مغلق حاليا، وسيكون متاح الساعة" + " \(self.featuredBranches![indexPath.row].openingTime ?? "")"
+                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+                    Router.toBranch(UIApplication.getTopViewController()!, self.featuredBranches![indexPath.row])
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                alert.addAction(continueAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+                
+            }
 
         default:
             break
@@ -137,7 +159,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
         case featuredVendorsCollection:
             return CGSize(width: 180, height: 260)
         case filtersCollectionView:
-            let font = UIFont(name: "Lato-Bold", size: 16)
+            let font = UIFont(name: "Lato-Bold", size: 20)
             let fontAttributes = [NSAttributedString.Key.font: font]
             let size = (("lang".localized == "en" ? self.categories?[indexPath.row].name?.en ?? "" : self.categories?[indexPath.row].name?.ar ?? "") as NSString ).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
             return CGSize(width: size.width + 10 , height: size.height + 20)
@@ -190,12 +212,16 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
            !favBranches.isEmpty,
            !favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).isEmpty{
             let fav = favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).first
+            self.featuredBranches![sender.tag].isFavourite = 0
+            loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
             presenter?.removeFromFavourites((fav?.favouriteId)!, sender.tag, true)
         }else{
             let prms = [
                 "model_id": "\(self.featuredBranches![sender.tag].id)",
                 "model": "Branch"
             ]
+            self.featuredBranches![sender.tag].isFavourite = 1
+            loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
             self.presenter?.addToFavourite(prms, sender.tag, true)
         }
     }

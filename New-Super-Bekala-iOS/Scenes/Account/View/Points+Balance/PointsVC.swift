@@ -64,10 +64,10 @@ extension PointsVC: MainViewDelegate{
            let points = data.total,
            points != 0{
             self.pointsValue = points
-            self.points.text = "You Collected \(points) Points"
+            self.points.text = "lang".localized == "en" ? "You Collected \(points) Points" : ("جمعت" + " \(points) " + "نقطة")
         }else{
             self.pointsValue = 0
-            self.points.text = "You have no points"
+            self.points.text = "You have no points".localized
         }
     }
     

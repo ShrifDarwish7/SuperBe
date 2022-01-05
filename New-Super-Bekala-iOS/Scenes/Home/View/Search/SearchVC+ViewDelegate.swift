@@ -9,6 +9,14 @@
 import Foundation
 
 extension SearchVC: MainViewDelegate{
+    func didCompleteWithTags(_ data: [Tag]?, _ error: String?) {
+        if let error = error {
+            showToast(error)
+        }else{
+            guard let data = data, !data.isEmpty else { return }
+            Router.toTags(self, data)
+        }
+    }
     func didCompeleteBranchesSearch(_ data: [Branch]?, _ error: String?) {
         if var data = data, !data.isEmpty {
             for i in 0...data.count-1{
@@ -32,9 +40,10 @@ extension SearchVC: MainViewDelegate{
             self.notFoundStack.isHidden = false
         }
     }
-    func didCompleteWithBranches(_ data: [Branch]?) {
+    func didCompleteWithBranches(_ data: [Branch]?,_ meta: Meta?) {
         if let branches = data,
            !branches.isEmpty{
+            
             self.branches = data
         }else{
             self.resultTableView.isHidden = true

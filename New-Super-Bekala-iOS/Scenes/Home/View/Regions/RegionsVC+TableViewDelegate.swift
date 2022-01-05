@@ -51,7 +51,7 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
                     subregionID: self.regions![indexPath.row].subregions![index.row].id,
                     subregionEn: self.regions![indexPath.row].subregions![index.row].name?.en,
                     subregionAr: self.regions![indexPath.row].subregions![index.row].name?.ar)
-                Router.toHome(self)
+                Router.toHome(self, true)
             }
             cell.regionTableView.reloadData()
         }else{
@@ -95,7 +95,7 @@ extension RegionsVC: UITableViewDelegate, UITableViewDataSource{
                 subregionAr: ""
             )
             Shared.deliveringToTitle = "lang".localized == "en" ? Shared.selectedArea.regionsNameEn : Shared.selectedArea.regionNameAr
-            Router.toHome(self)
+            Router.toHome(self, true)
         }
         
     }

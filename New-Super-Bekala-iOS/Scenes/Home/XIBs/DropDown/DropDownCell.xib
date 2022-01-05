@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-sS-C22">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-sS-C22">
                         <rect key="frame" x="15" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="TEO-9d-k5s"/>
@@ -30,7 +30,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-qn-5Pt">
-                        <rect key="frame" x="50" y="14.5" width="255" height="15"/>
+                        <rect key="frame" x="10" y="14.5" width="295" height="15"/>
                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,8 +39,8 @@
                 <constraints>
                     <constraint firstItem="hHv-sS-C22" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="O4y-8Y-yTT"/>
                     <constraint firstItem="kNd-qn-5Pt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YyR-VN-t2t"/>
-                    <constraint firstItem="kNd-qn-5Pt" firstAttribute="leading" secondItem="hHv-sS-C22" secondAttribute="trailing" constant="10" id="dSy-H6-htV"/>
                     <constraint firstItem="hHv-sS-C22" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="l4L-nv-xmA"/>
+                    <constraint firstItem="kNd-qn-5Pt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="lS1-FR-BNE"/>
                     <constraint firstAttribute="trailing" secondItem="kNd-qn-5Pt" secondAttribute="trailing" constant="15" id="rfg-qq-7Fc"/>
                 </constraints>
             </tableViewCellContentView>

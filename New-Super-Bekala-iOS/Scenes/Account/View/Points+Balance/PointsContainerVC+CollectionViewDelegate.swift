@@ -54,6 +54,6 @@ extension PointsContainerVC: UICollectionViewDelegate, UICollectionViewDataSourc
         let font = UIFont(name: "Lato-Bold", size: 20)
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = ((self.tabs[indexPath.row].name) as NSString).size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
-        return CGSize(width: size.width , height: size.height + 20)
+        return CGSize(width: size.width + 20 , height: size.height + 20)
     }
 }

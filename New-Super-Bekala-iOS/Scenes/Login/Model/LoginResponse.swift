@@ -20,6 +20,7 @@ struct LoginResponse: Codable {
 struct User: Codable {
     let id: Int?
     let name, email: String?
+    let phoneVerifiedAt: String?
     let phone: String?
     let token: String?
     let birthdate: String?
@@ -27,9 +28,12 @@ struct User: Codable {
     let uid: String?
     let gender: String?
     let isBlocked: Int?
+    let notificationsLang: String?
     
     enum CodingKeys: String, CodingKey{
         case id, name, email, phone, token, birthdate, avatar, uid, gender
         case isBlocked = "is_blocked"
+        case notificationsLang = "notification_lang"
+        case phoneVerifiedAt = "phone_verified_at"
     }
 }

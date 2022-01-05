@@ -2,7 +2,7 @@
 //  CartBranch+CoreDataProperties.swift
 //  New-Super-Bekala-iOS
 //
-//  Created by Sherif Darwish on 15/07/2021.
+//  Created by Sherif Darwish on 12/12/2021.
 //  Copyright © 2021 Super Bekala. All rights reserved.
 //
 //
@@ -17,7 +17,7 @@ extension CartBranch {
         return NSFetchRequest<CartBranch>(entityName: "CartBranch")
     }
 
-    @NSManaged public var id: Int16
+    @NSManaged public var id: Int32
     @NSManaged public var logo: String?
     @NSManaged public var name_ar: String?
     @NSManaged public var name_en: String?
@@ -40,5 +40,9 @@ extension CartBranch {
 
     @objc(removeItems:)
     @NSManaged public func removeFromItems(_ values: NSSet)
+
+}
+
+extension CartBranch : Identifiable {
 
 }

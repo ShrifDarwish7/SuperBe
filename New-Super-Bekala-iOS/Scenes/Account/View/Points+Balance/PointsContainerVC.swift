@@ -18,8 +18,8 @@ class PointsContainerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabs.append(Tab(name: "Balance", selected: true))
-        tabs.append(Tab(name: "Points", selected: false))
+        tabs.append(Tab(name: "Balance".localized, selected: true))
+        tabs.append(Tab(name: "Points".localized, selected: false))
         
         self.replaceView(containerView: containerView, identifier: "BalanceVC", storyboard: .profile)
         

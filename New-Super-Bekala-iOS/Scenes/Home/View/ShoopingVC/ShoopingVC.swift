@@ -33,6 +33,16 @@ class ShoopingVC: UIViewController, ChooserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if Shared.isRegion{
+            parameters.updateValue("\(Shared.selectedArea.regionsID ?? 0)", forKey: "region_id")
+            if Shared.selectedArea.subregionID != 0{
+                parameters.updateValue("\(Shared.selectedArea.subregionID ?? 0)", forKey: "subregion_id")
+            }
+        }else if Shared.isCoords{
+            parameters.updateValue(Shared.selectedCoords, forKey: "coordinates")
+        }
+        parameters.updateValue("all", forKey: "lang")
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         scroller.refreshControl = refreshControl
@@ -40,17 +50,28 @@ class ShoopingVC: UIViewController, ChooserDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToTop), name: NSNotification.Name("SCROLL_TO_TOP"), object: nil)
         
         showSkeletonView()
-        
+                
         presenter = MainPresenter(self)
-        presenter?.getFavourites()
+        if APIServices.shared.isLogged{
+            presenter?.getFavourites()
+        }else{
+            presenter?.getCategories(parameters)
+        }
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(shouldShowCategories), name: NSNotification.Name(rawValue: "SHOULD_SHOW_CATEGORIES"), object: nil)
         
     }
     
+//    @objc func shouldShowCategories(){
+//        Router.toChooseCategory(self, self, categories!)
+//    }
+    
     @objc func refresh(){
         refreshControl.endRefreshing()
-        featuredLoading = true
-        ordinaryLoading = true
-        self.viewDidLoad()
+//        featuredLoading = true
+//        ordinaryLoading = true
+//        self.viewDidLoad()
+        selectCategory(index: (categories!.firstIndex(where: { $0.id == selectedCategory?.id }))!)
     }
     
     @objc func scrollToTop(){
@@ -58,7 +79,7 @@ class ShoopingVC: UIViewController, ChooserDelegate {
     }
     
     func onChoose(_ index: Int) {
-        self.selectCategory(index: index)
+        self.selectCategory(index: categories!.firstIndex(where: { $0.id == index })!)
     }
     
     func showSkeletonView(){
@@ -69,8 +90,8 @@ class ShoopingVC: UIViewController, ChooserDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now()+0.05) { [self] in
             ordinaryVendorsTAbleView.hideSkeleton()
-            loadOrdinaryTable(identifier: OrdinaryVendorsSkeletonTableViewCell.identifier)
             ordinaryVendorsTAbleView.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
+            loadOrdinaryTable(identifier: OrdinaryVendorsSkeletonTableViewCell.identifier)
         }
         
     }
@@ -86,16 +107,18 @@ class ShoopingVC: UIViewController, ChooserDelegate {
     }
     
     @IBAction func toChooser(_ sender: Any) {
-        guard let categories = self.categories else { return }
-        var list = [String]()
-        categories.forEach { category in
-            list.append(("lang".localized == "en" ? category.name?.en : category.name?.ar)!)
-        }
-        Router.toChooser(self, list)
+//        guard let categories = self.categories else { return }
+//        var list = [String]()
+//        categories.forEach { category in
+//            list.append(("lang".localized == "en" ? category.name?.en : category.name?.ar)!)
+//        }
+//       // Router.toChooser(self, "lang".localized == "en" ? list : list.reversed())
+//        Router.toChooser(self, list)
+        Router.toChooseCategory(self, self, "lang".localized == "ar" ? categories!.reversed() : categories!)
     }
     
     func selectCategory(index: Int){
-        self.filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
+        guard !self.categories!.isEmpty else { return }
         for i in 0...self.categories!.count-1{
             self.categories![i].selected = false
         }
@@ -106,6 +129,7 @@ class ShoopingVC: UIViewController, ChooserDelegate {
         self.ordinaryLoading = true
         self.showSkeletonView()
         self.updateBranches()
+        filtersCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: ("lang".localized == "en" ? .left : .right), animated: true)
     }
     
     

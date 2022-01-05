@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>SuperBe-Demo</string>
+	<string>Super Be</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.806574922305-8f0bnjog7kriohcipdf2ilu7jb4b7sch</string>
+				<string>com.googleusercontent.apps.966110321537-bg6q76idnnvqf2fdvu9fstertat6mgq1</string>
 			</array>
 		</dict>
 		<dict>
@@ -34,6 +34,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb273601846598966</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.superbekala.SuperBekaaIOS</string>
 			</array>
 		</dict>
 	</array>

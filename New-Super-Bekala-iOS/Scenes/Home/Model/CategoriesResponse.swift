@@ -18,13 +18,14 @@ struct CategoriesResponse: Codable {
 // MARK: - Datum
 struct Category: Codable {
     let id: Int?
+    let logo: Localized?
     let regionsCount: Int?
     let name, description: Localized?
     
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, description
+        case id, name, description, logo
         case regionsCount = "regions_count"
     }
 }

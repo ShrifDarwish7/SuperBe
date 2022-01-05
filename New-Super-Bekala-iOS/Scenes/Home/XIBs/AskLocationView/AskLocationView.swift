@@ -40,7 +40,7 @@ class AskLocationView: UIView{
         contentView = view
         
         shareMsgLbl.text = "Share your location".localized
-        shareHintLbl.text = "By allowing SuperBe to detect your location we can show you nearby categories and restaurants".localized
+       // shareHintLbl.text = "By allowing SuperBe to detect your location we can show you nearby categories and restaurants".localized
         shareStep1Lbl.text = "1. Select Location".localized
         shareStep2.text = "2. Choose \"Always\"".localized
         cancelBtn.setTitle("Cancel".localized, for: .normal)

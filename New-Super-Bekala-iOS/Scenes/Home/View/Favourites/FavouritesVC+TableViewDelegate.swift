@@ -24,7 +24,6 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
                 let nib = UINib(nibName: OrdinaryVendorTableViewCell.identifier, bundle: nil)
                 favouritesTableView.register(nib, forCellReuseIdentifier: OrdinaryVendorTableViewCell.identifier)
             }
-            
         }
         favouritesTableView.allowsSelection = true
         favouritesTableView.isUserInteractionEnabled = true
@@ -131,13 +130,14 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch query {
         case .branch:
-            if self.branches![indexPath.row].isOpen == 1{
-                Router.toBranch(self, self.branches![indexPath.row])
-            }else if self.branches![indexPath.row].isOnhold == 1{
+            if self.branches![indexPath.row].isOnhold == 1{
+                
                 let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is on hold at the moment" : "\(self.branches![indexPath.row].name?.ar ?? "") معلق حاليا"
                 showAlert(title: "", message: msg)
-            }else if self.branches![indexPath.row].isOpen == 0 || self.branches![indexPath.row].isBusy == 1{
-                let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently busy, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.branches![indexPath.row].name?.ar ?? "") مشغول حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
+                
+            }else if self.branches![indexPath.row].isBusy == 1 {
+                
+                let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently busy, and your order may take longer than expected" : "\(self.branches![indexPath.row].name?.en ?? "") مشغول حاليًا ، وقد يستغرق طلبك وقتًا أطول من المتوقع"
                 let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
                 let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
                     Router.toBranch(self, self.branches![indexPath.row])
@@ -146,8 +146,29 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
                 alert.addAction(continueAction)
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true, completion: nil)
+                
+            }else if self.branches![indexPath.row].isOpen == 1{
+                
+                Router.toBranch(self, self.branches![indexPath.row])
+                
+            }else if self.branches![indexPath.row].isOpen == 0{
+                
+                //let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently closed, and is not accepting orders at this time, you can continue exploring and adding items to your cart and order when vendor is available" : "\(self.branches![indexPath.row].name?.ar ?? "") مغلق حاليًا ، ولا يقبل الطلبات في الوقت الحالي ، يمكنك متابعة استكشاف المنتجات وإضافتها إلى سلة التسوق وطلبها عند توفر المتجر"
+                let msg = "lang".localized == "en" ? "\(self.branches![indexPath.row].name?.en ?? "") is currently closed, and will open in \(self.branches![indexPath.row].openingTime ?? "")" : "\(self.branches![indexPath.row].name?.ar ?? "") " +  "مغلق حاليا، وسيكون متاح الساعة" + " \(self.branches![indexPath.row].openingTime ?? "")"
+
+                let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
+                let continueAction = UIAlertAction(title: "Contiue".localized, style: .default) { _ in
+                    Router.toBranch(self, self.branches![indexPath.row])
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
+                alert.addAction(continueAction)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+                
             }
         case .product:
+            guard self.products![indexPath.row].isOpen == 1 else { return }
+            guard self.products![indexPath.row].inStock == 1 else { return }
             Router.toProduct(self, self.products![indexPath.row])
         }
     }
@@ -156,18 +177,18 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource{
         return 115
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let maxHeight: CGFloat = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 80
-        let minHeight: CGFloat = self.view.frame.height * 0.5
-        let y: CGFloat = scrollView.contentOffset.y
-        let newViewHeight = self.favouritesViewHeight.constant + y
-        if newViewHeight > maxHeight{
-            self.favouritesViewHeight.constant = maxHeight
-        }else if newViewHeight < minHeight{
-            self.favouritesViewHeight.constant = minHeight
-        }else{
-            self.favouritesViewHeight.constant = newViewHeight
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let maxHeight: CGFloat = self.view.frame.height - UIApplication.shared.statusBarFrame.height - 80
+//        let minHeight: CGFloat = self.view.frame.height * 0.5
+//        let y: CGFloat = scrollView.contentOffset.y
+//        let newViewHeight = self.favouritesViewHeight.constant + y
+//        if newViewHeight > maxHeight{
+//            self.favouritesViewHeight.constant = maxHeight
+//        }else if newViewHeight < minHeight{
+//            self.favouritesViewHeight.constant = minHeight
+//        }else{
+//            self.favouritesViewHeight.constant = newViewHeight
+//        }
+//    }
     
 }

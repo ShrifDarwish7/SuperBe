@@ -43,6 +43,14 @@ class APIServices{
             return UserDefaults.init().bool(forKey: "isLogged")
         }
     }
+    var skipFromLogin: Bool{
+        set{
+            UserDefaults.init().setValue(newValue, forKey: "skipFromLogin")
+        }
+        get{
+            return UserDefaults.init().bool(forKey: "skipFromLogin")
+        }
+    }
     
     func call(_ target: Google , _ completed: @escaping (Data?)->Void){
         self.googleProvider.request(target) {

@@ -1,10 +1,3 @@
-//
-//  Recorder.swift
-//  Passioneurs
-//
-//  Created by Sherif Darwish on 2/19/20.
-//  Copyright © 2020 Sherif Darwish. All rights reserved.
-//
 
 import Foundation
 import AVFoundation

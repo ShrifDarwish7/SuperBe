@@ -152,16 +152,16 @@ class LoginVC: UIViewController {
     
     
     @IBAction func signinWithGoogleAction(_ sender: Any) {
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().signIn()
+//        GIDSignIn.sharedInstance()?.presentingViewController = self
+//        GIDSignIn.sharedInstance().signIn()
     }
     
     
     @IBAction func signinWithFacebookAction(_ sender: Any) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logOut()
-//        fbLoginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
-//            let accessToken = AccessToken.current
+        fbLoginManager.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
+            let accessToken = AccessToken.current
 //            GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: "GET", apiVersion: .defaultVersion).start { (res, result) in
 //
 //                let json = JSON(result)
@@ -174,9 +174,9 @@ class LoginVC: UIViewController {
 //                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken!)
 //                self.loginViewPresenter?.signWithCredential(credential: credential)
 //            }
-//
-//
-//        }
+
+
+        }
         
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import Moya
+import UIKit
 
 enum SuperBe{
     case login(_ prms: [String: String])
@@ -32,7 +33,7 @@ enum SuperBe{
     case addToFavourite(_ prms: [String: Any])
     case removeFromFavourtie(_ id: Int)
     case updateOrder(_ id: Int,_ bodyData: [String: String])
-    //case getOrderBy(_ id: Int)
+    case getOrderBy(_ id: Int,_ prms: [String: String])
     case placeSuperService(_ prms: [String: Any],_ images: [String: UIImage]?,_ voice: Data?)
     case wallet
     case addToWallet(_ prms: [String: Any])
@@ -41,16 +42,28 @@ enum SuperBe{
     case validateCoupons(_ encodable: ValidatableCoupon)
     case getShippingCost(_ prms: [String: String])
     case startConversation
+    case startOrderIssueConveration(_ prms: [String: Any])
     case sendMessage(_ id: Int,_ prms: [String: String])
     case getConversation(_ id: Int)
     case reopenConversation(_ id: Int)
     case lockConversation(_ id: Int)
     case updateWallet(_ prms: [String: String])
+    case getCaptain(_ id: Int)
+    case updateProfile(_ prms: [String: String])
+    case verifyOTP(_ prms: [String: String])
+    case getProfile
+    case requestOtp(_ prms: [String: String])
+    case getServices(_ prms: [String: String])
+    case setting
+    case uploadFilesToOrder(_ orderId: Int,_ images: [UIImage],_ voices: [Data],_ notes: [String])
+    case tags
+    case productOffers(_ prms: [String: String])
+    case couponsOffers(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
     public var baseURL: URL{
-        return URL(string: "https://dev4.superbekala.com/api/v1/")!
+        return URL(string: "https://new.superbekala.com/api/v1/")!
     }
     
     public var path: String{
@@ -103,7 +116,7 @@ extension SuperBe: TargetType{
             return "coupons/validate_coupons"
         case .getShippingCost(_):
             return "orders/shipping_details"
-        case .startConversation:
+        case .startConversation, .startOrderIssueConveration(_):
             return "chats/conversations"
         case .sendMessage(let id,_):
             return "chats/conversations/\(id)/messages"
@@ -113,6 +126,29 @@ extension SuperBe: TargetType{
             return "chats/conversations/\(id)/reopen"
         case .lockConversation(let id):
             return "chats/conversations/\(id)/lock"
+        case .getCaptain(let id):
+            return "delivery/\(id)"
+        case .updateProfile(_): return "update_profile"
+        case .getOrderBy(let id, _):
+            return "orders/\(id)"
+        case .verifyOTP(_):
+            return "sms/verify_otp"
+        case .getProfile:
+            return "profile"
+        case .requestOtp(_):
+            return "sms/request_otp"
+        case .getServices(_):
+            return "orders/super_services"
+        case .setting:
+            return "settings"
+        case .uploadFilesToOrder(_, _, _, _):
+            return "orders/quick_order"
+        case .tags:
+            return "tags"
+        case .productOffers(_):
+            return "product_offers"
+        case .couponsOffers(_):
+            return "coupon_offers"
         }
     }
     
@@ -130,10 +166,15 @@ extension SuperBe: TargetType{
              .sendMessage(_, _),
              .reopenConversation(_),
              .lockConversation(_),
-             .updateWallet(_):
+             .updateWallet(_),
+             .startOrderIssueConveration(_),
+             .verifyOTP(_),
+             .uploadFilesToOrder(_,_,_,_),
+             .logout:
             return .post
         case .updateAddress(_, _),
-             .updateOrder(_, _):
+             .updateOrder(_, _),
+             .updateProfile(_):
             return .put
         case .deleteAddress(_), .removeFromFavourtie(_):
             return .delete
@@ -160,12 +201,19 @@ extension SuperBe: TargetType{
              .search(let prms),
              .slider(let prms),
              .getShippingCost(let prms),
-             .updateWallet(let prms):
+             .updateWallet(let prms),
+             .getOrderBy(_, let prms),
+             .verifyOTP(let prms),
+             .requestOtp(let prms),
+             .getServices(let prms),
+             .productOffers(let prms),
+             .couponsOffers(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),
              .addToWallet(let prms),
-             .rate(let prms):
+             .rate(let prms),
+             .startOrderIssueConveration(let prms):
             var multipartFormData = [MultipartFormData]()
             for (key,value) in prms{
                 let formData = MultipartFormData(provider: .data("\(value)".data(using: .utf8)!), name: key)
@@ -190,12 +238,33 @@ extension SuperBe: TargetType{
             }
             return .uploadMultipart(multipartFormData)
         case .updateOrder(_, let prms),
-             .sendMessage(_, let prms):
+             .sendMessage(_, let prms),
+             .updateProfile(let prms):
             return .requestParameters(parameters: prms, encoding: JSONEncoding.default)
         case .placeOrder(let encodable):
             return .requestJSONEncodable(encodable)
         case .validateCoupons(let encodable):
             return .requestJSONEncodable(encodable)
+        case .uploadFilesToOrder(let id, let images, let voices, let notes):
+            var multipartFormData = [MultipartFormData]()
+            if !images.isEmpty{
+                for image in images{
+                    let imageData = image.jpegData(compressionQuality: 0.2)
+                    let formData: Moya.MultipartFormData = Moya.MultipartFormData(provider: .data(imageData!), name: "files[]", fileName: "file.jpg", mimeType: "image/jpeg")
+                    multipartFormData.append(formData)
+                }
+            }
+            if !voices.isEmpty{
+                for voice in voices{
+                    let formData: Moya.MultipartFormData = Moya.MultipartFormData(provider: .data(voice), name: "files[]", fileName: "file.m4a", mimeType: "audio/m4a")
+                    multipartFormData.append(formData)
+                }
+            }
+            if !notes.isEmpty{
+                multipartFormData.append(MultipartFormData(provider: .data("\(notes)".data(using: .utf8)!), name: "notes[]"))
+            }
+            multipartFormData.append(MultipartFormData(provider: .data("\(id)".data(using: .utf8)!), name: "order_id"))
+            return .uploadMultipart(multipartFormData)
         default:
             return .requestPlain
         }

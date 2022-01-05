@@ -21,21 +21,24 @@ extension MapVC: MKMapViewDelegate{
             self.showHintZoom()
         }else{
             self.dismissHintZoom()
-            
+                        
             if let polygon = self.polygone{
-                let polygonRenderer = MKPolygonRenderer(polygon: polygon)
-                let mapPoint: MKMapPoint = MKMapPoint(CLLocationCoordinate2D(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude))
-                let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
-                if !polygonRenderer.path.contains(polygonViewPoint){
-                    markerImageView.alpha = 0.5
-                    self.inRegion = false
-                    return
-                }else{
-                    self.inRegion = true
-                    markerImageView.alpha = 1
+                for polygon in polygon{
+                    let polygonRenderer = MKPolygonRenderer(polygon: polygon)
+                    let mapPoint: MKMapPoint = MKMapPoint(CLLocationCoordinate2D(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude))
+                    let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
+                    if !polygonRenderer.path.contains(polygonViewPoint){
+                        markerImageView.alpha = 0.5
+                        self.inRegion = false
+                    }else{
+                        self.inRegion = true
+                        markerImageView.alpha = 1
+                        break
+                    }
                 }
             }
             
+            guard self.inRegion else { return }
             guard let previousLocation = self.previousLocation else { return }
             guard center.distance(from: previousLocation) > 50 else { return }
             self.previousLocation = center
@@ -49,14 +52,14 @@ extension MapVC: MKMapViewDelegate{
                 guard let placemark = placemarks?.first else { return }
                 switch Shared.mapState{
                 case .fetchLocation:
-                    Shared.deliveringToTitle = (placemark.administrativeArea ?? "") + " (\((placemark.subAdministrativeArea ?? placemark.name) ?? placemark.thoroughfare ?? ""))"
+                    self.addressTitle = (placemark.administrativeArea ?? "") + " (\((placemark.subAdministrativeArea ?? placemark.name) ?? placemark.thoroughfare ?? ""))"
                 default : break
                 }
                 DispatchQueue.main.async {
                     self.locationLbl.text = "\(placemark.administrativeArea ?? "") \(placemark.subAdministrativeArea ?? "") \(placemark.name ?? "")"
                     self.cityTF.text = placemark.administrativeArea ?? ""
                     self.districtTF.text = (placemark.subAdministrativeArea ?? "") + " " + (placemark.name ?? "")
-                    self.streetTF.text = (placemark.thoroughfare ?? "") + " " + (placemark.subThoroughfare ?? "")
+                    //self.streetTF.text = (placemark.thoroughfare ?? "") + " " + (placemark.subThoroughfare ?? "")
                 }
             }
         }

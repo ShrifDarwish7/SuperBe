@@ -22,7 +22,7 @@ struct Slider: Codable {
     let slidableType: SliderType
     let slidableID: Int
     let actionURL: String?
-    let cityID, regionID: Int
+    //let cityID, regionID: Int
     let branch: Branch?
     let product: Product?
 
@@ -31,8 +31,8 @@ struct Slider: Codable {
         case slidableType = "slidable_type"
         case slidableID = "slidable_id"
         case actionURL = "action_url"
-        case cityID = "city_id"
-        case regionID = "region_id"
+     //   case cityID = "city_id"
+      //  case regionID = "region_id"
         case branch = "slidable_branch"
         case product = "slidable_branch_product"
     }
@@ -41,4 +41,6 @@ struct Slider: Codable {
 enum SliderType: String, Codable{
     case branch = "App\\Models\\Branch"
     case product = "App\\Models\\BranchProduct"
+    case coupons = "App\\Models\\Coupon"
+    case category = "App\\Models\\Category"
 }

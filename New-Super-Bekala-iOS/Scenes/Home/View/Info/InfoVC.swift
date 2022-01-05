@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import GoogleMaps
 import MapKit
 
 class InfoVC: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var phonesTableView: UITableView!
     @IBOutlet weak var deliveryAreasTableView: UITableView!
@@ -33,6 +31,7 @@ class InfoVC: UIViewController {
     @IBOutlet weak var onlinePayStack: UIStackView!
     @IBOutlet weak var branchName: UILabel!
     @IBOutlet weak var bio: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
     
     var branch: Branch?
 
@@ -49,9 +48,9 @@ class InfoVC: UIViewController {
     }
     
     func loadUI(){
-        
+                
         branchName.text = "lang".localized == "en" ? branch?.name?.en : branch?.name?.ar
-//        bio.text = "lang".localized == "en" ? branch?.bio?.en : branch?.bio?.ar
+        bio.text = "lang".localized == "en" ? branch?.bio?.en : branch?.bio?.ar
         
         onlinePayStack.isHidden = branch?.onlinePayment == 1 ? false : true
         
@@ -63,10 +62,21 @@ class InfoVC: UIViewController {
             branchStatusIcon.image = UIImage(named: "close_now")
         }
         
+        let coords = branch!.coordinates!
+        branch!.coordinates = coords.replacingOccurrences(of: " ", with: "")
+        
         deliveryHours.text = (branch?.deliveryStartTime ?? "") + " - " + (branch?.deliveryEndTime ?? "")
         
-        let camera = GMSCameraPosition(latitude: Double((branch?.coordinates?.split(separator: ",")[0])!) ?? 0.0, longitude: Double((branch?.coordinates?.split(separator: ",")[1])!) ?? 0.0, zoom: 19)
-        mapView.camera = camera
+        let branchCoords = CLLocationCoordinate2D(latitude: Double((branch?.coordinates?.split(separator: ",")[0])!) ?? 0.0, longitude: Double((branch?.coordinates?.split(separator: ",")[1])!) ?? 0.0)
+        
+        let branchRegion = MKCoordinateRegion(center: branchCoords, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.region = branchRegion
+        
+        let branchAnnotation = MKPointAnnotation()
+        branchAnnotation.coordinate = branchCoords
+        mapView.addAnnotation(branchAnnotation)
+        mapView.isUserInteractionEnabled = false
+        
         address.text = branch?.street
         
         if branch?.useCustomTimes == 0{
