@@ -59,6 +59,7 @@ protocol MainViewDelegate {
     func didCompleteUploadOrderFiles(_ error: String?)
     func didCompleteWithTags(_ data: [Tag]?,_ error: String?)
     //func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?)
+    func didCompleteWithUserCoupns(_ data: [Coupon]?)
     
 }
 
@@ -110,6 +111,7 @@ extension MainViewDelegate{
     func didCompleteUploadOrderFiles(_ error: String?){}
     func didCompleteWithTags(_ data: [Tag]?,_ error: String?){}
    // func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?){}
+    func didCompleteWithUserCoupns(_ data: [Coupon]?){}
 }
 
 class MainPresenter{
@@ -118,6 +120,19 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func getUserCoupons(_ type: CouponType){
+        delegate?.showProgress()
+        APIServices.shared.call(.userCoupons(["type": type.rawValue])) { [self] data in
+            print(JSON(data))
+            delegate?.dismissProgress()
+            if let data = data, let json = try? JSON(data: data), let coupons = try? json["data"].rawData().getDecodedObject(from: [Coupon].self){
+                delegate?.didCompleteWithUserCoupns(coupons)
+            }else{
+                delegate?.didCompleteWithUserCoupns(nil)
+            }
+        }
     }
     
     func getTags(){
@@ -229,6 +244,42 @@ class MainPresenter{
         }
     }
     
+    func getOrderConversation(_ orderId: Int){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.getOrderConversation(["with": "messages", "filter": "order_id=\(orderId)"])) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data, let json = try? JSON(data: data){
+                if let dataModel = try? json["data"].arrayValue.first?.rawData().getDecodedObject(from: Conversation.self){
+                    Shared.currentConversationId = dataModel.id
+                    self.delegate?.didCompleteWithConversation(dataModel, nil)
+                }else{
+                    self.delegate?.didCompleteWithConversation(nil, JSON(data)["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompleteWithConversation(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
+    func getSupportMessages(){
+        self.delegate?.showProgress()
+        APIServices.shared.call(.getSupportMessages(["with": "messages"])) { data in
+            print(JSON(data))
+            self.delegate?.dismissProgress()
+            if let data = data{
+                if let dataModel = data.getDecodedObject(from: ConversationResponse.self){
+                    Shared.currentConversationId = dataModel.data.id
+                    self.delegate?.didCompleteWithConversation(dataModel.data, nil)
+                }else{
+                    self.delegate?.didCompleteWithConversation(nil, JSON(data)["message"].stringValue)
+                }
+            }else{
+                self.delegate?.didCompleteWithConversation(nil, Shared.errorMsg)
+            }
+        }
+    }
+    
     func reopenConversation(){
         APIServices.shared.call(.reopenConversation(Shared.currentConversationId!)) { data in
             print(JSON(data))
@@ -283,6 +334,7 @@ class MainPresenter{
     func startConversation(_ title: String,_ orderId: String){
         self.delegate?.showProgress()
         APIServices.shared.call(.startOrderIssueConveration(["title": title, "order_id": orderId])) { data in
+            print(JSON(data))
             self.delegate?.dismissProgress()
             if let data = data,
                let json = try? JSON(data: data),

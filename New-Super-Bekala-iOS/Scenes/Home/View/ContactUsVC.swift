@@ -57,12 +57,14 @@ class ContactUsVC: UIViewController {
     }
     
     @IBAction func toChat(_ sender: Any) {
-        guard Shared.isChatting == false else {
-            showAlert(title: "", message: "Please first close your current conversation session to start new one".localized)
-            return
-        }
-        let presenter = MainPresenter(self)
-        presenter.startConversation()
+//        guard Shared.isChatting == false else {
+//            showAlert(title: "", message: "Please first close your current conversation session to start new one".localized)
+//            return
+//        }
+//        let presenter = MainPresenter(self)
+//        presenter.startConversation()
+        Shared.orderChatting = false
+        Router.toChat(self)
     }
     
 }

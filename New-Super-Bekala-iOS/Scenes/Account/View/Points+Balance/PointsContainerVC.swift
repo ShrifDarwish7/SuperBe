@@ -20,6 +20,7 @@ class PointsContainerVC: UIViewController {
 
         tabs.append(Tab(name: "Balance".localized, selected: true))
         tabs.append(Tab(name: "Points".localized, selected: false))
+        tabs.append(Tab(name: "Coupons".localized, selected: false))
         
         self.replaceView(containerView: containerView, identifier: "BalanceVC", storyboard: .profile)
         

@@ -89,18 +89,17 @@ extension OffersVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         
         switch collectionView {
         case filtersCollection:
-            
+            guard !offersTabs[indexPath.row].selected else { return }
             showSkeletonView()
-            
             for i in 0...offersTabs.count-1{
                 offersTabs[i].selected = false
             }
             offersTabs[indexPath.row].selected = true
             collectionView.reloadData()
-            
-            page = 1
             branches.removeAll()
+            page = 1
             parameters.updateValue("\(page)", forKey: "page")
+            filtersCollection.isUserInteractionEnabled = false
             
             switch indexPath.row{
             case 0:

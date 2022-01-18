@@ -46,6 +46,8 @@ extension PointsContainerVC: UICollectionViewDelegate, UICollectionViewDataSourc
             self.replaceView(containerView: containerView, identifier: "BalanceVC", storyboard: .profile)
         case 1:
             self.replaceView(containerView: containerView, identifier: "PointsVC", storyboard: .profile)
+        case 2:
+            self.replaceView(containerView: containerView, identifier: "UserCouponsVC", storyboard: .profile)
         default:
             break
         }

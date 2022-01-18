@@ -377,7 +377,7 @@ class HomeContainerVC: UIViewController, LoginDelegate {
             selectedTab = .shooping
             
         case 1:
-            
+                        
             offersTab.isHidden = false
             offersTabBtn.setImage(UIImage(named: "offers-select"), for: .normal)
             

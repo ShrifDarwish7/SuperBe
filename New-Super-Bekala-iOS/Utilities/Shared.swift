@@ -99,7 +99,14 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "current_conversation_admin_avatar") }
         get { return UserDefaults.init().string(forKey: "current_conversation_admin_avatar") }
     }
-    
+    static var orderChatting: Bool?{
+        set { UserDefaults.init().setValue(newValue, forKey: "order_chatting") }
+        get { return UserDefaults.init().bool(forKey: "order_chatting") }
+    }
+    static var orderChattingId: Int?{
+        set { UserDefaults.init().setValue(newValue, forKey: "order_chatting_id") }
+        get { return UserDefaults.init().integer(forKey: "order_chatting_id") }
+    }
     static func call(phoneNumber: String) {
        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
             let application:UIApplication = UIApplication.shared

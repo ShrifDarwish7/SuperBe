@@ -81,8 +81,13 @@ extension AllAddressesVC: UITableViewDelegate, UITableViewDataSource{
         }
         
         cell.deleteBtn.onTap {
-            SVProgressHUD.show()
-            self.presenter?.deleteAddress(self.addresses![indexPath.row].id)
+            let alert = UIAlertController(title: nil, message: "Are you sure you want to delete this address ?".localized, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Delete".localized, style: .destructive, handler: { _ in
+                SVProgressHUD.show()
+                self.presenter?.deleteAddress(self.addresses![indexPath.row].id)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         
         cell.editBtn.onTap {

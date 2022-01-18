@@ -10,6 +10,9 @@ import Foundation
 import Moya
 import UIKit
 
+// testing base url: http://dev4.superbekala.com
+// production base url: https://new.superbekala.com
+
 enum SuperBe{
     case login(_ prms: [String: String])
     case logout
@@ -59,6 +62,9 @@ enum SuperBe{
     case tags
     case productOffers(_ prms: [String: String])
     case couponsOffers(_ prms: [String: String])
+    case userCoupons(_ prms: [String: String])
+    case getSupportMessages(_ prms: [String: String])
+    case getOrderConversation(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
@@ -149,6 +155,12 @@ extension SuperBe: TargetType{
             return "product_offers"
         case .couponsOffers(_):
             return "coupon_offers"
+        case .userCoupons(_):
+            return "user_coupons"
+        case .getSupportMessages(_):
+            return "chats/get_support_conversation"
+        case .getOrderConversation(_):
+            return "chats/conversations"
         }
     }
     
@@ -207,7 +219,10 @@ extension SuperBe: TargetType{
              .requestOtp(let prms),
              .getServices(let prms),
              .productOffers(let prms),
-             .couponsOffers(let prms):
+             .couponsOffers(let prms),
+             .userCoupons(let prms),
+             .getSupportMessages(let prms),
+             .getOrderConversation(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),
