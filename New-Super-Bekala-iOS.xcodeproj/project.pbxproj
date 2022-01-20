@@ -65,7 +65,6 @@
 		103F81DB2767660800D44DD1 /* Cart_v1_to_v2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 103F81DA2767660800D44DD1 /* Cart_v1_to_v2.xcmappingmodel */; };
 		103F81DD2767751E00D44DD1 /* CartMigrationV1toV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103F81DC2767751E00D44DD1 /* CartMigrationV1toV2.swift */; };
 		1040D44926F2441900BDBA55 /* VerifyPhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1040D44826F2441900BDBA55 /* VerifyPhoneVC.swift */; };
-		1041F8712721946600B9B112 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1041F8702721946600B9B112 /* GoogleService-Info.plist */; };
 		10449D3726B6E16F00DD72D3 /* ValidatableCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10449D3626B6E16F00DD72D3 /* ValidatableCoupon.swift */; };
 		10475CC626926FEB00E58A94 /* SliderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10475CC526926FEB00E58A94 /* SliderResponse.swift */; };
 		1047A5EC2652A2230007C3EE /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1047A5EB2652A2230007C3EE /* ProfileVC.swift */; };
@@ -163,6 +162,7 @@
 		109E085726C7503E0085FBBE /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109E085626C7503E0085FBBE /* ContactUsVC.swift */; };
 		10A076D825F786BE000EE39F /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A076D725F786BE000EE39F /* LoginResponse.swift */; };
 		10A076DD25F78B18000EE39F /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A076DC25F78B18000EE39F /* SplashVC.swift */; };
+		10A192C52795862100F4A412 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10A192C42795862100F4A412 /* GoogleService-Info.plist */; };
 		10A44E7826DE58AD00DF21B5 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A44E7726DE58AD00DF21B5 /* CustomAnnotation.swift */; };
 		10A44E7A26DE5AC200DF21B5 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A44E7926DE5AC200DF21B5 /* CustomAnnotationView.swift */; };
 		10A44E7C26DE616F00DF21B5 /* map_marker.gif in Resources */ = {isa = PBXBuildFile; fileRef = 10A44E7B26DE616F00DF21B5 /* map_marker.gif */; };
@@ -278,6 +278,9 @@
 		BC0809762781FAB500E34AA2 /* AllAddressesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0809752781FAB500E34AA2 /* AllAddressesVC.swift */; };
 		BC518F04277C97790069859F /* ProfileAddressesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC518F02277C97790069859F /* ProfileAddressesTableViewCell.swift */; };
 		BC518F05277C97790069859F /* ProfileAddressesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC518F03277C97790069859F /* ProfileAddressesTableViewCell.xib */; };
+		BC8DFB2C278725D8003624A8 /* UserCouponsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8DFB2B278725D8003624A8 /* UserCouponsTableViewCell.swift */; };
+		BCBD646F278712BF0095E8A5 /* UserCouponsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBD646E278712BF0095E8A5 /* UserCouponsVC.swift */; };
+		BCBD6471278714BF0095E8A5 /* UserCouponsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBD6470278714BF0095E8A5 /* UserCouponsCollectionViewCell.swift */; };
 		D3427D80DEB8B916F3BA4482 /* Pods_New_Super_Bekala_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C0E90AB39FCCCB000E3E07 /* Pods_New_Super_Bekala_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -371,7 +374,6 @@
 		103F81DA2767660800D44DD1 /* Cart_v1_to_v2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Cart_v1_to_v2.xcmappingmodel; sourceTree = "<group>"; };
 		103F81DC2767751E00D44DD1 /* CartMigrationV1toV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartMigrationV1toV2.swift; sourceTree = "<group>"; };
 		1040D44826F2441900BDBA55 /* VerifyPhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneVC.swift; sourceTree = "<group>"; };
-		1041F8702721946600B9B112 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10449D3626B6E16F00DD72D3 /* ValidatableCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableCoupon.swift; sourceTree = "<group>"; };
 		10475CC526926FEB00E58A94 /* SliderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderResponse.swift; sourceTree = "<group>"; };
 		1047A5EB2652A2230007C3EE /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 		109E085626C7503E0085FBBE /* ContactUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		10A076D725F786BE000EE39F /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		10A076DC25F78B18000EE39F /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		10A192C42795862100F4A412 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A44E7726DE58AD00DF21B5 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		10A44E7926DE5AC200DF21B5 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		10A44E7B26DE616F00DF21B5 /* map_marker.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = map_marker.gif; sourceTree = "<group>"; };
@@ -604,6 +607,9 @@
 		BC0809752781FAB500E34AA2 /* AllAddressesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAddressesVC.swift; sourceTree = "<group>"; };
 		BC518F02277C97790069859F /* ProfileAddressesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAddressesTableViewCell.swift; sourceTree = "<group>"; };
 		BC518F03277C97790069859F /* ProfileAddressesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileAddressesTableViewCell.xib; sourceTree = "<group>"; };
+		BC8DFB2B278725D8003624A8 /* UserCouponsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCouponsTableViewCell.swift; sourceTree = "<group>"; };
+		BCBD646E278712BF0095E8A5 /* UserCouponsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCouponsVC.swift; sourceTree = "<group>"; };
+		BCBD6470278714BF0095E8A5 /* UserCouponsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCouponsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -835,6 +841,7 @@
 				1047A5EA2652A2100007C3EE /* Profile */,
 				1052295626A5D8CD00F317C0 /* PayContainerVC.swift */,
 				BC0809752781FAB500E34AA2 /* AllAddressesVC.swift */,
+				BCBD646E278712BF0095E8A5 /* UserCouponsVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1340,6 +1347,8 @@
 			isa = PBXGroup;
 			children = (
 				109524512659330D00C8C769 /* Transactions */,
+				BCBD6470278714BF0095E8A5 /* UserCouponsCollectionViewCell.swift */,
+				BC8DFB2B278725D8003624A8 /* UserCouponsTableViewCell.swift */,
 			);
 			path = XIB;
 			sourceTree = "<group>";
@@ -1507,7 +1516,7 @@
 			children = (
 				881594BB24B610FF008BE195 /* AppDelegate.swift */,
 				881594BD24B610FF008BE195 /* SceneDelegate.swift */,
-				1041F8702721946600B9B112 /* GoogleService-Info.plist */,
+				10A192C42795862100F4A412 /* GoogleService-Info.plist */,
 				881594C924B61104008BE195 /* Info.plist */,
 				104E8A0D2619CC3B00756B62 /* Cart.xcdatamodeld */,
 				103F81DA2767660800D44DD1 /* Cart_v1_to_v2.xcmappingmodel */,
@@ -1878,6 +1887,7 @@
 				103191082614B2140002C47E /* ProductSkeletonCollectionViewCell.xib in Resources */,
 				8823DDDA24B9D89A009A83C5 /* Lato-LightItalic.ttf in Resources */,
 				8823DDDB24B9D89A009A83C5 /* Lato-Regular.ttf in Resources */,
+				10A192C52795862100F4A412 /* GoogleService-Info.plist in Resources */,
 				1026E9702625C2C0004F1DEA /* VariationsTableViewCell.xib in Resources */,
 				102E6AE92778A3E900EBC4AD /* OffersTabsCollectionViewCell.xib in Resources */,
 				1054717A263042B5001EE33F /* LastOrdersTableViewCell.xib in Resources */,
@@ -1907,7 +1917,6 @@
 				101CEB6625FCF3640014D96E /* RegionsTableViewCell.xib in Resources */,
 				10F5AEE3272AE0C900D11B4D /* TagsCollectionViewCell.xib in Resources */,
 				88DDB5AE24E188C50003D1A7 /* OnSaleCollectionViewCell.xib in Resources */,
-				1041F8712721946600B9B112 /* GoogleService-Info.plist in Resources */,
 				100E206D26C58F19007FF432 /* conversation_locked.mp3 in Resources */,
 				1054DB4426384DDE0032D6FA /* CartVoiceTableViewCell.xib in Resources */,
 				8823DDD724B9D89A009A83C5 /* Lato-BoldItalic.ttf in Resources */,
@@ -2206,6 +2215,7 @@
 				1034F52E26A0792F0054038F /* FavouritesResponse.swift in Sources */,
 				103DC5E9271F3CE700FD0A68 /* ImagedCategoryCollectionViewCell.swift in Sources */,
 				881594BC24B610FF008BE195 /* AppDelegate.swift in Sources */,
+				BCBD646F278712BF0095E8A5 /* UserCouponsVC.swift in Sources */,
 				BC0809762781FAB500E34AA2 /* AllAddressesVC.swift in Sources */,
 				10227B902688D20000626C74 /* ChangeLocationVC.swift in Sources */,
 				1006E17225FCDE4300D325F0 /* AskLocationVC+HomeViewDelegate.swift in Sources */,
@@ -2236,6 +2246,7 @@
 				10475CC626926FEB00E58A94 /* SliderResponse.swift in Sources */,
 				881594BE24B610FF008BE195 /* SceneDelegate.swift in Sources */,
 				10F3B3122741A5FC00AB35E1 /* CheckoutVC+PayButtonDelegate.swift in Sources */,
+				BC8DFB2C278725D8003624A8 /* UserCouponsTableViewCell.swift in Sources */,
 				10F3A6ED261607BE00EAF1C7 /* ProductVC.swift in Sources */,
 				1026AE6926C4A80F001D0BE9 /* ChatVC+TableViewDelegate.swift in Sources */,
 				10DF0E9225BD7E940084D83C /* AskLocationView.swift in Sources */,
@@ -2247,6 +2258,7 @@
 				1026E9802625CCFD004F1DEA /* ProductVC+TableViewDelegate.swift in Sources */,
 				1047A5EC2652A2230007C3EE /* ProfileVC.swift in Sources */,
 				102E6AE82778A3E900EBC4AD /* OffersTabsCollectionViewCell.swift in Sources */,
+				BCBD6471278714BF0095E8A5 /* UserCouponsCollectionViewCell.swift in Sources */,
 				10ADFF5D25BC5DC70009F430 /* MapVC.swift in Sources */,
 				1018F0EC26BB5BD90019EA83 /* ReceivedTextMessageCell.swift in Sources */,
 				1063153626148D6100912097 /* BranchVC+CollectionViewDelegate.swift in Sources */,
@@ -2498,7 +2510,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2515,7 +2527,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS/MPGSDK.framework",
 				);
-				MARKETING_VERSION = 6.7;
+				MARKETING_VERSION = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superbekala.SuperBekaaIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2530,7 +2542,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2547,7 +2559,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS/MPGSDK.framework",
 				);
-				MARKETING_VERSION = 6.7;
+				MARKETING_VERSION = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superbekala.SuperBekaaIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LastOrdersTableViewCell" rowHeight="181" id="KGk-i7-Jjw" customClass="LastOrdersTableViewCell" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="181"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="181"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYT-2t-sZ4" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="5" width="369" height="171"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmT-tU-Ust" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="7" y="55.5" width="60" height="60"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5n-KI-9Be">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="C5n-KI-9Be" firstAttribute="leading" secondItem="rmT-tU-Ust" secondAttribute="leading" id="8Jv-xr-ywa"/>
+                                    <constraint firstAttribute="bottom" secondItem="C5n-KI-9Be" secondAttribute="bottom" id="Bz9-iV-92w"/>
+                                    <constraint firstAttribute="trailing" secondItem="C5n-KI-9Be" secondAttribute="trailing" id="PQV-NC-fPe"/>
+                                    <constraint firstItem="C5n-KI-9Be" firstAttribute="top" secondItem="rmT-tU-Ust" secondAttribute="top" id="Qwg-Wv-34x"/>
+                                    <constraint firstAttribute="width" constant="60" id="aw0-qP-SOC"/>
+                                    <constraint firstAttribute="height" constant="60" id="d3W-VB-u16"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ltF-FX-EqS">
+                                <rect key="frame" x="77" y="55.5" width="152" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-sf-mLC">
+                                        <rect key="frame" x="0.0" y="0.0" width="152" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-Hq-TMc">
+                                        <rect key="frame" x="0.0" y="22.5" width="152" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaQ-8z-6Zl">
+                                        <rect key="frame" x="0.0" y="45" width="152" height="15"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qtB-0u-ZUL">
+                                                <rect key="frame" x="0.0" y="0.0" width="152" height="15"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rate" translatesAutoresizingMaskIntoConstraints="NO" id="6CK-ix-lr6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="15" id="4UF-W9-rnb"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate order" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekh-uF-7gc" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="0.0" width="132" height="15"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="13"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9j-Jk-UgM">
+                                                <rect key="frame" x="0.0" y="0.0" width="152" height="15"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="10O-16-fUo"/>
+                                            <constraint firstItem="qtB-0u-ZUL" firstAttribute="top" secondItem="FaQ-8z-6Zl" secondAttribute="top" id="1Ut-vM-plA"/>
+                                            <constraint firstAttribute="bottom" secondItem="qtB-0u-ZUL" secondAttribute="bottom" id="KPu-QC-FWl"/>
+                                            <constraint firstAttribute="trailing" secondItem="qtB-0u-ZUL" secondAttribute="trailing" id="VDl-Pw-4Fp"/>
+                                            <constraint firstItem="qtB-0u-ZUL" firstAttribute="leading" secondItem="FaQ-8z-6Zl" secondAttribute="leading" id="XLQ-vB-Yfy"/>
+                                            <constraint firstItem="e9j-Jk-UgM" firstAttribute="top" secondItem="FaQ-8z-6Zl" secondAttribute="top" id="Z8f-tD-5Da"/>
+                                            <constraint firstItem="e9j-Jk-UgM" firstAttribute="leading" secondItem="FaQ-8z-6Zl" secondAttribute="leading" id="d01-Jv-ioP"/>
+                                            <constraint firstAttribute="bottom" secondItem="e9j-Jk-UgM" secondAttribute="bottom" id="eUm-Ne-XZx"/>
+                                            <constraint firstAttribute="trailing" secondItem="e9j-Jk-UgM" secondAttribute="trailing" id="mt7-fR-GJ9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FaQ-8z-6Zl" firstAttribute="leading" secondItem="ltF-FX-EqS" secondAttribute="leading" id="ivf-k5-KPd"/>
+                                    <constraint firstAttribute="trailing" secondItem="FaQ-8z-6Zl" secondAttribute="trailing" id="rRw-y0-4D0"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkB-kg-EQY" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="239" y="67" width="120" height="37.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="processing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMh-UB-vpv">
+                                        <rect key="frame" x="5" y="10" width="110" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Dark-Red"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="NPB-NT-6N1"/>
+                                    <constraint firstItem="vMh-UB-vpv" firstAttribute="leading" secondItem="JkB-kg-EQY" secondAttribute="leading" constant="5" id="U9u-zE-4Wj"/>
+                                    <constraint firstAttribute="trailing" secondItem="vMh-UB-vpv" secondAttribute="trailing" constant="5" id="nyF-rB-2zt"/>
+                                    <constraint firstAttribute="bottom" secondItem="vMh-UB-vpv" secondAttribute="bottom" constant="10" id="tnc-sk-RLD"/>
+                                    <constraint firstItem="vMh-UB-vpv" firstAttribute="top" secondItem="JkB-kg-EQY" secondAttribute="top" constant="10" id="wSl-Ts-ntw"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadow" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="500-b4-4xY">
+                                <rect key="frame" x="227" y="120" width="164" height="14.5"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="White2"/>
+                        <constraints>
+                            <constraint firstItem="ltF-FX-EqS" firstAttribute="centerY" secondItem="C5n-KI-9Be" secondAttribute="centerY" id="8nj-rw-tWt"/>
+                            <constraint firstItem="500-b4-4xY" firstAttribute="top" secondItem="JkB-kg-EQY" secondAttribute="bottom" constant="7" id="Dqt-8e-Wgv"/>
+                            <constraint firstItem="ltF-FX-EqS" firstAttribute="leading" secondItem="C5n-KI-9Be" secondAttribute="trailing" constant="10" id="LAf-oU-M5J"/>
+                            <constraint firstItem="JkB-kg-EQY" firstAttribute="centerY" secondItem="SYT-2t-sZ4" secondAttribute="centerY" id="ZGW-av-r7s"/>
+                            <constraint firstAttribute="trailing" secondItem="JkB-kg-EQY" secondAttribute="trailing" constant="10" id="dKT-ZG-4Sb"/>
+                            <constraint firstItem="rmT-tU-Ust" firstAttribute="leading" secondItem="SYT-2t-sZ4" secondAttribute="leading" constant="7" id="fro-eg-D0g"/>
+                            <constraint firstItem="rmT-tU-Ust" firstAttribute="centerY" secondItem="SYT-2t-sZ4" secondAttribute="centerY" id="kDb-YY-sMP"/>
+                            <constraint firstItem="JkB-kg-EQY" firstAttribute="leading" secondItem="ltF-FX-EqS" secondAttribute="trailing" constant="10" id="nsQ-oQ-prG"/>
+                            <constraint firstItem="500-b4-4xY" firstAttribute="centerX" secondItem="JkB-kg-EQY" secondAttribute="centerX" id="rL6-lk-6Sd"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                <real key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" name="LightGray"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="SYT-2t-sZ4" secondAttribute="trailing" id="AIJ-W5-2er"/>
+                    <constraint firstItem="SYT-2t-sZ4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="JU8-qc-EM0"/>
+                    <constraint firstAttribute="bottom" secondItem="SYT-2t-sZ4" secondAttribute="bottom" constant="5" id="nVA-1w-a6r"/>
+                    <constraint firstItem="SYT-2t-sZ4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wBt-7k-of9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="branchImgView" destination="rmT-tU-Ust" id="kGb-1G-vJO"/>
+                <outlet property="branchName" destination="Vel-Hq-TMc" id="UGT-fG-tYz"/>
+                <outlet property="logo" destination="C5n-KI-9Be" id="idZ-vu-cWM"/>
+                <outlet property="orderDate" destination="500-b4-4xY" id="w2P-GY-ywS"/>
+                <outlet property="orderId" destination="Q3L-sf-mLC" id="HGX-hh-7a9"/>
+                <outlet property="rateBtn" destination="e9j-Jk-UgM" id="5Ra-TD-8fR"/>
+                <outlet property="rateView" destination="FaQ-8z-6Zl" id="awc-62-1XL"/>
+                <outlet property="status" destination="vMh-UB-vpv" id="C17-3c-UAQ"/>
+                <outlet property="statusContainer" destination="JkB-kg-EQY" id="FHE-V7-kC4"/>
+            </connections>
+            <point key="canvasLocation" x="57.24637681159421" y="140.29017857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="rate" width="19" height="19"/>
+        <namedColor name="Dark-Red">
+            <color red="0.66699999570846558" green="0.063000001013278961" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LightGray">
+            <color red="0.89800000190734863" green="0.89800000190734863" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White2">
+            <color red="0.98400002717971802" green="0.98400002717971802" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
