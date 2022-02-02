@@ -27,6 +27,7 @@ extension SearchVC: MainViewDelegate{
                 }
             }
             self.branches = data
+            presenter?.delegate = nil
         }else{
             self.resultTableView.isHidden = true
             self.notFoundStack.isHidden = false

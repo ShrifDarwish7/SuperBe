@@ -47,6 +47,7 @@ class MapVC: UIViewController {
     var previousLocation: CLLocation?
     var addressTitle: String?
     var editableAddress: Address?
+    var presentingAddressDetails = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +106,11 @@ class MapVC: UIViewController {
         
         previousLocation = self.getCenterLocation(for: mapKitView)
         
+        streetTF.rightView?.isHidden = true
+        buildingTF.rightView?.isHidden = true
+        floorTF.rightView?.isHidden = true
+        flatTF.rightView?.isHidden = true
+        
     }
     
     func getUserLocation(){
@@ -123,6 +129,7 @@ class MapVC: UIViewController {
             presenter?.getCategories(["coordinates": "\(mapKitView.centerCoordinate.latitude),\(mapKitView.centerCoordinate.longitude)"])
         case .addAddress, .editAddress:
             guard self.inRegion else { return }
+            presentingAddressDetails = true
             let zoomWidth = self.mapKitView.visibleMapRect.size.width
             let zoomFactor = Int(log2(zoomWidth)) - 9
             guard zoomFactor <= 1 else {
@@ -164,34 +171,49 @@ class MapVC: UIViewController {
         
     }
     
-    
     @IBAction func save(_ sender: Any) {
+        
+        streetTF.rightView?.isHidden = true
+        buildingTF.rightView?.isHidden = true
+        floorTF.rightView?.isHidden = true
+        flatTF.rightView?.isHidden = true
+        
         guard !self.addressTitleTF.text!.isEmpty else {
             self.addressTitleStack.shake(.error)
             return
         }
         guard !self.cityTF.text!.isEmpty else {
             cityTF.shake(.error)
+            scroller.setContentOffset(cityTF.frame.origin, animated: true)
             return
         }
         guard !self.districtTF.text!.isEmpty else {
             districtTF.shake(.error)
+            scroller.setContentOffset(districtTF.frame.origin, animated: true)
             return
         }
         guard !self.streetTF.text!.isEmpty else {
             streetTF.shake(.error)
+            streetTF.rightView?.isHidden = false
+            scroller.setContentOffset(streetTF.frame.origin, animated: true)
             return
         }
         guard !self.buildingTF.text!.isEmpty else {
             buildingTF.shake(.error)
+            buildingTF.rightView?.isHidden = false
+            scroller.setContentOffset(buildingTF.frame.origin, animated: true)
             return
         }
         guard !self.floorTF.text!.isEmpty else {
             floorTF.shake(.error)
+            floorTF.rightView?.isHidden = false
+            scroller.setContentOffset(floorTF.frame.origin, animated: true)
             return
         }
         guard !self.flatTF.text!.isEmpty else {
             flatTF.shake(.error)
+            flatTF.rightView?.isHidden = false
+            scroller.setContentOffset(flatTF.frame.origin, animated: true)
             return
         }
         let parameters: [String: String] = [
@@ -230,6 +252,7 @@ class MapVC: UIViewController {
     }
     
     @IBAction func refine(_ sender: Any) {
+        presentingAddressDetails = false
         UIView.animate(withDuration: 0.25) {
             self.addAddressBlockView.alpha = 0
             self.detectBtn.isHidden = false
@@ -241,7 +264,11 @@ class MapVC: UIViewController {
     
     
     @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if presentingAddressDetails{
+            refine(self)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     

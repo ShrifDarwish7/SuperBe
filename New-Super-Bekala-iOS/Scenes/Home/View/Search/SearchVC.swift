@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import Alamofire
 
 class SearchVC: UIViewController{
 
@@ -176,7 +177,7 @@ class SearchVC: UIViewController{
         if let branchId = branchId{
             query.updateValue("branch_id=\(branchId)", forKey: "filter")
         }
-        
+        presenter?.delegate = self
         presenter?.searchWith(query: &query, self.context)
     }
 }

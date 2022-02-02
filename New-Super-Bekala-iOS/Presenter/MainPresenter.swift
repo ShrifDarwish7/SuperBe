@@ -477,8 +477,9 @@ class MainPresenter{
         case .vendors:
             prms.updateValue("coupons", forKey: "with")
         }
+        //print("prms here",prms)
         APIServices.shared.call(.search(prms)) { (data) in
-            print("searchWith ",JSON(data))
+            //print("searchWith ",JSON(data))
             if let data = data{
                 switch context {
                 case .vendors:

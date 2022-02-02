@@ -15,7 +15,7 @@ class RateOrderVC: UIViewController {
     @IBOutlet weak var valueForPriceRate: CosmosView!
     @IBOutlet weak var timingRate: CosmosView!
     @IBOutlet weak var qualityRate: CosmosView!
-    @IBOutlet weak var comment: UITextView!
+    @IBOutlet weak var comment: UITextField!
     @IBOutlet weak var orderTitle: UILabel!
     
     var presenter: MainPresenter?
@@ -29,6 +29,7 @@ class RateOrderVC: UIViewController {
         }
         presenter = MainPresenter(self)
         orderTitle.text = "Rate Order ".localized + "#\(orderId!)"
+        comment.placeholder = "Write your comment here ...".localized
     }
 
     @IBAction func dismissAction(_ sender: Any) {

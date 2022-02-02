@@ -220,6 +220,10 @@ class HomeContainerVC: UIViewController, LoginDelegate {
     }
     
     @IBAction func toQuickOrder(_ sender: UIButton) {
+        guard APIServices.shared.isLogged else{
+            Router.toRegister(self)
+            return
+        }
         switch sender.tag {
         case 0:
             Shared.selectedServices = .voice

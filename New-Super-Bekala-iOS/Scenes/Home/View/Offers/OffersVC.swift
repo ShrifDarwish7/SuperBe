@@ -50,6 +50,8 @@ class OffersVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        filtersCollection.isUserInteractionEnabled = false
+        
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         scrollView.refreshControl = refreshControl
@@ -74,10 +76,6 @@ class OffersVC: UIViewController {
         specialOffersCollection.register(nib, forCellWithReuseIdentifier: ProductSkeletonCollectionViewCell.identifier)
         self.specialOffersCollection.reloadData()
         specialOffersCollection.showAnimatedSkeleton(usingColor: .lightGray, transition: .crossDissolve(0.25))
-        
-//        offersTabs.append(OffersTab(name: "Offers".localized, image: UIImage(named: "discount")!, selected: true))
-//        offersTabs.append(OffersTab(name: "Special".localized, image: UIImage(named: "sale")!, selected: false))
-//        offersTabs.append(OffersTab(name: "Coupons".localized, image: UIImage(named: "coupon")!, selected: false))
         
         filtersCollection.register(OffersTabsCollectionViewCell.nib(), forCellWithReuseIdentifier: OffersTabsCollectionViewCell.identifier)
         filtersCollection.delegate = self
