@@ -24,7 +24,9 @@ class SplashVC: UIViewController {
     }
     
     func initView(){
+        
         presenter = LoginViewPresenter(loginViewDelegate: self)
+        
         if let _ = APIServices.shared.user{
             presenter?.updateProfile([
                 "device_token": UserDefaults.init().string(forKey: "FCM_Token") ?? "",
@@ -60,6 +62,7 @@ class SplashVC: UIViewController {
             self.viewDidLoad()
         }
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -120,8 +123,8 @@ extension SplashVC: LoginViewDelegate{
             let width = NSLayoutConstraint(item: alert.view!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)  
             alert.view.addConstraint(height)
             alert.view.addConstraint(width)
-            alert.addAction(UIAlertAction(title: "Exit".localized, style: .default, handler: { _ in
-                exit(0)
+            alert.addAction(UIAlertAction(title: "Continue".localized, style: .default, handler: { _ in
+                self.goNext()
             }))
             present(alert, animated: true, completion: nil)
         }
