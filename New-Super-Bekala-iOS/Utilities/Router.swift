@@ -359,4 +359,12 @@ class Router {
         sender.present(vc, animated: true, completion: nil)
     }
     
+    static func toPopUpNotify(_ sender: UIViewController,_ image: String){
+        let vc = self.instantiate(appStoryboard: .other, identifier: "PopUpNotifyVC") as! PopUpNotifyVC
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.image = Shared.storageBase + image
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
 }
