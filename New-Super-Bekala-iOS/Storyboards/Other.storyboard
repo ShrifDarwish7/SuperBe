@@ -568,6 +568,66 @@ experience with us</string>
             </objects>
             <point key="canvasLocation" x="1263.768115942029" y="785.49107142857144"/>
         </scene>
+        <!--Pop Up NotifyVC-->
+        <scene sceneID="Zhk-UF-fCx">
+            <objects>
+                <viewController storyboardIdentifier="PopUpNotifyVC" id="fhz-TV-A0n" customClass="PopUpNotifyVC" customModule="New_Super_Bekala_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CBF-O4-nX2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uue-Xv-CKG" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                <rect key="frame" x="41.5" y="274" width="331" height="358"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sWZ-I7-fXv">
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="358"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knt-Mv-ZfF">
+                                        <rect key="frame" x="15" y="15" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="IGo-sx-utN"/>
+                                            <constraint firstAttribute="height" constant="15" id="eR8-MQ-j1S"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button" image="close-1"/>
+                                        <connections>
+                                            <action selector="close:" destination="fhz-TV-A0n" eventType="touchUpInside" id="Qqf-HL-ksl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sWZ-I7-fXv" secondAttribute="trailing" id="DEr-Ft-OCs"/>
+                                    <constraint firstItem="knt-Mv-ZfF" firstAttribute="leading" secondItem="Uue-Xv-CKG" secondAttribute="leading" constant="15" id="Dg3-4H-gLu"/>
+                                    <constraint firstItem="sWZ-I7-fXv" firstAttribute="top" secondItem="Uue-Xv-CKG" secondAttribute="top" id="g1P-zg-pTZ"/>
+                                    <constraint firstItem="knt-Mv-ZfF" firstAttribute="top" secondItem="Uue-Xv-CKG" secondAttribute="top" constant="15" id="gr1-h4-zPf"/>
+                                    <constraint firstItem="sWZ-I7-fXv" firstAttribute="leading" secondItem="Uue-Xv-CKG" secondAttribute="leading" id="gxJ-Tm-XwF"/>
+                                    <constraint firstAttribute="bottom" secondItem="sWZ-I7-fXv" secondAttribute="bottom" id="k6o-28-aWs"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaduis">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pat-Gz-8RL"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Uue-Xv-CKG" firstAttribute="width" secondItem="CBF-O4-nX2" secondAttribute="width" multiplier="0.8" id="7nd-O3-xuA"/>
+                            <constraint firstItem="Uue-Xv-CKG" firstAttribute="centerY" secondItem="pat-Gz-8RL" secondAttribute="centerY" id="kZj-7S-m8s"/>
+                            <constraint firstItem="Uue-Xv-CKG" firstAttribute="centerX" secondItem="pat-Gz-8RL" secondAttribute="centerX" id="kle-So-yzP"/>
+                            <constraint firstItem="Uue-Xv-CKG" firstAttribute="height" secondItem="CBF-O4-nX2" secondAttribute="height" multiplier="0.4" id="vls-C9-C3N"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="popupImage" destination="sWZ-I7-fXv" id="23x-AF-yDc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mGb-OG-vmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2070" y="785"/>
+        </scene>
         <!--Rate OrderVC-->
         <scene sceneID="qBg-kD-Ihc">
             <objects>
@@ -1684,7 +1744,7 @@ experience with us</string>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2012066672019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7c-LW-hkc">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+201066672019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7c-LW-hkc">
                                                                                     <rect key="frame" x="0.0" y="27" width="264" height="14.5"/>
                                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                                                     <color key="textColor" name="White2"/>
@@ -1737,7 +1797,7 @@ experience with us</string>
                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="012066672019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlh-th-tAF">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01066672019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlh-th-tAF">
                                                                                     <rect key="frame" x="0.0" y="27" width="264" height="14.5"/>
                                                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                                                     <color key="textColor" name="White2"/>
@@ -2213,7 +2273,7 @@ experience with us</string>
         <image name="add_icon" width="41" height="41"/>
         <image name="add_icon-1" width="29" height="45"/>
         <image name="back" width="39" height="39"/>
-        <image name="close" width="512" height="512"/>
+        <image name="close" width="15" height="30"/>
         <image name="close-1" width="512" height="512"/>
         <image name="fbb" width="57" height="57"/>
         <image name="instgram" width="57" height="57"/>
