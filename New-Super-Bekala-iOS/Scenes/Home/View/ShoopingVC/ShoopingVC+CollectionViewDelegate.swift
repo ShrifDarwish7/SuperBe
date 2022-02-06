@@ -212,7 +212,7 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
            !favBranches.isEmpty,
            !favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).isEmpty{
             let fav = favBranches.filter({ return $0.id == self.featuredBranches![sender.tag].id}).first
-            self.featuredBranches![sender.tag].isFavourite = 0
+            featuredBranches![sender.tag].isFavourite = 0
             loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
             presenter?.removeFromFavourites((fav?.favouriteId)!, sender.tag, true)
         }else{
@@ -220,9 +220,9 @@ extension ShoopingVC: UICollectionViewDelegate, SkeletonCollectionViewDataSource
                 "model_id": "\(self.featuredBranches![sender.tag].id)",
                 "model": "Branch"
             ]
-            self.featuredBranches![sender.tag].isFavourite = 1
+            featuredBranches![sender.tag].isFavourite = 1
             loadFeaturedCollection(identifier: FeaturedCollectionViewCell.identifier)
-            self.presenter?.addToFavourite(prms, sender.tag, true)
+            presenter?.addToFavourite(prms, sender.tag, true)
         }
     }
     
