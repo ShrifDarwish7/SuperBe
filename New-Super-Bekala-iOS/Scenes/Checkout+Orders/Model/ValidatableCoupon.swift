@@ -12,6 +12,7 @@ struct ValidatableCoupon: Codable{
     
     var coupons: [String]
     var branchId: Int
+    var paymentMethod: Int
     var lang = "lang".localized
     var lineItems: [LineItem]
     
@@ -19,6 +20,7 @@ struct ValidatableCoupon: Codable{
         case coupons
         case branchId = "branch_id"
         case lineItems = "line_items"
+        case paymentMethod = "payment_method"
     }
     
 }
