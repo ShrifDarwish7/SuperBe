@@ -25,6 +25,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var salePriceView: UIView!
     @IBOutlet weak var outOfStockView: UIView!
     @IBOutlet weak var closedView: ViewCorners!
+    @IBOutlet weak var discountIcon: UIImageView!
+    @IBOutlet weak var discountLbl: UILabel!
     
     func loadFrom(data: Product){
         name.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
@@ -47,6 +49,18 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
         closedView.isHidden = data.isOpen == 1 ? true : false
        // addToCartBtn.isHidden = data.isOpen == 0 ? false : true
+        
+        if data.salePrice == nil || data.salePrice == 0{
+          //  currentPrice.isHidden = true
+          //  lineView.isHidden = true
+            discountLbl.isHidden = true
+            discountIcon.isHidden = true
+        }else{
+            discountLbl.isHidden = false
+            discountIcon.isHidden = false
+            let discount = (Double(data.price!) - Double(data.salePrice!)) * 100.0 / Double(data.price!)
+            discountLbl.text = "\(discount.roundToDecimal(1))% " + "OFF".localized
+        }
         
     }
     
