@@ -91,7 +91,7 @@ extension UserCouponsVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: collectionView.frame.height)
+        return CGSize(width: 100, height: collectionView.frame.height)
     }
 }
 

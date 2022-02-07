@@ -65,6 +65,7 @@ enum SuperBe{
     case userCoupons(_ prms: [String: String])
     case getSupportMessages(_ prms: [String: String])
     case getOrderConversation(_ prms: [String: String])
+    case getRegion(_ prms: [String: String])
 }
 
 extension SuperBe: TargetType{
@@ -161,6 +162,8 @@ extension SuperBe: TargetType{
             return "chats/get_support_conversation"
         case .getOrderConversation(_):
             return "chats/conversations"
+        case .getRegion(_):
+            return "get_region_by_coordinates"
         }
     }
     
@@ -222,7 +225,8 @@ extension SuperBe: TargetType{
              .couponsOffers(let prms),
              .userCoupons(let prms),
              .getSupportMessages(let prms),
-             .getOrderConversation(let prms):
+             .getOrderConversation(let prms),
+             .getRegion(let prms):
             return .requestParameters(parameters: prms, encoding: URLEncoding.default)
         case .postAddress(let prms),
              .addToFavourite(let prms),

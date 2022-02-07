@@ -1202,13 +1202,10 @@ more ...</string>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                 <color key="tintColor" name="Main"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Exit">
-                                                    <color key="titleColor" name="Dark-Red"/>
+                                                    <color key="titleColor" name="Main"/>
                                                 </state>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Exit">
-                                                    <fontDescription key="titleFontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                    <color key="baseForegroundColor" name="Dark-Red"/>
-                                                </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="7"/>
@@ -1472,7 +1469,7 @@ more ...</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="187" height="40"/>
                                                         <color key="backgroundColor" name="Main"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                        <state key="normal" title="Continue">
+                                                        <state key="normal" title="Order Details">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -1486,12 +1483,12 @@ more ...</string>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz9-n9-d0s" customClass="SystemLocalizedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
                                                         <rect key="frame" x="197" y="0.0" width="187" height="40"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                         <color key="tintColor" name="Main"/>
-                                                        <state key="normal" title="Cancel Order"/>
-                                                        <buttonConfiguration key="configuration" style="tinted" title="Cancel Order">
-                                                            <fontDescription key="titleFontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                                            <color key="baseBackgroundColor" name="Main"/>
-                                                        </buttonConfiguration>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Cancel Order">
+                                                            <color key="titleColor" name="Main"/>
+                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="7"/>
@@ -1591,7 +1588,7 @@ more ...</string>
             <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
         <designable name="Jf1-cm-xMN">
-            <size key="intrinsicContentSize" width="70" height="33"/>
+            <size key="intrinsicContentSize" width="102" height="33"/>
         </designable>
         <designable name="hZ3-N8-Ztv">
             <size key="intrinsicContentSize" width="42" height="33"/>
@@ -1603,10 +1600,10 @@ more ...</string>
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="uvL-n6-VFE">
-            <size key="intrinsicContentSize" width="53.5" height="34.5"/>
+            <size key="intrinsicContentSize" width="30" height="33"/>
         </designable>
         <designable name="yz9-n9-d0s">
-            <size key="intrinsicContentSize" width="124" height="34.5"/>
+            <size key="intrinsicContentSize" width="100" height="33"/>
         </designable>
     </designables>
     <resources>
@@ -1627,7 +1624,7 @@ more ...</string>
         <image name="google" width="512" height="512"/>
         <image name="icons8-wi-fi-disconnected-100" width="100" height="100"/>
         <image name="loginPath 59" width="375" height="255"/>
-        <image name="logo" width="118" height="118"/>
+        <image name="logo" width="500" height="500"/>
         <image name="logo-shadow" width="387" height="387"/>
         <image name="nextIcon" width="49.5" height="24"/>
         <image name="nextIcon_" width="49.5" height="24"/>
@@ -1650,9 +1647,6 @@ more ...</string>
         </namedColor>
         <namedColor name="Dark-Blue">
             <color red="0.16099999845027924" green="0.21199999749660492" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Dark-Red">
-            <color red="0.66699999570846558" green="0.063000001013278961" blue="0.10599999874830246" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Gold">
             <color red="0.90200001001358032" green="0.76099997758865356" blue="0.46299999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

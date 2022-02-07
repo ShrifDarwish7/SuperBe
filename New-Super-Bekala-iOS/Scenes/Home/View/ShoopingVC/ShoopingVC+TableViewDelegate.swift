@@ -100,13 +100,17 @@ extension ShoopingVC: SkeletonTableViewDelegate, UITableViewDataSource{
            !favBranches.isEmpty,
            !favBranches.filter({ return $0.id == self.branches![sender.tag].id}).isEmpty{
             let fav = favBranches.filter({ return $0.id == self.branches![sender.tag].id}).first
+            branches![sender.tag].isFavourite = 0
+            loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
             presenter?.removeFromFavourites((fav?.favouriteId)!, sender.tag, false)
         }else{
             let prms = [
                 "model_id": "\(self.branches![sender.tag].id)",
                 "model": "Branch"
             ]
-            self.presenter?.addToFavourite(prms, sender.tag, false)
+            branches![sender.tag].isFavourite = 1
+            loadOrdinaryTable(identifier: OrdinaryVendorTableViewCell.identifier)
+            presenter?.addToFavourite(prms, sender.tag, false)
         }
     }
 }

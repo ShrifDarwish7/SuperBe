@@ -27,6 +27,12 @@ class ProductSearchResultTableViewCell: UITableViewCell {
     
     
     func loadFrom(_ product: Product){
+        
+        branchImage.isUserInteractionEnabled = true
+        branchImage.addTapGesture { _ in
+            Router.toBranch(UIApplication.getTopViewController()!, product.branch!)
+        }
+        
         productImage.layer.cornerRadius = productImage.frame.height/2
         branchImage.layer.cornerRadius = branchImage.frame.height/2
         

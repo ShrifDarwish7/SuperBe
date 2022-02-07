@@ -63,7 +63,7 @@
 "FP7-0e-ak3.text" = "Shekkoooo";
 
 /* Class = "UILabel"; text = "Debit/Credit card"; ObjectID = "FUL-VG-fXd"; */
-"FUL-VG-fXd.text" = "بطاقة الخصم / الائتمان";
+"FUL-VG-fXd.text" = "دفع الكتروني";
 
 /* Class = "UILabel"; text = "Phone number"; ObjectID = "GfA-B6-Pxh"; */
 "GfA-B6-Pxh.text" = "رقم الهاتف";

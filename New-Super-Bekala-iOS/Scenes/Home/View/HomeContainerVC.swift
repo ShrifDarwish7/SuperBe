@@ -8,6 +8,8 @@
 
 import UIKit
 import SVProgressHUD
+import PusherSwift
+import SwiftyJSON
 
 class HomeContainerVC: UIViewController, LoginDelegate {
     
@@ -48,9 +50,21 @@ class HomeContainerVC: UIViewController, LoginDelegate {
    // var cartItems: [CartItem]?
     var selectedTab = Tabs.shooping
    // var shouldShowCats = false
+    var regionId: Int?{
+        didSet{
+            connectToPusher()
+        }
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Shared.isRegion{
+           regionId = Shared.selectedArea.regionsID
+        }else if Shared.isCoords{
+            let presenter = MainPresenter(self)
+            presenter.getRegionBy(Shared.selectedCoords)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(didChooseAddress), name: NSNotification.Name("DID_CHOOSE_ADDRESS"), object: nil)
 
@@ -111,6 +125,29 @@ class HomeContainerVC: UIViewController, LoginDelegate {
             }
         }
         
+    }
+    
+    func connectToPusher(){
+        let options = PusherClientOptions(
+            authMethod: AuthMethod.authRequestBuilder(authRequestBuilder: AuthRequestBuilder()),
+            host: .cluster("eu")
+        )
+        // pusher dev key:  3291250172ef81e382a7
+        AppDelegate.pusher = Pusher(key: "123d1a18cea91eab7b90", options: options)
+        AppDelegate.pusher.connection.delegate = self
+        AppDelegate.pusher.delegate = self
+        AppDelegate.pusher.connect()
+        
+        AppDelegate.channel = AppDelegate.pusher.subscribe("presence-regions.\(self.regionId ?? 0)")
+        
+        let _ = AppDelegate.channel.bind(eventName: "App\\Events\\PopupNotification") { (event: PusherEvent) -> Void in
+            print("PopupNotification from pusher")
+            if let data = event.data, let json = try? JSON(data: data.data(using: .utf8)!){
+                let imageLoc = "lang".localized == "en" ? json["notification"]["image"]["en"].stringValue : json["notification"]["image"]["ar"].stringValue
+                guard !imageLoc.isEmpty else { return }
+                Router.toPopUpNotify(self, imageLoc)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -220,6 +257,10 @@ class HomeContainerVC: UIViewController, LoginDelegate {
     }
     
     @IBAction func toQuickOrder(_ sender: UIButton) {
+        guard APIServices.shared.isLogged else{
+            Router.toRegister(self)
+            return
+        }
         switch sender.tag {
         case 0:
             Shared.selectedServices = .voice
@@ -478,6 +519,12 @@ extension HomeContainerVC: MainViewDelegate{
             Router.toChat(self)
         }
     }
+    func didCompleteWithRegionId(_ data: Int?) {
+        guard let data = data else {
+            return
+        }
+        self.regionId = data
+    }
 }
 
 extension HomeContainerVC: LoginViewDelegate{
@@ -488,5 +535,39 @@ extension HomeContainerVC: LoginViewDelegate{
         }else{
             Router.toProfile(self)
         }
+    }
+}
+
+class AuthRequestBuilder: AuthRequestBuilderProtocol {
+    func requestFor(socketID: String, channelName: String) -> URLRequest? {
+        var request = URLRequest(url: URL(string: "https://new.superbekala.com/broadcasting/auth")!)
+        request.httpMethod = "POST"
+        request.httpBody = "socket_id=\(socketID)&channel_name=\(channelName)".data(using: String.Encoding.utf8)
+        request.setValue("Bearer " + (UserDefaults.init().string(forKey: "token") ?? ""), forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        return request
+    }
+}
+
+struct DebugConsoleMessage: Codable {
+    let name: String
+    let message: String
+}
+
+extension HomeContainerVC: PusherDelegate{
+    func changedConnectionState(from old: ConnectionState, to new: ConnectionState) {
+        print("old: \(old.stringValue()) -> new: \(new.stringValue())")
+    }
+    func debugLog(message: String) {
+        print("debugLog",message)
+    }
+    func subscribedToChannel(name: String) {
+        print("subscribedToChannel",name)
+    }
+    func failedToSubscribeToChannel(name: String, response: URLResponse?, data: String?, error: NSError?) {
+        print("failedToSubscribeToChannel",name)
+    }
+    func receivedError(error: PusherError) {
+        print("receivedError",error.message)
     }
 }

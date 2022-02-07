@@ -206,11 +206,6 @@ class ServicesCheckoutVC: UIViewController {
 
     @IBAction func submitAction(_ sender: Any) {
         
-        guard APIServices.shared.isLogged else{
-            Router.toRegister(self)
-            return
-        }
-        
         guard !phoneNumber.text!.isEmpty else {
             phoneStack.shake(.error)
             return

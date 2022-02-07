@@ -60,6 +60,7 @@ protocol MainViewDelegate {
     func didCompleteWithTags(_ data: [Tag]?,_ error: String?)
     //func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?)
     func didCompleteWithUserCoupns(_ data: [Coupon]?)
+    func didCompleteWithRegionId(_ data: Int?)
     
 }
 
@@ -112,6 +113,7 @@ extension MainViewDelegate{
     func didCompleteWithTags(_ data: [Tag]?,_ error: String?){}
    // func didCompleteWithCoupons(_ data: [Branch]?,_ meta: Meta?){}
     func didCompleteWithUserCoupns(_ data: [Coupon]?){}
+    func didCompleteWithRegionId(_ data: Int?){}
 }
 
 class MainPresenter{
@@ -120,6 +122,19 @@ class MainPresenter{
     
     init(_ delegate: MainViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func getRegionBy(_ coords: String){
+        delegate?.showProgress()
+        APIServices.shared.call(.getRegion(["coordinates" : coords])) { [self] data in
+            print("getRegionBy",JSON(data))
+            delegate?.dismissProgress()
+            if let data = data, let json = try? JSON(data: data){
+                delegate?.didCompleteWithRegionId(json["data"]["id"].intValue)
+            }else{
+                delegate?.didCompleteWithRegionId(nil)
+            }
+        }
     }
     
     func getUserCoupons(_ type: CouponType){
@@ -477,8 +492,9 @@ class MainPresenter{
         case .vendors:
             prms.updateValue("coupons", forKey: "with")
         }
+        //print("prms here",prms)
         APIServices.shared.call(.search(prms)) { (data) in
-            print("searchWith ",JSON(data))
+            //print("searchWith ",JSON(data))
             if let data = data{
                 switch context {
                 case .vendors:
@@ -718,7 +734,7 @@ class MainPresenter{
     func getCategories(_ prms: [String: String]){
         delegate?.showSkeleton()
         APIServices.shared.call(.getCategories(prms)) { [self] (data) in
-            print(JSON(data))
+          //  print(JSON(data))
             delegate?.hideSkeleton()
             if let data = data,
                let dataModel = data.getDecodedObject(from: CategoriesResponse.self){
@@ -731,7 +747,7 @@ class MainPresenter{
     
     func getBranches(_ prms: [String:String]){
         APIServices.shared.call(.getBranches(prms)) { [self] (data) in
-            print("getBranches",JSON(data))
+          //  print("getBranches",JSON(data))
             if let data = data,
                var dataModel = data.getDecodedObject(from: BranchesResponse.self),
                !dataModel.data.isEmpty{

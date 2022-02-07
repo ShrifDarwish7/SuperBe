@@ -32,7 +32,7 @@ class ContactUsVC: UIViewController {
             UIApplication.shared.open(faceUrl! as URL, options: [:], completionHandler: nil)
         } else {
             //redirect to safari because the user doesn't have facebook
-            UIApplication.shared.open(NSURL(string: "https://www.facebook.com/SuperBekala")! as URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(NSURL(string: "https://www.facebook.com/SuperBe.EG/")! as URL, options: [:], completionHandler: nil)
         }
     }
     
@@ -43,7 +43,7 @@ class ContactUsVC: UIViewController {
             UIApplication.shared.open(NSURL(string: instaHooks)! as URL, options: [:], completionHandler: nil)
         } else {
             //redirect to safari because the user doesn't have Instagram
-            UIApplication.shared.open(NSURL(string: "http://instgram.com/superbekala")! as URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(NSURL(string: "https://www.instagram.com/superbe.app/?hl=en")! as URL, options: [:], completionHandler: nil)
 
         }
     }
