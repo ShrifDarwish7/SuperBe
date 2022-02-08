@@ -12,8 +12,7 @@ import SVProgressHUD
 extension ProfileVC: MainViewDelegate, LoginViewDelegate{
     
     func didCompleteUpdateProfile() {
-        activityIndicator.stopAnimating()
-        updateBtn.isHidden = false
+        SVProgressHUD.dismiss()
     }
     
     func didCompleteWithAddresses(_ data: [Address]?) {

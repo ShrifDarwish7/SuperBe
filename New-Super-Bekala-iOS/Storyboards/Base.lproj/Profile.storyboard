@@ -269,8 +269,8 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="doY-lZ-Kwz">
                                                                         <rect key="frame" x="0.0" y="33" width="364" height="40"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PDK-Pb-LUd">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="272" height="40"/>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PDK-Pb-LUd">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="254" height="40"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="qW9-JP-ijF"/>
                                                                                 </constraints>
@@ -278,11 +278,14 @@
                                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
-                                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aFd-Ed-gbn">
-                                                                                <rect key="frame" x="282" y="0.0" width="20" height="40"/>
+                                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aFd-Ed-gbn">
+                                                                                <rect key="frame" x="264" y="0.0" width="20" height="40"/>
                                                                             </activityIndicatorView>
-                                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIf-yR-5xG" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                                                <rect key="frame" x="312" y="0.0" width="52" height="40"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIf-yR-5xG" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                                                <rect key="frame" x="294" y="0.0" width="70" height="40"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="70" id="8zk-q8-Gbl"/>
+                                                                                </constraints>
                                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                 <state key="normal" title="Update">
@@ -359,15 +362,37 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aQd-Xa-EpU">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJu-5N-iVb">
                                                                         <rect key="frame" x="0.0" y="33" width="364" height="40"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="40" id="hP0-Wm-mvX"/>
-                                                                        </constraints>
-                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
-                                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                                                    </textField>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aQd-Xa-EpU">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="274" height="40"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="40" id="hP0-Wm-mvX"/>
+                                                                                </constraints>
+                                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                                            </textField>
+                                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="wuq-yZ-VJn">
+                                                                                <rect key="frame" x="274" y="0.0" width="20" height="40"/>
+                                                                            </activityIndicatorView>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q27-9R-nyX" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                                                <rect key="frame" x="294" y="0.0" width="70" height="40"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="70" id="FbH-4r-ixt"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                                <state key="normal" title="Update">
+                                                                                    <color key="titleColor" name="Main"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="updatePhone:" destination="hWE-uk-dRJ" eventType="touchUpInside" id="ngk-Zb-utm"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmo-bt-vYj">
                                                                         <rect key="frame" x="0.0" y="83" width="364" height="1"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -377,10 +402,10 @@
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="aQd-Xa-EpU" secondAttribute="trailing" id="3XA-79-6RT"/>
                                                                     <constraint firstAttribute="trailing" secondItem="fd5-fp-Yes" secondAttribute="trailing" id="9a7-0H-vxR"/>
                                                                     <constraint firstItem="wmo-bt-vYj" firstAttribute="leading" secondItem="iGN-PE-Qi2" secondAttribute="leading" id="IIP-nd-Hw9"/>
-                                                                    <constraint firstItem="aQd-Xa-EpU" firstAttribute="leading" secondItem="iGN-PE-Qi2" secondAttribute="leading" id="LFA-bW-zny"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="WJu-5N-iVb" secondAttribute="trailing" id="RSO-Ne-JOf"/>
+                                                                    <constraint firstItem="WJu-5N-iVb" firstAttribute="leading" secondItem="iGN-PE-Qi2" secondAttribute="leading" id="hKQ-KC-l9G"/>
                                                                     <constraint firstItem="fd5-fp-Yes" firstAttribute="leading" secondItem="iGN-PE-Qi2" secondAttribute="leading" id="uEM-Ot-6aR"/>
                                                                     <constraint firstAttribute="trailing" secondItem="wmo-bt-vYj" secondAttribute="trailing" id="yTi-P0-ec4"/>
                                                                 </constraints>
@@ -596,11 +621,13 @@
                                                             <constraint firstItem="iGN-PE-Qi2" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="1la-TI-8Dc"/>
                                                             <constraint firstAttribute="trailing" secondItem="iGN-PE-Qi2" secondAttribute="trailing" id="27e-fF-DQO"/>
                                                             <constraint firstItem="aNl-Tu-hd7" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="GY3-8U-tdd"/>
+                                                            <constraint firstItem="iGN-PE-Qi2" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="GpN-fZ-LJL"/>
                                                             <constraint firstAttribute="trailing" secondItem="wDF-pS-OLx" secondAttribute="trailing" id="IB6-uO-x22"/>
                                                             <constraint firstItem="Lie-Bo-bqi" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="JEX-Mh-dJh"/>
                                                             <constraint firstAttribute="trailing" secondItem="aNl-Tu-hd7" secondAttribute="trailing" id="LxE-gZ-cWm"/>
                                                             <constraint firstAttribute="trailing" secondItem="Lie-Bo-bqi" secondAttribute="trailing" id="MwU-el-Uir"/>
                                                             <constraint firstAttribute="trailing" secondItem="Yj9-LH-DBV" secondAttribute="trailing" id="Nyw-pA-c9M"/>
+                                                            <constraint firstAttribute="trailing" secondItem="iGN-PE-Qi2" secondAttribute="trailing" id="dwj-ew-6zl"/>
                                                             <constraint firstItem="pXP-6x-fDD" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="fXc-Bd-sXX"/>
                                                             <constraint firstAttribute="trailing" secondItem="pXP-6x-fDD" secondAttribute="trailing" id="shy-sl-BTe"/>
                                                             <constraint firstItem="Yj9-LH-DBV" firstAttribute="leading" secondItem="hrk-wr-sfF" secondAttribute="leading" id="y9e-nm-16e"/>
@@ -2544,6 +2571,9 @@
             <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
         <designable name="jIf-yR-5xG">
+            <size key="intrinsicContentSize" width="52" height="32"/>
+        </designable>
+        <designable name="q27-9R-nyX">
             <size key="intrinsicContentSize" width="52" height="32"/>
         </designable>
         <designable name="uCm-cl-Mpd">
