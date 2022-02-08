@@ -72,7 +72,7 @@ class ProductVC: UIViewController {
         if let salePrice = product?.salePrice,
            salePrice > 0{
             self.salePriceView.isHidden = false
-            self.salePrice.text = "\(self.product?.price?.roundToDecimal(1) ?? 0) EGP"
+            self.salePrice.text = "\(self.product?.price?.roundToDecimal(2) ?? 0) EGP"
             self.product?.price = salePrice
         }else{
             self.salePriceView.isHidden = true
@@ -94,9 +94,9 @@ class ProductVC: UIViewController {
         
         productDesc.text = "lang".localized == "en" ? product?.description?.en : product?.description?.ar
         price.isHidden = product?.price == 0 ? true : false
-        price.text = "\(product?.price?.roundToDecimal(1) ?? 0) EGP"
+        price.text = "\(product?.price?.roundToDecimal(2) ?? 0) EGP"
         price1.isHidden = product?.price == 0 ? true : false
-        price1.text = "\(product?.price?.roundToDecimal(1) ?? 0) EGP"
+        price1.text = "\(product?.price?.roundToDecimal(2) ?? 0) EGP"
         
         self.updateUI(nil)
         
@@ -263,7 +263,7 @@ class ProductVC: UIViewController {
     
     func updateUI(_ index: Int?){
         
-        var total = product?.price?.roundToDecimal(1) ?? 0.0
+        var total = product?.price?.roundToDecimal(2) ?? 0.0
         
         if let variations = product?.variations,
            !variations.isEmpty{
@@ -274,12 +274,12 @@ class ProductVC: UIViewController {
                 if variation.isAddition == 0{
                     
                     guard !(selectedOtps?.isEmpty)! else { continue }
-                    total += (selectedOtps?.first?.price)!.roundToDecimal(1)
+                    total += (selectedOtps?.first?.price)!.roundToDecimal(2)
                     
                 }else{
                     
                     selectedOtps!.forEach({ (option) in
-                        total += option.price!.roundToDecimal(1)
+                        total += option.price!.roundToDecimal(2)
                     })
                     
                 }
@@ -287,10 +287,10 @@ class ProductVC: UIViewController {
         }
         
         price.isHidden = total == 0.0 ? true : false
-        price.text = "\((total * Double(quantity.text!)!).roundToDecimal(1)) EGP"
+        price.text = "\((total * Double(quantity.text!)!).roundToDecimal(2)) EGP"
         price1.isHidden = total == 0.0 ? true : false
-        price1.text = "\((total * Double(quantity.text!)!).roundToDecimal(1)) EGP"
-        productSelectedTotal = Double(total).roundToDecimal(1)
+        price1.text = "\((total * Double(quantity.text!)!).roundToDecimal(2)) EGP"
+        productSelectedTotal = Double(total).roundToDecimal(2)
         
         if let variations = product?.variations,
             !(variations.filter({ return $0.isRequired == 1 }).isEmpty){

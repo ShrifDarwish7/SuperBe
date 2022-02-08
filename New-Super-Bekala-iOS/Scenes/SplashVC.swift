@@ -15,6 +15,7 @@ class SplashVC: UIViewController {
     let reachability = try! Reachability()
     var presenter: LoginViewPresenter?
     private var observer: NSObjectProtocol?
+    let chatMinimizeView = ChatMinimizeView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +60,19 @@ class SplashVC: UIViewController {
         }
         
         observer = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
-            self.viewDidLoad()
+//            self.viewDidLoad()
+            print(Shared.isChatting)
+            NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
         }
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        if let _ = observer {
-            NotificationCenter.default.removeObserver(observer!)
-        }
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(true)
+//        if let _ = observer {
+//            NotificationCenter.default.removeObserver(observer!)
+//        }
+//    }
     
     @objc func reload(){
         guard (self.navigationController?.topViewController?.isKind(of: SplashVC.self))! else { return }
@@ -77,7 +80,7 @@ class SplashVC: UIViewController {
     }
     
     func goNext(){
-        NotificationCenter.default.removeObserver(observer!)
+      //  NotificationCenter.default.removeObserver(observer!)
         if APIServices.shared.skipFromLogin {
             if Shared.userSelectLocation{
                 Router.toHome(self,true)
