@@ -97,6 +97,8 @@ class ProfileVC: UIViewController {
         acitvityIndicator.startAnimating()
         presenter = MainPresenter(self)
         presenter?.getAddresses()
+        
+        phone.isUserInteractionEnabled = true
     }
 
     override func viewDidLoad() {
@@ -186,9 +188,15 @@ class ProfileVC: UIViewController {
     @IBAction func updateName(_ sender: Any) {
         guard !name.text!.isEmpty else { return }
         let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
-        activityIndicator.startAnimating()
-        updateBtn.isHidden = true
+        SVProgressHUD.show()
         loginPresenter.updateProfile(["name": name.text!])
+    }
+    
+    @IBAction func updatePhone(_ sender: Any) {
+        guard !phone.text!.isEmpty else { return }
+        let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+        SVProgressHUD.show()
+        loginPresenter.updateProfile(["phone": phone.text!])
     }
     
     
