@@ -117,8 +117,8 @@ class CheckoutVC: UIViewController {
         branchRate.rating = Double(branch?.rating ?? "0.0")!
         username.text = APIServices.shared.user?.name
         
-        if let _ = APIServices.shared.user?.phoneVerifiedAt,
-           let phone = APIServices.shared.user?.phone{
+       // if let _ = APIServices.shared.user?.phoneVerifiedAt,
+        if let phone = APIServices.shared.user?.phone{
             self.verifiedPhoneNumber = phone
             self.phoneNumber.text = phone.replacingOccurrences(of: "+2", with: "")
         }else{
@@ -138,11 +138,6 @@ class CheckoutVC: UIViewController {
             if let items = items{
                 
                 self.cartItems = items
-                
-                print(items)
-                
-                
-                
                 for item in items{
                     guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
                     var variations = [LineItemVariation]()
@@ -164,6 +159,7 @@ class CheckoutVC: UIViewController {
         
         if !Shared.coupons.filter({ return $0.branch == branch?.id }).isEmpty{
             self.couponsTF.text = Shared.coupons.filter({ return $0.branch == branch?.id }).first?.code
+            self.validateBtn.isEnabled = true
             self.validateCouponsAction(self)
         }
         

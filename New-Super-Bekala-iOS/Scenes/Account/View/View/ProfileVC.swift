@@ -97,6 +97,8 @@ class ProfileVC: UIViewController {
         acitvityIndicator.startAnimating()
         presenter = MainPresenter(self)
         presenter?.getAddresses()
+        
+        phone.isUserInteractionEnabled = true
     }
 
     override func viewDidLoad() {
@@ -186,9 +188,15 @@ class ProfileVC: UIViewController {
     @IBAction func updateName(_ sender: Any) {
         guard !name.text!.isEmpty else { return }
         let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
-        activityIndicator.startAnimating()
-        updateBtn.isHidden = true
+        SVProgressHUD.show()
         loginPresenter.updateProfile(["name": name.text!])
+    }
+    
+    @IBAction func updatePhone(_ sender: Any) {
+        guard !phone.text!.isEmpty else { return }
+        let loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+        SVProgressHUD.show()
+        loginPresenter.updateProfile(["phone": phone.text!])
     }
     
     
@@ -242,22 +250,22 @@ class ProfileVC: UIViewController {
     @objc func startPaymentNotify(){
         
         dismissBottomSheet(self)
-        Router.toPayContainer(self)
+//        Router.toPayContainer(self)
         
-//        showInputAlert(title: "Add Balance".localized, subtitle: "Please enter your amount".localized, actionTitle: "Proceed".localized, cancelTitle: "Cancel".localized, secureTF: false, inputPlaceholder: "amount".localized, inputKeyboardType: .numberPad, cancelHandler: nil) { (amount, alert) in
-//            self.amountToBbAdd = amount
-//            let paymentViewController = PaymentViewController()
-//            paymentViewController.amount =  String(amount!)
-//            paymentViewController.delegate = self
-//            paymentViewController.refnumber =  "5236975231"
-//            paymentViewController.mId = "10253847133"
-//            paymentViewController.tId = "57547386"
-//            paymentViewController.Currency = "818"
-//            paymentViewController.isProduction = true
-//            paymentViewController.AppStatus = .Production
-//            paymentViewController.Key = "37353137326166332D326561322D343665652D383461612D353630383335653231396638"
-//            paymentViewController.pushViewController()
-//        }
+        showInputAlert(title: "Add Balance".localized, subtitle: "Please enter your amount".localized, actionTitle: "Proceed".localized, cancelTitle: "Cancel".localized, secureTF: false, inputPlaceholder: "amount".localized, inputKeyboardType: .numberPad, cancelHandler: nil) { (amount, alert) in
+            self.amountToBbAdd = amount
+            let paymentViewController = PaymentViewController()
+            paymentViewController.amount =  String(amount!)
+            paymentViewController.delegate = self
+            paymentViewController.refnumber =  "5236975231"
+            paymentViewController.mId = "10253847133"
+            paymentViewController.tId = "57547386"
+            paymentViewController.Currency = "818"
+            paymentViewController.isProduction = true
+            paymentViewController.AppStatus = .Production
+            paymentViewController.Key = "37353137326166332D326561322D343665652D383461612D353630383335653231396638"
+            paymentViewController.pushViewController()
+        }
         
     }
     
