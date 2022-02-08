@@ -84,7 +84,6 @@ class ChatMinimizeView: UIView, MainViewDelegate {
 //        }))
 //        (UIWindow.key!.rootViewController)!.present(alert, animated: true, completion: nil)
         Shared.isChatting = false
-        self.isHidden = true
         NotificationCenter.default.post(name: NSNotification.Name("is_chatting"), object: nil)
     }
     
