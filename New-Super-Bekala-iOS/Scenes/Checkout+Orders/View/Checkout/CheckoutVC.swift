@@ -138,11 +138,6 @@ class CheckoutVC: UIViewController {
             if let items = items{
                 
                 self.cartItems = items
-                
-                print(items)
-                
-                
-                
                 for item in items{
                     guard let itemVariations = item.variations?.getDecodedObject(from: [Variation].self) else { continue }
                     var variations = [LineItemVariation]()
@@ -164,6 +159,7 @@ class CheckoutVC: UIViewController {
         
         if !Shared.coupons.filter({ return $0.branch == branch?.id }).isEmpty{
             self.couponsTF.text = Shared.coupons.filter({ return $0.branch == branch?.id }).first?.code
+            self.validateBtn.isEnabled = true
             self.validateCouponsAction(self)
         }
         
