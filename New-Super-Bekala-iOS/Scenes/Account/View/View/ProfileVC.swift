@@ -241,7 +241,7 @@ class ProfileVC: UIViewController {
     
     @objc func startPaymentNotify(){
         
-//        dismissBottomSheet(self)
+        dismissBottomSheet(self)
 //        Router.toPayContainer(self)
         
         showInputAlert(title: "Add Balance".localized, subtitle: "Please enter your amount".localized, actionTitle: "Proceed".localized, cancelTitle: "Cancel".localized, secureTF: false, inputPlaceholder: "amount".localized, inputKeyboardType: .numberPad, cancelHandler: nil) { (amount, alert) in
