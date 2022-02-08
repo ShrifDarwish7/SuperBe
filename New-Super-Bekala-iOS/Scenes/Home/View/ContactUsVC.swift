@@ -16,8 +16,6 @@ class ContactUsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
     }
     
     @IBAction func dismiiss(_ sender: Any) {

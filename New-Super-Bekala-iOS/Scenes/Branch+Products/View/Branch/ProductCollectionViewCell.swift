@@ -30,7 +30,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     func loadFrom(data: Product){
         name.text = "lang".localized == "en" ? data.name?.en : data.name?.ar
-        price.text = data.price == 0 ? "Price on selection".localized : ("\(data.price ?? 0) " + "EGP".localized)
+        price.text = data.price == 0 ? "Price on selection".localized : ("\(data.price?.roundToDecimal(2) ?? 0) " + "EGP".localized)
         productImage.roundCorners([.layerMinXMinYCorner,.layerMaxXMinYCorner], radius: 25)
         productImage.kf.indicatorType = .activity
         productImage.kf.setImage(with: URL(string: Shared.storageBase + (data.logo ?? "") ), placeholder: nil, options: [], completionHandler: nil)
@@ -59,7 +59,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
             discountLbl.isHidden = false
             discountIcon.isHidden = false
             let discount = (Double(data.price!) - Double(data.salePrice!)) * 100.0 / Double(data.price!)
-            discountLbl.text = "\(discount.roundToDecimal(1))% " + "OFF".localized
+            discountLbl.text = "\(discount.roundToDecimal(2))% " + "OFF".localized
         }
         
     }
