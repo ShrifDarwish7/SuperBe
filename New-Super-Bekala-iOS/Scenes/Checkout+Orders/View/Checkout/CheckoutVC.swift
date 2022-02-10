@@ -160,6 +160,7 @@ class CheckoutVC: UIViewController {
         if !Shared.coupons.filter({ return $0.branch == branch?.id }).isEmpty{
             self.couponsTF.text = Shared.coupons.filter({ return $0.branch == branch?.id }).first?.code
             self.validateBtn.isEnabled = true
+            self.validateBtn.alpha = 1
             self.validateCouponsAction(self)
         }
         
