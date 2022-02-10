@@ -23,7 +23,7 @@ class Shared{
         set { UserDefaults.init().setValue(newValue, forKey: "is_chatting") }
         get { UserDefaults.init().bool(forKey: "is_chatting") }
     }
-    static let storageBase = "https://dev4.superbekala.com/storage/"
+    static let storageBase = "https://new.superbekala.com/storage/"
     static var headers = [
         "Authorization": "Bearer " + (UserDefaults.init().string(forKey: "token") ?? ""),
         "Accept": "application/json",
