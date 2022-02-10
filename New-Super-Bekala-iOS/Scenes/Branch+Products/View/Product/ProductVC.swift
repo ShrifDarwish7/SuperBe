@@ -360,7 +360,9 @@ class ProductVC: UIViewController {
         for variation in product!.variations ?? []{
             let selectedOpts = variation.options?.filter({ return $0.selected == true })
             if selectedOpts?.isEmpty == false{
-                temp.append(selectedOpts!.map({ "lang".localized == "en" ? "\($0.name!.en ?? "")" : "\($0.name!.ar ?? "")" }).joined(separator: " , "))
+                let enDesc = selectedOpts!.map({ ((variation.name?.en)! + ": " + "\($0.name!.en ?? "")") }).joined(separator: " , ")
+                let arDesc = selectedOpts!.map({ ((variation.name?.ar)! + ": " + "\($0.name!.ar ?? "")") }).joined(separator: " , ")
+                temp.append("lang".localized == "en" ? enDesc : arDesc)
 //                selectedOptsStr = selectedOpts!.map({ "lang".localized == "en" ? "\($0.name!.en ?? "")" : "\($0.name!.ar ?? "")" }).joined(separator: ", ")
             }
             print("selectedOpts",temp)
