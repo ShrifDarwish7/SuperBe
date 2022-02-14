@@ -5059,19 +5059,19 @@ has been the industry's</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dez-Kg-MhP">
-                                        <rect key="frame" x="15" y="35" width="89" height="51.5"/>
+                                        <rect key="frame" x="15" y="35" width="174.5" height="51.5"/>
                                         <subviews>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wuy-bW-0Li">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="51.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wuy-bW-0Li">
+                                                <rect key="frame" x="0.0" y="0.0" width="65.5" height="51.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTz-8n-4cQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Taxes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTz-8n-4cQ" customClass="LocalizedLabel" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="13.5" y="0.0" width="38.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 EGP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dE9-EB-VtH">
-                                                        <rect key="frame" x="0.0" y="27.5" width="0.0" height="24"/>
+                                                        <rect key="frame" x="0.0" y="27.5" width="65.5" height="24"/>
                                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="20"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -5079,7 +5079,7 @@ has been the industry's</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1je-ed-zTP">
-                                                <rect key="frame" x="0.0" y="0.0" width="89" height="51.5"/>
+                                                <rect key="frame" x="85.5" y="0.0" width="89" height="51.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-t5-Yre">
                                                         <rect key="frame" x="27" y="0.0" width="35" height="19.5"/>
@@ -5207,9 +5207,9 @@ has been the industry's</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="deliveryFees" destination="dE9-EB-VtH" id="aWz-oM-mBx"/>
                         <outlet property="filtersCollectionView" destination="El8-Lp-bCJ" id="Q4Q-g6-FA0"/>
                         <outlet property="productsTableView" destination="OvM-ny-nBq" id="O0I-ZG-b2f"/>
+                        <outlet property="taxes" destination="dE9-EB-VtH" id="9KZ-nW-gWY"/>
                         <outlet property="total" destination="tsp-o6-SOb" id="7GR-ab-qj2"/>
                     </connections>
                 </viewController>
