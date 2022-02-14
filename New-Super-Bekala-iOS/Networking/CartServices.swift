@@ -200,6 +200,7 @@ class CartServices{
         cartBranch.name_en = item.branch?.name?.en
         cartBranch.name_ar = item.branch?.name?.ar
         cartBranch.selected = true
+        cartBranch.taxes = item.branch?.taxes ?? 0.0
         cartItem.branch = cartBranch
         
         do{
