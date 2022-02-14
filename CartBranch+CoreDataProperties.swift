@@ -2,8 +2,8 @@
 //  CartBranch+CoreDataProperties.swift
 //  New-Super-Bekala-iOS
 //
-//  Created by Sherif Darwish on 12/12/2021.
-//  Copyright © 2021 Super Bekala. All rights reserved.
+//  Created by Sherif Darwish on 14/02/2022.
+//  Copyright © 2022 Super Bekala. All rights reserved.
 //
 //
 
@@ -22,6 +22,7 @@ extension CartBranch {
     @NSManaged public var name_ar: String?
     @NSManaged public var name_en: String?
     @NSManaged public var selected: Bool
+    @NSManaged public var taxes: Double
     @NSManaged public var items: NSSet?
 
 }
