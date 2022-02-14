@@ -77,6 +77,7 @@
 		1049D1F827BA77310045152E /* CartItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1049D1F427BA77310045152E /* CartItem+CoreDataProperties.swift */; };
 		1049D1F927BA77310045152E /* CartBranch+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1049D1F527BA77310045152E /* CartBranch+CoreDataClass.swift */; };
 		1049D1FA27BA77310045152E /* CartBranch+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1049D1F627BA77310045152E /* CartBranch+CoreDataProperties.swift */; };
+		1049D1FC27BA9C640045152E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1049D1FB27BA9C640045152E /* GoogleService-Info.plist */; };
 		104E8A0F2619CC3B00756B62 /* Cart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 104E8A0D2619CC3B00756B62 /* Cart.xcdatamodeld */; };
 		104E8A142619DD7C00756B62 /* CartItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E8A132619DD7C00756B62 /* CartItemModel.swift */; };
 		104E8A5C2619E39A00756B62 /* CartBranchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104E8A5B2619E39A00756B62 /* CartBranchModel.swift */; };
@@ -207,7 +208,6 @@
 		10DF0EA825BD86970084D83C /* MapVC+HomeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DF0EA725BD86970084D83C /* MapVC+HomeViewDelegate.swift */; };
 		10E2ABD9273D61C800F75AD8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 10E2ABD8273D61C800F75AD8 /* Kingfisher */; };
 		10E2D826265BC48500A1FDB6 /* OffersVC+ViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E2D825265BC48500A1FDB6 /* OffersVC+ViewDelegate.swift */; };
-		10E6F71027B27B1D005ABA99 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E6F70F27B27B1D005ABA99 /* GoogleService-Info.plist */; };
 		10F0ED01271F3FBC00B24640 /* CategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F0ED00271F3FBC00B24640 /* CategoriesVC.swift */; };
 		10F3A6BB2615F86A00EAF1C7 /* ProductImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F3A6BA2615F86A00EAF1C7 /* ProductImageCollectionViewCell.swift */; };
 		10F3A6ED261607BE00EAF1C7 /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F3A6EC261607BE00EAF1C7 /* ProductVC.swift */; };
@@ -388,6 +388,7 @@
 		1049D1F427BA77310045152E /* CartItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1049D1F527BA77310045152E /* CartBranch+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartBranch+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1049D1F627BA77310045152E /* CartBranch+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartBranch+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		1049D1FB27BA9C640045152E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		104E8A0E2619CC3B00756B62 /* Cart.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cart.xcdatamodel; sourceTree = "<group>"; };
 		104E8A132619DD7C00756B62 /* CartItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemModel.swift; sourceTree = "<group>"; };
 		104E8A5B2619E39A00756B62 /* CartBranchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartBranchModel.swift; sourceTree = "<group>"; };
@@ -519,7 +520,6 @@
 		10DF0E9125BD7E940084D83C /* AskLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskLocationView.swift; sourceTree = "<group>"; };
 		10DF0EA725BD86970084D83C /* MapVC+HomeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+HomeViewDelegate.swift"; sourceTree = "<group>"; };
 		10E2D825265BC48500A1FDB6 /* OffersVC+ViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OffersVC+ViewDelegate.swift"; sourceTree = "<group>"; };
-		10E6F70F27B27B1D005ABA99 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10EF68D02766239F00DF93B0 /* Cart v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Cart v2.xcdatamodel"; sourceTree = "<group>"; };
 		10F0ED00271F3FBC00B24640 /* CategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesVC.swift; sourceTree = "<group>"; };
 		10F3A6BA2615F86A00EAF1C7 /* ProductImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1520,7 +1520,7 @@
 				881594BB24B610FF008BE195 /* AppDelegate.swift */,
 				881594BD24B610FF008BE195 /* SceneDelegate.swift */,
 				881594C924B61104008BE195 /* Info.plist */,
-				10E6F70F27B27B1D005ABA99 /* GoogleService-Info.plist */,
+				1049D1FB27BA9C640045152E /* GoogleService-Info.plist */,
 				104E8A0D2619CC3B00756B62 /* Cart.xcdatamodeld */,
 				103F81DA2767660800D44DD1 /* Cart_v1_to_v2.xcmappingmodel */,
 				881594C424B61104008BE195 /* Assets.xcassets */,
@@ -1891,7 +1891,7 @@
 				103191082614B2140002C47E /* ProductSkeletonCollectionViewCell.xib in Resources */,
 				8823DDDA24B9D89A009A83C5 /* Lato-LightItalic.ttf in Resources */,
 				8823DDDB24B9D89A009A83C5 /* Lato-Regular.ttf in Resources */,
-				10E6F71027B27B1D005ABA99 /* GoogleService-Info.plist in Resources */,
+				1049D1FC27BA9C640045152E /* GoogleService-Info.plist in Resources */,
 				1026E9702625C2C0004F1DEA /* VariationsTableViewCell.xib in Resources */,
 				102E6AE92778A3E900EBC4AD /* OffersTabsCollectionViewCell.xib in Resources */,
 				1054717A263042B5001EE33F /* LastOrdersTableViewCell.xib in Resources */,
@@ -2516,7 +2516,7 @@
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2550,7 +2550,7 @@
 				CODE_SIGN_ENTITLEMENTS = "New-Super-Bekala-iOS/New-Super-Bekala-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = CWVXAJ7P69;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
