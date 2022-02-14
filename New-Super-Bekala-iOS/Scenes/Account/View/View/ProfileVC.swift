@@ -83,8 +83,8 @@ class ProfileVC: UIViewController {
         
         name.text = APIServices.shared.user?.name ?? ""
         
-        if let _ = APIServices.shared.user?.phoneVerifiedAt,
-           let phone = APIServices.shared.user?.phone{
+      //  if let _ = APIServices.shared.user?.phoneVerifiedAt,
+          if let phone = APIServices.shared.user?.phone{
             self.phone.text = phone.replacingOccurrences(of: "+2", with: "")
         }else{
             self.phone.text = ""
