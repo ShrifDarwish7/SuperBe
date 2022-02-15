@@ -68,10 +68,14 @@ class OrderVC: UIViewController {
     @IBOutlet weak var captainAvatar2: CircluarImage!
     @IBOutlet weak var captainName2: UILabel!
     @IBOutlet weak var rateComment: UITextField!
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var disslike: UIButton!
+    @IBOutlet weak var confirmReactBtn: UIButton!
     
     var order: LastOrder?
     var presenter: MainPresenter?
     var delegate: OrderUpdatedDelegate?
+    var prms: [String : Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,7 +228,12 @@ class OrderVC: UIViewController {
         }
         
         rateComment.placeholder = "Write your comment here ...".localized
-               
+        
+        likeBtn.alpha = 0.5
+        disslike.alpha = 0.5
+        confirmReactBtn.alpha = 0.5
+        confirmReactBtn.isEnabled = false
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -246,7 +255,7 @@ class OrderVC: UIViewController {
     }
     
     @IBAction func captainReact(_ sender: UIButton) {
-        var prms = [
+        self.prms = [
             "model_id": "\(order?.captain?.id! ?? 0)",
             "model": "DeliveryCaptain",
             "comment": rateComment.text!,
@@ -255,11 +264,23 @@ class OrderVC: UIViewController {
         switch sender.tag{
         case 0:
             prms.updateValue("5", forKey: "rates[0]")
+            likeBtn.alpha = 1
+            disslike.alpha = 0.5
         case 1:
-            guard !rateComment.text!.isEmpty else{ return }
+            guard !rateComment.text!.isEmpty else{
+                showAlert(title: nil, message: "Please give a reason for dissliking".localized)
+                return
+            }
             prms.updateValue("1", forKey: "rates[0]")
+            likeBtn.alpha = 0.5
+            disslike.alpha = 1
         default: break
         }
+        confirmReactBtn.isEnabled = true
+        confirmReactBtn.alpha = 1
+    }
+    
+    @IBAction func confirmReact(_ sender: UIButton){
         presenter?.postRate(prms)
     }
     

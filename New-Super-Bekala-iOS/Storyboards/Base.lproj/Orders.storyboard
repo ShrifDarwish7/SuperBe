@@ -2417,7 +2417,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hts-t4-dZn" customClass="ViewCorners" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="277" width="309" height="150"/>
+                                                        <rect key="frame" x="0.0" y="277" width="309" height="200"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i0Y-Zx-dkh">
                                                                 <rect key="frame" x="49" y="15" width="211" height="50"/>
@@ -2472,24 +2472,48 @@
                                                                     <action selector="captainReact:" destination="ZBO-P7-oRd" eventType="touchUpInside" id="92o-5x-2Dy"/>
                                                                 </connections>
                                                             </button>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eK3-hF-JrW">
-                                                                <rect key="frame" x="7" y="106" width="295" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="fwE-g2-8qV">
+                                                                <rect key="frame" x="7" y="94" width="295" height="91"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eK3-hF-JrW">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AT7-N9-hBo" customClass="RoundedButton" customModule="New_Super_Bekala_iOS" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="41" width="295" height="50"/>
+                                                                        <color key="backgroundColor" name="Main"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="50" id="oed-3l-IcG"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" name="Main"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <state key="normal" title="Submit"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="5"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="confirmReact:" destination="ZBO-P7-oRd" eventType="touchUpInside" id="jv0-5s-3HE"/>
+                                                                            <action selector="openInMapsAction:" destination="Xla-2v-MtB" eventType="touchUpInside" id="A57-kZ-Z8U"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="eK3-hF-JrW" secondAttribute="bottom" constant="10" id="Cyl-D8-hmW"/>
                                                             <constraint firstItem="i0Y-Zx-dkh" firstAttribute="top" secondItem="Hts-t4-dZn" secondAttribute="top" constant="15" id="DfH-JO-FSE"/>
                                                             <constraint firstItem="G3V-L1-FrS" firstAttribute="centerY" secondItem="i0Y-Zx-dkh" secondAttribute="centerY" id="FP6-Y8-UJb"/>
                                                             <constraint firstItem="G3V-L1-FrS" firstAttribute="centerX" secondItem="Hts-t4-dZn" secondAttribute="centerX" multiplier="0.35" id="M8s-M7-hCU"/>
                                                             <constraint firstItem="ung-u4-Wdd" firstAttribute="centerY" secondItem="i0Y-Zx-dkh" secondAttribute="centerY" id="VTJ-Va-jpt"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fwE-g2-8qV" secondAttribute="trailing" constant="7" id="Xzr-P5-JtR"/>
                                                             <constraint firstItem="i0Y-Zx-dkh" firstAttribute="centerX" secondItem="Hts-t4-dZn" secondAttribute="centerX" id="agW-6t-PQn"/>
-                                                            <constraint firstAttribute="trailing" secondItem="eK3-hF-JrW" secondAttribute="trailing" constant="7" id="g42-jQ-trP"/>
+                                                            <constraint firstAttribute="bottom" secondItem="fwE-g2-8qV" secondAttribute="bottom" constant="15" id="gKA-9X-FHb"/>
                                                             <constraint firstItem="ung-u4-Wdd" firstAttribute="centerX" secondItem="Hts-t4-dZn" secondAttribute="centerX" multiplier="1.65" id="jKb-XB-zHT"/>
-                                                            <constraint firstAttribute="height" constant="150" id="lFm-uQ-p1N"/>
-                                                            <constraint firstItem="eK3-hF-JrW" firstAttribute="leading" secondItem="Hts-t4-dZn" secondAttribute="leading" constant="7" id="osq-wB-fBD"/>
+                                                            <constraint firstAttribute="height" constant="200" id="lFm-uQ-p1N"/>
+                                                            <constraint firstItem="fwE-g2-8qV" firstAttribute="leading" secondItem="Hts-t4-dZn" secondAttribute="leading" constant="7" id="ui5-Ba-AQu"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -2750,12 +2774,15 @@
                         <outlet property="chatBtn" destination="rd2-9Z-HQz" id="7P1-Kx-zuU"/>
                         <outlet property="completedLbl" destination="3HM-Kb-d9P" id="rXa-CK-ZsQ"/>
                         <outlet property="completedStatusView" destination="fMU-cE-9hs" id="51s-qT-TXO"/>
+                        <outlet property="confirmReactBtn" destination="AT7-N9-hBo" id="13X-vc-wvL"/>
                         <outlet property="couponStack" destination="Swd-Qg-xmp" id="lwk-W5-LhY"/>
                         <outlet property="deliveryFees" destination="7if-98-eqy" id="frc-ls-EXo"/>
                         <outlet property="deliveryStack" destination="VmV-da-ARM" id="v8u-uH-G9H"/>
                         <outlet property="discount" destination="dOA-5P-l7h" id="xG5-co-rUi"/>
                         <outlet property="discountStack" destination="l2p-AO-1Cz" id="mBO-dS-qvz"/>
+                        <outlet property="disslike" destination="ung-u4-Wdd" id="nkC-6d-MTh"/>
                         <outlet property="failedStatusView" destination="Xft-vN-4F3" id="LCX-Kt-vNb"/>
+                        <outlet property="likeBtn" destination="G3V-L1-FrS" id="Z42-j2-cC1"/>
                         <outlet property="notes" destination="2jO-jR-HVu" id="m1v-wK-id9"/>
                         <outlet property="orderCoupon" destination="mqH-9s-S4z" id="m6Y-fU-iNj"/>
                         <outlet property="orderDate" destination="hyu-0c-c5P" id="0fy-8O-ODj"/>
@@ -3914,6 +3941,9 @@
         <designable name="AQR-Is-u1R">
             <size key="intrinsicContentSize" width="89" height="30"/>
         </designable>
+        <designable name="AT7-N9-hBo">
+            <size key="intrinsicContentSize" width="57" height="34"/>
+        </designable>
         <designable name="EFd-If-v85">
             <size key="intrinsicContentSize" width="15" height="30"/>
         </designable>
@@ -3959,7 +3989,7 @@
         <image name="close-1" width="512" height="512"/>
         <image name="code_icon" width="29" height="33"/>
         <image name="cvv" width="512" height="512"/>
-        <image name="date_icon" width="13.5" height="13"/>
+        <image name="date_icon" width="25" height="26"/>
         <image name="dislike" width="512" height="512"/>
         <image name="empty_result" width="289" height="142"/>
         <image name="fast_order_selected" width="35" height="35"/>

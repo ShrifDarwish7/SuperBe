@@ -61,11 +61,12 @@ struct Branch: Codable {
     var favouriteId: Int?
     var useCustomTimes: Int?
     var coupons: [Coupon]?
+    var taxes: Double?
     
     var selected: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, phones, emails, fax, website, name, bio, coupons
+        case id, phones, emails, fax, website, name, bio, coupons, taxes
         case isNewBranch = "is_new_branch"
         case postalCode = "postal_code"
         case street, landmark

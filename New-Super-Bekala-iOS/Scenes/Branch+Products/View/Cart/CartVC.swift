@@ -13,7 +13,7 @@ class CartVC: UIViewController {
     
     @IBOutlet weak var filtersCollectionView: UICollectionView!
     @IBOutlet weak var productsTableView: UITableView!
-    @IBOutlet weak var deliveryFees: UILabel!
+    @IBOutlet weak var taxes: UILabel!
     @IBOutlet weak var total: UILabel!
     
     var items: [CartItem]?
@@ -96,6 +96,7 @@ class CartVC: UIViewController {
             linesTotal += (item.price * Double(item.quantity))
         })
         self.total.text = "\(self.linesTotal) EGP"
+        self.taxes.text = "\(((self.selectedBranch?.taxes ?? 0.0)/100) * self.linesTotal) EGP"
     }
     
     @IBAction func back(_ sender: Any) {
