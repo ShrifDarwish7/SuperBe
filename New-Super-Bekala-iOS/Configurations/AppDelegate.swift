@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
                 
         FirebaseApp.configure()
-        Auth.auth().canHandle(URL(string: "com.googleusercontent.apps.966110321537-bg6q76idnnvqf2fdvu9fstertat6mgq1")!)
+        Auth.auth().canHandle(URL(string: "com.googleusercontent.apps.806574922305-8f0bnjog7kriohcipdf2ilu7jb4b7sch")!)
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
         do{
