@@ -122,6 +122,10 @@
 		1064AE6F26021F9900EBC7BA /* SkeletonLoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1064AE6D26021F9900EBC7BA /* SkeletonLoadingCollectionViewCell.xib */; };
 		106817F126BED91F0078F4F2 /* MapVC+MKMapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106817F026BED91F0078F4F2 /* MapVC+MKMapViewDelegate.swift */; };
 		106CFFD4261878F400203580 /* CartServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106CFFD3261878F400203580 /* CartServices.swift */; };
+		106D8E2A27BBB6E600579A31 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106D8E2827BBB6E600579A31 /* CategoriesTableViewCell.swift */; };
+		106D8E2B27BBB6E600579A31 /* CategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106D8E2927BBB6E600579A31 /* CategoriesTableViewCell.xib */; };
+		106D8E2F27BBBF5300579A31 /* SlidingBranchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106D8E2D27BBBF5300579A31 /* SlidingBranchCollectionViewCell.swift */; };
+		106D8E3027BBBF5300579A31 /* SlidingBranchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106D8E2E27BBBF5300579A31 /* SlidingBranchCollectionViewCell.xib */; };
 		106EFFDA262DB5F2008940D3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106EFFD9262DB5F2008940D3 /* Order.swift */; };
 		10726427266CD699007FD243 /* PayPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10726426266CD699007FD243 /* PayPresenter.swift */; };
 		1072642A266CD9F3007FD243 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10726429266CD9F3007FD243 /* Transaction.swift */; };
@@ -433,6 +437,10 @@
 		1064AE6D26021F9900EBC7BA /* SkeletonLoadingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SkeletonLoadingCollectionViewCell.xib; sourceTree = "<group>"; };
 		106817F026BED91F0078F4F2 /* MapVC+MKMapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC+MKMapViewDelegate.swift"; sourceTree = "<group>"; };
 		106CFFD3261878F400203580 /* CartServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartServices.swift; sourceTree = "<group>"; };
+		106D8E2827BBB6E600579A31 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		106D8E2927BBB6E600579A31 /* CategoriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesTableViewCell.xib; sourceTree = "<group>"; };
+		106D8E2D27BBBF5300579A31 /* SlidingBranchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingBranchCollectionViewCell.swift; sourceTree = "<group>"; };
+		106D8E2E27BBBF5300579A31 /* SlidingBranchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlidingBranchCollectionViewCell.xib; sourceTree = "<group>"; };
 		106EFFD9262DB5F2008940D3 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		10726426266CD699007FD243 /* PayPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPresenter.swift; sourceTree = "<group>"; };
 		10726429266CD9F3007FD243 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -1079,6 +1087,33 @@
 			path = SkeletonLoading;
 			sourceTree = "<group>";
 		};
+		106D8E2627BBB54400579A31 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				106D8E2C27BBBD3100579A31 /* SlidingBranches */,
+				106D8E2727BBB6A200579A31 /* CategoriesTableCell */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		106D8E2727BBB6A200579A31 /* CategoriesTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				106D8E2827BBB6E600579A31 /* CategoriesTableViewCell.swift */,
+				106D8E2927BBB6E600579A31 /* CategoriesTableViewCell.xib */,
+			);
+			path = CategoriesTableCell;
+			sourceTree = "<group>";
+		};
+		106D8E2C27BBBD3100579A31 /* SlidingBranches */ = {
+			isa = PBXGroup;
+			children = (
+				106D8E2D27BBBF5300579A31 /* SlidingBranchCollectionViewCell.swift */,
+				106D8E2E27BBBF5300579A31 /* SlidingBranchCollectionViewCell.xib */,
+			);
+			path = SlidingBranches;
+			sourceTree = "<group>";
+		};
 		10726428266CD6B1007FD243 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1669,6 +1704,7 @@
 		88DDA70F24BB5B7B002C674F /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				106D8E2627BBB54400579A31 /* Categories */,
 				105E3D472779D8BE00F7A67A /* Coupons */,
 				102E6AE52778A39F00EBC4AD /* OffersTabs */,
 				10F5AEDF272AE0B700D11B4D /* Tags */,
@@ -1919,10 +1955,12 @@
 				881594C324B610FF008BE195 /* Main.storyboard in Resources */,
 				8823DDDF24B9D89A009A83C5 /* Lato-ThinItalic.ttf in Resources */,
 				101CEB6625FCF3640014D96E /* RegionsTableViewCell.xib in Resources */,
+				106D8E3027BBBF5300579A31 /* SlidingBranchCollectionViewCell.xib in Resources */,
 				10F5AEE3272AE0C900D11B4D /* TagsCollectionViewCell.xib in Resources */,
 				88DDB5AE24E188C50003D1A7 /* OnSaleCollectionViewCell.xib in Resources */,
 				100E206D26C58F19007FF432 /* conversation_locked.mp3 in Resources */,
 				1054DB4426384DDE0032D6FA /* CartVoiceTableViewCell.xib in Resources */,
+				106D8E2B27BBB6E600579A31 /* CategoriesTableViewCell.xib in Resources */,
 				8823DDD724B9D89A009A83C5 /* Lato-BoldItalic.ttf in Resources */,
 				100E206526C58270007FF432 /* message_notify_tone.mp3 in Resources */,
 			);
@@ -2167,6 +2205,7 @@
 				10813E92268CCCD500C56B25 /* LocationManager.swift in Sources */,
 				103191002614AEE80002C47E /* ProductsResponse.swift in Sources */,
 				1097058626189D3900C0E4DD /* CartVC+CollectionViewDelegate.swift in Sources */,
+				106D8E2A27BBB6E600579A31 /* CategoriesTableViewCell.swift in Sources */,
 				10F3A6F226160F3500EAF1C7 /* ProductVC+ScrollViewDelegate.swift in Sources */,
 				10FD6C332600E3EF00DF790F /* ShoopingVC+HomeViewDelegate.swift in Sources */,
 				107E6B1A26933C1B00978190 /* FavouritesVC.swift in Sources */,
@@ -2178,6 +2217,7 @@
 				AA08E45024E01295001629A0 /* Router.swift in Sources */,
 				109705722618968900C0E4DD /* CartProductTableViewCell.swift in Sources */,
 				103F81DD2767751E00D44DD1 /* CartMigrationV1toV2.swift in Sources */,
+				106D8E2F27BBBF5300579A31 /* SlidingBranchCollectionViewCell.swift in Sources */,
 				1056FEE5268E06380020A955 /* GMSDistanceMatrixResponse.swift in Sources */,
 				1052295726A5D8CE00F317C0 /* PayContainerVC.swift in Sources */,
 				102EBCBE263199B000FA85DB /* OrderVC+TableViewDelegate.swift in Sources */,
