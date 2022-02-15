@@ -202,14 +202,14 @@ class CheckoutVC: UIViewController {
         switch selectedReceiveOption{
         case 0:
             deliveryFeesLbl.text = "\(shippingCost ?? 0.0) " + "EGP".localized
-            taxes.text = "\(Double((shippingCost ?? 0)*0.14).rounded()) " + "EGP".localized
+            taxes.text = "\(Double(((shippingCost ?? 0)*0.14) + branchTaxes).rounded()) " + "EGP".localized
         default:
             deliveryFeesLbl.text = "0.0 " + "EGP".localized
-            taxes.text = "0.0 " + "EGP".localized
+            taxes.text = "\(branchTaxes.rounded() ) " + "EGP".localized
         }
         discountLblLbl.text = "-" + "\(discountAmount ?? 0.0) " + "EGP".localized
         let temp = lineItemsTotal! + (selectedReceiveOption == 0 ? (shippingCost ?? 0.0) : 0.0) - (discountAmount ?? 0.0) + branchTaxes
-        totalLbl.text = "\(temp + (selectedReceiveOption == 0 ? Double((shippingCost ?? 0) * 0.14).rounded() : 0.0)) " + "EGP".localized
+        totalLbl.text = "\(temp + (selectedReceiveOption == 0 ? Double((shippingCost ?? 0) * 0.14).rounded() : 0.0) + branchTaxes.rounded()) " + "EGP".localized
     }
     
     @IBAction func showAddresses(_ sender: UIButton) {
