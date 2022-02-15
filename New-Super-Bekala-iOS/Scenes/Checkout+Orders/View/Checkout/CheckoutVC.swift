@@ -198,7 +198,7 @@ class CheckoutVC: UIViewController {
     
     func updateBill(){
         totalLinesLbl.text = "\(lineItemsTotal ?? 0.0) " + "EGP".localized
-        let branchTaxes = (branch?.taxes ?? 0.0) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
+        let branchTaxes = ((branch?.taxes ?? 0.0)/100) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
         switch selectedReceiveOption{
         case 0:
             deliveryFeesLbl.text = "\(shippingCost ?? 0.0) " + "EGP".localized
@@ -597,7 +597,7 @@ class CheckoutVC: UIViewController {
             
             let alert = UIAlertController(title: nil, message: "Please back again after completing payment to be able to proceed your order".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok, Got it".localized , style: .default, handler: { [self] _ in
-                let branchTaxes = (branch?.taxes ?? 0.0) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
+                let branchTaxes = ((branch?.taxes ?? 0.0)/100) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
                 let amount = lineItemsTotal! + (selectedReceiveOption == 0 ? (shippingCost ?? 0.0) : 0.0) - (discountAmount ?? 0.0) + (selectedReceiveOption == 0 ? ((shippingCost ?? 0.0) * 0.14) : 0.0) + branchTaxes
                 
     //            Shared.transaction = Transaction()
