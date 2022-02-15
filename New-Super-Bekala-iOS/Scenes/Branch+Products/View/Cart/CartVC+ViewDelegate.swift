@@ -54,4 +54,9 @@ extension CartVC: MainViewDelegate, LoginViewDelegate{
             showToast(Shared.errorMsg)
         }
     }
+    
+    func didCompleteWithSetting(_ data: Setting?) {
+        guard let setting = data else { return }
+        self.setting = setting
+    }
 }

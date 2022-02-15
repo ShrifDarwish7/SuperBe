@@ -22,6 +22,8 @@ class CartVC: UIViewController {
     var presenter: MainPresenter?
     var linesTotal = 0.0
     var fetchingSelectedBranch = false
+    var setting: Setting?
+    var loginPresenter: LoginViewPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,8 @@ class CartVC: UIViewController {
         presenter = MainPresenter(self)
                 
         fetchCartBranches()
+        loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+        loginPresenter?.getSetting()
             
     }
     
@@ -104,6 +108,12 @@ class CartVC: UIViewController {
     }
     
     @IBAction func toCheckout(_ sender: Any) {
+        if setting?.appClosed != 0{
+            let errorMsg = "App is closed now,for \(setting?.appCloseMessage ?? "") you can check out later"
+            showToast(errorMsg)
+            return
+        }
+        
         
         guard APIServices.shared.isLogged else{
             Router.toRegister(self)
