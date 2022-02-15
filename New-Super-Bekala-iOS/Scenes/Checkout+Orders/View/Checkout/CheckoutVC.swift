@@ -601,11 +601,7 @@ class CheckoutVC: UIViewController {
             
             let alert = UIAlertController(title: nil, message: "Please back again after completing payment to be able to proceed your order".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok, Got it".localized , style: .default, handler: { [self] _ in
-<<<<<<< HEAD
                 let branchTaxes = ((branch?.taxes ?? 0.0)/100) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
-=======
-                let branchTaxes = (branch?.taxes ?? 0.0) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
->>>>>>> c4bc70b (Rate delivery captain ui flow)
                 let amount = lineItemsTotal! + (selectedReceiveOption == 0 ? (shippingCost ?? 0.0) : 0.0) - (discountAmount ?? 0.0) + (selectedReceiveOption == 0 ? ((shippingCost ?? 0.0) * 0.14) : 0.0) + branchTaxes
                 
     //            Shared.transaction = Transaction()
