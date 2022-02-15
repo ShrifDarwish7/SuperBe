@@ -96,7 +96,7 @@ class CartVC: UIViewController {
             linesTotal += (item.price * Double(item.quantity))
         })
         self.total.text = "\(self.linesTotal) EGP"
-        self.taxes.text = "\(((self.selectedBranch?.taxes ?? 0.0)/100) * self.linesTotal) EGP"
+        self.taxes.text = "\((((self.selectedBranch?.taxes ?? 0.0)/100) * self.linesTotal).round(2)) EGP"
     }
     
     @IBAction func back(_ sender: Any) {
