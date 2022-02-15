@@ -70,7 +70,7 @@ enum SuperBe{
 
 extension SuperBe: TargetType{
     public var baseURL: URL{
-        return URL(string: "https://dev4.superbekala.com/api/v1/")!
+        return URL(string: "https://new.superbekala.com/api/v1/")!
     }
     
     public var path: String{
