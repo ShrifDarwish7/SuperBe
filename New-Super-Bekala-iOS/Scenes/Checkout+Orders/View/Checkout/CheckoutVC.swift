@@ -198,15 +198,7 @@ class CheckoutVC: UIViewController {
     
     func updateBill(){
         totalLinesLbl.text = "\(lineItemsTotal ?? 0.0) " + "EGP".localized
-<<<<<<< HEAD
-<<<<<<< HEAD
         let branchTaxes = ((branch?.taxes ?? 0.0)/100) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
-=======
-        let branchTaxes = (branch?.taxes ?? 0.0) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
->>>>>>> c4bc70b (Rate delivery captain ui flow)
-=======
-        let branchTaxes = (branch?.taxes ?? 0.0) * ((lineItemsTotal ?? 0.0) - (discountAmount ?? 0.0))
->>>>>>> feature/Home-UI
         switch selectedReceiveOption{
         case 0:
             deliveryFeesLbl.text = "\(shippingCost ?? 0.0) " + "EGP".localized
@@ -216,7 +208,7 @@ class CheckoutVC: UIViewController {
             taxes.text = "\(branchTaxes.rounded() ) " + "EGP".localized
         }
         discountLblLbl.text = "-" + "\(discountAmount ?? 0.0) " + "EGP".localized
-        let temp = lineItemsTotal! + (selectedReceiveOption == 0 ? (shippingCost ?? 0.0) : 0.0) - (discountAmount ?? 0.0) + branchTaxes
+        let temp = lineItemsTotal! + (selectedReceiveOption == 0 ? (shippingCost ?? 0.0) : 0.0) - (discountAmount ?? 0.0)
         totalLbl.text = "\(temp + (selectedReceiveOption == 0 ? Double((shippingCost ?? 0) * 0.14).rounded() : 0.0) + branchTaxes.rounded()) " + "EGP".localized
     }
     
