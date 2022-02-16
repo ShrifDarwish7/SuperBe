@@ -22,6 +22,8 @@ class CartVC: UIViewController {
     var presenter: MainPresenter?
     var linesTotal = 0.0
     var fetchingSelectedBranch = false
+    var setting: Setting?
+    var loginPresenter: LoginViewPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,8 @@ class CartVC: UIViewController {
         presenter = MainPresenter(self)
                 
         fetchCartBranches()
+        loginPresenter = LoginViewPresenter(loginViewDelegate: self)
+        loginPresenter?.getSetting()
             
     }
     
@@ -96,7 +100,7 @@ class CartVC: UIViewController {
             linesTotal += (item.price * Double(item.quantity))
         })
         self.total.text = "\(self.linesTotal) EGP"
-        self.taxes.text = "\(((self.selectedBranch?.taxes ?? 0.0)/100) * self.linesTotal) EGP"
+        self.taxes.text = "\((((self.selectedBranch?.taxes ?? 0.0)/100) * self.linesTotal).roundToDecimal(2)) EGP"
     }
     
     @IBAction func back(_ sender: Any) {
@@ -104,6 +108,12 @@ class CartVC: UIViewController {
     }
     
     @IBAction func toCheckout(_ sender: Any) {
+        if setting?.appClosed != 0{
+            let errorMsg = "App is closed now,for \(setting?.appCloseMessage ?? "") you can check out later"
+            showToast(errorMsg)
+            return
+        }
+        
         
         guard APIServices.shared.isLogged else{
             Router.toRegister(self)
